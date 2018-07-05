@@ -35,14 +35,14 @@ export class PosgradoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
     this.percentage = 0;
-    this.nForms = 8;
+    this.nForms = 3;
+    this.percentageTab = [this.nForms];
     this.getInfoPersonaId();
   }
 
   setPercentage(number, tab) {
     console.info(number);
     this.percentageTab[tab] = (number * 100) / this.nForms;
-    console.info(this.percentageTab);
     this.percentage = Math.round(UtilidadesService.getSumArray(this.percentageTab));
   }
 
@@ -59,7 +59,7 @@ export class PosgradoComponent implements OnInit {
   }
 
   traerInfoIdiomas(event) {
-    this.setPercentage(event.percentage, 4);
+    // this.setPercentage(event.percentage, 4);
   }
 
   getInfoPersonaId() {
