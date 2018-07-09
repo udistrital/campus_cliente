@@ -7,7 +7,7 @@
                 <nb-tabset fullWidth (changeTab)="selectTab($event)">
 
                     <nb-tab  tabTitle="{{ 'GLOBAL.info_persona' | translate }}" [active]="info_persona">
-                        <ngx-crud-info-persona info_persona_id={{this.info_persona_id}} (eventChange)="onChange($event)" (result)="traerInfoPersona($event)"></ngx-crud-info-persona>
+                        <ngx-crud-info-persona info_persona_id={{this.info_ente_id}} (eventChange)="onChange($event)" (result)="traerInfoPersona($event)"></ngx-crud-info-persona>
                       </nb-tab>
                 <nb-tab  tabTitle="{{ 'GLOBAL.info_caracteristica' | translate }}" [active]="info_caracteristica">
                       <ngx-crud-info-caracteristica info_caracteristica_id={{this.info_ente_id}} (eventChange)="onChange($event)" (result)="traerInfoCaracteristica($event)"></ngx-crud-info-caracteristica>
