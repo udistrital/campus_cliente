@@ -6,6 +6,7 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { ThemeModule } from '../@theme/theme.module';
 import { SharedModule } from '../shared/shared.module';
 import { MenuService } from '../@core/data/menu.service';
+import { ListadoComponent } from './notificacion/listado/listado.component';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -20,6 +21,7 @@ const PAGES_COMPONENTS = [
   ],
   declarations: [
     ...PAGES_COMPONENTS,
+    ListadoComponent,
   ],
   providers: [
     MenuService,
