@@ -85,6 +85,10 @@ const routes: Routes = [{
     loadChildren: './admision/admision.module#AdmisionModule',
     },
     {
+      path: 'notificacion',
+      loadChildren: './notificacion/notificacion.module#NotificacionModule',
+      },
+    {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
