@@ -1,3 +1,52 @@
-<p>
-  listado works!
-</p>
+<div class="row">
+  <div class="col-8 offset-2">
+    <nb-card>
+      <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-append">
+          <button class="btn btn-primary input-group-text">
+            Buscar
+          </button>
+        </span>
+      </div>
+    </nb-card>
+  </div>
+  <br>
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>
+        Notificaciones Pendientes
+      </nb-card-header>
+      <nb-card-body>
+        <mat-list>
+          <mat-list-item *ngFor="let notificacion of notificaciones">
+            <img matListAvatar [src]="notificacion.src" [alt]="notificacion.alt">
+            <h3 matLine> {{notificacion.from}} </h3>
+            <p matLine>
+              <span> {{notificacion.name}} </span>
+            </p>
+            <p>
+              <span>{{notificacion.content}} </span>
+            </p>
+
+          </mat-list-item>
+        </mat-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+  <div class="col-6">
+    <nb-card size="medium">
+      <nb-card-header>
+        Vistas
+      </nb-card-header>
+      <nb-card-body>
+        <mat-nav-list>
+          <a *ngFor="let notificacion of notificaciones" mat-list-item>
+            <span mat-line>{{notificacion.name}}</span>
+            <span mat-line>{{notificacion.describe}}</span>
+          </a>
+        </mat-nav-list>
+      </nb-card-body>
+    </nb-card>
+  </div>
+</div>

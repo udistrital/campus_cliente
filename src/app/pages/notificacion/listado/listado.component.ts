@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Http } from '@angular/http';
 
 @Component({
   selector: 'ngx-listado',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListadoComponent implements OnInit {
 
-  constructor() { }
+  notificaciones: any;
+  constructor(private http: Http) {
+  }
+
+  public getNotificacion(): Observable<any> {
+    return this.http.get('assets/json/notification.json');
+  }
 
   ngOnInit() {
+    this.getNotificacion().subscribe(result => {
+      this.notificaciones = JSON.parse(result._body);
+      console.info(this.notificaciones);
+    });
   }
 
 }
