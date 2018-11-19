@@ -8,6 +8,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 import {DocumentoService} from './data/documento.service'
+import { NotificacionesService } from './utils/notificaciones.service';
+import { WebsocketService } from './utils/websocket.service';
 
 const socialLinks = [
   {
@@ -94,6 +96,8 @@ export class CoreModule {
       providers: [
         ...NB_CORE_PROVIDERS,
         DocumentoService,
+        NotificacionesService,
+        WebsocketService,
       ],
     };
   }

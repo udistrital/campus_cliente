@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Http } from '@angular/http';
+import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
 
 @Component({
   selector: 'ngx-listado',
@@ -10,7 +11,12 @@ import { Http } from '@angular/http';
 export class ListadoComponent implements OnInit {
 
   notificaciones: any;
-  constructor(private http: Http) {
+  constructor(private http: Http,
+    private notificacionesService: NotificacionesService,
+  ) {
+    this.notificacionesService.messages.subscribe(msg => {
+      console.info('Response from websocket: ' + msg);
+    });
   }
 
   public getNotificacion(): Observable<any> {
