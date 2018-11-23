@@ -26,15 +26,14 @@ export class ListadoComponent implements OnInit {
       .pipe(
         debounceTime(700),
         distinctUntilChanged(),
-        switchMap(term => this.searchEntries(term)),
-      ).subscribe
-        (response => {
-          console.info(response);
-        })
+        switchMap(query => this.searchEntries(query)),
+      ).subscribe(response => {
+        console.info(response);
+      })
 
     this.notificacionesService.messages.subscribe(msg => {
-        console.info('Response from websocket: ' + msg);
-      });
+      console.info('Response from websocket: ' + msg);
+    });
 
     this.notificacionesService.messages.subscribe(msg => {
       console.info('Response from websocket: ' + msg);
