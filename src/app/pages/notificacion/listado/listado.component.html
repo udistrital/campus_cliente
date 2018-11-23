@@ -2,7 +2,7 @@
   <div class="col-8 offset-2">
     <nb-card>
       <div class="input-group">
-        <input type="text" class="form-control" placeholder="Search for...">
+        <input type="text" class="form-control" (ngModel)="search" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for...">
         <span class="input-group-append">
           <button class="btn btn-primary input-group-text">
             Buscar
@@ -12,6 +12,9 @@
     </nb-card>
   </div>
   <br>
+  <pre>
+    {{search|json}}
+  </pre>
   <div class="col-6">
     <nb-card size="medium">
       <nb-card-header>
