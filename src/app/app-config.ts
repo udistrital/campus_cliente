@@ -111,5 +111,5 @@ export const Config = {
 };
 
 export const GENERAL = {
-    ENTORNO: Config.PREPROD_NUBE,
+    ENTORNO: Config.LOCAL,
 };
