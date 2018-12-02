@@ -53,7 +53,7 @@ export class ListPropuestaGradoComponent implements OnInit {
           },
         },
         Nombre: {
-          title: this.translate.instant('GLOBAL.nombre'),
+          title: this.translate.instant('GLOBAL.titulo_proyecto'),
           // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
@@ -67,28 +67,28 @@ export class ListPropuestaGradoComponent implements OnInit {
           },
         },
         Grupoinvestigacion: {
-          title: this.translate.instant('GLOBAL.grupoinvestigacion'),
+          title: this.translate.instant('GLOBAL.grupo_investigacion'),
           // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Lineainvestigacion: {
-          title: this.translate.instant('GLOBAL.lineainvestigacion'),
+          title: this.translate.instant('GLOBAL.linea_investigacion'),
           // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Duracion: {
-          title: this.translate.instant('GLOBAL.duracion'),
+          title: this.translate.instant('GLOBAL.duracion_proyecto'),
           // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         UnidadTiempo: {
-          title: this.translate.instant('GLOBAL.unidad_tiempo'),
+          title: this.translate.instant('GLOBAL.unidad_tiempo_duracion_proyecto'),
           // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
