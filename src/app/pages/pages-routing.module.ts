@@ -20,6 +20,14 @@ const routes: Routes = [{
     loadChildren: './admision/admision.module#AdmisionModule',
     },
     {
+    path: 'propuesta_grado',
+    loadChildren: './propuesta_grado/propuesta_grado.module#PropuestaGradoModule',
+    },
+    {
+    path: 'tipo_proyecto',
+    loadChildren: './tipo_proyecto/tipo_proyecto.module#TipoProyectoModule',
+    },
+    {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',
