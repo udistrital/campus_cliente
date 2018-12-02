@@ -31,7 +31,7 @@ export let FORM_PROPUESTA_GRADO = {
         label_i18n: 'grupo_investigacion',
         placeholder_i18n: 'placeholder_grupo_investigacion',
         requerido: false,
-        tipo: 'text', //tipo: 'EstadoAdmision',
+        tipo: 'text', 
         oopciones: [],
     },
     {
@@ -41,7 +41,7 @@ export let FORM_PROPUESTA_GRADO = {
         label_i18n: 'linea_investigacion',
         placeholder_i18n: 'placeholder_linea_investigacion',
         requerido: false,
-        tipo: 'text',
+        tipo: 'LineaInvestigacion',
         opciones: [],
     },
     {
@@ -70,7 +70,7 @@ export let FORM_PROPUESTA_GRADO = {
         label_i18n: 'tipoproyecto',
         placeholder_i18n: 'tipoproyecto',
         requerido: false,
-        tipo: 'text',
+        tipo: 'TipoProyecto',
         opciones: [],
     },
     {
@@ -80,7 +80,7 @@ export let FORM_PROPUESTA_GRADO = {
         label_i18n: 'lugarejecucion',
         placeholder_i18n: 'lugarejecucion',
         requerido: true,
-        tipo: 'text',
+        tipo: 'Lugar',
         opciones: [],
     },
     {
