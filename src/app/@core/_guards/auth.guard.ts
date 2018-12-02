@@ -34,7 +34,7 @@ export class AuthGuard implements CanActivate {
         // or not exist role return url
         this.router.navigate(['/']);
       }*/
-      return true;
+      return valid;
   }
 
   canActivateChild(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean {
