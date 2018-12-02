@@ -31,7 +31,7 @@ export let FORM_PROPUESTA_GRADO = {
         label_i18n: 'grupo_investigacion',
         placeholder_i18n: 'placeholder_grupo_investigacion',
         requerido: false,
-        tipo: 'text', 
+        tipo: 'text',
         oopciones: [],
     },
     {
