@@ -81,7 +81,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   public loadPropuestaGrado(): void {
     if (this.propuesta_grado_id !== undefined && this.propuesta_grado_id !== 0) {
-      this.propuestaService.get('propuesta_grado/?query=id:' + this.propuesta_grado_id)
+      this.propuestaService.get('propuesta/?query=id:' + this.propuesta_grado_id)
         .subscribe(res => {
           if (res !== null) {
             this.info_propuesta_grado = <PropuestaGrado>res[0];
@@ -107,7 +107,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_propuesta_grado = <PropuestaGrado>propuestaGrado;
-        this.propuestaService.put('propuesta_grado', this.info_propuesta_grado)
+        this.propuestaService.put('propuesta', this.info_propuesta_grado)
           .subscribe(res => {
             this.loadPropuestaGrado();
             this.eventChange.emit(true);
@@ -130,7 +130,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_propuesta_grado = <PropuestaGrado>propuestaGrado;
-        this.propuestaService.post('propuesta_grado', this.info_propuesta_grado)
+        this.propuestaService.post('propuesta', this.info_propuesta_grado)
           .subscribe(res => {
             this.info_propuesta_grado = <PropuestaGrado>res;
             this.eventChange.emit(true);

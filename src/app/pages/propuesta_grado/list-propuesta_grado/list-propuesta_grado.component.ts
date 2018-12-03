@@ -117,7 +117,7 @@ export class ListPropuestaGradoComponent implements OnInit {
   }
 
   loadData(): void {
-    this.propuestaService.get('propuesta_grado/?limit=0').subscribe(res => {
+    this.propuestaService.get('propuesta/?limit=0').subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
@@ -151,7 +151,7 @@ export class ListPropuestaGradoComponent implements OnInit {
     .then((willDelete) => {
 
       if (willDelete.value) {
-        this.propuestaService.delete('propuesta_grado/', event.data).subscribe(res => {
+        this.propuestaService.delete('propuesta/', event.data).subscribe(res => {
           if (res !== null) {
             this.loadData();
             this.showToast('info', 'deleted', 'PropuestaGrado deleted');
