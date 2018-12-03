@@ -7,6 +7,9 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { IAppState } from '../../../@core/store/app.state';
+import { Store } from '@ngrx/store';
+import { ListService } from '../../../@core/store/services/list.service';
 
 @Component({
   selector: 'ngx-crud-propuesta-grado',
@@ -24,18 +27,30 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
 
   info_propuesta_grado: PropuestaGrado;
   formPropuestaGrado: any;
   regPropuestaGrado: any;
   clean: boolean;
+  loading: boolean;
+  percentage: number;
 
-  constructor(private translate: TranslateService, private propuestaService: PropuestaService, private toasterService: ToasterService) {
+  constructor(
+    private translate: TranslateService,
+    private propuestaService: PropuestaService,
+    private store: Store < IAppState > ,
+    private listService: ListService,
+    private toasterService: ToasterService) {
     this.formPropuestaGrado = FORM_PROPUESTA_GRADO;
     this.construirForm();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
+    this.listService.findCiudad();
+    this.listService.findLineaInvestigacion();
+    this.loading = false;
+    this.loadLists();
    }
 
   construirForm() {
@@ -157,6 +172,15 @@ export class CrudPropuestaGradoComponent implements OnInit {
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
     this.toasterService.popAsync(toast);
+  }
+
+  public loadLists() {
+    this.store.select((state) => state).subscribe(
+      (list) => {
+        this.formPropuestaGrado.campos[this.getIndexForm('Lugarejecucion')].opciones = list.listCiudad[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
+      },
+    );
   }
 
 }
