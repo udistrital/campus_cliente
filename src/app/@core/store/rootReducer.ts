@@ -22,4 +22,5 @@ export const rootReducer: ActionReducerMap<IAppState> = {
   listTipoLugar: ListReducer.ListReducerTipoLugar,
   listTitulacion: ListReducer.ListReducerTitulacion,
   listTipoIdentificacion: ListReducer.ListReducerTipoIdentificacion,
+  listTipoProyecto: ListReducer.ListReducerTipoProyecto,
 }

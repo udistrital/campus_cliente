@@ -366,6 +366,24 @@ export class ListService {
     );
   }
 
+  public findTipoProyecto() {
+    this.store.select(REDUCER_LIST.TipoProyecto).subscribe(
+      (list: any) => {
+        if (!list || list.length === 0) {
+          this.admisionesService.get('tipo_proyecto/?limit=0')
+          .subscribe(
+            (result: any[]) => {
+              this.addList(REDUCER_LIST.TipoProyecto, result);
+            },
+            error => {
+              this.addList(REDUCER_LIST.TipoProyecto, []);
+            },
+          );
+        }
+      },
+    );
+  }
+
 
 
   private addList(type: string, object: Array < any > ) {

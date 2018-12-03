@@ -49,6 +49,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     });
     this.listService.findCiudad();
     this.listService.findLineaInvestigacion();
+    this.listService.findTipoProyecto();
     this.loading = false;
     this.loadLists();
    }
@@ -179,6 +180,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
       (list) => {
         this.formPropuestaGrado.campos[this.getIndexForm('Lugarejecucion')].opciones = list.listCiudad[0];
         this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('Tipoproyecto')].opciones = list.listTipoProyecto[0];
       },
     );
   }
