@@ -26,14 +26,17 @@ export class PosgradoComponent implements OnInit {
   percentage_info: number = 0;
   percentage_acad: number = 0;
   percentage_expe: number = 0;
+  percentage_proy: number = 0;
   percentage_tab_info = [];
   percentage_tab_expe = [];
   percentage_tab_acad = [];
+  percentage_tab_proy = [];
   posgrados = [];
   show_info = false;
   show_profile = false;
   show_acad = false;
   show_expe = false;
+  show_proy = false;
   info_contacto: boolean;
   info_persona: boolean;
   info_caracteristica: boolean;
@@ -61,6 +64,10 @@ export class PosgradoComponent implements OnInit {
   }
 
   setPercentage_expe(number, tab) {
+    this.percentage_tab_info[tab] = (number * 100) / 1;
+    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
+  }
+  setPercentage_proy(number, tab) {
     this.percentage_tab_info[tab] = (number * 100) / 1;
     this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
   }
@@ -131,6 +138,7 @@ export class PosgradoComponent implements OnInit {
         this.info_contacto = true;
         this.info_caracteristica = false;
         this.info_persona = false;
+        this.show_proy = false;
         break;
       case 'info_caracteristica':
         this.show_info = true;
@@ -140,6 +148,7 @@ export class PosgradoComponent implements OnInit {
         this.info_contacto = false;
         this.info_caracteristica = true;
         this.info_persona = false;
+        this.show_proy = false;
         break;
       case 'info_persona':
         this.show_info = true;
@@ -149,30 +158,42 @@ export class PosgradoComponent implements OnInit {
         this.info_contacto = false;
         this.info_caracteristica = false;
         this.info_persona = true;
+        this.show_proy = false;
         break;
       case 'experiencia_laboral':
         this.show_info = false;
         this.show_profile = false;
         this.show_acad = false;
         this.show_expe = true;
+        this.show_proy = false;
         break;
       case 'formacion_academica':
         this.show_info = false;
         this.show_profile = false;
         this.show_acad = true;
         this.show_expe = false;
+        this.show_proy = false;
+        break;
+      case 'propuesta_grado':
+        this.show_info = false;
+        this.show_profile = false;
+        this.show_acad = false;
+        this.show_expe = false;
+        this.show_proy = true;
         break;
       case 'perfil':
         this.show_info = false;
         this.show_profile = true;
         this.show_acad = false;
         this.show_expe = false;
+        this.show_proy = false;
         break;
       default:
         this.show_info = false;
         this.show_profile = false;
         this.show_acad = false;
         this.show_expe = false;
+        this.show_proy = false;
         break;
     }
   }
