@@ -28,7 +28,6 @@ import { CrudExperienciaLaboralComponent } from '../experiencia_laboral/crud-exp
 import { ProgramaAcademicoService } from '../../@core/data/programa_academico.service';
 import { PropuestaGradoModule } from '../propuesta_grado/propuesta_grado.module';
 import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component';
-//import { ListPropuestaGradoComponent } from '../propuesta_grado/list-propuesta_grado/list-propuesta_grado.component';
 
 
 @NgModule({
