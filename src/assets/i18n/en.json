@@ -277,6 +277,7 @@
         "tipo_proyecto_descripcion": "Description",
         "placeholder_tipo_proyecto_descripcion": "e.g. basic research project",
         "tipo_poyecto_nombre": "Name",
-        "placeholder_tipo_poyecto_nombre": "Basic Research"
+        "placeholder_tipo_poyecto_nombre": "Basic Research",
+        "formatoproyecto": "Project format"
     }
 }

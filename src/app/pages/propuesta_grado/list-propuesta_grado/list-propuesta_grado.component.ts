@@ -80,15 +80,8 @@ export class ListPropuestaGradoComponent implements OnInit {
             return value;
           },
         },
-        Duracion: {
-          title: this.translate.instant('GLOBAL.duracion_proyecto'),
-          // type: 'string;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        UnidadTiempo: {
-          title: this.translate.instant('GLOBAL.unidad_tiempo_duracion_proyecto'),
+        Enfasis: {
+          title: this.translate.instant('GLOBAL.enfasis'),
           // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
@@ -101,8 +94,8 @@ export class ListPropuestaGradoComponent implements OnInit {
             return value;
           },
         },
-        Lugarejecucion: {
-          title: this.translate.instant('GLOBAL.lugarejecucion'),
+        Formatoproyecto: {
+          title: this.translate.instant('GLOBAL.formatoproyecto'),
           // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
