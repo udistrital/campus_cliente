@@ -17,6 +17,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CdkTableModule } from '@angular/cdk/table';
 import {ToasterModule} from 'angular2-toaster';
+import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -44,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     }),
   ],
   bootstrap: [AppComponent],
-  providers: [
+  providers: [ImplicitAutenticationService,
     { provide: APP_BASE_HREF, useValue: '/' },
   ],
 })
