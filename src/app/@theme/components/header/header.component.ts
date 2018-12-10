@@ -23,13 +23,11 @@ export class HeaderComponent implements OnInit {
   title: any;
   username = '';
   userMenu = [
-    // { title: 'Profile', icon: 'fa fa-user' },
-    // { title: 'Settings', icon: 'fa fa-gear' },
-    { title: 'asdfasdf  asdf asdf asdf as df asdf asd fa sdf   as df asd fasdf asdf aasd fasdfa sdfasdf asdfasdfa asdfasdf asdf asdf asdfadfadf', icon: 'fa fa-sign-out' },
-    { title: 'asdfasdf  asdf asdf asdf as df asdf asd fa sdf as df asd fasdf asdf aasd fasdfa sdfasdf asdfasdfa asdfasdf asdf asdf asdfadfadf', icon: 'fa fa-sign-out' },
-    { title: 'asdfasdf  asdf asdf asdf as df asdf asd fa sdf as df asd fasdf asdf aasd fasdfa sdfasdf asdfasdfa asdfasdf asdf asdf asdfadfadf', icon: 'fa fa-sign-out' },
-    { title: 'asdfasdf  asdf asdf asdf as df asdf asd fa sdf as df asd fasdf asdf aasd fasdfa sdfasdf asdfasdfa asdfasdf asdf asdf asdfadfadf', icon: 'fa fa-sign-out' },
-    { title: 'asdfasdf  asdf asdf asdf as df asdf asd fa sdf as df asd fasdf asdf aasd fasdfa sdfasdf asdfasdfa asdfasdf asdf asdf asdfadfadf', icon: 'fa fa-sign-out' },
+    { title: 'Notificación 1', icon: 'fa fa-check' },
+    { title: 'Notificación 2', icon: 'fa fa-check' },
+    { title: 'Notificación 3', icon: 'fa fa-check' },
+    { title: 'Notificación 4', icon: 'fa fa-check' },
+
   ];
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,

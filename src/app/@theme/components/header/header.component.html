@@ -38,7 +38,7 @@
       <option *ngFor="let lang of translate.getLangs()" class="form-control" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
     </select>
   </nb-action>
-  <nb-action class="control-item" icon="nb-notifications" [nbContextMenu]="userMenu"  badgeText="99+"
+  <nb-action class="control-item" icon="nb-notifications" [nbContextMenu]="userMenu"  [badgeText]="userMenu.length"
   badgeStatus="danger">
   </nb-action>
   <nb-action [hidden]="!liveToken()" class="control-item" icon="nb-email"></nb-action>
