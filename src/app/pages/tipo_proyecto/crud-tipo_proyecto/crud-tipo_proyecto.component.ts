@@ -1,7 +1,8 @@
 
 import { TipoProyecto } from './../../../@core/data/models/tipo_proyecto';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PropuestaService } from '../../../@core/data/propuesta.service';
+//import { PropuestaService } from '../../../@core/data/propuesta.service';
+import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { FORM_TIPO_PROYECTO } from './form-tipo_proyecto';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -30,7 +31,7 @@ export class CrudTipoProyectoComponent implements OnInit {
   regTipoProyecto: any;
   clean: boolean;
 
-  constructor(private translate: TranslateService, private propuestaService: PropuestaService, private toasterService: ToasterService) {
+  constructor(private translate: TranslateService, private admisionesService: AdmisionesService, private toasterService: ToasterService) {
     this.formTipoProyecto = FORM_TIPO_PROYECTO;
     this.construirForm();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -65,7 +66,7 @@ export class CrudTipoProyectoComponent implements OnInit {
 
   public loadTipoProyecto(): void {
     if (this.tipo_proyecto_id !== undefined && this.tipo_proyecto_id !== 0) {
-      this.propuestaService.get('tipo_proyecto/?query=id:' + this.tipo_proyecto_id)
+      this.admisionesService.get('tipo_proyecto/?query=id:' + this.tipo_proyecto_id)
         .subscribe(res => {
           if (res !== null) {
             this.info_tipo_proyecto = <TipoProyecto>res[0];
@@ -91,7 +92,7 @@ export class CrudTipoProyectoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
-        this.propuestaService.put('tipo_proyecto', this.info_tipo_proyecto)
+        this.admisionesService.put('tipo_proyecto', this.info_tipo_proyecto)
           .subscribe(res => {
             this.loadTipoProyecto();
             this.eventChange.emit(true);
@@ -114,7 +115,7 @@ export class CrudTipoProyectoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
-        this.propuestaService.post('tipo_proyecto', this.info_tipo_proyecto)
+        this.admisionesService.post('tipo_proyecto', this.info_tipo_proyecto)
           .subscribe(res => {
             this.info_tipo_proyecto = <TipoProyecto>res;
             this.eventChange.emit(true);

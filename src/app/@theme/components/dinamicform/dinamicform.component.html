@@ -335,8 +335,8 @@
                         </mat-form-field>
 
                         <!-- editor -->
-                        <div *ngSwitchCase="'editor'">
-                            <label for="{{c.nombre}}" class="form-group">
+                        <div *ngSwitchCase="'editor'" class="form-group">
+                            <label for="{{c.nombre}}">
 {{c.requerido?'* '+c.label:c.label}}
 </label>
 
@@ -345,11 +345,11 @@
                                     Tiny MCE
                                 </nb-card-header>
                                 <nb-card-body>
-                                    <ngx-tiny-mce></ngx-tiny-mce>
+                                    <ngx-tiny-mce ngDefaultControl [(ngModel)]="c.valor" [ngModelOptions]="{standalone: true}" id="{{c.nombre}}" name="{{c.nombre}}" (ngModelChange)="validCampo(c)" type="text"></ngx-tiny-mce>
                                 </nb-card-body>
                             </nb-card>
 
-                            <mat-hint class="text-danger">{{c.alerta}}</mat-hint>
+                            <mat-hint class=" text-danger ">{{c.alerta}}</mat-hint>
                         </div>
 
                         <!-- input-file -->

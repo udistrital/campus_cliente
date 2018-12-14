@@ -1,7 +1,8 @@
 
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { PropuestaService } from '../../../@core/data/propuesta.service';
+//import { PropuestaService } from '../../../@core/data/propuesta.service';
+import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { FORM_PROPUESTA_GRADO } from './form-propuesta_grado';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -38,7 +39,8 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private propuestaService: PropuestaService,
+    //private propuestaService: PropuestaService,
+    private admisionesService: AdmisionesService,
     private store: Store < IAppState > ,
     private listService: ListService,
     private toasterService: ToasterService) {
@@ -47,9 +49,9 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
-    this.listService.findCiudad();
-    this.listService.findLineaInvestigacion();
-    this.listService.findTipoProyecto();
+    //this.listService.findCiudad();
+    //this.listService.findLineaInvestigacion();
+    //this.listService.findTipoProyecto();
     this.loading = false;
     this.loadLists();
    }
@@ -81,7 +83,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   public loadPropuestaGrado(): void {
     if (this.propuesta_grado_id !== undefined && this.propuesta_grado_id !== 0) {
-      this.propuestaService.get('propuesta/?query=id:' + this.propuesta_grado_id)
+      this.admisionesService.get('propuesta/?query=id:' + this.propuesta_grado_id)
         .subscribe(res => {
           if (res !== null) {
             this.info_propuesta_grado = <PropuestaGrado>res[0];
@@ -107,7 +109,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_propuesta_grado = <PropuestaGrado>propuestaGrado;
-        this.propuestaService.put('propuesta', this.info_propuesta_grado)
+        this.admisionesService.put('propuesta', this.info_propuesta_grado)
           .subscribe(res => {
             this.loadPropuestaGrado();
             this.eventChange.emit(true);
@@ -130,7 +132,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_propuesta_grado = <PropuestaGrado>propuestaGrado;
-        this.propuestaService.post('propuesta', this.info_propuesta_grado)
+        this.admisionesService.post('propuesta', this.info_propuesta_grado)
           .subscribe(res => {
             this.info_propuesta_grado = <PropuestaGrado>res;
             this.eventChange.emit(true);
@@ -178,9 +180,9 @@ export class CrudPropuestaGradoComponent implements OnInit {
   public loadLists() {
     this.store.select((state) => state).subscribe(
       (list) => {
-        this.formPropuestaGrado.campos[this.getIndexForm('Lugarejecucion')].opciones = list.listCiudad[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('Tipoproyecto')].opciones = list.listTipoProyecto[0];
+        //this.formPropuestaGrado.campos[this.getIndexForm('Lugarejecucion')].opciones = list.listCiudad[0];
+        //this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
+        //this.formPropuestaGrado.campos[this.getIndexForm('Tipoproyecto')].opciones = list.listTipoProyecto[0];
       },
     );
   }

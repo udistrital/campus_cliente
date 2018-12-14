@@ -1,14 +1,15 @@
 import { TipoProyecto } from './tipo_proyecto';
 import { LineaInvestigacion } from './linea_investigacion';
-import { Enfasis } from './enfasis'
+import { EnfasisProyecto } from './enfasis_proyecto';
+import { GruproInvestigacion } from './grupro_investigacion';
 
 export class PropuestaGrado {
   Id: number;
   Nombre: string;
   Resumen: string;
-  Grupoinvestigacion: string;
+  Grupoinvestigacion: GruproInvestigacion;
   LineaInvestigacion: LineaInvestigacion;
-  Enfasis: Enfasis;
+  Enfasis: EnfasisProyecto;
   TipoProyecto: TipoProyecto;
   Formatoproyecto: string;
 }
