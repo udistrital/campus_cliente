@@ -1,5 +1,5 @@
 
-export class GruproInvestigacion {
+export class GrupoInvestigacion {
   Id: number;
   Nombre: string;
   Descripcion: string;

@@ -1,3 +1,4 @@
+import { GrupoInvestigacion } from '../data/models/grupo_investigacion';
 export const REDUCER_LIST = {
     Genero: 'listGenero',
     ClasificacionNivelIdioma: 'listClasificacionNivelIdioma',
@@ -19,4 +20,6 @@ export const REDUCER_LIST = {
     Titulacion: 'listTitulacion',
     TipoIdentificacion: 'listTipoIdentificacion',
     TipoProyecto: 'listReducerTipoProyecto',
+    EnfasisProyecto: 'listReducerEnfasisProyecto',
+    GrupoInvestigacion: 'listReducerGrupoInvestigacion',
 };
