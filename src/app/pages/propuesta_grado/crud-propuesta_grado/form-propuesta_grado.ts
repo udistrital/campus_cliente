@@ -31,7 +31,7 @@ export let FORM_PROPUESTA_GRADO = {
         label_i18n: 'grupo_investigacion',
         placeholder_i18n: 'placeholder_grupo_investigacion',
         requerido: false,
-        tipo: 'text',
+        tipo: 'GrupoInvestigacion',
         key: 'Nombre',
         oopciones: [],
     },
@@ -83,7 +83,7 @@ export let FORM_PROPUESTA_GRADO = {
         tamanoMaximo: 2,
     },
     {
-        etiqueta: 'editor',
+        etiqueta: 'textarea',
         claseGrid: 'col-12',
         nombre: 'Resumen',
         label_i18n: 'resumen',

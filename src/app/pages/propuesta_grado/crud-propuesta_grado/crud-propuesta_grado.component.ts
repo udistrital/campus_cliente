@@ -49,9 +49,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
-    //this.listService.findCiudad();
-    //this.listService.findLineaInvestigacion();
-    //this.listService.findTipoProyecto();
+    this.listService.findGrupoInvestigacion();
+    this.listService.findEnfasisProyecto();
+    this.listService.findTipoProyecto();
+    this.listService.findLineaInvestigacion();
     this.loading = false;
     this.loadLists();
    }
@@ -180,9 +181,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
   public loadLists() {
     this.store.select((state) => state).subscribe(
       (list) => {
-        //this.formPropuestaGrado.campos[this.getIndexForm('Lugarejecucion')].opciones = list.listCiudad[0];
-        //this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
-        //this.formPropuestaGrado.campos[this.getIndexForm('Tipoproyecto')].opciones = list.listTipoProyecto[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('Grupoinvestigacion')].opciones = list.listGrupoInvestigacion[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('Enfasis')].opciones = list.listEnfasisProyecto[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('Tipoproyecto')].opciones = list.listTipoProyecto[0];
       },
     );
   }
