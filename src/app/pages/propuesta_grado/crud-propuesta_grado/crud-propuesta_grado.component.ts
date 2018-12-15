@@ -1,7 +1,6 @@
 
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-//import { PropuestaService } from '../../../@core/data/propuesta.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { FORM_PROPUESTA_GRADO } from './form-propuesta_grado';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -39,7 +38,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    //private propuestaService: PropuestaService,
     private admisionesService: AdmisionesService,
     private store: Store < IAppState > ,
     private listService: ListService,

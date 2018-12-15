@@ -1,7 +1,6 @@
 
 import { TipoProyecto } from './../../../@core/data/models/tipo_proyecto';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-//import { PropuestaService } from '../../../@core/data/propuesta.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { FORM_TIPO_PROYECTO } from './form-tipo_proyecto';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
