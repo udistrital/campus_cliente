@@ -9,6 +9,8 @@ import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+// import Swal from 'sweetalert2';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-posgrado',
@@ -40,17 +42,26 @@ export class PosgradoComponent implements OnInit {
   info_contacto: boolean;
   info_persona: boolean;
   info_caracteristica: boolean;
+  button_politica: boolean = true;
+  programa_seleccionado: any;
 
   constructor(
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
     private translate: TranslateService,
+  //  private router: Router,
     private programaService: ProgramaAcademicoService) {
     this.translate = translate;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
     this.getInfoPersonaId();
     this.loadInfoPostgrados();
+    // if (this.autenticacion.live()) {
+    //  this.loadInfoPostgrados();
+    // }else {
+    //  Swal({type: 'error', text: ' No hay sesión abierta'});
+    //  this.router.navigate(['/']);
+    // }
   }
 
   setPercentage_info(number, tab) {
