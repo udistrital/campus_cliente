@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
+import { IdiomaService } from '../../../@core/data/idioma.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { UserService } from '../../../@core/data/users.service';
+import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 
@@ -17,7 +20,10 @@ export class ListIdiomasComponent implements OnInit {
     settings: any;
     source: LocalDataSource = new LocalDataSource();
 
-    constructor(private translate: TranslateService, private toasterService: ToasterService) {
+    constructor(private translate: TranslateService,
+        private idiomaService: IdiomaService,
+        private userService: UserService,
+        private toasterService: ToasterService) {
         this.loadData();
         this.cargarCampos();
         this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -46,37 +52,31 @@ export class ListIdiomasComponent implements OnInit {
                 Idioma: {
                     title: this.translate.instant('GLOBAL.idioma'),
                     valuePrepareFunction: (value) => {
-                        return value;
+                        return value.Nombre;
                     },
                 },
-                IdiomaNativo: {
-                    title: this.translate.instant('GLOBAL.idioma_nativo'),
+                NivelEscribe: {
+                    title: this.translate.instant('GLOBAL.nivel_escribe'),
                     valuePrepareFunction: (value) => {
-                        return value;
-                    },
-                },
-                NivelEscritura: {
-                    title: this.translate.instant('GLOBAL.nivel_escritura'),
-                    valuePrepareFunction: (value) => {
-                        return value;
+                        return value.Nombre;
                     },
                 },
                 NivelEscucha: {
                     title: this.translate.instant('GLOBAL.nivel_escucha'),
                     valuePrepareFunction: (value) => {
-                        return value;
+                        return value.Nombre;
                     },
                 },
                 NivelHabla: {
                     title: this.translate.instant('GLOBAL.nivel_habla'),
                     valuePrepareFunction: (value) => {
-                        return value;
+                        return value.Nombre;
                     },
                 },
-                NivelLectuta: {
-                    title: this.translate.instant('GLOBAL.nivel_lectura'),
+                NivelLee: {
+                    title: this.translate.instant('GLOBAL.nivel_lee'),
                     valuePrepareFunction: (value) => {
-                        return value;
+                        return value.Nombre;
                     },
                 },
             },
@@ -88,47 +88,41 @@ export class ListIdiomasComponent implements OnInit {
     }
 
     loadData(): void {
-        /** this.Service.get('').subscribe(res => {
+        this.idiomaService.get('conocimiento_idioma/?query=persona:' + this.userService.getEnte())
+        .subscribe(res => {
             if (res !== null) {
                 const data = <Array<any>>res;
                 this.source.load(data);
             }
-        }); **/
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
     }
 
     ngOnInit() {
     }
 
-    activetab(): void {
-        this.cambiotab = !this.cambiotab;
-    }
-
     onEdit(event): void {
         this.uid = event.data.Id;
-        this.activetab();
     }
 
     onCreate(event): void {
         this.uid = 0;
-        this.activetab();
-    }
-
-    selectTab(event): void {
-        if (event.tabTitle === this.translate.instant('GLOBAL.lista')) {
-          this.cambiotab = false;
-        } else {
-          this.cambiotab = true;
-        }
-    }
-
-    onChange(event) {
-        if (event) {
-            this.loadData();
-            this.cambiotab = !this.cambiotab;
-        }
     }
 
     itemselec(event): void {
+    }
+
+    onChange(event) {
+      if (event) {
+        this.loadData();
+      }
     }
 
     onDelete(event): void {
@@ -145,14 +139,23 @@ export class ListIdiomasComponent implements OnInit {
         Swal(opt)
         .then((willDelete) => {
             if (willDelete.value) {
-                /** this.Service.delete('', event.data).subscribe(res => {
-                    if (res !== null) { **/
-                        this.loadData();
-                        this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
-                        this.translate.instant('GLOBAL.confirmarEliminar'));
-                    /** }
-                }); **/
-            }
+            this.idiomaService.delete('conocimiento_idioma/', event.data).subscribe(res => {
+              if (res !== null) {
+                this.loadData();
+                this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.idioma') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
+                }
+             },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+          }
         });
     }
 

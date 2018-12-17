@@ -8,8 +8,12 @@ import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { FORM_INFORMACION_CONTACTO } from './form-informacion_contacto';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { IAppState } from '../../../@core/store/app.state';
+import { ListService } from '../../../@core/store/services/list.service';
+import { Store } from '@ngrx/store';
 
 @Component({
   selector: 'ngx-crud-informacion-contacto',
@@ -44,13 +48,16 @@ export class CrudInformacionContactoComponent implements OnInit {
     private translate: TranslateService,
     private campusMidService: CampusMidService,
     private ubicacionesService: UbicacionesService,
+    private store: Store < IAppState >,
+    private listService: ListService,
     private toasterService: ToasterService) {
     this.formInformacionContacto = FORM_INFORMACION_CONTACTO;
     this.construirForm();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
-    this.loadOptionsPaisResidencia();
+    this.listService.findPais();
+    this.loadLists();
   }
 
   construirForm() {
@@ -76,16 +83,6 @@ export class CrudInformacionContactoComponent implements OnInit {
     }
   }
 
-  loadOptionsPaisResidencia(): void {
-    let paisResidencia: Array<any> = [];
-    this.ubicacionesService.get('lugar/?query=TipoLugar.Nombre:PAIS')
-      .subscribe(res => {
-        if (res !== null) {
-          paisResidencia = <Array<Lugar>>res;
-        }
-        this.formInformacionContacto.campos[this.getIndexForm('PaisResidencia')].opciones = paisResidencia;
-      });
-  }
   loadOptionsDepartamentoResidencia(): void {
     let consultaHijos: Array<any> = [];
     const departamentoResidencia: Array<any> = [];
@@ -99,9 +96,18 @@ export class CrudInformacionContactoComponent implements OnInit {
             }
           }
           this.formInformacionContacto.campos[this.getIndexForm('DepartamentoResidencia')].opciones = departamentoResidencia;
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
     }
   }
+
   loadOptionsCiudadResidencia(): void {
     let consultaHijos: Array<any> = [];
     const ciudadResidencia: Array<any> = [];
@@ -115,6 +121,14 @@ export class CrudInformacionContactoComponent implements OnInit {
             }
           }
           this.formInformacionContacto.campos[this.getIndexForm('CiudadResidencia')].opciones = ciudadResidencia;
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
     }
   }
@@ -170,6 +184,14 @@ export class CrudInformacionContactoComponent implements OnInit {
             this.formInformacionContacto.campos[this.getIndexForm('DepartamentoResidencia')].opciones[0] = this.datosGet.UbicacionEnte[0].Lugar.DEPARTAMENTO;
             this.formInformacionContacto.campos[this.getIndexForm('CiudadResidencia')].opciones[0] = this.info_informacion_contacto.CiudadResidencia;
           }
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
     } else {
       this.info_informacion_contacto = undefined;
@@ -232,6 +254,14 @@ export class CrudInformacionContactoComponent implements OnInit {
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.informacion_contacto') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+            },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
             });
         }
       });
@@ -293,6 +323,14 @@ export class CrudInformacionContactoComponent implements OnInit {
               this.showToast('info', this.translate.instant('GLOBAL.crear'),
                 this.translate.instant('GLOBAL.informacion_contacto') + ' ' +
                 this.translate.instant('GLOBAL.confirmarCrear'));
+            },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
             });
         }
       });
@@ -335,6 +373,14 @@ export class CrudInformacionContactoComponent implements OnInit {
       bodyOutputType: BodyOutputType.TrustedHtml,
     };
     this.toasterService.popAsync(toast);
+  }
+
+  public loadLists() {
+    this.store.select((state) => state).subscribe(
+      (list) => {
+        this.formInformacionContacto.campos[this.getIndexForm('PaisResidencia')].opciones = list.listPais[0];
+      },
+    );
   }
 
 }

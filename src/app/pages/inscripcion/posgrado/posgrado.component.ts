@@ -4,8 +4,13 @@ import { ImplicitAutenticationService } from './../../../@core/utils/implicit_au
 import { PersonaService } from '../../../@core/data/persona.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import 'style-loader!angular2-toaster/toaster.css';
 import * as jspdf from 'jspdf';
 import html2canvas from 'html2canvas';
+// import Swal from 'sweetalert2';
+// import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-posgrado',
@@ -34,17 +39,26 @@ export class PosgradoComponent implements OnInit {
   info_contacto: boolean;
   info_persona: boolean;
   info_caracteristica: boolean;
+  button_politica: boolean = true;
+  programa_seleccionado: any;
 
   constructor(
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
     private translate: TranslateService,
+  //  private router: Router,
     private programaService: ProgramaAcademicoService) {
     this.translate = translate;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
     this.getInfoPersonaId();
     this.loadInfoPostgrados();
+    // if (this.autenticacion.live()) {
+    //  this.loadInfoPostgrados();
+    // }else {
+    //  Swal({type: 'error', text: ' No hay sesión abierta'});
+    //  this.router.navigate(['/']);
+    // }
   }
 
   setPercentage_info(number, tab) {
@@ -74,6 +88,14 @@ export class PosgradoComponent implements OnInit {
         if (res !== null && r.Type !== 'error') {
           this.posgrados = <any>res;
         }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
       });
   }
 
@@ -91,6 +113,14 @@ export class PosgradoComponent implements OnInit {
             this.info_persona_id = this.info_info_persona.Id;
             this.info_ente_id = this.info_info_persona.Ente;
           }
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
     } else {
       this.info_persona_id = undefined;
