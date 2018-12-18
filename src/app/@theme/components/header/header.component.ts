@@ -6,7 +6,6 @@ import { AnalyticsService } from '../../../@core/utils/analytics.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
 import { Subscription } from 'rxjs';
-import {}
 import { Router } from '@angular/router';
 
 @Component({
