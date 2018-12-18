@@ -10,6 +10,7 @@ import 'style-loader!angular2-toaster/toaster.css';
 import { IAppState } from '../../../@core/store/app.state';
 import { Store } from '@ngrx/store';
 import { ListService } from '../../../@core/store/services/list.service';
+import { AdmisionService } from '../../../@core/data/admision.service';
 
 @Component({
   selector: 'ngx-crud-propuesta-grado',
@@ -19,6 +20,7 @@ import { ListService } from '../../../@core/store/services/list.service';
 export class CrudPropuestaGradoComponent implements OnInit {
   config: ToasterConfig;
   propuesta_grado_id: number;
+  admision_id: number;
 
   @Input('propuesta_grado_id')
   set name(propuesta_grado_id: number) {
@@ -41,6 +43,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     private admisionesService: AdmisionesService,
     private store: Store < IAppState > ,
     private listService: ListService,
+    private Admi_id: AdmisionService,
     private toasterService: ToasterService) {
     this.formPropuestaGrado = FORM_PROPUESTA_GRADO;
     this.construirForm();
@@ -53,6 +56,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.listService.findLineaInvestigacion();
     this.loading = false;
     this.loadLists();
+    this.admision_id=this.Admi_id.getAdmision_id();
    }
 
   construirForm() {
@@ -146,11 +150,27 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   validarForm(event) {
+    console.log(event.data.PropuestaGrado);
+    console.log(this.admision_id);
+    const propuesta ={
+      Nombre: event.data.PropuestaGrado.Nombre,
+      Resumen: event.data.PropuestaGrado.Resumen,
+      Grupoinvestigacion: event.data.PropuestaGrado.Grupoinvestigacion.Id,
+      LineaInvestigacion: event.data.PropuestaGrado.Lineainvestigacion.Id,
+      Formatoproyecto: event.data.PropuestaGrado.Formatoproyecto.file.name,
+      Admision: {
+        Id: this.admision_id,
+      },
+      TipoProyecto: event.data.PropuestaGrado.Tipoproyecto,
+      EnfasisProyecto: event.data.PropuestaGrado.Enfasis,
+    }
+    console.log(propuesta);
+    
     if (event.valid) {
       if (this.info_propuesta_grado === undefined) {
-        this.createPropuestaGrado(event.data.PropuestaGrado);
+        this.createPropuestaGrado(propuesta);
       } else {
-        this.updatePropuestaGrado(event.data.PropuestaGrado);
+        this.updatePropuestaGrado(propuesta);
       }
     }
   }
