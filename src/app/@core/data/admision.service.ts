@@ -29,12 +29,28 @@ export class AdmisionService {
             window.localStorage.setItem('admi_id', res[0].Id);
           }
         });
+        setTimeout(() => {
+          const payload_2 = parseInt(window.localStorage.getItem('admi_id'), 10);
+          this.http.get(path + 'propuesta/?query=Admision:' + payload_2, httpOptions)
+            .subscribe(res => {
+              if (res !== null) {
+                this.user_1 = res[0];
+                this.user_1$.next(this.user_1);
+                window.localStorage.setItem('prop_id', res[0].Id);
+              }
+            });
+        }, 1000/60);   
     }
   }
 
   public getAdmision_id(): number {
     return parseInt(window.localStorage.getItem('admi_id'), 10);
   }
+
+  public getProp_id(): number {
+    return parseInt(window.localStorage.getItem('prop_id'), 10);
+  }
+
 
   public getUser() {
     return this.user_1$.asObservable();

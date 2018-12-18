@@ -25,6 +25,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
   @Input('propuesta_grado_id')
   set name(propuesta_grado_id: number) {
     this.propuesta_grado_id = propuesta_grado_id;
+    console.log('propuestaId: ' +propuesta_grado_id);
     this.loadPropuestaGrado();
   }
 
@@ -57,6 +58,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.loading = false;
     this.loadLists();
     this.admision_id=this.Admi_id.getAdmision_id();
+    this.propuesta_grado_id=this.Admi_id.getProp_id();
    }
 
   construirForm() {
