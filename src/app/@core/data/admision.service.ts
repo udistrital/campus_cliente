@@ -39,7 +39,7 @@ export class AdmisionService {
                 window.localStorage.setItem('prop_id', res[0].Id);
               }
             });
-        }, 1000/60);   
+        }, 1000 / 60);
     }
   }
 

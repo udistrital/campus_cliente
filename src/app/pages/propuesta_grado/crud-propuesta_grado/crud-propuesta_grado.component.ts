@@ -26,7 +26,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
   @Input('propuesta_grado_id')
   set name(propuesta_grado_id: number) {
     this.propuesta_grado_id = propuesta_grado_id;
-    console.log('propuestaId: ' +propuesta_grado_id);
     this.loadPropuestaGrado();
   }
 
@@ -58,8 +57,8 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.listService.findLineaInvestigacion();
     this.loading = false;
     this.loadLists();
-    this.admision_id=this.Admi_id.getAdmision_id();
-    this.propuesta_grado_id=this.Admi_id.getProp_id();
+    this.admision_id = this.Admi_id.getAdmision_id();
+    this.propuesta_grado_id = this.Admi_id.getProp_id();
    }
 
   construirForm() {
@@ -93,12 +92,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
         .subscribe(res => {
           if (res !== null) {
             const temp = <PropuestaGrado>res[0];
-            console.log(temp);
             this.info_propuesta_grado = <PropuestaGrado>res[0];
-            this.info_propuesta_grado.TipoProyecto= temp.TipoProyecto;
-            this.info_propuesta_grado.EnfasisProyecto= temp.EnfasisProyecto;
-            this.info_propuesta_grado.LineaInvestigacion=temp.LineaInvestigacion;
-            console.log(this.info_propuesta_grado);
+            this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
+            this.info_propuesta_grado.EnfasisProyecto = temp.EnfasisProyecto;
+            this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
           }
         });
     } else  {
@@ -159,9 +156,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   validarForm(event) {
-    console.log(event.data.PropuestaGrado);
-    console.log(this.admision_id);
-    const propuesta ={
+    const propuesta = {
       Nombre: event.data.PropuestaGrado.Nombre,
       Resumen: event.data.PropuestaGrado.Resumen,
       GrupoInvestigacion: event.data.PropuestaGrado.GrupoInvestigacion,
@@ -173,8 +168,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
       TipoProyecto: event.data.PropuestaGrado.TipoProyecto,
       EnfasisProyecto: event.data.PropuestaGrado.EnfasisProyecto,
     }
-    console.log(propuesta);
-    
     if (event.valid) {
       if (this.info_propuesta_grado === undefined) {
         this.createPropuestaGrado(propuesta);
