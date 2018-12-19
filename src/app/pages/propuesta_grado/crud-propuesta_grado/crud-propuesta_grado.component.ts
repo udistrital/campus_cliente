@@ -1,5 +1,6 @@
 
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
+import { GrupoInvestigacion } from '../../../@core/data/models/grupo_investigacion';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { FORM_PROPUESTA_GRADO } from './form-propuesta_grado';
@@ -91,7 +92,13 @@ export class CrudPropuestaGradoComponent implements OnInit {
       this.admisionesService.get('propuesta/?query=id:' + this.propuesta_grado_id)
         .subscribe(res => {
           if (res !== null) {
+            const temp = <PropuestaGrado>res[0];
+            console.log(temp);
             this.info_propuesta_grado = <PropuestaGrado>res[0];
+            this.info_propuesta_grado.TipoProyecto= temp.TipoProyecto;
+            this.info_propuesta_grado.EnfasisProyecto= temp.EnfasisProyecto;
+            this.info_propuesta_grado.LineaInvestigacion=temp.LineaInvestigacion;
+            console.log(this.info_propuesta_grado);
           }
         });
     } else  {
@@ -157,14 +164,14 @@ export class CrudPropuestaGradoComponent implements OnInit {
     const propuesta ={
       Nombre: event.data.PropuestaGrado.Nombre,
       Resumen: event.data.PropuestaGrado.Resumen,
-      Grupoinvestigacion: event.data.PropuestaGrado.Grupoinvestigacion.Id,
-      LineaInvestigacion: event.data.PropuestaGrado.Lineainvestigacion.Id,
+      GrupoInvestigacion: event.data.PropuestaGrado.GrupoInvestigacion,
+      LineaInvestigacion: event.data.PropuestaGrado.LineaInvestigacion,
       Formatoproyecto: event.data.PropuestaGrado.Formatoproyecto.file.name,
       Admision: {
         Id: this.admision_id,
       },
-      TipoProyecto: event.data.PropuestaGrado.Tipoproyecto,
-      EnfasisProyecto: event.data.PropuestaGrado.Enfasis,
+      TipoProyecto: event.data.PropuestaGrado.TipoProyecto,
+      EnfasisProyecto: event.data.PropuestaGrado.EnfasisProyecto,
     }
     console.log(propuesta);
     
@@ -175,6 +182,11 @@ export class CrudPropuestaGradoComponent implements OnInit {
         this.updatePropuestaGrado(propuesta);
       }
     }
+  }
+
+  setPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -201,10 +213,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
   public loadLists() {
     this.store.select((state) => state).subscribe(
       (list) => {
-        this.formPropuestaGrado.campos[this.getIndexForm('Grupoinvestigacion')].opciones = list.listGrupoInvestigacion[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('Lineainvestigacion')].opciones = list.listLineaInvestigacion[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('Enfasis')].opciones = list.listEnfasisProyecto[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('Tipoproyecto')].opciones = list.listTipoProyecto[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('GrupoInvestigacion')].opciones = list.listGrupoInvestigacion[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('LineaInvestigacion')].opciones = list.listLineaInvestigacion[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('EnfasisProyecto')].opciones = list.listEnfasisProyecto[0];
+        this.formPropuestaGrado.campos[this.getIndexForm('TipoProyecto')].opciones = list.listTipoProyecto[0];
       },
     );
   }

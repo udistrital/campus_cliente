@@ -27,7 +27,7 @@ export let FORM_PROPUESTA_GRADO = {
     {
         etiqueta: 'select',
         claseGrid: 'col-6',
-        nombre: 'Grupoinvestigacion',
+        nombre: 'GrupoInvestigacion',
         label_i18n: 'grupo_investigacion',
         placeholder_i18n: 'placeholder_grupo_investigacion',
         requerido: false,
@@ -38,7 +38,7 @@ export let FORM_PROPUESTA_GRADO = {
     {
         etiqueta: 'select',
         claseGrid: 'col-6',
-        nombre: 'Lineainvestigacion',
+        nombre: 'LineaInvestigacion',
         label_i18n: 'linea_investigacion',
         placeholder_i18n: 'placeholder_linea_investigacion',
         requerido: false,
@@ -49,7 +49,7 @@ export let FORM_PROPUESTA_GRADO = {
     {
         etiqueta: 'select',
         claseGrid: 'col-6',
-        nombre: 'Enfasis',
+        nombre: 'EnfasisProyecto',
         label_i18n: 'enfasis',
         placeholder_i18n: 'enfasis',
         requerido: false,
@@ -60,7 +60,7 @@ export let FORM_PROPUESTA_GRADO = {
     {
         etiqueta: 'select',
         claseGrid: 'col-6',
-        nombre: 'Tipoproyecto',
+        nombre: 'TipoProyecto',
         label_i18n: 'tipoproyecto',
         placeholder_i18n: 'tipoproyecto',
         requerido: false,

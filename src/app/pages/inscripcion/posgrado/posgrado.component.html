@@ -128,7 +128,7 @@
             </div>
             <nb-tabset fullWidth (changeTab)="selectTab($event)">
                 <nb-tab tabTitle="{{ 'GLOBAL.propuesta_grado' | translate }}">
-                    <ngx-crud-propuesta-grado></ngx-crud-propuesta-grado>
+                    <ngx-crud-propuesta-grado (result)="setPercentage_proy($event,4)"></ngx-crud-propuesta-grado>
                 </nb-tab>
             </nb-tabset>
         </nb-card-body>

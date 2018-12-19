@@ -79,8 +79,8 @@ export class PosgradoComponent implements OnInit {
     this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
   }
   setPercentage_proy(number, tab) {
-    this.percentage_tab_info[tab] = (number * 100) / 1;
-    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
+    this.percentage_tab_proy[tab] = (number * 100) / 1;
+    this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
   }
 
   traerInfoPersona(event, tab) {

@@ -7,7 +7,7 @@ export class PropuestaGrado {
   Id: number;
   Nombre: string;
   Resumen: string;
-  Grupoinvestigacion: GrupoInvestigacion;
+  GrupoInvestigacion: GrupoInvestigacion;
   LineaInvestigacion: LineaInvestigacion;
   Formatoproyecto: string;
   Admision: number;
