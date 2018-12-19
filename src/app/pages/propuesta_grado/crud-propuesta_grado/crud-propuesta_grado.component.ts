@@ -1,6 +1,4 @@
-
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
-import { GrupoInvestigacion } from '../../../@core/data/models/grupo_investigacion';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { FORM_PROPUESTA_GRADO } from './form-propuesta_grado';
