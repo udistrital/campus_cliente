@@ -25,7 +25,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
   propuesta_grado_id: number;
   admision_id: number;
   filesUp: any;
-  Formatoproyecto: any;
+  FormatoProyecto: any;
 
   @Input('propuesta_grado_id')
   set name(propuesta_grado_id: number) {
@@ -94,16 +94,47 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
 
   public loadPropuestaGrado(): void {
-    if (this.propuesta_grado_id !== undefined && this.propuesta_grado_id !== 0) {
+    if (this.propuesta_grado_id !== undefined && this.propuesta_grado_id !== 0 &&
+      this.propuesta_grado_id.toString() !== '') {
       this.admisionesService.get('propuesta/?query=id:' + this.propuesta_grado_id)
         .subscribe(res => {
           if (res !== null) {
             const temp = <PropuestaGrado>res[0];
-            this.info_propuesta_grado = <PropuestaGrado>res[0];
-            this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
-            this.info_propuesta_grado.EnfasisProyecto = temp.EnfasisProyecto;
-            this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
+            console.info(temp);
+            const files = []
+            if (temp.FormatoProyecto + '' !== '0') {
+              files.push({ Id: temp.FormatoProyecto, key: 'FormatoProyecto' });
+            }
+            console.info(files);
+            this.nuxeoService.getDocumentoById$(files, this.documentoService)
+              .subscribe(response => {
+                const filesResponse = <any>response;
+                console.info(filesResponse);
+                if (Object.keys(filesResponse).length === files.length) {
+                  this.info_propuesta_grado = <PropuestaGrado>res[0];
+                  this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
+                  this.info_propuesta_grado.EnfasisProyecto = temp.EnfasisProyecto;
+                  this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
+                  this.info_propuesta_grado.FormatoProyecto = filesResponse['FormatoProyecto'] + '';
+                }
+              },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
           }
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
     } else  {
       this.info_propuesta_grado = undefined;
@@ -151,18 +182,18 @@ export class CrudPropuestaGradoComponent implements OnInit {
         this.info_propuesta_grado = <PropuestaGrado>propuestaGrado;
         console.info(this.info_propuesta_grado);
 
-        if (this.info_propuesta_grado.Formatoproyecto !== undefined) {
+        if (this.info_propuesta_grado.FormatoProyecto !== undefined) {
           files.push({
-            nombre: this.autenticationService.getPayload().sub, key: 'Formatoproyecto',
-            file: this.info_propuesta_grado.Formatoproyecto, IdDocumento: 2});
+            nombre: this.autenticationService.getPayload().sub, key: 'FormatoProyecto',
+            file: this.info_propuesta_grado.FormatoProyecto, IdDocumento: 2});
         }
 
         this.nuxeoService.getDocumentos$(files, this.documentoService)
             .subscribe(response => {
               if (Object.keys(response).length === files.length) {
                 this.filesUp = <any>response;
-                if (this.filesUp['Formatoproyecto'] !== undefined) {
-                  this.info_propuesta_grado.Formatoproyecto = this.filesUp['Formatoproyecto'].Id;
+                if (this.filesUp['FormatoProyecto'] !== undefined) {
+                  this.info_propuesta_grado.FormatoProyecto = this.filesUp['FormatoProyecto'].Id;
                 }
                 this.admisionesService.post('propuesta', this.info_propuesta_grado)
                 .subscribe(res => {
@@ -209,7 +240,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
       Resumen: event.data.PropuestaGrado.Resumen,
       GrupoInvestigacion: event.data.PropuestaGrado.GrupoInvestigacion,
       LineaInvestigacion: event.data.PropuestaGrado.LineaInvestigacion,
-      Formatoproyecto: event.data.PropuestaGrado.Formatoproyecto.file,
+      FormatoProyecto: event.data.PropuestaGrado.FormatoProyecto.file,
       Admision: {
         Id: this.admision_id,
       },

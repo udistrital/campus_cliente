@@ -72,7 +72,7 @@ export let FORM_PROPUESTA_GRADO = {
         etiqueta: 'file',
         claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
         clase: 'form-control',
-        nombre: 'Formatoproyecto',
+        nombre: 'FormatoProyecto',
         label_i18n: 'formatoproyecto',
         placeholder_i18n: 'formatoproyecto',
         requerido: false,

@@ -9,7 +9,7 @@ export class PropuestaGrado {
   Resumen: string;
   GrupoInvestigacion: GrupoInvestigacion;
   LineaInvestigacion: LineaInvestigacion;
-  Formatoproyecto: string;
+  FormatoProyecto: string;
   Admision: number;
   TipoProyecto: TipoProyecto;
   EnfasisProyecto: EnfasisProyecto;
