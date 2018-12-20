@@ -1,9 +1,13 @@
+import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
+import { NuxeoService } from '../../../@core/utils/nuxeo.service';
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { DocumentoService } from '../../../@core/data/documento.service';
 import { FORM_PROPUESTA_GRADO } from './form-propuesta_grado';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { IAppState } from '../../../@core/store/app.state';
@@ -20,6 +24,8 @@ export class CrudPropuestaGradoComponent implements OnInit {
   config: ToasterConfig;
   propuesta_grado_id: number;
   admision_id: number;
+  filesUp: any;
+  Formatoproyecto: any;
 
   @Input('propuesta_grado_id')
   set name(propuesta_grado_id: number) {
@@ -39,6 +45,9 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
+    private autenticationService: ImplicitAutenticationService,
+    private documentoService: DocumentoService,
+    private nuxeoService: NuxeoService,
     private admisionesService: AdmisionesService,
     private store: Store < IAppState > ,
     private listService: ListService,
@@ -138,13 +147,53 @@ export class CrudPropuestaGradoComponent implements OnInit {
     Swal(opt)
     .then((willDelete) => {
       if (willDelete.value) {
+        const files = []
         this.info_propuesta_grado = <PropuestaGrado>propuestaGrado;
-        this.admisionesService.post('propuesta', this.info_propuesta_grado)
-          .subscribe(res => {
-            this.info_propuesta_grado = <PropuestaGrado>res;
-            this.eventChange.emit(true);
-            this.showToast('info', 'created', 'PropuestaGrado created');
-          });
+        console.info(this.info_propuesta_grado);
+
+        if (this.info_propuesta_grado.Formatoproyecto !== undefined) {
+          files.push({
+            nombre: this.autenticationService.getPayload().sub, key: 'Formatoproyecto',
+            file: this.info_propuesta_grado.Formatoproyecto, IdDocumento: 2});
+        }
+
+        this.nuxeoService.getDocumentos$(files, this.documentoService)
+            .subscribe(response => {
+              if (Object.keys(response).length === files.length) {
+                this.filesUp = <any>response;
+                if (this.filesUp['Formatoproyecto'] !== undefined) {
+                  this.info_propuesta_grado.Formatoproyecto = this.filesUp['Formatoproyecto'].Id;
+                }
+                this.admisionesService.post('propuesta', this.info_propuesta_grado)
+                .subscribe(res => {
+                  const r = <any>res
+                    if (r !== null && r.Type !== 'error') {
+                      this.info_propuesta_grado = <PropuestaGrado>res;
+                      this.eventChange.emit(true);
+                      this.showToast('info', 'created', 'PropuestaGrado created');
+                    } else {
+                      this.showToast('error', this.translate.instant('GLOBAL.error'),
+                      this.translate.instant('GLOBAL.error'));
+                    }
+                },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
+              }
+            },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            }) 
       }
     });
   }
@@ -154,12 +203,13 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   validarForm(event) {
+    console.info("id_admision" + this.admision_id);
     const propuesta = {
       Nombre: event.data.PropuestaGrado.Nombre,
       Resumen: event.data.PropuestaGrado.Resumen,
       GrupoInvestigacion: event.data.PropuestaGrado.GrupoInvestigacion,
       LineaInvestigacion: event.data.PropuestaGrado.LineaInvestigacion,
-      Formatoproyecto: event.data.PropuestaGrado.Formatoproyecto.file.name,
+      Formatoproyecto: event.data.PropuestaGrado.Formatoproyecto.file,
       Admision: {
         Id: this.admision_id,
       },
@@ -167,6 +217,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
       EnfasisProyecto: event.data.PropuestaGrado.EnfasisProyecto,
     }
     if (event.valid) {
+      console.info(propuesta);
       if (this.info_propuesta_grado === undefined) {
         this.createPropuestaGrado(propuesta);
       } else {
