@@ -5,37 +5,35 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
-};
-
-// const path = Config.LOCAL.ADMISIONES_SERVICE;
+    headers: new HttpHeaders({
+        'Accept': 'application/json',
+        'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
+    }),
+}
 
 const path = GENERAL.ENTORNO.ADMISIONES_SERVICE;
 
 @Injectable()
-export class AdmisionesService {
+export class PropuestaService {
 
     constructor(private http: HttpClient) {
     }
 
     get(endpoint) {
-        return this.http.get(path + endpoint).pipe(
+        return this.http.get(path + endpoint, httpOptions).pipe(
           catchError(this.handleError),
         );
-      }
+    }
     post(endpoint, element) {
         return this.http.post(path + endpoint, element, httpOptions).pipe(
           catchError(this.handleError),
         );
     }
-
-    put(endpoint, element , ID) {
-      console.info('id recibido para put ' + ID);
-        return this.http.put(path + endpoint + '/' + ID, element, httpOptions).pipe(
+    put(endpoint, element) {
+        return this.http.put(path + endpoint + '/' + element.Id, element, httpOptions).pipe(
           catchError(this.handleError),
         );
     }
-
     delete(endpoint, element) {
         return this.http.delete(path + endpoint + '/' + element.Id, httpOptions).pipe(
           catchError(this.handleError),
@@ -58,5 +56,5 @@ export class AdmisionesService {
           status: error.status,
           message: 'Something bad happened; please try again later.',
         });
-    };
+      };
 }

@@ -174,5 +174,32 @@ export class ListReducer {
       }
   }
 
+  static ListReducerTipoProyecto(state: Array<any> =  new Array, action) {
+    switch (action.type) {
+      case REDUCER_LIST.TipoProyecto:
+        return [...state, action.payload];
+      default:
+        return state;
+      }
+  }
+
+  static ListReducerEnfasisProyecto(state: Array<any> =  new Array, action) {
+    switch (action.type) {
+      case REDUCER_LIST.EnfasisProyecto:
+        return [...state, action.payload];
+      default:
+        return state;
+      }
+  }
+
+  static ListReducerGrupoInvestigacion(state: Array<any> =  new Array, action) {
+    switch (action.type) {
+      case REDUCER_LIST.GrupoInvestigacion:
+        return [...state, action.payload];
+      default:
+        return state;
+      }
+  }
+
 }
 

@@ -18,4 +18,7 @@ export const REDUCER_LIST = {
     TipoLugar: 'listTipoLugar',
     Titulacion: 'listTitulacion',
     TipoIdentificacion: 'listTipoIdentificacion',
+    TipoProyecto: 'listReducerTipoProyecto',
+    EnfasisProyecto: 'listReducerEnfasisProyecto',
+    GrupoInvestigacion: 'listReducerGrupoInvestigacion',
 };
