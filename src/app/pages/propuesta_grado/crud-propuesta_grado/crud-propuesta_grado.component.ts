@@ -96,12 +96,12 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.ENTE_id = this.ente_id.getEnte();
     this.admisionesService.get('admision/?query=Aspirante:' + this.ENTE_id)
         .subscribe(res_ente => {
-          this.admision_id=res_ente[0].Id;
-          if(res_ente[0].Aspirante === this.ente_id.getEnte()){
+          this.admision_id = res_ente[0].Id;
+          if (res_ente[0].Aspirante === this.ente_id.getEnte() ){
           this.admisionesService.get('propuesta/?query=Admision:' + this.admision_id)
               .subscribe(res => {
                 const tempo = <any>res[0].Id
-                this.prop_id= tempo;
+                this.prop_id = tempo;
                 this.loadPropuestaGrado();
               });
           }else {
@@ -134,7 +134,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                 if (Object.keys(filesResponse).length === files.length) {
                   this.info_propuesta_grado = <PropuestaGrado>res[0];
                   this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
-                  this.FormatoProyecto= this.info_propuesta_grado.FormatoProyecto;
+                  this.FormatoProyecto = this.info_propuesta_grado.FormatoProyecto;
                   this.info_propuesta_grado.EnfasisProyecto = temp.EnfasisProyecto;
                   this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
                   this.info_propuesta_grado.FormatoProyecto = filesResponse['FormatoProyecto'] + '';
@@ -234,7 +234,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                     });
                   });
-        } 
+        }
       }
     });
   }
@@ -296,7 +296,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                 text: this.translate.instant('ERROR.' + error.status),
                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
               });
-            }) 
+            })
       }
     });
   }
