@@ -1,3 +1,5 @@
+import { environment } from '../environments/environment';
+
 export const Config = {
     LOCAL: {
         NUXEO: {
@@ -25,6 +27,35 @@ export const Config = {
             SIGN_OUT_URL: 'https://autenticacion.udistrital.edu.co/oidc/logout',
             SIGN_OUT_REDIRECT_URL: 'http://localhost:4200/',
         },
+    },
+    LOCAL_NUBE: {
+        NUXEO: {
+            PATH: 'https://documental.udistrital.edu.co/nuxeo/',
+        },
+        WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
+        UBICACIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicacion_crud/',
+        PERSONA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/personas_crud/',
+        ENTE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/ente_crud/v1/',
+        DOCUMENTO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/documento_crud/',
+        ORGANIZACION_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/organizacion_crud/',
+        EXPERIENCIASERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/experiencia_laboral_crud/',
+        CAMPUS_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/campus_mid/',
+        ADMISIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/admisiones_crud/',
+        PROGRAMA_ACADEMICO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/programa_academico_crud/',
+        FORMACION_ACADEMICA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/formacion_academica_crud/',
+        IDIOMA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/idiomas_crud/',
+        CORE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/core_crud/',
+        SESIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/',
+        CONF_MENU_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/api/configuracion_crud_api/v1/menu_opcion_padre/ArbolMenus/',
+        TOKEN: {
+          AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
+          CLIENTE_ID: '3Idp5LUlnZY7cOV10NaLuyRfzooa',
+          RESPONSE_TYPE: 'id_token token',
+          SCOPE: 'openid email role documento',
+          REDIRECT_URL: 'http://localhost:4200/',
+          SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
+          SIGN_OUT_REDIRECT_URL: 'http://localhost:4200/',
+      },
     },
     PRUEBAS: {
         NUXEO: {
@@ -108,8 +139,37 @@ export const Config = {
             SIGN_OUT_REDIRECT_URL: 'https://campusvirtualudpreprod.portaloas.udistrital.edu.co/',
         },
     },
+    PROD: {
+      NUXEO: {
+          PATH: 'https://documental.udistrital.edu.co/nuxeo/',
+      },
+      WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
+      UBICACIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/ubicacion_crud/',
+      PERSONA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/personas_crud/',
+      ENTE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/ente_crud/v1/',
+      DOCUMENTO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/documento_crud/',
+      ORGANIZACION_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/organizacion_crud/',
+      EXPERIENCIASERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/experiencia_laboral_crud/',
+      CAMPUS_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/campus_mid/',
+      ADMISIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/admisiones_crud/',
+      PROGRAMA_ACADEMICO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/programa_academico_crud/',
+      FORMACION_ACADEMICA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/formacion_academica_crud/',
+      IDIOMA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/idiomas_crud/',
+      CORE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/core_crud/',
+      SESIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/',
+      CONF_MENU_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/api/configuracion_crud_api/v1/menu_opcion_padre/ArbolMenus/',
+      TOKEN: {
+          AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
+          CLIENTE_ID: '7AxAGQAvdCo_PfdFKOVCI9zeuqga',
+          RESPONSE_TYPE: 'id_token token',
+          SCOPE: 'openid email role documento',
+          REDIRECT_URL: 'https://campusvirtualudpreprod.portaloas.udistrital.edu.co/',
+          SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
+          SIGN_OUT_REDIRECT_URL: 'https://campusvirtualudpreprod.portaloas.udistrital.edu.co/',
+      },
+  },
 };
 
 export const GENERAL = {
-    ENTORNO: Config.PREPROD_NUBE,
+    ENTORNO: Config[environment.entorno],
 };

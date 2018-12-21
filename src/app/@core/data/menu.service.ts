@@ -7,7 +7,6 @@ const path = GENERAL.ENTORNO.CONF_MENU_SERVICE;
 const httpOptions = {
     headers: new HttpHeaders({
         'Accept': 'application/json',
-        'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
     }),
 }
 

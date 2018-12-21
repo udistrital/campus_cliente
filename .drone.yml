@@ -9,11 +9,13 @@ pipeline:
 
   # build and test the go program
   nodejs:
-    image: node:9.5.0
+    image: node:10.7.0
     commands:
      - apt-get update -y
      - apt-get install -y zip
-     - npm install
+     - rm -rf node_modules
+     - npm i
+     - npm install @ngrx/store@latest
      - npm run lint:ci
      - npm run build:prod
 
@@ -33,7 +35,7 @@ pipeline:
     when:
       branch: [develop]
       event: push
-      
+
   publish_s3:
     image: plugins/s3
     secrets: [ aws_access_key_id, aws_secret_access_key ]
@@ -46,14 +48,14 @@ pipeline:
       branch: [master]
       event: push
 
-  #Notify results to telegram    
+  #Notify results to telegram
   notify_telegram:
-    image: appleboy/drone-telegram    
+    image: appleboy/drone-telegram
     secrets: [ telegram_token, telegram_to ]
     format: html
     message: >
       {{#success build.status}}
-        <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a> 
+        <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
       {{else}}
         <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">FAILURE</a>

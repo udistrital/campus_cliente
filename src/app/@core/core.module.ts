@@ -1,3 +1,4 @@
+import { AuthInterceptor } from './_Interceptor/auth.Interceptor';
 import { EnteService } from './data/ente.service';
 import { UbicacionesService } from './data/ubicaciones.service';
 import { PersonaService } from './data/persona.service';
@@ -17,6 +18,7 @@ import { rootReducer } from './store/rootReducer';
 import { AdmisionesService } from './data/admisiones.service';
 import { IdiomaService } from './data/idioma.service';
 import { ProgramaAcademicoService } from './data/programa_academico.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const socialLinks = [
   {
@@ -101,6 +103,11 @@ export const NB_CORE_PROVIDERS = [
     UbicacionesService,
     ProgramaAcademicoService,
     EnteService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
   ],
 })
 export class CoreModule {

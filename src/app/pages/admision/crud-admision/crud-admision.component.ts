@@ -161,7 +161,7 @@ export class CrudAdmisionComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_admision = <Admision>admision;
-        this.admisionesService.put('admision', this.info_admision)
+        this.admisionesService.put('admision', this.info_admision, this.info_admision.Id)
           .subscribe(res => {
             this.loadAdmision();
             this.eventChange.emit(true);

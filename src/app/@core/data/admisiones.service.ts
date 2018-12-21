@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Config } from './../../app-config';
+import { GENERAL } from './../../app-config';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -8,7 +8,9 @@ const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
 };
 
-const path = Config.LOCAL.ADMISIONES_SERVICE;
+// const path = Config.LOCAL.ADMISIONES_SERVICE;
+
+const path = GENERAL.ENTORNO.ADMISIONES_SERVICE;
 
 @Injectable()
 export class AdmisionesService {
@@ -27,8 +29,9 @@ export class AdmisionesService {
         );
     }
 
-    put(endpoint, element) {
-        return this.http.put(path + endpoint + '/' + element.Id, element, httpOptions).pipe(
+    put(endpoint, element , ID) {
+      console.info('id recibido para put ' + ID);
+        return this.http.put(path + endpoint + '/' + ID, element, httpOptions).pipe(
           catchError(this.handleError),
         );
     }
