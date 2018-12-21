@@ -34,22 +34,4 @@ export const MENU_ITEMS: MenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Propuesta Grado',
-    icon: 'nb-compose',
-    link: '/pages/propuesta_grado',
-    key: 'propuesta_grado',
-    children: [
-      {
-        title: 'Lista Propuesta Grado',
-        link: '/pages/propuesta_grado/list-propuesta_grado',
-        key: 'lista_propuesta_grado',
-      },
-      {
-        title: 'CRUD Propuesta Grado',
-        link: '/pages/propuesta_grado/crud-propuesta_grado',
-        key: 'crud_propuesta_grado',
-      },
-    ],
-  },
 ]

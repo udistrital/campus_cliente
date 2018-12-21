@@ -6,7 +6,7 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudPropuestaGradoComponent } from './crud-propuesta_grado/crud-propuesta_grado.component';
-import { AdmisionService } from '../../@core/data/admision.service';
+import { UserService } from '../../@core/data/users.service';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { AdmisionService } from '../../@core/data/admision.service';
   ],
   providers: [
     AdmisionesService,
-    AdmisionService,
+    UserService,
   ],
   exports: [
     CrudPropuestaGradoComponent,

@@ -278,6 +278,7 @@
         "placeholder_tipo_proyecto_descripcion": "e.g. basic research project",
         "tipo_poyecto_nombre": "Name",
         "placeholder_tipo_poyecto_nombre": "Basic Research",
-        "formatoproyecto": "Project format"
+        "formatoproyecto": "Project format",
+        "error_carga_datos": "Reload the page or close and reopen the window to successfully load your data."
     }
 }

@@ -278,6 +278,7 @@
         "placeholder_tipo_proyecto_descripcion": "ej: proyecto de investigacion basica",
         "tipo_poyecto_nombre": "Nombre",
         "placeholder_tipo_poyecto_nombre": "Investigacion Basica",
-        "formatoproyecto": "Formato del proyecto"
+        "formatoproyecto": "Formato del proyecto",
+        "error_carga_datos": "Recargue la página o cierre y abra de nuevo la ventana para poder cargar exitosamente sus datos"
     }
 }

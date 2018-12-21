@@ -91,7 +91,7 @@ export class CrudTipoProyectoComponent implements OnInit {
     .then((willDelete) => {
       if (willDelete.value) {
         this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
-        this.admisionesService.put('tipo_proyecto', this.info_tipo_proyecto)
+        this.admisionesService.put('tipo_proyecto', this.info_tipo_proyecto, this.info_tipo_proyecto.Id)
           .subscribe(res => {
             this.loadTipoProyecto();
             this.eventChange.emit(true);

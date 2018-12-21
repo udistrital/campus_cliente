@@ -437,7 +437,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.loadAdmision();
     this.info_admision.AceptaTerminos = true;
     console.info(this.info_admision);
-    this.admisionesService.put('admision', this.info_admision)
+    this.admisionesService.put('admision', this.info_admision, this.info_admision.Id)
       .subscribe(res => {
         this.eventChange.emit(true);
         this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
