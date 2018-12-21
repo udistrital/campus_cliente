@@ -97,7 +97,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.admisionesService.get('admision/?query=Aspirante:' + this.ENTE_id)
         .subscribe(res_ente => {
           this.admision_id = res_ente[0].Id;
-          if (res_ente[0].Aspirante === this.ente_id.getEnte() ){
+          if (res_ente[0].Aspirante === this.ente_id.getEnte() ) {
           this.admisionesService.get('propuesta/?query=Admision:' + this.admision_id)
               .subscribe(res => {
                 const tempo = <any>res[0].Id
