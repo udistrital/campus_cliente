@@ -20,7 +20,7 @@ export let FORM_INFO_PERSONA = {
             nombre: 'SegundoNombre',
             label_i18n: 'segundo_nombre',
             placeholder_i18n: 'segundo_nombre',
-            requerido: true,
+            requerido: false,
             tipo: 'text',
         },
         {
@@ -38,7 +38,7 @@ export let FORM_INFO_PERSONA = {
             nombre: 'SegundoApellido',
             label_i18n: 'segundo_apellido',
             placeholder_i18n: 'segundo_apellido',
-            requerido: true,
+            requerido: false,
             tipo: 'text',
         },
         {
