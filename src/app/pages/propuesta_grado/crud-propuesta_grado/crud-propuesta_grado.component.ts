@@ -61,7 +61,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
       this.construirForm();
     });
     this.listService.findGrupoInvestigacion();
-    this.listService.findEnfasisProyecto();
     this.listService.findTipoProyecto();
     this.listService.findLineaInvestigacion();
     this.loading = false;
@@ -135,7 +134,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
                   this.info_propuesta_grado = <PropuestaGrado>res[0];
                   this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
                   this.FormatoProyecto = this.info_propuesta_grado.FormatoProyecto;
-                  this.info_propuesta_grado.EnfasisProyecto = temp.EnfasisProyecto;
                   this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
                   this.info_propuesta_grado.FormatoProyecto = filesResponse['FormatoProyecto'] + '';
                 }
@@ -316,7 +314,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
         Id: this.admision_id,
       },
       TipoProyecto: event.data.PropuestaGrado.TipoProyecto,
-      EnfasisProyecto: event.data.PropuestaGrado.EnfasisProyecto,
     }
     if (event.valid) {
       if (this.info_propuesta_grado === undefined) {
@@ -358,7 +355,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
       (list) => {
         this.formPropuestaGrado.campos[this.getIndexForm('GrupoInvestigacion')].opciones = list.listGrupoInvestigacion[0];
         this.formPropuestaGrado.campos[this.getIndexForm('LineaInvestigacion')].opciones = list.listLineaInvestigacion[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('EnfasisProyecto')].opciones = list.listEnfasisProyecto[0];
         this.formPropuestaGrado.campos[this.getIndexForm('TipoProyecto')].opciones = list.listTipoProyecto[0];
       },
     );

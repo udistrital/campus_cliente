@@ -384,24 +384,6 @@ export class ListService {
     );
   }
 
-  public findEnfasisProyecto() {
-    this.store.select(REDUCER_LIST.EnfasisProyecto).subscribe(
-      (list: any) => {
-        if (!list || list.length === 0) {
-          this.admisionesService.get('enfasis_proyecto/?limit=0')
-          .subscribe(
-            (result: any[]) => {
-              this.addList(REDUCER_LIST.EnfasisProyecto, result);
-            },
-            error => {
-              this.addList(REDUCER_LIST.EnfasisProyecto, []);
-            },
-          );
-        }
-      },
-    );
-  }
-
   public findGrupoInvestigacion() {
     this.store.select(REDUCER_LIST.GrupoInvestigacion).subscribe(
       (list: any) => {

@@ -16,7 +16,6 @@ import {Genero} from '../data/models/genero';
 import { Titulacion } from '../data/models/titulacion';
 import { TipoIdentificacion } from '../data/models/tipo_identificacion';
 import { TipoProyecto } from '../data/models/tipo_proyecto';
-import { EnfasisProyecto } from '../data/models/enfasis_proyecto';
 import { GrupoInvestigacion } from '../data/models/grupo_investigacion';
 
 export interface IAppState {
@@ -40,6 +39,5 @@ export interface IAppState {
   listTitulacion: Titulacion[],
   listTipoIdentificacion: TipoIdentificacion[],
   listTipoProyecto: TipoProyecto[],
-  listEnfasisProyecto: EnfasisProyecto[],
   listGrupoInvestigacion: GrupoInvestigacion[],
 }

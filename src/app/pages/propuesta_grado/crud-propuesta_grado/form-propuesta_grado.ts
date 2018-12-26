@@ -49,17 +49,6 @@ export let FORM_PROPUESTA_GRADO = {
     {
         etiqueta: 'select',
         claseGrid: 'col-6',
-        nombre: 'EnfasisProyecto',
-        label_i18n: 'enfasis',
-        placeholder_i18n: 'enfasis',
-        requerido: true,
-        tipo: 'Enfasis',
-        key: 'Nombre',
-        opciones: [],
-    },
-    {
-        etiqueta: 'select',
-        claseGrid: 'col-6',
         nombre: 'TipoProyecto',
         label_i18n: 'tipoproyecto',
         placeholder_i18n: 'tipoproyecto',
