@@ -5,5 +5,5 @@
  */
 export const environment = {
   production: true,
-  entorno: 'LOCAL',
+  entorno: 'PROD',
 };
