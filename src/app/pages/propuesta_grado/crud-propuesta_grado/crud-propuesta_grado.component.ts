@@ -107,7 +107,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
             this.showToast('info', 'updated', 'Regargar pagina');
             Swal({
               type: 'warning',
-              title: 'Error',
+              title: this.translate.instant('GLOBAL.warning'),
               text: this.translate.instant('GLOBAL.error_carga_datos'),
               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
@@ -239,10 +239,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   createPropuestaGrado(propuestaGrado: any): void {
     const opt: any = {
-      title: 'Create?',
-      text: 'Create PropuestaGrado!',
+      title:  this.translate.instant('GLOBAL.crear'),
+      text: this.translate.instant('GLOBAL.create_propuesta'),
       icon: 'warning',
-      buttons: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       dangerMode: true,
       showCancelButton: true,
     };
@@ -271,7 +271,8 @@ export class CrudPropuestaGradoComponent implements OnInit {
                     if (r !== null && r.Type !== 'error') {
                       this.info_propuesta_grado = <PropuestaGrado>res;
                       this.eventChange.emit(true);
-                      this.showToast('info', 'created', 'PropuestaGrado created');
+                      this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                      this.translate.instant('GLOBAL.propuesta') + ' ' + this.translate.instant('GLOBAL.confirmarCrear'));
                     } else {
                       this.showToast('error', this.translate.instant('GLOBAL.error'),
                       this.translate.instant('GLOBAL.error'));
