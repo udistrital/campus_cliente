@@ -8,7 +8,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 const httpOptions = {
     headers: new HttpHeaders({
         'Accept': 'application/json',
-        'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
     }),
 }
 

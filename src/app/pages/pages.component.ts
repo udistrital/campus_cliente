@@ -104,6 +104,7 @@ export class PagesComponent implements OnInit {
         this.translateMenu();
       },
     ); */
+    this.menu = MENU_ITEMS;
     this.translateMenu();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => { // Live reload
       this.translateMenu();
