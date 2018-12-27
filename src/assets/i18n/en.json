@@ -279,6 +279,8 @@
         "tipo_poyecto_nombre": "Name",
         "placeholder_tipo_poyecto_nombre": "Basic Research",
         "formatoproyecto": "Project format",
-        "error_carga_datos": "Reload the page or close and reopen the window to successfully load your data."
+        "error_carga_datos": "Reload the page or close and reopen the window to successfully load your data.",
+        "warning": "Warning",
+        "create_propuesta": "Create Grade Proposal"
     }
 }

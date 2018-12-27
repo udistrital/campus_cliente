@@ -61,7 +61,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
       this.construirForm();
     });
     this.listService.findGrupoInvestigacion();
-    this.listService.findEnfasisProyecto();
     this.listService.findTipoProyecto();
     this.listService.findLineaInvestigacion();
     this.loading = false;
@@ -108,7 +107,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
             this.showToast('info', 'updated', 'Regargar pagina');
             Swal({
               type: 'warning',
-              title: 'Error',
+              title: this.translate.instant('GLOBAL.warning'),
               text: this.translate.instant('GLOBAL.error_carga_datos'),
               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
@@ -135,7 +134,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
                   this.info_propuesta_grado = <PropuestaGrado>res[0];
                   this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
                   this.FormatoProyecto = this.info_propuesta_grado.FormatoProyecto;
-                  this.info_propuesta_grado.EnfasisProyecto = temp.EnfasisProyecto;
                   this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
                   this.info_propuesta_grado.FormatoProyecto = filesResponse['FormatoProyecto'] + '';
                 }
@@ -241,10 +239,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   createPropuestaGrado(propuestaGrado: any): void {
     const opt: any = {
-      title: 'Create?',
-      text: 'Create PropuestaGrado!',
+      title:  this.translate.instant('GLOBAL.crear'),
+      text: this.translate.instant('GLOBAL.create_propuesta'),
       icon: 'warning',
-      buttons: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       dangerMode: true,
       showCancelButton: true,
     };
@@ -273,7 +271,8 @@ export class CrudPropuestaGradoComponent implements OnInit {
                     if (r !== null && r.Type !== 'error') {
                       this.info_propuesta_grado = <PropuestaGrado>res;
                       this.eventChange.emit(true);
-                      this.showToast('info', 'created', 'PropuestaGrado created');
+                      this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                      this.translate.instant('GLOBAL.propuesta') + ' ' + this.translate.instant('GLOBAL.confirmarCrear'));
                     } else {
                       this.showToast('error', this.translate.instant('GLOBAL.error'),
                       this.translate.instant('GLOBAL.error'));
@@ -316,7 +315,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
         Id: this.admision_id,
       },
       TipoProyecto: event.data.PropuestaGrado.TipoProyecto,
-      EnfasisProyecto: event.data.PropuestaGrado.EnfasisProyecto,
     }
     if (event.valid) {
       if (this.info_propuesta_grado === undefined) {
@@ -358,7 +356,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
       (list) => {
         this.formPropuestaGrado.campos[this.getIndexForm('GrupoInvestigacion')].opciones = list.listGrupoInvestigacion[0];
         this.formPropuestaGrado.campos[this.getIndexForm('LineaInvestigacion')].opciones = list.listLineaInvestigacion[0];
-        this.formPropuestaGrado.campos[this.getIndexForm('EnfasisProyecto')].opciones = list.listEnfasisProyecto[0];
         this.formPropuestaGrado.campos[this.getIndexForm('TipoProyecto')].opciones = list.listTipoProyecto[0];
       },
     );

@@ -1,6 +1,5 @@
 import { TipoProyecto } from './tipo_proyecto';
 import { LineaInvestigacion } from './linea_investigacion';
-import { EnfasisProyecto } from './enfasis_proyecto';
 import { GrupoInvestigacion } from './grupo_investigacion';
 
 export class PropuestaGrado {
@@ -12,5 +11,4 @@ export class PropuestaGrado {
   FormatoProyecto: string;
   Admision: number;
   TipoProyecto: TipoProyecto;
-  EnfasisProyecto: EnfasisProyecto;
 }
