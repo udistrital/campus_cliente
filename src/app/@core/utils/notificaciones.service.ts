@@ -22,7 +22,6 @@ export class NotificacionesService {
         this.messages = <Subject<any>>wsService
             .connect(CHAT_URL + `?id=${payload.sub}&profiles=admin`)
             .map((response: any) => {
-                this.addMessage(response.data);
                 return JSON.parse(response.data)
             });
     }

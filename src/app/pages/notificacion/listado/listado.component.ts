@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component } from '@angular/core';
+import { Subject } from 'rxjs';
 import { Http } from '@angular/http';
 import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -35,10 +35,6 @@ export class ListadoComponent {
 
     this.notificacionesService.messages.subscribe(response => {
       this.notificacionesService.addMessage(response);
-    });
-
-    this.notificacionesService.arrayMessages.subscribe(response => {
-      this.notificaciones = response;
     });
 
   }

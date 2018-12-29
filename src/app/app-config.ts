@@ -146,6 +146,6 @@ export const Config = {
 };
 
 export const GENERAL = {
-    // ENTORNO: Config[environment.entorno],
-    ENTORNO: Config.PRUEBAS,
+     ENTORNO: Config[environment.entorno],
+    // ENTORNO: Config.PRUEBAS,
 };
