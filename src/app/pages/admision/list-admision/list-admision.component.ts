@@ -81,6 +81,20 @@ export class ListAdmisionComponent implements OnInit {
             return value.Nombre;
           },
         },
+        Enfasis: {
+          title: 'Enfasis',
+          // type: 'estado_admision;',
+          valuePrepareFunction: (value) => {
+            return value.Nombre;
+          },
+        },
+        AceptaTerminos: {
+          title: 'Acepta Terminos',
+          // type: 'estado_admision;',
+          valuePrepareFunction: (value) => {
+            return value;
+          },
+        },
       },
     };
   }
