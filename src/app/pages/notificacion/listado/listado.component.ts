@@ -10,7 +10,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   styleUrls: ['./listado.component.scss'],
 })
 
-export class ListadoComponent implements OnInit {
+export class ListadoComponent {
 
   baseUrl: string = 'https://api.cdnjs.com/libraries';
   queryUrl: string = '?search=';
@@ -22,6 +22,8 @@ export class ListadoComponent implements OnInit {
     private notificacionesService: NotificacionesService,
   ) {
 
+    this.notificaciones = [];
+
     this.searchTerm$
       .pipe(
         debounceTime(700),
@@ -31,14 +33,13 @@ export class ListadoComponent implements OnInit {
         console.info(response);
       })
 
-    this.notificacionesService.messages.subscribe(msg => {
-      console.info('Response from websocket: ' + msg);
+    this.notificacionesService.messages.subscribe(response => {
+      this.notificacionesService.addMessage(response);
     });
 
-    this.notificacionesService.messages.subscribe(msg => {
-      console.info('Response from websocket: ' + msg);
+    this.notificacionesService.arrayMessages.subscribe(response => {
+      this.notificaciones = response;
     });
-
 
   }
 
@@ -46,18 +47,6 @@ export class ListadoComponent implements OnInit {
     return this.http
       .get(this.baseUrl + this.queryUrl + term)
       .map(res => res.json());
-  }
-
-
-  public getNotificacion(): Observable<any> {
-    return this.http.get('assets/json/notification.json');
-  }
-
-  ngOnInit() {
-    this.getNotificacion().subscribe(result => {
-      this.notificaciones = JSON.parse(result._body);
-      console.info(this.notificaciones);
-    });
   }
 
 }

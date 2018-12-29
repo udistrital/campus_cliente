@@ -43,8 +43,8 @@ export const Config = {
         ADMISIONES_SERVICE: 'http://localhost:8080/v1/',
         PROGRAMA_ACADEMICO_SERVICE: 'http://localhost:8101/v1/',
         FORMACION_ACADEMICA_SERVICE: 'http://localhost:8098/v1/',
-        CONFIGURACION_SERVICE: 'http://localhost:8082/configuracion_api/v1/',
-        NOTIFICACION_SERVICE: 'ws://pruebasapi.intranetoas.udistrital.edu.co:8116/ws/join',
+        CONFIGURACION_SERVICE: 'http://localhost:8083/configuracion_api/v1/',
+        NOTIFICACION_SERVICE: 'ws://localhost:8080/ws/join',
         IDIOMA_SERVICE: 'http://localhost:8103/v1/',
         CONF_MENU_SERVICE: 'http://10.20.0.254/configuracion_api/v1/menu_opcion_padre/ArbolMenus/',
         TOKEN: {
@@ -131,6 +131,8 @@ export const Config = {
       CORE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/core_crud/',
       SESIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/',
       CONF_MENU_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/api/configuracion_crud_api/v1/menu_opcion_padre/ArbolMenus/',
+      CONFIGURACION_SERVICE: 'http://localhost:8083/configuracion_api/v1/',
+      NOTIFICACION_SERVICE: 'ws://localhost:8080/v1/ws/join',
       TOKEN: {
           AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
           CLIENTE_ID: '7AxAGQAvdCo_PfdFKOVCI9zeuqga',
@@ -144,5 +146,6 @@ export const Config = {
 };
 
 export const GENERAL = {
-    ENTORNO: Config[environment.entorno],
+    // ENTORNO: Config[environment.entorno],
+    ENTORNO: Config.PRUEBAS,
 };

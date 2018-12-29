@@ -1,32 +1,34 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Rx';
+import { Subject, BehaviorSubject } from 'rxjs/Rx';
 import { WebsocketService } from './websocket.service';
 import { GENERAL } from './../../app-config';
 import { ImplicitAutenticationService } from './implicit_autentication.service';
 const CHAT_URL = GENERAL.ENTORNO.NOTIFICACION_SERVICE;
 
-export interface Message {
-    author: string,
-    message: string,
-}
+
 
 @Injectable()
 export class NotificacionesService {
-    public messages: Subject<Message>;
-    payload: any;
+    public messages: Subject<any>;
+    listMessage: any;
+    private arrayMessagesSubject = new BehaviorSubject({});
+    arrayMessages = this.arrayMessagesSubject.asObservable();
+
     constructor(wsService: WebsocketService,
-    authService: ImplicitAutenticationService,
+        authService: ImplicitAutenticationService,
     ) {
-        this.payload = authService.getPayload();
-        console.info(this.payload);
-        this.messages = <Subject<Message>>wsService
-            .connect(CHAT_URL + `?id=${this.payload.sub}&profiles=[admin]`)
-            .map((response: MessageEvent): Message => {
-                const data = JSON.parse(response.data);
-                return {
-                    author: data.author,
-                    message: data.message,
-                }
+        this.listMessage = [];
+        const payload = authService.getPayload();
+        this.messages = <Subject<any>>wsService
+            .connect(CHAT_URL + `?id=${payload.sub}&profiles=admin`)
+            .map((response: any) => {
+                this.addMessage(response.data);
+                return JSON.parse(response.data)
             });
+    }
+
+    addMessage(message) {
+        this.listMessage = [...[message], ...this.listMessage]
+        this.arrayMessagesSubject.next(this.listMessage);
     }
 }

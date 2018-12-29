@@ -4,9 +4,6 @@
       <div class="input-group">
         <input type="text" class="form-control" (ngModel)="search" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for...">
         <span class="input-group-append">
-          <button class="btn btn-primary input-group-text">
-            Buscar
-          </button>
         </span>
       </div>
     </nb-card>
@@ -15,10 +12,10 @@
   <pre>
     {{search|json}}
   </pre>
-  <div class="col-6">
+  <div class="col-8 offset-2">
     <nb-card size="medium">
       <nb-card-header>
-        Notificaciones Pendientes
+        Notificaciones
       </nb-card-header>
       <nb-card-body>
         <mat-list>
@@ -26,10 +23,10 @@
             <img matListAvatar [src]="notificacion.src" [alt]="notificacion.alt">
             <h3 matLine> {{notificacion.from}} </h3>
             <p matLine>
-              <span> {{notificacion.name}} </span>
+              <span> {{notificacion.User}} </span>
             </p>
             <p>
-              <span>{{notificacion.content}} </span>
+              <span>{{notificacion.Content.Message}} </span>
             </p>
 
           </mat-list-item>
@@ -37,7 +34,7 @@
       </nb-card-body>
     </nb-card>
   </div>
-  <div class="col-6">
+  <!-- <div class="col-6">
     <nb-card size="medium">
       <nb-card-header>
         Vistas
@@ -51,5 +48,5 @@
         </mat-nav-list>
       </nb-card-body>
     </nb-card>
-  </div>
+  </div> -->
 </div>

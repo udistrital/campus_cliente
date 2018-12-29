@@ -22,9 +22,10 @@ export class WebsocketService {
             ws.onerror = obs.error.bind(obs);
             ws.onclose = obs.complete.bind(obs);
             return ws.close.bind(ws);
-        })
+        });
         const observer = {
             next: (data: Object) => {
+                console.info(data);
                 if (ws.readyState === WebSocket.OPEN) {
                     ws.send(JSON.stringify(data));
                 }
