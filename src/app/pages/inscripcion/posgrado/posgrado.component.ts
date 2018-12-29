@@ -4,6 +4,7 @@ import { ImplicitAutenticationService } from './../../../@core/utils/implicit_au
 import { PersonaService } from '../../../@core/data/persona.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
@@ -44,12 +45,14 @@ export class PosgradoComponent implements OnInit {
   info_caracteristica: boolean;
   button_politica: boolean = true;
   programa_seleccionado: any;
+  selectedValue: any;
 
   constructor(
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
     private translate: TranslateService,
-  //  private router: Router,
+  //  private router: Router, 
+    private admisionesService: AdmisionesService,
     private programaService: ProgramaAcademicoService) {
     this.translate = translate;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -89,11 +92,30 @@ export class PosgradoComponent implements OnInit {
   }
 
   loadInfoPostgrados() {
-    this.programaService.get('programa_academico')
+    this.programaService.get('programa_academico/?limit=0')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.posgrados = <any>res;
+          console.info("carga primero esto")
+          this.admisionesService.get(`admision/?query=Aspirante:${this.info_ente_id}`)
+      .subscribe(res_2 => {
+        const r_2 = <any>res_2;
+        if (res_2 !== null && r_2.Type !== 'error') {
+          console.info(res[res_2[0].ProgramaAcademico]);
+          console.info(res_2[0].ProgramaAcademico);
+          console.info("carga primero esto x2");
+          this.selectedValue = res[res_2[0].ProgramaAcademico];
+        }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
         }
       },
       (error: HttpErrorResponse) => {
@@ -119,6 +141,7 @@ export class PosgradoComponent implements OnInit {
             this.info_info_persona = <ResponseId>res[0];
             this.info_persona_id = this.info_info_persona.Id;
             this.info_ente_id = this.info_info_persona.Ente;
+            console.info("el ente es: "+this.info_ente_id);
           }
         },
         (error: HttpErrorResponse) => {
