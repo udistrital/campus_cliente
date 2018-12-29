@@ -18,13 +18,6 @@ export class ConfiguracionService {
   }
 
   get(endpoint) {
-    interface Response {
-      Id: number;
-      Nombre: string;
-      Url: string;
-      TipoOpcion: string;
-      Opciones: Response[];
-    }
-    return this.http.get<Response[]>(path + endpoint, httpOptions);
+    return this.http.get<any[]>(path + endpoint, httpOptions);
   }
 }

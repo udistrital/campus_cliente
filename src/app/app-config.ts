@@ -43,7 +43,7 @@ export const Config = {
         ADMISIONES_SERVICE: 'http://localhost:8080/v1/',
         PROGRAMA_ACADEMICO_SERVICE: 'http://localhost:8101/v1/',
         FORMACION_ACADEMICA_SERVICE: 'http://localhost:8098/v1/',
-        CONFIGURACION_SERVICE: 'http://localhost:8083/configuracion_api/v1/',
+        CONFIGURACION_SERVICE: 'http://localhost:8083/v1/',
         NOTIFICACION_SERVICE: 'ws://localhost:8080/ws/join',
         IDIOMA_SERVICE: 'http://localhost:8103/v1/',
         CONF_MENU_SERVICE: 'http://10.20.0.254/configuracion_api/v1/menu_opcion_padre/ArbolMenus/',
@@ -146,6 +146,6 @@ export const Config = {
 };
 
 export const GENERAL = {
-     ENTORNO: Config[environment.entorno],
-    // ENTORNO: Config.PRUEBAS,
+    // ENTORNO: Config[environment.entorno],
+    ENTORNO: Config.PRUEBAS,
 };

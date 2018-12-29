@@ -20,15 +20,14 @@
       <nb-card-body>
         <mat-list>
           <mat-list-item *ngFor="let notificacion of notificacionesService.arrayMessages | async">
-            <img matListAvatar [src]="notificacion.src" [alt]="notificacion.alt">
-            <h3 matLine> {{notificacion.from}} </h3>
+            <!-- <img matListAvatar [src]="notificacion.src" [alt]="notificacion.alt"> -->
+            <h3 matLine> {{notificacion | json}} </h3>
             <p matLine>
               <span> {{notificacion.User}} </span>
             </p>
             <p>
               <span>{{notificacion.Content.Message}} </span>
             </p>
-
           </mat-list-item>
         </mat-list>
       </nb-card-body>

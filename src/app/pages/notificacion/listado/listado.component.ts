@@ -33,10 +33,6 @@ export class ListadoComponent {
         console.info(response);
       })
 
-    this.notificacionesService.messages.subscribe(response => {
-      this.notificacionesService.addMessage(response);
-    });
-
   }
 
   searchEntries(term) {
