@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -17,15 +18,21 @@ export class ListAdmisionComponent implements OnInit {
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
+  posgrados = [];
+  selectedValue: any;
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private translate: TranslateService, private admisionesService: AdmisionesService, private toasterService: ToasterService) {
+  constructor(private translate: TranslateService, 
+    private admisionesService: AdmisionesService, 
+    private toasterService: ToasterService,
+    private programaService: ProgramaAcademicoService) {
     this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
+    this.loadInfoPostgrados();
   }
 
   cargarCampos() {
@@ -82,21 +89,47 @@ export class ListAdmisionComponent implements OnInit {
     this.translate.use(language);
   }
 
-  loadData(): void {
-    this.admisionesService.get('admision/?limit=0').subscribe(res => {
-      if (res !== null) {
-        const data = <Array<any>>res;
-        this.source.load(data);
-          }
-    },
-    (error: HttpErrorResponse) => {
-      Swal({
-        type: 'error',
-        title: error.status + '',
-        text: this.translate.instant('ERROR.' + error.status),
-        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+  loadData(query?:string): void {
+    if(query){
+      console.info(query);
+      this.admisionesService.get(query).subscribe(res => {
+        if (res !== null) {
+          const data = <Array<any>>res;
+          this.source.load(data);
+            } else {
+              Swal({
+                type: 'info',
+                title: this.translate.instant('GLOBAL.warning'),
+                text: `no se encontraron resultados`,
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
       });
-    });
+    } else {
+      this.admisionesService.get('admision/?limit=0').subscribe(res => {
+        if (res !== null) {
+          const data = <Array<any>>res;
+          this.source.load(data);
+            }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
+    }
+    
   }
 
   ngOnInit() {
@@ -167,6 +200,37 @@ export class ListAdmisionComponent implements OnInit {
 
   itemselec(event): void {
     // console.log("afssaf");
+  }
+
+  loadInfoPostgrados() {
+    this.programaService.get('programa_academico/?limit=0')
+      .subscribe(res => {
+        const r = <any>res;
+        if (res !== null && r.Type !== 'error') {
+          this.posgrados = <any>res;
+        }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
+  }
+
+  Filtrar(){
+    if(this.selectedValue){
+      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValue.Id}`);
+    }else {
+      this.loadData();
+    }
+  }
+
+  ClearFiltro(){
+    this.loadData();
+    this.selectedValue='--Seleccionar--'
   }
 
   private showToast(type: string, title: string, body: string) {
