@@ -139,6 +139,8 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
+import { NotificacionesService } from '../@core/utils/notificaciones.service';
+import { ConfiguracionService } from '../@core/data/configuracion.service';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -214,6 +216,8 @@ export class ThemeModule {
       ngModule: ThemeModule,
       providers: [...NB_THEME_PROVIDERS,
         ImplicitAutenticationService,
+        NotificacionesService,
+        ConfiguracionService,
         DocumentoService],
     };
   }

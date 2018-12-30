@@ -7,6 +7,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-header',
@@ -21,24 +23,36 @@ export class HeaderComponent implements OnInit {
   user: any;
   title: any;
   username = '';
-  userMenu = [
-    { title: 'Notificación 1', icon: 'fa fa-check' },
-    { title: 'Notificación 2', icon: 'fa fa-check' },
-    { title: 'Notificación 3', icon: 'fa fa-check' },
-    { title: 'Notificación 4', icon: 'fa fa-check' },
-
-  ];
+  userMenu = [{ title: 'ver todas', icon: 'fa fa-list' }];
+  public noNotify: any = '0';
   constructor(private sidebarService: NbSidebarService,
     private menuService: NbMenuService,
     private analyticsService: AnalyticsService,
     private autenticacion: ImplicitAutenticationService,
+    private notificacionService: NotificacionesService,
     private router: Router,
     public translate: TranslateService) {
     this.translate = translate;
     this.itemClick = this.menuService.onItemClick()
-    .subscribe((event) => {
-      this.onContecxtItemSelection(event.item.title);
-    });
+      .subscribe((event) => {
+        this.onContecxtItemSelection(event.item.title);
+      });
+
+    this.notificacionService.getMessages()
+      .pipe(debounceTime(700), distinctUntilChanged())
+      .subscribe((notification: any) => {
+        const temp = notification.map((notify: any) => {
+          return { title: notify.Content.Message, icon: 'fa fa-commenting-o' }
+        });
+        this.userMenu = [...temp.slice(0, 7), ...[{ title: 'ver todas', icon: 'fa fa-list' }]];
+      });
+
+    this.notificacionService.noNotify$
+      .subscribe((numero: any) => {
+        if (typeof numero !== typeof {}) {
+          this.noNotify = numero + '';
+        }
+      });
   }
   useLanguage(language: string) {
     this.translate.use(language);
@@ -54,7 +68,9 @@ export class HeaderComponent implements OnInit {
   }
 
   onContecxtItemSelection(title) {
-    this.router.navigate(['/pages/notificacion/listado']);
+    if (title === 'ver todas') {
+      this.router.navigate(['/pages/notificacion/listado']);
+    }
   }
 
   login() {

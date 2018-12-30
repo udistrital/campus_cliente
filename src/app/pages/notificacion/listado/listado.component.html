@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-8 offset-2">
+  <div class="col-6 offset-3">
     <nb-card>
       <div class="input-group">
         <input type="text" class="form-control" (ngModel)="search" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for...">
@@ -12,40 +12,25 @@
   <pre>
     {{search|json}}
   </pre>
-  <div class="col-8 offset-2">
+  <div class="col-6 offset-3">
     <nb-card size="medium">
       <nb-card-header>
         Notificaciones
       </nb-card-header>
       <nb-card-body>
         <mat-list>
-          <mat-list-item *ngFor="let notificacion of notificacionesService.arrayMessages | async">
-            <!-- <img matListAvatar [src]="notificacion.src" [alt]="notificacion.alt"> -->
-            <h3 matLine> {{notificacion | json}} </h3>
-            <p matLine>
-              <span> {{notificacion.User}} </span>
-            </p>
-            <p>
-              <span>{{notificacion.Content.Message}} </span>
-            </p>
+          <mat-list-item *ngFor="let notificacion of notificaciones">
+            <img matListAvatar src="assets/images/polux.png" [alt]="notificacion.User">
+            <h3 matLine> {{notificacion.User}} </h3>
+            <h4 matLine>
+              {{notificacion.Content.Message}}
+            </h4>
+            <h4 matLine>
+              {{notificacion.FechaCreacion}}
+            </h4>
           </mat-list-item>
         </mat-list>
       </nb-card-body>
     </nb-card>
   </div>
-  <!-- <div class="col-6">
-    <nb-card size="medium">
-      <nb-card-header>
-        Vistas
-      </nb-card-header>
-      <nb-card-body>
-        <mat-nav-list>
-          <a *ngFor="let notificacion of notificaciones" mat-list-item>
-            <span mat-line>{{notificacion.name}}</span>
-            <span mat-line>{{notificacion.describe}}</span>
-          </a>
-        </mat-nav-list>
-      </nb-card-body>
-    </nb-card>
-  </div> -->
 </div>
