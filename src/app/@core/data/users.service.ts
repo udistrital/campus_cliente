@@ -37,6 +37,10 @@ export class UserService {
     return parseInt(window.localStorage.getItem('ente'), 10);
   }
 
+  public getPrograma(): number {
+    return parseInt(window.localStorage.getItem('programa'), 10);
+  }
+
   public getUser() {
     return this.user$.asObservable();
   }

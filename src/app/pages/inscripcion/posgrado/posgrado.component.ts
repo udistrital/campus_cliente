@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnChanges} from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from './../../../@core/utils/implicit_autentication.service';
 import { PersonaService } from '../../../@core/data/persona.service';
@@ -18,7 +18,7 @@ import html2canvas from 'html2canvas';
   templateUrl: './posgrado.component.html',
   styleUrls: ['./posgrado.component.scss'],
 })
-export class PosgradoComponent implements OnInit {
+export class PosgradoComponent implements OnInit, OnChanges {
 
   info_persona_id: number;
   info_ente_id: number;
@@ -97,14 +97,10 @@ export class PosgradoComponent implements OnInit {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.posgrados = <any>res;
-          console.info("carga primero esto")
           this.admisionesService.get(`admision/?query=Aspirante:${this.info_ente_id}`)
       .subscribe(res_2 => {
         const r_2 = <any>res_2;
         if (res_2 !== null && r_2.Type !== 'error') {
-          console.info(res[res_2[0].ProgramaAcademico]);
-          console.info(res_2[0].ProgramaAcademico);
-          console.info("carga primero esto x2");
           this.selectedValue = res[res_2[0].ProgramaAcademico];
         }
       },
@@ -244,6 +240,15 @@ export class PosgradoComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(){
+    console.info("algun cambio raro")
+  }
+
+  pruebita(){
+    console.info("si funciona");
+    window.localStorage.setItem('programa', this.selectedValue.Id);
   }
 
   public captureScreen() {
