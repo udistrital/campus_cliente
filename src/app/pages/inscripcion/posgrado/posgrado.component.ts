@@ -51,7 +51,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
     private translate: TranslateService,
-  //  private router: Router, 
+  //  private router: Router,
     private admisionesService: AdmisionesService,
     private programaService: ProgramaAcademicoService) {
     this.translate = translate;
@@ -137,7 +137,6 @@ export class PosgradoComponent implements OnInit, OnChanges {
             this.info_info_persona = <ResponseId>res[0];
             this.info_persona_id = this.info_info_persona.Id;
             this.info_ente_id = this.info_info_persona.Ente;
-            console.info("el ente es: "+this.info_ente_id);
           }
         },
         (error: HttpErrorResponse) => {
@@ -242,12 +241,10 @@ export class PosgradoComponent implements OnInit, OnChanges {
   ngOnInit() {
   }
 
-  ngOnChanges(){
-    console.info("algun cambio raro")
+  ngOnChanges() {
   }
 
-  pruebita(){
-    console.info("si funciona");
+  pruebita() {
     window.localStorage.setItem('programa', this.selectedValue.Id);
   }
 
