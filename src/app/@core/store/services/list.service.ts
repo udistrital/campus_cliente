@@ -366,6 +366,42 @@ export class ListService {
     );
   }
 
+  public findTipoProyecto() {
+    this.store.select(REDUCER_LIST.TipoProyecto).subscribe(
+      (list: any) => {
+        if (!list || list.length === 0) {
+          this.admisionesService.get('tipo_proyecto/?limit=0')
+          .subscribe(
+            (result: any[]) => {
+              this.addList(REDUCER_LIST.TipoProyecto, result);
+            },
+            error => {
+              this.addList(REDUCER_LIST.TipoProyecto, []);
+            },
+          );
+        }
+      },
+    );
+  }
+
+  public findGrupoInvestigacion() {
+    this.store.select(REDUCER_LIST.GrupoInvestigacion).subscribe(
+      (list: any) => {
+        if (!list || list.length === 0) {
+          this.admisionesService.get('grupo_investigacion/?limit=0')
+          .subscribe(
+            (result: any[]) => {
+              this.addList(REDUCER_LIST.GrupoInvestigacion, result);
+            },
+            error => {
+              this.addList(REDUCER_LIST.GrupoInvestigacion, []);
+            },
+          );
+        }
+      },
+    );
+  }
+
 
 
   private addList(type: string, object: Array < any > ) {

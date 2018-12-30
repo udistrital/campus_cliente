@@ -8,25 +8,33 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-    path: 'dashboard',
-    component: DashboardComponent,
+      path: 'dashboard',
+      component: DashboardComponent,
     },
     {
-    path: 'inscripcion',
-    loadChildren: './inscripcion/inscripcion.module#InscripcionModule',
+      path: 'inscripcion',
+      loadChildren: './inscripcion/inscripcion.module#InscripcionModule',
     },
     {
-    path: 'admision',
-    loadChildren: './admision/admision.module#AdmisionModule',
+      path: 'admision',
+      loadChildren: './admision/admision.module#AdmisionModule',
     },
     {
       path: 'notificacion',
       loadChildren: './notificacion/notificacion.module#NotificacionModule',
-      },
+    },
     {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+      path: 'propuesta_grado',
+      loadChildren: './propuesta_grado/propuesta_grado.module#PropuestaGradoModule',
+    },
+    {
+      path: 'tipo_proyecto',
+      loadChildren: './tipo_proyecto/tipo_proyecto.module#TipoProyectoModule',
+    },
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
     },
   ],
 }];

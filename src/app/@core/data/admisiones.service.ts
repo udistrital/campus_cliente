@@ -29,8 +29,9 @@ export class AdmisionesService {
         );
     }
 
-    put(endpoint, element) {
-        return this.http.put(path + endpoint + '/' + element.Id, element, httpOptions).pipe(
+    put(endpoint, element , ID) {
+      console.info('id recibido para put ' + ID);
+        return this.http.put(path + endpoint + '/' + ID, element, httpOptions).pipe(
           catchError(this.handleError),
         );
     }

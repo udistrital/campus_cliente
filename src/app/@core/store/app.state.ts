@@ -15,6 +15,8 @@ import {ClasificacionNivelIdioma} from '../data/models/clasificacion_idioma';
 import {Genero} from '../data/models/genero';
 import { Titulacion } from '../data/models/titulacion';
 import { TipoIdentificacion } from '../data/models/tipo_identificacion';
+import { TipoProyecto } from '../data/models/tipo_proyecto';
+import { GrupoInvestigacion } from '../data/models/grupo_investigacion';
 
 export interface IAppState {
   listGenero: Genero[],
@@ -36,4 +38,6 @@ export interface IAppState {
   listTipoLugar: TipoLugar[],
   listTitulacion: Titulacion[],
   listTipoIdentificacion: TipoIdentificacion[],
+  listTipoProyecto: TipoProyecto[],
+  listGrupoInvestigacion: GrupoInvestigacion[],
 }

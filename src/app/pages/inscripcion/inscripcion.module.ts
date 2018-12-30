@@ -26,6 +26,9 @@ import { ExperienciaLaboralModule } from '../experiencia_laboral/experiencia_lab
 import { ListExperienciaLaboralComponent } from '../experiencia_laboral/list-experiencia_laboral/list-experiencia_laboral.component';
 import { CrudExperienciaLaboralComponent } from '../experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component';
 import { ProgramaAcademicoService } from '../../@core/data/programa_academico.service';
+import { PropuestaGradoModule } from '../propuesta_grado/propuesta_grado.module';
+import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component';
+
 
 @NgModule({
   imports: [
@@ -40,6 +43,7 @@ import { ProgramaAcademicoService } from '../../@core/data/programa_academico.se
     IdiomasModule,
     FormacionAcademicaModule,
     ExperienciaLaboralModule,
+    PropuestaGradoModule,
   ],
   declarations: [
     ...routedComponents,
@@ -63,6 +67,7 @@ import { ProgramaAcademicoService } from '../../@core/data/programa_academico.se
     CrudInfoPersonaComponent,
     CrudInfoCaracteristicaComponent,
     CrudInformacionContactoComponent,
+    CrudPropuestaGradoComponent,
   ],
 })
 export class InscripcionModule { }
