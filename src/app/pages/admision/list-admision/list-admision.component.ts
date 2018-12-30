@@ -23,8 +23,8 @@ export class ListAdmisionComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private translate: TranslateService, 
-    private admisionesService: AdmisionesService, 
+  constructor(private translate: TranslateService,
+    private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
     private programaService: ProgramaAcademicoService) {
     this.loadData();
@@ -103,8 +103,8 @@ export class ListAdmisionComponent implements OnInit {
     this.translate.use(language);
   }
 
-  loadData(query?:string): void {
-    if(query){
+  loadData(query?: string): void {
+    if (query) {
       console.info(query);
       this.admisionesService.get(query).subscribe(res => {
         if (res !== null) {
@@ -143,7 +143,6 @@ export class ListAdmisionComponent implements OnInit {
         });
       });
     }
-    
   }
 
   ngOnInit() {
@@ -234,17 +233,17 @@ export class ListAdmisionComponent implements OnInit {
       });
   }
 
-  Filtrar(){
-    if(this.selectedValue){
+  Filtrar() {
+    if (this.selectedValue) {
       this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValue.Id}`);
     }else {
       this.loadData();
     }
   }
 
-  ClearFiltro(){
+  ClearFiltro() {
     this.loadData();
-    this.selectedValue='--Seleccionar--'
+    this.selectedValue = '--Seleccionar--'
   }
 
   private showToast(type: string, title: string, body: string) {

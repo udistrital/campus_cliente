@@ -409,7 +409,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     // this.loadInfoPersona();
     console.info(ente_id);
     this.aspirante = ente_id
-    this.programa=this.userService.getPrograma();
+    this.programa = this.userService.getPrograma();
     const admisionPost = {
      Periodo: 1, // TODO: Cambiar a periodo actual
      Aspirante: this.aspirante,
@@ -426,7 +426,6 @@ export class CrudInfoPersonaComponent implements OnInit {
      AceptaTerminos: true,
    };
         console.info(admisionPost);
-        console.info("creare una admision");
         this.info_admision = <Admision>admisionPost;
         this.info_admision.Aspirante = Number(this.info_persona_id);
         this.admisionesService.post('admision', this.info_admision)
