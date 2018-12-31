@@ -31,23 +31,27 @@ export class NotificacionesService {
         authService: ImplicitAutenticationService,
     ) {
         this.listMessage = [];
-        this.payload = authService.getPayload();
-        this.messages = <Subject<any>>wsService
-            .connect(CHAT_URL + `?id=${this.payload.sub}&profiles=admin`)
-            .map((response: any) => {
-                return JSON.parse(response.data)
+        if (authService.live()) {
+            this.payload = authService.getPayload();
+            this.messages = <Subject<any>>wsService
+                .connect(CHAT_URL + `?id=${this.payload.sub}&profiles=admin`)
+                .map((response: any) => {
+                    return JSON.parse(response.data)
+                });
+            this.queryNotification('admin');
+            this.messages.subscribe(response => {
+                const message = {
+                    Type: response.Type,
+                    Content: response.Content,
+                    User: response.User,
+                    FechaCreacion: new Date(response.Timestamp),
+                };
+                console.info(message);
+                this.addMessage(message);
             });
-        this.queryNotification('admin');
-        this.messages.subscribe(response => {
-            const message = {
-                Type: response.Type,
-                Content: response.Content,
-                User: response.User,
-                FechaCreacion: new Date(response.Timestamp),
-            };
-            console.info(message);
-            this.addMessage(message);
-        });
+        }
+
+
     }
 
     addMessage(message) {
