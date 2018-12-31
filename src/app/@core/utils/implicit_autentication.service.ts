@@ -111,7 +111,7 @@ export class ImplicitAutenticationService {
     }
 
     timer() {
-        Observable.interval(5000).subscribe(x => {
+        Observable.interval(5000).subscribe(() => {
             if (window.localStorage.getItem('expires_at') !== null) {
                 if (this.expired()) {
                     window.localStorage.clear();
