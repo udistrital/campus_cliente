@@ -105,7 +105,6 @@ export class ListAdmisionComponent implements OnInit {
 
   loadData(query?: string): void {
     if (query) {
-      console.info(query);
       this.admisionesService.get(query).subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;

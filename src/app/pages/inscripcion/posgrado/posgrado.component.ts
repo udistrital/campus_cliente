@@ -101,7 +101,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
       .subscribe(res_2 => {
         const r_2 = <any>res_2;
         if (res_2 !== null && r_2.Type !== 'error') {
-          this.selectedValue = res[res_2[0].ProgramaAcademico];
+          this.selectedValue = res[res_2[0].ProgramaAcademico - 1];
         }
       },
       (error: HttpErrorResponse) => {
