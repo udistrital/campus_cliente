@@ -64,7 +64,7 @@ export class ListAdmisionComponent implements OnInit {
           // type: 'number;',
           valuePrepareFunction: (value) => {
             const num = parseInt(value, 10);
-            return this.posgrados[num -1].Nombre.toString();
+            return this.posgrados[num - 1].Nombre.toString();
           },
         },
         Periodo: {

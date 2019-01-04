@@ -104,11 +104,11 @@ export class PosgradoComponent implements OnInit, OnChanges {
           this.selectedValue = res[res_2[0].ProgramaAcademico - 1];
         }
       },
-      (error: HttpErrorResponse) => {
+      (error_2: HttpErrorResponse) => {
         Swal({
           type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
+          title: error_2.status + '',
+          text: this.translate.instant('ERROR.' + error_2.status),
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });

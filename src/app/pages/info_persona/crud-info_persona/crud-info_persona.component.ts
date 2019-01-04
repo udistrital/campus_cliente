@@ -314,7 +314,6 @@ export class CrudInfoPersonaComponent implements OnInit {
                     }
                   },
                   (error: HttpErrorResponse) => {
-                    console.info("entra al error");
                     const usu = window.localStorage.getItem('usuario').toString()
                     this.personaService.get(`persona?query=Usuario:${usu}`)
                     .subscribe(res_usu => {
@@ -330,22 +329,22 @@ export class CrudInfoPersonaComponent implements OnInit {
                             this.createAdmision(res_usu[0].Ente);
                           }
                         },
-                        (error: HttpErrorResponse) => {
+                        (error_1: HttpErrorResponse) => {
                           Swal({
                             type: 'error',
-                            title: error.status + '',
-                            text: this.translate.instant('ERROR.' + error.status),
+                            title: error_1.status + '',
+                            text: this.translate.instant('ERROR.' + error_1.status),
                             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                           });
                         });
 
                       }
                     },
-                    (error: HttpErrorResponse) => {
+                    (error_2: HttpErrorResponse) => {
                       Swal({
                         type: 'error',
-                        title: error.status + '',
-                        text: this.translate.instant('ERROR.' + error.status),
+                        title: error_2.status + '',
+                        text: this.translate.instant('ERROR.' + error_2.status),
                         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                       });
                     });
