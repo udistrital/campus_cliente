@@ -22,6 +22,7 @@ export class UserService {
     if (window.localStorage.getItem('id_token') !== null && window.localStorage.getItem('id_token') !== undefined) {
       const id_token = window.localStorage.getItem('id_token').split('.');
       const payload = JSON.parse(atob(id_token[1]));
+      window.localStorage.setItem('usuario', payload.sub);
       this.http.get(path + 'persona/?query=Usuario:' + payload.sub, httpOptions)
         .subscribe(res => {
           if (res !== null) {
@@ -39,6 +40,10 @@ export class UserService {
 
   public getPrograma(): number {
     return parseInt(window.localStorage.getItem('programa'), 10);
+  }
+
+  public getUsuario(): string {
+    return window.localStorage.getItem('usuario').toString() ;
   }
 
   public getUser() {
