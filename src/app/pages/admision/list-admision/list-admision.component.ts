@@ -27,7 +27,6 @@ export class ListAdmisionComponent implements OnInit {
     private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
     private programaService: ProgramaAcademicoService) {
-    this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
@@ -64,7 +63,8 @@ export class ListAdmisionComponent implements OnInit {
           title: this.translate.instant('GLOBAL.programa_academico'),
           // type: 'number;',
           valuePrepareFunction: (value) => {
-            return value;
+            const num = parseInt(value, 10);
+            return this.posgrados[num -1].Nombre.toString();
           },
         },
         Periodo: {
@@ -220,6 +220,7 @@ export class ListAdmisionComponent implements OnInit {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.posgrados = <any>res;
+          this.loadData();
         }
       },
       (error: HttpErrorResponse) => {
