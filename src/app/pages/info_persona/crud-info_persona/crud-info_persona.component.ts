@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { PersonaService } from '../../../@core/data/persona.service';
 import { FORM_INFO_PERSONA } from './form-info_persona';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -62,6 +63,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     private listService: ListService,
     private admisionesService: AdmisionesService,
     private userService: UserService,
+    private personaService: PersonaService,
     private toasterService: ToasterService) {
     this.formInfoPersona = FORM_INFO_PERSONA;
     this.construirForm();
@@ -299,11 +301,11 @@ export class CrudInfoPersonaComponent implements OnInit {
                   .subscribe(res => {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {
+                      this.eventChange.emit(true);
                       this.info_persona_id = r.Body.Ente;
                       this.createAdmision(this.info_persona_id);
                       this.loadInfoPersona();
                       this.loading = false;
-                      this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                       this.translate.instant('GLOBAL.info_persona') + ' ' + this.translate.instant('GLOBAL.confirmarCrear'));
                     } else {
@@ -312,6 +314,41 @@ export class CrudInfoPersonaComponent implements OnInit {
                     }
                   },
                   (error: HttpErrorResponse) => {
+                    console.info("entra al error");
+                    const usu = window.localStorage.getItem('usuario').toString()
+                    this.personaService.get(`persona?query=Usuario:${usu}`)
+                    .subscribe(res_usu => {
+                      const r_usu = <any>res_usu;
+                      if (res_usu !== null && r_usu.Type !== 'error') {
+                        this.admisionesService.get(`admision/?query=Aspirante:${res_usu[0].Ente}`)
+                        .subscribe(res_2 => {
+                          const r_2 = <any>res_2;
+                          if (res_2 !== null && r_2.Type !== 'error') {
+                            console.info(`ya existe esta admision`);
+                          } else {
+                            console.info(`aun existe una admision`);
+                            this.createAdmision(res_usu[0].Ente);
+                          }
+                        },
+                        (error: HttpErrorResponse) => {
+                          Swal({
+                            type: 'error',
+                            title: error.status + '',
+                            text: this.translate.instant('ERROR.' + error.status),
+                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                          });
+                        });
+
+                      }
+                    },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
                     Swal({
                       type: 'error',
                       title: error.status + '',
