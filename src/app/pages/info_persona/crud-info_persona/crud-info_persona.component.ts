@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { PersonaService } from '../../../@core/data/persona.service';
 import { FORM_INFO_PERSONA } from './form-info_persona';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -15,6 +16,7 @@ import 'style-loader!angular2-toaster/toaster.css';
 import { IAppState } from '../../../@core/store/app.state';
 import { Store } from '@ngrx/store';
 import { ListService } from '../../../@core/store/services/list.service';
+import { UserService } from '../../../@core/data/users.service';
 
 @Component({
   selector: 'ngx-crud-info-persona',
@@ -60,6 +62,8 @@ export class CrudInfoPersonaComponent implements OnInit {
     private store: Store < IAppState > ,
     private listService: ListService,
     private admisionesService: AdmisionesService,
+    private userService: UserService,
+    private personaService: PersonaService,
     private toasterService: ToasterService) {
     this.formInfoPersona = FORM_INFO_PERSONA;
     this.construirForm();
@@ -297,11 +301,11 @@ export class CrudInfoPersonaComponent implements OnInit {
                   .subscribe(res => {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {
+                      this.eventChange.emit(true);
                       this.info_persona_id = r.Body.Ente;
                       this.createAdmision(this.info_persona_id);
                       this.loadInfoPersona();
                       this.loading = false;
-                      this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                       this.translate.instant('GLOBAL.info_persona') + ' ' + this.translate.instant('GLOBAL.confirmarCrear'));
                     } else {
@@ -310,6 +314,40 @@ export class CrudInfoPersonaComponent implements OnInit {
                     }
                   },
                   (error: HttpErrorResponse) => {
+                    const usu = window.localStorage.getItem('usuario').toString()
+                    this.personaService.get(`persona?query=Usuario:${usu}`)
+                    .subscribe(res_usu => {
+                      const r_usu = <any>res_usu;
+                      if (res_usu !== null && r_usu.Type !== 'error') {
+                        this.admisionesService.get(`admision/?query=Aspirante:${res_usu[0].Ente}`)
+                        .subscribe(res_2 => {
+                          const r_2 = <any>res_2;
+                          if (res_2 !== null && r_2.Type !== 'error') {
+                            console.info(`ya existe esta admision`);
+                          } else {
+                            console.info(`aun existe una admision`);
+                            this.createAdmision(res_usu[0].Ente);
+                          }
+                        },
+                        (error_1: HttpErrorResponse) => {
+                          Swal({
+                            type: 'error',
+                            title: error_1.status + '',
+                            text: this.translate.instant('ERROR.' + error_1.status),
+                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                          });
+                        });
+
+                      }
+                    },
+                    (error_2: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error_2.status + '',
+                        text: this.translate.instant('ERROR.' + error_2.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
                     Swal({
                       type: 'error',
                       title: error.status + '',
@@ -407,6 +445,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     // this.loadInfoPersona();
     console.info(ente_id);
     this.aspirante = ente_id
+    this.programa = this.userService.getPrograma();
     const admisionPost = {
      Periodo: 1, // TODO: Cambiar a periodo actual
      Aspirante: this.aspirante,
