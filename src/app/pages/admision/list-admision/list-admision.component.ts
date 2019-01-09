@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { PersonaService } from '../../../@core/data/persona.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -26,6 +27,7 @@ export class ListAdmisionComponent implements OnInit {
   constructor(private translate: TranslateService,
     private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
+    private personaService: PersonaService,
     private programaService: ProgramaAcademicoService) {
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -108,7 +110,29 @@ export class ListAdmisionComponent implements OnInit {
       this.admisionesService.get(query).subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
-          this.source.load(data);
+          for (let index = 0; index < data.length; index++) {
+            const datos = data[index];
+            this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
+                    .subscribe(res_aspirante => {
+                      if(res_aspirante !== null){
+                        const aspirante =`${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        data[index].Aspirante =aspirante;
+                        if( index == (data.length -1 ) ){
+                          this.source.load(data);
+                        }
+                      }
+                      
+                    },
+                    (error_aspirante: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error_aspirante.status + '',
+                        text: this.translate.instant('ERROR.' + error_aspirante.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+            
+          }
             } else {
               Swal({
                 type: 'info',
@@ -130,7 +154,34 @@ export class ListAdmisionComponent implements OnInit {
       this.admisionesService.get('admision/?limit=0').subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
-          this.source.load(data);
+          // data.forEach(function persona (dato): void {
+          //   console.info(dato.Aspirante)
+            
+            
+          // });
+          for (let index = 0; index < data.length; index++) {
+            const datos = data[index];
+            this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
+                    .subscribe(res_aspirante => {
+                      if(res_aspirante !== null){
+                        const aspirante =`${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        data[index].Aspirante =aspirante;
+                        if( index == (data.length -1 ) ){
+                          this.source.load(data);
+                        }
+                      }
+                      
+                    },
+                    (error_aspirante: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error_aspirante.status + '',
+                        text: this.translate.instant('ERROR.' + error_aspirante.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+            
+          }
             }
       },
       (error: HttpErrorResponse) => {
