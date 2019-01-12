@@ -20,7 +20,9 @@ export class ListAdmisionComponent implements OnInit {
   config: ToasterConfig;
   settings: any;
   posgrados = [];
-  selectedValue: any;
+  periodo = [];
+  selectedValuePrograma: any;
+  selectedValuePeriodo: any;
 
   source: LocalDataSource = new LocalDataSource();
 
@@ -33,7 +35,7 @@ export class ListAdmisionComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
-    this.loadInfoPostgrados();
+    this.loadInfoSelectFiltro();
   }
 
   cargarCampos() {
@@ -265,7 +267,7 @@ export class ListAdmisionComponent implements OnInit {
     // console.log("afssaf");
   }
 
-  loadInfoPostgrados() {
+  loadInfoSelectFiltro() {
     this.programaService.get('programa_academico/?limit=0')
       .subscribe(res => {
         const r = <any>res;
@@ -282,19 +284,46 @@ export class ListAdmisionComponent implements OnInit {
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });
+      this.admisionesService.get('periodo_academico/?limit=0')
+      .subscribe(res => {
+        const r = <any>res;
+        if (res !== null && r.Type !== 'error') {
+          this.periodo = <any>res;
+          this.loadData();
+        }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
   }
 
   Filtrar() {
-    if (this.selectedValue) {
-      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValue.Id}`);
-    }else {
+    if (this.selectedValuePrograma && !this.selectedValuePeriodo) {
+      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePrograma.Id}`);
+    }
+    else if( !this.selectedValuePrograma && this.selectedValuePeriodo ) {
+      this.loadData(`admision/?query=Periodo:${this.selectedValuePeriodo.Id}`);
+    }
+    else if ( (this.selectedValuePrograma!==undefined && this.selectedValuePrograma!==0 )
+    && (this.selectedValuePeriodo!==undefined && this.selectedValuePeriodo!==0 ) ) {
+      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePeriodo.Id},Periodo:${this.selectedValuePeriodo.Id}`);
+    }
+    else {
       this.loadData();
     }
   }
 
   ClearFiltro() {
     this.loadData();
-    this.selectedValue = '--Seleccionar--'
+    this.selectedValuePrograma = '--Seleccionar--'
+    this.selectedValuePrograma= 0;
+    this.selectedValuePeriodo = '--Seleccionar--'
+    this.selectedValuePeriodo = 0;
   }
 
   private showToast(type: string, title: string, body: string) {

@@ -8,15 +8,28 @@
                     <div class="container m-5">
                         <div>
                             <div class="row">
-                                <mat-form-field style="width: 50%;">
-                                    <mat-label>Programa Academico:</mat-label>
-                                    <mat-select [(value)]="selected" [(ngModel)]="selectedValue">
-                                        <mat-option>--Seleccionar--</mat-option>
-                                        <mat-option *ngFor="let item of posgrados" [value]="item">
-                                            {{item.Nombre}}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
+                                <div class="col">
+                                    <mat-form-field style="width: 70%;">
+                                        <mat-label>Programa Academico:</mat-label>
+                                        <mat-select [(ngModel)]="selectedValuePrograma">
+                                            <mat-option>--Seleccionar--</mat-option>
+                                            <mat-option *ngFor="let item of posgrados" [value]="item">
+                                                {{item.Nombre}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="col">
+                                    <mat-form-field style="width: 40%;">
+                                        <mat-label>Periodo Academico:</mat-label>
+                                        <mat-select [(ngModel)]="selectedValuePeriodo">
+                                            <mat-option>--Seleccionar--</mat-option>
+                                            <mat-option *ngFor="let item_periodo of periodo" [value]="item_periodo">
+                                                {{item_periodo.Nombre}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="col">
