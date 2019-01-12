@@ -5,43 +5,51 @@
             <nb-tabset fullWidth (changeTab)="selectTab($event)">
                 <nb-tab tabTitle="{{ 'GLOBAL.lista' | translate }}" [active]="!cambiotab">
                     <br />
-                    <div class="container m-5">
-                        <div>
-                            <div class="row">
-                                <div class="col">
-                                    <mat-form-field style="width: 70%;">
-                                        <mat-label>Programa Academico:</mat-label>
-                                        <mat-select [(ngModel)]="selectedValuePrograma">
-                                            <mat-option>--Seleccionar--</mat-option>
-                                            <mat-option *ngFor="let item of posgrados" [value]="item">
-                                                {{item.Nombre}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                                <div class="col">
-                                    <mat-form-field style="width: 40%;">
-                                        <mat-label>Periodo Academico:</mat-label>
-                                        <mat-select [(ngModel)]="selectedValuePeriodo">
-                                            <mat-option>--Seleccionar--</mat-option>
-                                            <mat-option *ngFor="let item_periodo of periodo" [value]="item_periodo">
-                                                {{item_periodo.Nombre}}
-                                            </mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <button (click)="Filtrar()" class="btn btn-info btn-sm">Filtrar</button>
-                                </div>
-                                <div class="col">
-                                    <button (click)="ClearFiltro()" class="btn btn-info btn-sm">Limpiar</button>
-                                </div>
+                    <nb-tabset fullWidth>
+                        <nb-tab tabTitle="selecionable">
+                            <br />
+                            <div class="container">
+                                <div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <mat-form-field style="width: 70%;">
+                                                <mat-label>Programa Academico:</mat-label>
+                                                <mat-select [(ngModel)]="selectedValuePrograma">
+                                                    <mat-option>--Seleccionar--</mat-option>
+                                                    <mat-option *ngFor="let item of posgrados" [value]="item">
+                                                        {{item.Nombre}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                        <div class="col">
+                                            <mat-form-field style="width: 40%;">
+                                                <mat-label>Periodo Academico:</mat-label>
+                                                <mat-select [(ngModel)]="selectedValuePeriodo">
+                                                    <mat-option>--Seleccionar--</mat-option>
+                                                    <mat-option *ngFor="let item_periodo of periodo" [value]="item_periodo">
+                                                        {{item_periodo.Nombre}}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col">
+                                            <button (click)="Filtrar()" class="btn btn-info btn-sm">Filtrar</button>
+                                        </div>
+                                        <div class="col">
+                                            <button (click)="ClearFiltro()" class="btn btn-info btn-sm">Limpiar</button>
+                                        </div>
 
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        </nb-tab>
+                        <nb-tab tabTitle="documento">
+
+                        </nb-tab>
+                    </nb-tabset>
                     <br />
                     <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDelete($event)" (rowSelect)="itemselec($event)" (edit)="onEdit($event)" (create)="onCreate($event)">
                     </ng2-smart-table>
