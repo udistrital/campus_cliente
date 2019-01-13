@@ -52,6 +52,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   aceptaTerminos: boolean;
   programa: number = 1;
   aspirante: number;
+  periodo: any;
 
   constructor(
     private translate: TranslateService,
@@ -74,6 +75,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.listService.findEstadoCivil();
     this.listService.findTipoIdentificacion();
     this.loading = false;
+    this.CargarPeriodo();
     this.loadLists();
   }
 
@@ -326,7 +328,9 @@ export class CrudInfoPersonaComponent implements OnInit {
                             console.info(`ya existe esta admision`);
                           } else {
                             console.info(`aun existe una admision`);
+                            this.info_persona_id=  res_usu[0].Ente;
                             this.createAdmision(res_usu[0].Ente);
+                            
                           }
                         },
                         (error_1: HttpErrorResponse) => {
@@ -444,10 +448,13 @@ export class CrudInfoPersonaComponent implements OnInit {
   createAdmision(ente_id): void {
     // this.loadInfoPersona();
     console.info(ente_id);
-    this.aspirante = ente_id
+    this.aspirante = ente_id;
     this.programa = this.userService.getPrograma();
+    console.info(`este es el aspirante numero: ${this.aspirante}`)
     const admisionPost = {
-     Periodo: 1, // TODO: Cambiar a periodo actual
+     Periodo: {
+        Id: this.periodo.Id,
+     },
      Aspirante: this.aspirante,
      ProgramaAcademico: this.programa,
      LineaInvestigacion: {
@@ -464,10 +471,17 @@ export class CrudInfoPersonaComponent implements OnInit {
         console.info(admisionPost);
         this.info_admision = <Admision>admisionPost;
         this.info_admision.Aspirante = Number(this.info_persona_id);
+        console.info(this.info_admision);
         this.admisionesService.post('admision', this.info_admision)
           .subscribe(res => {
             this.info_admision = <Admision>res;
             this.eventChange.emit(true);
+            Swal({
+              type: 'info',
+              title: this.translate.instant('GLOBAL.crear'),
+              text: `${this.translate.instant('GLOBAL.crear')} ${this.periodo.Nombre};`,
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
             // this.showToast('info', 'created', 'Admision created');
           });
 
@@ -489,6 +503,25 @@ export class CrudInfoPersonaComponent implements OnInit {
   setPercentage(event) {
     this.percentage = event;
     this.result.emit(this.percentage);
+  }
+
+  CargarPeriodo() : void {
+    this.admisionesService.get('periodo_academico/?query=Activo:true&sortby=Id&order=desc&limit=1')
+      .subscribe(res => {
+        const r = <any>res;
+        if (res !== null && r.Type !== 'error') {
+          this.periodo = <any>res[0];
+          console.log(this.periodo);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
   }
 
   private showToast(type: string, title: string, body: string) {

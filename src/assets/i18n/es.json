@@ -281,6 +281,7 @@
         "formatoproyecto": "Formato del proyecto",
         "error_carga_datos": "Recargue la página o cierre y abra de nuevo la ventana para poder cargar exitosamente sus datos",
         "warning": "Advertencia",
-        "create_propuesta": "Crear Propuesta de Grado"
+        "create_propuesta": "Crear Propuesta de Grado",
+        "inscrito": "ha sido inscrito al periodo academico:"
     }
 }
