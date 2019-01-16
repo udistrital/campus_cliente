@@ -329,7 +329,7 @@ export class CrudInfoPersonaComponent implements OnInit {
                           } else {
                             console.info(`aun no existe una admision`);
                             this.info_persona_id =  res_usu[0].Ente;
-                            this.createAdmision(res_usu[0].Ente);                            
+                            this.createAdmision(res_usu[0].Ente);
                           }
                         },
                         (error_1: HttpErrorResponse) => {

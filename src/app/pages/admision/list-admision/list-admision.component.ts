@@ -117,13 +117,13 @@ export class ListAdmisionComponent implements OnInit {
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
                       if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
+                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
                         data[index].Aspirante = aspirante;
                         if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
                         }
-                      }
-                      
+                      }                      
                     },
                     (error_aspirante: HttpErrorResponse) => {
                       Swal({
@@ -133,7 +133,6 @@ export class ListAdmisionComponent implements OnInit {
                         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                       });
                     });
-            
           }
             } else {
               Swal({
@@ -157,22 +156,20 @@ export class ListAdmisionComponent implements OnInit {
         if (res !== null) {
           const data = <Array<any>>res;
           // data.forEach(function persona (dato): void {
-          //   console.info(dato.Aspirante)
-            
-            
+          //   console.info(dato.Aspirante)            
           // });
           for (let index = 0; index < data.length; index++) {
             const datos = data[index];
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
                       if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
+                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
                         data[index].Aspirante = aspirante;
-                        if ( index === (data.length - 1 ) ){
+                        if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
                         }
                       }
-                      
                     },
                     (error_aspirante: HttpErrorResponse) => {
                       Swal({
@@ -182,7 +179,6 @@ export class ListAdmisionComponent implements OnInit {
                         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                       });
                     });
-            
           }
             }
       },
