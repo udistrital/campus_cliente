@@ -123,7 +123,7 @@ export class ListAdmisionComponent implements OnInit {
                         if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
                         }
-                      }                      
+                      }
                     },
                     (error_aspirante: HttpErrorResponse) => {
                       Swal({
@@ -156,7 +156,7 @@ export class ListAdmisionComponent implements OnInit {
         if (res !== null) {
           const data = <Array<any>>res;
           // data.forEach(function persona (dato): void {
-          //   console.info(dato.Aspirante)            
+          //   console.info(dato.Aspirante)
           // });
           for (let index = 0; index < data.length; index++) {
             const datos = data[index];
