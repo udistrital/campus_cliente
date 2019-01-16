@@ -116,10 +116,10 @@ export class ListAdmisionComponent implements OnInit {
             const datos = data[index];
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
-                      if(res_aspirante !== null){
-                        const aspirante =`${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
-                        data[index].Aspirante =aspirante;
-                        if( index == (data.length -1 ) ){
+                      if (res_aspirante !== null) {
+                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        data[index].Aspirante = aspirante;
+                        if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
                         }
                       }
@@ -165,10 +165,10 @@ export class ListAdmisionComponent implements OnInit {
             const datos = data[index];
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
-                      if(res_aspirante !== null){
-                        const aspirante =`${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
-                        data[index].Aspirante =aspirante;
-                        if( index == (data.length -1 ) ){
+                      if (res_aspirante !== null) {
+                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre} ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        data[index].Aspirante = aspirante;
+                        if ( index === (data.length - 1 ) ){
                           this.source.load(data);
                         }
                       }
@@ -305,15 +305,12 @@ export class ListAdmisionComponent implements OnInit {
   Filtrar() {
     if (this.selectedValuePrograma && !this.selectedValuePeriodo) {
       this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePrograma.Id}`);
-    }
-    else if( !this.selectedValuePrograma && this.selectedValuePeriodo ) {
+    } else if ( !this.selectedValuePrograma && this.selectedValuePeriodo ) {
       this.loadData(`admision/?query=Periodo:${this.selectedValuePeriodo.Id}`);
-    }
-    else if ( (this.selectedValuePrograma!==undefined && this.selectedValuePrograma!==0 )
-    && (this.selectedValuePeriodo!==undefined && this.selectedValuePeriodo!==0 ) ) {
+    } else if ( (this.selectedValuePrograma !== undefined && this.selectedValuePrograma !== 0 )
+    && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0 ) ) {
       this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePeriodo.Id},Periodo:${this.selectedValuePeriodo.Id}`);
-    }
-    else {
+    } else {
       this.loadData();
     }
   }
@@ -321,7 +318,7 @@ export class ListAdmisionComponent implements OnInit {
   ClearFiltro() {
     this.loadData();
     this.selectedValuePrograma = '--Seleccionar--'
-    this.selectedValuePrograma= 0;
+    this.selectedValuePrograma = 0;
     this.selectedValuePeriodo = '--Seleccionar--'
     this.selectedValuePeriodo = 0;
   }

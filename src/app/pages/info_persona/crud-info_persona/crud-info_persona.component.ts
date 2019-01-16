@@ -328,9 +328,8 @@ export class CrudInfoPersonaComponent implements OnInit {
                             console.info(`ya existe esta admision`);
                           } else {
                             console.info(`aun no existe una admision`);
-                            this.info_persona_id=  res_usu[0].Ente;
-                            this.createAdmision(res_usu[0].Ente);
-                            
+                            this.info_persona_id =  res_usu[0].Ente;
+                            this.createAdmision(res_usu[0].Ente);                            
                           }
                         },
                         (error_1: HttpErrorResponse) => {
@@ -505,12 +504,12 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.result.emit(this.percentage);
   }
 
-  CargarPeriodo() : void {
+  CargarPeriodo(): void {
     this.admisionesService.get('periodo_academico/?query=Activo:true&sortby=Id&order=desc&limit=1')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
-          this.periodo = <any>res[0]; //se carga el periodo academico activo mas reciente
+          this.periodo = <any>res[0]; // se carga el periodo academico activo mas reciente
         }
       },
       (error: HttpErrorResponse) => {
