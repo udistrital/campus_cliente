@@ -12,7 +12,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <mat-form-field style="width: 70%;">
-                                            <mat-label>Programa Academico:</mat-label>
+                                            <mat-label>{{ 'GLOBAL.programa_academico' | translate }} :</mat-label>
                                             <mat-select [(ngModel)]="selectedValuePrograma">
                                                 <mat-option>--Seleccionar--</mat-option>
                                                 <mat-option *ngFor="let item of posgrados" [value]="item">
@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="col">
                                         <mat-form-field style="width: 35%;">
-                                            <mat-label>Periodo Academico:</mat-label>
+                                            <mat-label>{{ 'GLOBAL.periodo_academico' | translate }} :</mat-label>
                                             <mat-select [(ngModel)]="selectedValuePeriodo">
                                                 <mat-option>--Seleccionar--</mat-option>
                                                 <mat-option *ngFor="let item_periodo of periodo" [value]="item_periodo">
@@ -37,10 +37,10 @@
                             </div>
                             <div class="row">
                                 <div class="col">
-                                    <button (click)="Filtrar()" class="btn btn-info btn-sm">Filtrar</button>
+                                    <button (click)="Filtrar()" class="btn btn-info btn-sm">{{ 'GLOBAL.filtrar' | translate }}</button>
                                 </div>
                                 <div class="col">
-                                    <button (click)="ClearFiltro()" class="btn btn-info btn-sm">Limpiar</button>
+                                    <button (click)="ClearFiltro()" class="btn btn-info btn-sm">{{ 'GLOBAL.Limpiar' | translate }}</button>
                                 </div>
                             </div>
                         </div>

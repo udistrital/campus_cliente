@@ -327,7 +327,7 @@ export class CrudInfoPersonaComponent implements OnInit {
                           if (res_2 !== null && r_2.Type !== 'error') {
                             console.info(`ya existe esta admision`);
                           } else {
-                            console.info(`aun existe una admision`);
+                            console.info(`aun no existe una admision`);
                             this.info_persona_id=  res_usu[0].Ente;
                             this.createAdmision(res_usu[0].Ente);
                             
@@ -479,7 +479,7 @@ export class CrudInfoPersonaComponent implements OnInit {
             Swal({
               type: 'info',
               title: this.translate.instant('GLOBAL.crear'),
-              text: `${this.translate.instant('GLOBAL.crear')} ${this.periodo.Nombre};`,
+              text: `${this.translate.instant('GLOBAL.inscrito')} ${this.periodo.Nombre};`,
               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
             // this.showToast('info', 'created', 'Admision created');
@@ -510,8 +510,7 @@ export class CrudInfoPersonaComponent implements OnInit {
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
-          this.periodo = <any>res[0];
-          console.log(this.periodo);
+          this.periodo = <any>res[0]; //se carga el periodo academico activo mas reciente
         }
       },
       (error: HttpErrorResponse) => {

@@ -254,7 +254,7 @@
         "placeholder_periodo": "E.g.: 1",
         "propuesta": "Thesis proposal",
         "placeholder_propuesta": "E.g.: Thesis proposal",
-        "programa_academico": "Program",
+        "programa_academico": "Academic Program",
         "placeholder_programa_academico": "E.g.: Systems engineer",
         "enfasis": "Emphasis",
         "placeholder_enfasis": "E.g.: Research",
@@ -281,6 +281,10 @@
         "formatoproyecto": "Project format",
         "error_carga_datos": "Reload the page or close and reopen the window to successfully load your data.",
         "warning": "Warning",
-        "create_propuesta": "Create Grade Proposal"
+        "create_propuesta": "Create Grade Proposal",
+        "inscrito": "He's been enrolled in the academic period:",
+        "periodo_academico": "Academic Period",
+        "filtrar": "Filter",
+        "Limpiar": "Clean"
     }
 }
