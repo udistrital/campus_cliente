@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { PersonaService } from '../../../@core/data/persona.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -19,19 +20,22 @@ export class ListAdmisionComponent implements OnInit {
   config: ToasterConfig;
   settings: any;
   posgrados = [];
-  selectedValue: any;
+  periodo = [];
+  selectedValuePrograma: any;
+  selectedValuePeriodo: any;
 
   source: LocalDataSource = new LocalDataSource();
 
   constructor(private translate: TranslateService,
     private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
+    private personaService: PersonaService,
     private programaService: ProgramaAcademicoService) {
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
-    this.loadInfoPostgrados();
+    this.loadInfoSelectFiltro();
   }
 
   cargarCampos() {
@@ -71,7 +75,7 @@ export class ListAdmisionComponent implements OnInit {
           title: this.translate.instant('GLOBAL.periodo'),
           // type: 'number;',
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         EstadoAdmision: {
@@ -108,7 +112,28 @@ export class ListAdmisionComponent implements OnInit {
       this.admisionesService.get(query).subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
-          this.source.load(data);
+          for (let index = 0; index < data.length; index++) {
+            const datos = data[index];
+            this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
+                    .subscribe(res_aspirante => {
+                      if (res_aspirante !== null) {
+                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
+                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        data[index].Aspirante = aspirante;
+                        if ( index === (data.length - 1 ) ) {
+                          this.source.load(data);
+                        }
+                      }
+                    },
+                    (error_aspirante: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error_aspirante.status + '',
+                        text: this.translate.instant('ERROR.' + error_aspirante.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+          }
             } else {
               Swal({
                 type: 'info',
@@ -130,7 +155,31 @@ export class ListAdmisionComponent implements OnInit {
       this.admisionesService.get('admision/?limit=0').subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
-          this.source.load(data);
+          // data.forEach(function persona (dato): void {
+          //   console.info(dato.Aspirante)
+          // });
+          for (let index = 0; index < data.length; index++) {
+            const datos = data[index];
+            this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
+                    .subscribe(res_aspirante => {
+                      if (res_aspirante !== null) {
+                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
+                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        data[index].Aspirante = aspirante;
+                        if ( index === (data.length - 1 ) ) {
+                          this.source.load(data);
+                        }
+                      }
+                    },
+                    (error_aspirante: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error_aspirante.status + '',
+                        text: this.translate.instant('ERROR.' + error_aspirante.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+          }
             }
       },
       (error: HttpErrorResponse) => {
@@ -214,7 +263,7 @@ export class ListAdmisionComponent implements OnInit {
     // console.log("afssaf");
   }
 
-  loadInfoPostgrados() {
+  loadInfoSelectFiltro() {
     this.programaService.get('programa_academico/?limit=0')
       .subscribe(res => {
         const r = <any>res;
@@ -231,19 +280,43 @@ export class ListAdmisionComponent implements OnInit {
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });
+      this.admisionesService.get('periodo_academico/?limit=0')
+      .subscribe(res => {
+        const r = <any>res;
+        if (res !== null && r.Type !== 'error') {
+          this.periodo = <any>res;
+          this.loadData();
+        }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
   }
 
   Filtrar() {
-    if (this.selectedValue) {
-      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValue.Id}`);
-    }else {
+    if (this.selectedValuePrograma && !this.selectedValuePeriodo) {
+      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePrograma.Id}`);
+    } else if ( !this.selectedValuePrograma && this.selectedValuePeriodo ) {
+      this.loadData(`admision/?query=Periodo:${this.selectedValuePeriodo.Id}`);
+    } else if ( (this.selectedValuePrograma !== undefined && this.selectedValuePrograma !== 0 )
+    && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0 ) ) {
+      this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePeriodo.Id},Periodo:${this.selectedValuePeriodo.Id}`);
+    } else {
       this.loadData();
     }
   }
 
   ClearFiltro() {
     this.loadData();
-    this.selectedValue = '--Seleccionar--'
+    this.selectedValuePrograma = '--Seleccionar--'
+    this.selectedValuePrograma = 0;
+    this.selectedValuePeriodo = '--Seleccionar--'
+    this.selectedValuePeriodo = 0;
   }
 
   private showToast(type: string, title: string, body: string) {
