@@ -54,6 +54,13 @@ export class ListAdmisionComponent implements OnInit {
         deleteButtonContent: '<i class="nb-trash"></i>',
         confirmDelete: true,
       },
+      actions: {
+        add: true,
+        edit: true,
+        delete: true,
+        custom: [{ name: 'ourVerInfo', title: '<i class="nb-person"></i>' }],
+        //position: 'right'
+      },
       mode: 'external',
       columns: {
         Aspirante: {
@@ -198,12 +205,16 @@ export class ListAdmisionComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
+    console.info(event.data)
     this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
     this.activetab();
+  }
+  onVerInfo(event): void {
+    console.info("info chida")
   }
 
   onDelete(event): void {
@@ -260,7 +271,7 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   itemselec(event): void {
-    // console.log("afssaf");
+     console.info(event);
   }
 
   loadInfoSelectFiltro() {
