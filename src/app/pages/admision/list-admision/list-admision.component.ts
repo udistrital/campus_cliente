@@ -274,7 +274,7 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   itemselec(event): void {
-     console.info(event);
+     //console.info(event);
   }
 
   loadInfoSelectFiltro() {

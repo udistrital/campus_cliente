@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'detalle-admision',
@@ -7,7 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetalleAdmisionComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private translate: TranslateService,
+  ) {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    });
+   }
 
   ngOnInit() {
   }
