@@ -32,7 +32,7 @@ const routes: Routes = [{
       path: 'tipo_proyecto',
       loadChildren: './tipo_proyecto/tipo_proyecto.module#TipoProyectoModule',
     },
-    { path: 'DetalleInfo/:id',
+    { path: 'detalleInfo/:id',
       component: DetalleAdmisionComponent },
     {
       path: '',

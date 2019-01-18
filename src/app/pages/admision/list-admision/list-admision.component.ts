@@ -8,6 +8,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-list-admision',
@@ -30,6 +31,7 @@ export class ListAdmisionComponent implements OnInit {
     private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
     private personaService: PersonaService,
+    private router:Router,
     private programaService: ProgramaAcademicoService) {
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -215,6 +217,7 @@ export class ListAdmisionComponent implements OnInit {
   }
   onVerInfo(event): void {
     console.info("info chida")
+    this.router.navigate( ['/pages/detalleInfo',event.data.Id] )
   }
 
   onDelete(event): void {
