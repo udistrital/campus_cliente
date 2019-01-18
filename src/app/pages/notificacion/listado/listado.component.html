@@ -2,16 +2,13 @@
   <div class="col-6 offset-3">
     <nb-card>
       <div class="input-group">
-        <input type="text" class="form-control" (ngModel)="search" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for...">
+        <input type="text" class="form-control" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for...">
         <span class="input-group-append">
         </span>
       </div>
     </nb-card>
   </div>
   <br>
-  <pre>
-    {{search|json}}
-  </pre>
   <div class="col-6 offset-3">
     <nb-card size="medium">
       <nb-card-header>
