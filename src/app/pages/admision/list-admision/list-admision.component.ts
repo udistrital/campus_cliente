@@ -53,15 +53,15 @@ export class ListAdmisionComponent implements OnInit {
         cancelButtonContent: '<i class="nb-close"></i>',
       },
       delete: {
-        deleteButtonContent: '<i class="nb-trash"></i>',
-        confirmDelete: true,
+        deleteButtonContent: '<i class="nb-person"></i>', // este boton no elimina, sera usado para informacion
+        //confirmDelete: true,
       },
       actions: {
         add: true,
         edit: true,
         delete: true,
-        custom: [{ name: 'ourVerInfo', title: '<i class="nb-person"></i>' }],
-        //position: 'right'
+        // custom: [{ name: 'ourVerInfo', title: '<i class="nb-person"></i>' }],
+        // position: 'right'
       },
       mode: 'external',
       columns: {
