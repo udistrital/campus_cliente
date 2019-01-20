@@ -126,8 +126,8 @@ export class ListAdmisionComponent implements OnInit {
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
                       if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
-                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+                        ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
                         data[index].Aspirante = aspirante;
                         if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
@@ -172,8 +172,8 @@ export class ListAdmisionComponent implements OnInit {
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
                       if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
-                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+                        ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
                         data[index].Aspirante = aspirante;
                         if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
