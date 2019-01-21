@@ -1,10 +1,36 @@
 <div class="col-md-12 col-lg-12 col-xl-12">
     <nb-card>
         <nb-card-body>
-            <p>
-                detalle-admision works!
-            </p>
-            <div>
+            <!-- informacion personal -->
+            <div class="row m-5">
+                <div class="card col-12">
+                    <div class="container">
+                        <h6 class="display-4 col-12">{{ 'GLOBAL.info_persona' | translate }}</h6>
+                        <div class="row-fluid">
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.nombre' | translate }} : {{ Persona.PrimerNombre }} {{ Persona.SegundoNombre }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> Apellido : {{ Persona.PrimerApellido }} {{ Persona.SegundoApellido }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.numero_documento' | translate }} : {{ Persona.NumeroDocumento }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.estado_civil' | translate }} : {{ Persona.EstadoCivil.Nombre }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.genero' | translate }} : {{ Persona.Genero.Nombre }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.fecha_nacimiento' | translate }} : {{ Persona.FechaNacimiento | date: 'dd/MM/yyyy' }} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- fin informacion personal -->
+            <div class="row m-5">
                 <br><br>
                 <a [routerLink]="['/pages/admision/list-admision']" class="btn btn-info btn-sm"> <i class="nb-arrow-dropleft"></i> {{ 'GLOBAL.regresar' | translate }}</a>
             </div>

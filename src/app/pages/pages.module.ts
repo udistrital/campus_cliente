@@ -6,6 +6,7 @@ import { ThemeModule } from '../@theme/theme.module';
 import { SharedModule } from '../shared/shared.module';
 import { ConfiguracionService } from '../@core/data/configuracion.service';
 import { DetalleAdmisionComponent } from './detalle-admision/detalle-admision.component';
+import { CampusMidService } from '../@core/data/campus_mid.service';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -24,6 +25,7 @@ const PAGES_COMPONENTS = [
   ],
   providers: [
     ConfiguracionService,
+    CampusMidService,
   ],
 })
 export class PagesModule {

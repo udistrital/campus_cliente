@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { AdmisionesService } from '../../@core/data/admisiones.service';
-import { CampusMidService } from '../../@core/data/campus_mid.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import { CampusMidService } from '../../@core/data/campus_mid.service';
 
 @Component({
   selector: 'detalle-admision',
@@ -17,20 +17,20 @@ export class DetalleAdmisionComponent implements OnInit {
   Persona = [];
 
   constructor(
+    private campusMidService: CampusMidService,
+    private translate: TranslateService,
     private activatedRoute:ActivatedRoute,
     private admisionesService: AdmisionesService,
-    // private campusMidService: CampusMidService,
-    private translate: TranslateService,
   ) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
-    this.CargarDatos();
+    this.CargarDatosAspirante();
    }
 
   ngOnInit() {
   }
 
-  CargarDatos(): void {
+  public CargarDatosAspirante(): void {
     this.activatedRoute.params.subscribe( params => {
       console.info(params['id'])
       //this.heroe= this.heroesService.gerHeroe(params['id']);
@@ -38,24 +38,10 @@ export class DetalleAdmisionComponent implements OnInit {
         if (res !== null) {
           this.Aspirante = <any>res[0];
           console.info(this.Aspirante);
-          // this.campusMidService.get(`persona/ConsultaPersona/?id=3`)
-          //           .subscribe(res_aspirante => {
-          //             if (res_aspirante !== null) {
-          //               // this.Persona = <any>res_aspirante[0];
-          //               // console.info(this.Persona);
-          //             }
-          //           },
-          //           (error_aspirante: HttpErrorResponse) => {
-          //             Swal({
-          //               type: 'error',
-          //               title: error_aspirante.status + '',
-          //               text: this.translate.instant('ERROR.' + error_aspirante.status),
-          //               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          //             });
-          //           });
+          this.CargarDatosMid();
         } else {
           Swal({
-            type: 'error',
+            type: 'info',
             title: this.translate.instant('GLOBAL.warning'),
             text: `datos de la admision no obtenidos`,
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
@@ -70,7 +56,24 @@ export class DetalleAdmisionComponent implements OnInit {
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });
-    })
+    });
+  }
+
+  public CargarDatosMid(): void { 
+    this.campusMidService.get(`persona/ConsultaPersona/?id=${this.Aspirante['Aspirante']}`).subscribe(res_aspirante => {
+      if (res_aspirante !== null) {
+        this.Persona = <any>res_aspirante;
+        console.info(this.Persona);
+      }
+    },
+    (error_aspirante: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_aspirante.status + '',
+        text: this.translate.instant('ERROR.' + error_aspirante.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
   }
 
 }
