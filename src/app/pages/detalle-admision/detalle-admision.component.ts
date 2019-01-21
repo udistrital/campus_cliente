@@ -64,6 +64,9 @@ export class DetalleAdmisionComponent implements OnInit {
       if (res_aspirante !== null) {
         this.Persona = <any>res_aspirante;
         console.info(this.Persona);
+        this.Persona['EstadoCivil'] = this.Persona['EstadoCivil']['Nombre'];
+        this.Persona['Genero'] = this.Persona['Genero']['Nombre'];
+        this.Persona['TipoIdentificacion'] = this.Persona['TipoIdentificacion']['Nombre'];
       }
     },
     (error_aspirante: HttpErrorResponse) => {

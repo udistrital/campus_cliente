@@ -14,13 +14,13 @@
                                 <p class="lead"> Apellido : {{ Persona.PrimerApellido }} {{ Persona.SegundoApellido }} </p>
                             </div>
                             <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.numero_documento' | translate }} : {{ Persona.NumeroDocumento }} </p>
+                                <p class="lead"> {{ 'GLOBAL.numero_documento' | translate }} : {{ Persona.TipoIdentificacion }} {{ Persona.NumeroDocumento }} </p>
                             </div>
                             <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.estado_civil' | translate }} : {{ Persona.EstadoCivil.Nombre }} </p>
+                                <p class="lead"> {{ 'GLOBAL.estado_civil' | translate }} : {{ Persona.EstadoCivil }} </p>
                             </div>
                             <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.genero' | translate }} : {{ Persona.Genero.Nombre }} </p>
+                                <p class="lead"> {{ 'GLOBAL.genero' | translate }} : {{ Persona.Genero }} </p>
                             </div>
                             <div class="col">
                                 <p class="lead"> {{ 'GLOBAL.fecha_nacimiento' | translate }} : {{ Persona.FechaNacimiento | date: 'dd/MM/yyyy' }} </p>
