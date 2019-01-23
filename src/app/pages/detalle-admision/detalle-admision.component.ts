@@ -114,7 +114,7 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_expe => {
       if (res_expe !== null) {
         this.Experiencia = <any>res_expe;
-        console.info(this.Experiencia);
+        // console.info(this.Experiencia);
         // this.Telefono = this.contacto['ContactoEnte'];
         for (let i = 0; i < this.Experiencia.length; i++) {
           this.Experiencia[i]['Cargo'] =  this.Experiencia[i]['Cargo']['Nombre'];
@@ -146,6 +146,10 @@ export class DetalleAdmisionComponent implements OnInit {
         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       });
     });
+  }
+
+  public FormacionAcad(): void {
+    
   }
 
 }
