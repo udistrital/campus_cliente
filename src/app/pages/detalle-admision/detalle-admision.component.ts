@@ -5,6 +5,8 @@ import { AdmisionesService } from '../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import { CampusMidService } from '../../@core/data/campus_mid.service';
+import { ExperienciaService } from '../../@core/data/experiencia.service';
+import { OrganizacionService } from '../../@core/data/organizacion.service';
 
 @Component({
   selector: 'detalle-admision',
@@ -15,12 +17,17 @@ export class DetalleAdmisionComponent implements OnInit {
 
   Aspirante = [];
   Persona = [];
+  contacto = [];
+  Telefono = [];
+  Experiencia = [];
 
   constructor(
     private campusMidService: CampusMidService,
+    private experienciaService: ExperienciaService,
     private translate: TranslateService,
     private activatedRoute:ActivatedRoute,
     private admisionesService: AdmisionesService,
+    private organizacionService: OrganizacionService,
   ) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
@@ -28,17 +35,19 @@ export class DetalleAdmisionComponent implements OnInit {
    }
 
   ngOnInit() {
+    // this.CargarDatosAspirante();
   }
 
   public CargarDatosAspirante(): void {
     this.activatedRoute.params.subscribe( params => {
-      console.info(params['id'])
-      //this.heroe= this.heroesService.gerHeroe(params['id']);
-      this.admisionesService.get(`admision/?query=Id:${params['id']}`).subscribe(res => {
+      // puede traer documento
+      this.admisionesService.get(`admision/?query=Id:${params['id']}`)
+      .subscribe(res => {
         if (res !== null) {
           this.Aspirante = <any>res[0];
           console.info(this.Aspirante);
           this.CargarDatosMid();
+          this.ExperienciaLaboral();
         } else {
           Swal({
             type: 'info',
@@ -60,10 +69,11 @@ export class DetalleAdmisionComponent implements OnInit {
   }
 
   public CargarDatosMid(): void { 
-    this.campusMidService.get(`persona/ConsultaPersona/?id=${this.Aspirante['Aspirante']}`).subscribe(res_aspirante => {
+    this.campusMidService.get(`persona/ConsultaPersona/?id=${this.Aspirante['Aspirante']}`)
+    .subscribe(res_aspirante => {
       if (res_aspirante !== null) {
-        this.Persona = <any>res_aspirante;
-        console.info(this.Persona);
+        this.Persona = <any>res_aspirante; // puede traer documento
+        //console.info(this.Persona);
         this.Persona['EstadoCivil'] = this.Persona['EstadoCivil']['Nombre'];
         this.Persona['Genero'] = this.Persona['Genero']['Nombre'];
         this.Persona['TipoIdentificacion'] = this.Persona['TipoIdentificacion']['Nombre'];
@@ -74,6 +84,65 @@ export class DetalleAdmisionComponent implements OnInit {
         type: 'error',
         title: error_aspirante.status + '',
         text: this.translate.instant('ERROR.' + error_aspirante.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
+    // datos contacto  persona/DatosContacto/' + this.informacion_contacto_id + '?query=TipoRelacionUbicacionEnte:2
+    this.campusMidService.get(`persona/DatosContacto/${this.Aspirante['Aspirante']}`)
+    .subscribe(res_contacto => {
+      if (res_contacto !== null) {
+        this.contacto = <any>res_contacto;
+        this.Telefono = this.contacto['ContactoEnte'];
+        for (let i = 0; i < this.Telefono.length; i++) {
+          this.Telefono[i] =  this.Telefono[i]['Valor'];
+          
+        }
+      }
+    },
+    (error_contacto: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_contacto.status + '',
+        text: this.translate.instant('ERROR.' + error_contacto.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
+  }
+
+  public ExperienciaLaboral(): void {
+    this.experienciaService.get(`experiencia_laboral/?query=Persona:${this.Aspirante['Aspirante']}`)
+    .subscribe(res_expe => {
+      if (res_expe !== null) {
+        this.Experiencia = <any>res_expe;
+        console.info(this.Experiencia);
+        // this.Telefono = this.contacto['ContactoEnte'];
+        for (let i = 0; i < this.Experiencia.length; i++) {
+          this.Experiencia[i]['Cargo'] =  this.Experiencia[i]['Cargo']['Nombre'];
+          this.Experiencia[i]['TipoDedicacion'] =  this.Experiencia[i]['TipoDedicacion']['Nombre'];
+          this.Experiencia[i]['TipoVinculacion'] =  this.Experiencia[i]['TipoVinculacion']['Nombre'];
+          this.organizacionService.get(`organizacion/?query=id:${this.Experiencia[i]['Organizacion']}`)
+    .subscribe(res_org => {
+      if (res_org !== null) {
+          //console.info(res_org)
+          this.Experiencia[i]['Organizacion'] =  res_org[0].Nombre;
+      }
+    },
+    (error_org: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_org.status + '',
+        text: this.translate.instant('ERROR.' + error_org.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
+        }
+      }
+    },
+    (error_expe: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_expe.status + '',
+        text: this.translate.instant('ERROR.' + error_expe.status),
         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       });
     });
