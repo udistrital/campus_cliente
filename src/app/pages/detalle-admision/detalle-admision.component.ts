@@ -20,6 +20,7 @@ export class DetalleAdmisionComponent implements OnInit {
   contacto = [];
   Telefono = [];
   Experiencia = [];
+  Formacion = [];
 
   constructor(
     private campusMidService: CampusMidService,
@@ -77,6 +78,7 @@ export class DetalleAdmisionComponent implements OnInit {
         this.Persona['EstadoCivil'] = this.Persona['EstadoCivil']['Nombre'];
         this.Persona['Genero'] = this.Persona['Genero']['Nombre'];
         this.Persona['TipoIdentificacion'] = this.Persona['TipoIdentificacion']['Nombre'];
+        this.FormacionAcad();
       }
     },
     (error_aspirante: HttpErrorResponse) => {
@@ -121,20 +123,20 @@ export class DetalleAdmisionComponent implements OnInit {
           this.Experiencia[i]['TipoDedicacion'] =  this.Experiencia[i]['TipoDedicacion']['Nombre'];
           this.Experiencia[i]['TipoVinculacion'] =  this.Experiencia[i]['TipoVinculacion']['Nombre'];
           this.organizacionService.get(`organizacion/?query=id:${this.Experiencia[i]['Organizacion']}`)
-    .subscribe(res_org => {
-      if (res_org !== null) {
-          //console.info(res_org)
-          this.Experiencia[i]['Organizacion'] =  res_org[0].Nombre;
-      }
-    },
-    (error_org: HttpErrorResponse) => {
-      Swal({
-        type: 'error',
-        title: error_org.status + '',
-        text: this.translate.instant('ERROR.' + error_org.status),
-        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-      });
-    });
+          .subscribe(res_org => {
+            if (res_org !== null) {
+                //console.info(res_org)
+                this.Experiencia[i]['Organizacion'] =  res_org[0].Nombre;
+            }
+          },
+          (error_org: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error_org.status + '',
+              text: this.translate.instant('ERROR.' + error_org.status),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
         }
       }
     },
@@ -149,6 +151,25 @@ export class DetalleAdmisionComponent implements OnInit {
   }
 
   public FormacionAcad(): void {
+    this.campusMidService.get(`formacion/formacionacademicaente/?Ente=${this.Aspirante['Aspirante']}`)
+    .subscribe(res_for => {
+      if (res_for !== null) {
+        this.Formacion = <any>res_for; // puede traer documento
+        console.info(this.Formacion);
+        for (let i = 0; i < this.Formacion.length; i++) {
+            // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
+            this.Formacion[i]['Titulacion'] = this.Formacion[i]['Titulacion'][0]['Nombre'];
+        }
+      }
+    },
+    (error_for: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_for.status + '',
+        text: this.translate.instant('ERROR.' + error_for.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
     
   }
 
