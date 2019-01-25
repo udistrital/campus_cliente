@@ -9,6 +9,7 @@ import { DetalleAdmisionComponent } from './detalle-admision/detalle-admision.co
 import { CampusMidService } from '../@core/data/campus_mid.service';
 import { ExperienciaService } from '../@core/data/experiencia.service';
 import { OrganizacionService } from '../@core/data/organizacion.service';
+import { IdiomaService } from '../@core/data/idioma.service';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -30,6 +31,7 @@ const PAGES_COMPONENTS = [
     CampusMidService,
     ExperienciaService,
     OrganizacionService,
+    IdiomaService,
   ],
 })
 export class PagesModule {

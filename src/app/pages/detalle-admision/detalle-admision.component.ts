@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { CampusMidService } from '../../@core/data/campus_mid.service';
 import { ExperienciaService } from '../../@core/data/experiencia.service';
 import { OrganizacionService } from '../../@core/data/organizacion.service';
+import { IdiomaService } from '../../@core/data/idioma.service';
 
 @Component({
   selector: 'detalle-admision',
@@ -21,6 +22,7 @@ export class DetalleAdmisionComponent implements OnInit {
   Telefono = [];
   Experiencia = [];
   Formacion = [];
+  Idioma = [];
 
   constructor(
     private campusMidService: CampusMidService,
@@ -29,6 +31,7 @@ export class DetalleAdmisionComponent implements OnInit {
     private activatedRoute:ActivatedRoute,
     private admisionesService: AdmisionesService,
     private organizacionService: OrganizacionService,
+    private idiomaService: IdiomaService,
   ) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
@@ -49,6 +52,7 @@ export class DetalleAdmisionComponent implements OnInit {
           console.info(this.Aspirante);
           this.CargarDatosMid();
           this.ExperienciaLaboral();
+          this.IdiomaBusqueda();
         } else {
           Swal({
             type: 'info',
@@ -155,7 +159,7 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_for => {
       if (res_for !== null) {
         this.Formacion = <any>res_for; // puede traer documento
-        console.info(this.Formacion);
+        // console.info(this.Formacion);
         for (let i = 0; i < this.Formacion.length; i++) {
             // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
             this.Formacion[i]['Titulacion'] = this.Formacion[i]['Titulacion'][0]['Nombre'];
@@ -171,6 +175,34 @@ export class DetalleAdmisionComponent implements OnInit {
       });
     });
     
+  }
+
+  public IdiomaBusqueda(): void {
+    this.idiomaService.get(`conocimiento_idioma/?query=persona:${this.Aspirante['Aspirante']}`)
+        .subscribe(res_idioma => {
+            if (res_idioma !== null) {
+                this.Idioma = <any>res_idioma;
+                for (let i = 0; i < this.Idioma.length; i++) {
+                  // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
+                  this.Idioma[i]['ClasificacionNivelIdioma'] = this.Idioma[i]['ClasificacionNivelIdioma']['Nombre'];
+                  this.Idioma[i]['Idioma'] = this.Idioma[i]['Idioma']['Nombre'];
+                  this.Idioma[i]['NivelEscribe'] = this.Idioma[i]['NivelEscribe']['Nombre'];
+                  this.Idioma[i]['NivelEscucha'] = this.Idioma[i]['NivelEscucha']['Nombre'];
+                  this.Idioma[i]['NivelHabla'] = this.Idioma[i]['NivelHabla']['Nombre'];
+                  this.Idioma[i]['NivelLee'] = this.Idioma[i]['NivelLee']['Nombre'];
+              }
+              console.info(this.Idioma);
+            }
+        },
+        (error_idioma: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error_idioma.status + '',
+            text: this.translate.instant('ERROR.' + error_idioma.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+
   }
 
 }
