@@ -57,8 +57,8 @@ export class ListAdmisionComponent implements OnInit {
         //confirmDelete: true,
       },
       actions: {
-        add: true,
-        edit: true,
+        add: false,
+        edit: false,
         delete: true,
         // custom: [{ name: 'ourVerInfo', title: '<i class="nb-person"></i>' }],
         // position: 'right'

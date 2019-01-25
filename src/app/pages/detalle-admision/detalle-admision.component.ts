@@ -8,6 +8,8 @@ import { CampusMidService } from '../../@core/data/campus_mid.service';
 import { ExperienciaService } from '../../@core/data/experiencia.service';
 import { OrganizacionService } from '../../@core/data/organizacion.service';
 import { IdiomaService } from '../../@core/data/idioma.service';
+import { DocumentoService } from '../../@core/data/documento.service';
+import { NuxeoService } from '../../@core/utils/nuxeo.service';
 
 @Component({
   selector: 'detalle-admision',
@@ -24,9 +26,12 @@ export class DetalleAdmisionComponent implements OnInit {
   Formacion = [];
   Idioma = [];
   Propuesta = [];
+  Files = [];
 
   constructor(
     private campusMidService: CampusMidService,
+    private documentoService: DocumentoService,
+    private nuxeoService: NuxeoService,
     private experienciaService: ExperienciaService,
     private translate: TranslateService,
     private activatedRoute:ActivatedRoute,
@@ -44,13 +49,14 @@ export class DetalleAdmisionComponent implements OnInit {
   }
 
   public CargarDatosAspirante(): void {
+    this.Files= [];
     this.activatedRoute.params.subscribe( params => {
-      // puede traer documento
+      // puede traer documento pero aun no se implementan
       this.admisionesService.get(`admision/?query=Id:${params['id']}`)
       .subscribe(res => {
         if (res !== null) {
           this.Aspirante = <any>res[0];
-          console.info(this.Aspirante);
+          // console.info(this.Aspirante);
           this.CargarDatosMid();
           this.ExperienciaLaboral();
           this.IdiomaBusqueda();
@@ -79,10 +85,16 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_aspirante => {
       if (res_aspirante !== null) {
         this.Persona = <any>res_aspirante; // puede traer documento
-        //console.info(this.Persona);
+        console.info(this.Persona);
         this.Persona['EstadoCivil'] = this.Persona['EstadoCivil']['Nombre'];
         this.Persona['Genero'] = this.Persona['Genero']['Nombre'];
         this.Persona['TipoIdentificacion'] = this.Persona['TipoIdentificacion']['Nombre'];
+        if (this.Persona['Foto'] + '' !== '0') {
+          this.Files.push({ Id: this.Persona['Foto'], key: 'Foto' });
+        }
+        if (this.Propuesta['SoporteDocumento'] + '' !== '0') {
+          this.Files.push({ Id: this.Persona['SoporteDocumento'], key: 'SoporteDocumento' });
+        }
         this.FormacionAcad();
       }
     },
@@ -161,7 +173,7 @@ export class DetalleAdmisionComponent implements OnInit {
       if (res_for !== null) {
         this.Formacion = <any>res_for; // puede traer documento
         this.PropuestaGrado();
-        // console.info(this.Formacion);
+        console.info(this.Formacion);
         for (let i = 0; i < this.Formacion.length; i++) {
             // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
             this.Formacion[i]['Titulacion'] = this.Formacion[i]['Titulacion'][0]['Nombre'];
@@ -193,7 +205,7 @@ export class DetalleAdmisionComponent implements OnInit {
                   this.Idioma[i]['NivelHabla'] = this.Idioma[i]['NivelHabla']['Nombre'];
                   this.Idioma[i]['NivelLee'] = this.Idioma[i]['NivelLee']['Nombre'];
               }
-              console.info(this.Idioma);
+              // console.info(this.Idioma);
             }
         },
         (error_idioma: HttpErrorResponse) => {
@@ -217,6 +229,11 @@ export class DetalleAdmisionComponent implements OnInit {
         this.Propuesta['GrupoInvestigacion'] = this.Propuesta['GrupoInvestigacion']['Nombre'];
         this.Propuesta['LineaInvestigacion'] = this.Propuesta['LineaInvestigacion']['Nombre'];
         this.Propuesta['TipoProyecto'] = this.Propuesta['TipoProyecto']['Nombre'];
+        if (this.Propuesta['FormatoProyecto'] + '' !== '0') {
+          this.Files.push({ Id: this.Propuesta['FormatoProyecto'], key: 'FormatoProyecto' });
+        }
+        console.info(this.Files)
+        this.Archivos();
       } else {
         Swal({
           type: 'info',
@@ -231,6 +248,26 @@ export class DetalleAdmisionComponent implements OnInit {
         type: 'error',
         title: error_prop.status + '',
         text: this.translate.instant('ERROR.' + error_prop.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
+  }
+
+  public Archivos(): void {
+    this.nuxeoService.getDocumentoById$(this.Files, this.documentoService)
+    .subscribe(response => {
+      const filesResponse = <any>response;
+      console.info(filesResponse);
+      // console.info("-- "+ Object.keys(filesResponse_2).length + " >>> " + files.length)  && (filesResponse['FormatoProyecto'] != undefined) 
+      if ( (Object.keys(filesResponse).length != 0) ) {
+        console.info('archivos')
+      }
+    },
+    (error_2: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_2.status + '',
+        text: this.translate.instant('ERROR.' + error_2.status),
         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       });
     });

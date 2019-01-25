@@ -10,6 +10,7 @@ import { CampusMidService } from '../@core/data/campus_mid.service';
 import { ExperienciaService } from '../@core/data/experiencia.service';
 import { OrganizacionService } from '../@core/data/organizacion.service';
 import { IdiomaService } from '../@core/data/idioma.service';
+import { NuxeoService } from '../@core/utils/nuxeo.service';
 
 const PAGES_COMPONENTS = [
   PagesComponent,
@@ -32,6 +33,7 @@ const PAGES_COMPONENTS = [
     ExperienciaService,
     OrganizacionService,
     IdiomaService,
+    NuxeoService,
   ],
 })
 export class PagesModule {
