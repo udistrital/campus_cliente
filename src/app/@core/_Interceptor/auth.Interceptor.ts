@@ -31,7 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
           }
         },
         (error: any) => {
-            console.info('error: ' + error);
+            console.info(error);
         },
       ));
     } else {

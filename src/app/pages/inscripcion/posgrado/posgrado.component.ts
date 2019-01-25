@@ -73,18 +73,18 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   setPercentage_acad(number, tab) {
-    this.percentage_tab_acad[tab] = (number * 100) / 1;
-    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad));
+    this.percentage_tab_info[tab] = (number * 100) / 1;
+    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
   }
 
   setPercentage_expe(number, tab) {
-    this.percentage_tab_expe[tab] = (number * 100) / 1;
-    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_expe));
+    this.percentage_tab_info[tab] = (number * 100) / 1;
+    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
   }
   setPercentage_proy(number, tab) {
     this.percentage_tab_proy[tab] = (number * 100) / 1;
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
-  }
+}
 
   traerInfoPersona(event, tab) {
     this.setPercentage_info(event, tab);

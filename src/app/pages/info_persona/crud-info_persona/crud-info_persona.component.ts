@@ -142,6 +142,7 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.info_info_persona.Foto = filesResponse['Foto'] + '';
                   this.info_info_persona.SoporteDocumento = filesResponse['SoporteDocumento'] + '';
                   this.loading = false;
+                  console.info(this.info_info_persona)
                 }
               },
               (error: HttpErrorResponse) => {

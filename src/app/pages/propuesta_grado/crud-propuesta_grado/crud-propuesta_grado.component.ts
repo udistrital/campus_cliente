@@ -128,21 +128,24 @@ export class CrudPropuestaGradoComponent implements OnInit {
               files.push({ Id: temp.FormatoProyecto, key: 'FormatoProyecto' });
             }
             this.nuxeoService.getDocumentoById$(files, this.documentoService)
-              .subscribe(response => {
-                const filesResponse = <any>response;
-                if (Object.keys(filesResponse).length === files.length) {
+              .subscribe(response_2 => {
+                const filesResponse_2 = <any>response_2;
+                console.info(filesResponse_2);
+                console.info("-- "+ Object.keys(filesResponse_2).length + " >>> " + files.length)
+                if ( (Object.keys(filesResponse_2).length != 0) && (filesResponse_2['FormatoProyecto'] != undefined) ) {
                   this.info_propuesta_grado = <PropuestaGrado>res[0];
                   this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
                   this.FormatoProyecto = this.info_propuesta_grado.FormatoProyecto;
                   this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
-                  this.info_propuesta_grado.FormatoProyecto = filesResponse['FormatoProyecto'] + '';
+                  this.info_propuesta_grado.FormatoProyecto = filesResponse_2['FormatoProyecto'] + '';
+                  console.info(this.info_propuesta_grado)
                 }
               },
-              (error: HttpErrorResponse) => {
+              (error_2: HttpErrorResponse) => {
                 Swal({
                   type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
+                  title: error_2.status + '',
+                  text: this.translate.instant('ERROR.' + error_2.status),
                   confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                 });
               });
