@@ -23,6 +23,7 @@ export class DetalleAdmisionComponent implements OnInit {
   Experiencia = [];
   Formacion = [];
   Idioma = [];
+  Propuesta = [];
 
   constructor(
     private campusMidService: CampusMidService,
@@ -159,6 +160,7 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_for => {
       if (res_for !== null) {
         this.Formacion = <any>res_for; // puede traer documento
+        this.PropuestaGrado();
         // console.info(this.Formacion);
         for (let i = 0; i < this.Formacion.length; i++) {
             // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
@@ -203,6 +205,35 @@ export class DetalleAdmisionComponent implements OnInit {
           });
         });
 
+  }
+
+  public PropuestaGrado(): void {
+    this.admisionesService.get(`propuesta/?query=Admision:${this.Aspirante['Id']}`)
+    .subscribe(res_prop => {
+      if (res_prop !== null) {
+        this.Propuesta = <any>res_prop[0];
+        console.info(this.Propuesta)
+        // console.info(this.Propuesta['GrupoInvestigacion'])
+        this.Propuesta['GrupoInvestigacion'] = this.Propuesta['GrupoInvestigacion']['Nombre'];
+        this.Propuesta['LineaInvestigacion'] = this.Propuesta['LineaInvestigacion']['Nombre'];
+        this.Propuesta['TipoProyecto'] = this.Propuesta['TipoProyecto']['Nombre'];
+      } else {
+        Swal({
+          type: 'info',
+          title: this.translate.instant('GLOBAL.warning'),
+          text: `datos de la propuesta no obtenidos`,
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      }
+    },
+    (error_prop: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error_prop.status + '',
+        text: this.translate.instant('ERROR.' + error_prop.status),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    });
   }
 
 }
