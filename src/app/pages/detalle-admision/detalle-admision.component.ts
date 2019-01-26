@@ -12,9 +12,9 @@ import { DocumentoService } from '../../@core/data/documento.service';
 import { NuxeoService } from '../../@core/utils/nuxeo.service';
 
 @Component({
-  selector: 'detalle-admision',
+  selector: 'ngx-detalle-admision',
   templateUrl: './detalle-admision.component.html',
-  styleUrls: ['./detalle-admision.component.scss']
+  styleUrls: ['./detalle-admision.component.scss'],
 })
 export class DetalleAdmisionComponent implements OnInit {
 
@@ -34,7 +34,7 @@ export class DetalleAdmisionComponent implements OnInit {
     private nuxeoService: NuxeoService,
     private experienciaService: ExperienciaService,
     private translate: TranslateService,
-    private activatedRoute:ActivatedRoute,
+    private activatedRoute: ActivatedRoute,
     private admisionesService: AdmisionesService,
     private organizacionService: OrganizacionService,
     private idiomaService: IdiomaService,
@@ -49,14 +49,13 @@ export class DetalleAdmisionComponent implements OnInit {
   }
 
   public CargarDatosAspirante(): void {
-    this.Files= [];
+    this.Files = [];
     this.activatedRoute.params.subscribe( params => {
       // puede traer documento pero aun no se implementan
       this.admisionesService.get(`admision/?query=Id:${params['id']}`)
       .subscribe(res => {
         if (res !== null) {
           this.Aspirante = <any>res[0];
-          // console.info(this.Aspirante);
           this.CargarDatosMid();
           this.ExperienciaLaboral();
           this.IdiomaBusqueda();
@@ -80,12 +79,11 @@ export class DetalleAdmisionComponent implements OnInit {
     });
   }
 
-  public CargarDatosMid(): void { 
+  public CargarDatosMid(): void {
     this.campusMidService.get(`persona/ConsultaPersona/?id=${this.Aspirante['Aspirante']}`)
     .subscribe(res_aspirante => {
       if (res_aspirante !== null) {
         this.Persona = <any>res_aspirante; // puede traer documento
-        // console.info(this.Persona);
         this.Persona['EstadoCivil'] = this.Persona['EstadoCivil']['Nombre'];
         this.Persona['Genero'] = this.Persona['Genero']['Nombre'];
         this.Persona['TipoIdentificacion'] = this.Persona['TipoIdentificacion']['Nombre'];
@@ -114,7 +112,6 @@ export class DetalleAdmisionComponent implements OnInit {
         this.Telefono = this.contacto['ContactoEnte'];
         for (let i = 0; i < this.Telefono.length; i++) {
           this.Telefono[i] =  this.Telefono[i]['Valor'];
-          
         }
       }
     },
@@ -133,8 +130,6 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_expe => {
       if (res_expe !== null) {
         this.Experiencia = <any>res_expe;
-        // console.info(this.Experiencia);
-        // this.Telefono = this.contacto['ContactoEnte'];
         for (let i = 0; i < this.Experiencia.length; i++) {
           this.Experiencia[i]['Cargo'] =  this.Experiencia[i]['Cargo']['Nombre'];
           this.Experiencia[i]['TipoDedicacion'] =  this.Experiencia[i]['TipoDedicacion']['Nombre'];
@@ -142,7 +137,6 @@ export class DetalleAdmisionComponent implements OnInit {
           this.organizacionService.get(`organizacion/?query=id:${this.Experiencia[i]['Organizacion']}`)
           .subscribe(res_org => {
             if (res_org !== null) {
-                //console.info(res_org)
                 this.Experiencia[i]['Organizacion'] =  res_org[0].Nombre;
             }
           },
@@ -173,9 +167,7 @@ export class DetalleAdmisionComponent implements OnInit {
       if (res_for !== null) {
         this.Formacion = <any>res_for; // puede traer documento
         this.PropuestaGrado();
-        // console.info(this.Formacion);
         for (let i = 0; i < this.Formacion.length; i++) {
-            // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
             this.Formacion[i]['Titulacion'] = this.Formacion[i]['Titulacion'][0]['Nombre'];
         }
       }
@@ -187,8 +179,7 @@ export class DetalleAdmisionComponent implements OnInit {
         text: this.translate.instant('ERROR.' + error_for.status),
         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       });
-    });
-    
+    });    
   }
 
   public IdiomaBusqueda(): void {
@@ -205,7 +196,6 @@ export class DetalleAdmisionComponent implements OnInit {
                   this.Idioma[i]['NivelHabla'] = this.Idioma[i]['NivelHabla']['Nombre'];
                   this.Idioma[i]['NivelLee'] = this.Idioma[i]['NivelLee']['Nombre'];
               }
-              // console.info(this.Idioma);
             }
         },
         (error_idioma: HttpErrorResponse) => {
@@ -224,15 +214,12 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_prop => {
       if (res_prop !== null) {
         this.Propuesta = <any>res_prop[0];
-        // console.info(this.Propuesta)
-        // console.info(this.Propuesta['GrupoInvestigacion'])
         this.Propuesta['GrupoInvestigacion'] = this.Propuesta['GrupoInvestigacion']['Nombre'];
         this.Propuesta['LineaInvestigacion'] = this.Propuesta['LineaInvestigacion']['Nombre'];
         this.Propuesta['TipoProyecto'] = this.Propuesta['TipoProyecto']['Nombre'];
         if (this.Propuesta['FormatoProyecto'] + '' !== '0') {
           this.Files.push({ Id: this.Propuesta['FormatoProyecto'], key: 'FormatoProyecto' });
         }
-        // console.info(this.Files)
         this.Archivos();
       } else {
         Swal({
@@ -257,20 +244,15 @@ export class DetalleAdmisionComponent implements OnInit {
     this.nuxeoService.getDocumentoById$(this.Files, this.documentoService)
     .subscribe(response => {
       const filesResponse = <any>response;
-      // console.info(filesResponse);
-      // console.info("-- "+ Object.keys(filesResponse_2).length + " >>> " + files.length)  && (filesResponse['FormatoProyecto'] != undefined) 
-      if ( (Object.keys(filesResponse).length != 0) && (Object.keys(filesResponse).length === this.Files.length) ) {
-        if ((filesResponse['FormatoProyecto'] != undefined)) {
+      if ( (Object.keys(filesResponse).length !== 0) && (Object.keys(filesResponse).length === this.Files.length) ) {
+        if ((filesResponse['FormatoProyecto'] !== undefined)) {
           this.Propuesta['FormatoProyecto'] = filesResponse['FormatoProyecto'] + '';
-          // console.info(this.Propuesta)
         }
-        if ((filesResponse['Foto'] != undefined)) {
+        if ((filesResponse['Foto'] !== undefined)) {
           this.Persona['Foto'] = filesResponse['Foto'] + '';
-          // console.info(this.Persona);
         }
         if ((filesResponse['SoporteDocumento'] != undefined)) {
           this.Persona['SoporteDocumento'] = filesResponse['SoporteDocumento'] + '';
-          // console.info(this.Persona);
         }
       }
     },

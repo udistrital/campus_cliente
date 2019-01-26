@@ -130,15 +130,12 @@ export class CrudPropuestaGradoComponent implements OnInit {
             this.nuxeoService.getDocumentoById$(files, this.documentoService)
               .subscribe(response_2 => {
                 const filesResponse_2 = <any>response_2;
-                // console.info(filesResponse_2);
-                // console.info("-- "+ Object.keys(filesResponse_2).length + " >>> " + files.length)
-                if ( (Object.keys(filesResponse_2).length != 0) && (filesResponse_2['FormatoProyecto'] != undefined) ) {
+                if ( (Object.keys(filesResponse_2).length !== 0) && (filesResponse_2['FormatoProyecto'] !== undefined) ) {
                   this.info_propuesta_grado = <PropuestaGrado>res[0];
                   this.info_propuesta_grado.TipoProyecto = temp.TipoProyecto;
                   this.FormatoProyecto = this.info_propuesta_grado.FormatoProyecto;
                   this.info_propuesta_grado.LineaInvestigacion = temp.LineaInvestigacion;
                   this.info_propuesta_grado.FormatoProyecto = filesResponse_2['FormatoProyecto'] + '';
-                  // console.info(this.info_propuesta_grado)
                 }
               },
               (error_2: HttpErrorResponse) => {
