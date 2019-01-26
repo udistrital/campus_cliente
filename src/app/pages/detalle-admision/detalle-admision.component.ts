@@ -179,7 +179,7 @@ export class DetalleAdmisionComponent implements OnInit {
         text: this.translate.instant('ERROR.' + error_for.status),
         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       });
-    });    
+    });
   }
 
   public IdiomaBusqueda(): void {
@@ -251,7 +251,7 @@ export class DetalleAdmisionComponent implements OnInit {
         if ((filesResponse['Foto'] !== undefined)) {
           this.Persona['Foto'] = filesResponse['Foto'] + '';
         }
-        if ((filesResponse['SoporteDocumento'] != undefined)) {
+        if ((filesResponse['SoporteDocumento'] !== undefined)) {
           this.Persona['SoporteDocumento'] = filesResponse['SoporteDocumento'] + '';
         }
       }

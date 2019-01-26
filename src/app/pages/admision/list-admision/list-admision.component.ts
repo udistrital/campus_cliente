@@ -31,7 +31,7 @@ export class ListAdmisionComponent implements OnInit {
     private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
     private personaService: PersonaService,
-    private router:Router,
+    private router: Router,
     private programaService: ProgramaAcademicoService) {
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -54,7 +54,7 @@ export class ListAdmisionComponent implements OnInit {
       },
       delete: {
         deleteButtonContent: '<i class="nb-person"></i>', // este boton no elimina, sera usado para informacion
-        //confirmDelete: true,
+        // confirmDelete: true,
       },
       actions: {
         add: false,
@@ -216,8 +216,8 @@ export class ListAdmisionComponent implements OnInit {
     this.activetab();
   }
   onVerInfo(event): void {
-    console.info("info chida")
-    this.router.navigate( ['/pages/detalleInfo',event.data.Id] )
+    console.info('info chida')
+    this.router.navigate( ['/pages/detalleInfo', event.data.Id] )
   }
 
   onDelete(event): void {
@@ -274,7 +274,7 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   itemselec(event): void {
-     //console.info(event);
+     // console.info(event);
   }
 
   loadInfoSelectFiltro() {
