@@ -3,34 +3,48 @@
         <nb-card-body>
             <!-- informacion personal -->
             <div class="row m-5">
-                <div class="card col-12">
-                    <div class="container">
-                        <h6 class="display-4 col-12">{{ 'GLOBAL.info_persona' | translate }}</h6>
-                        <div class="row-fluid">
-                            <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.nombre' | translate }} : {{ Persona.PrimerNombre }} {{ Persona.SegundoNombre }} </p>
+                <div class="card-group col-12">
+                    <div class="card col-9">
+                        <div class="container">
+                            <h6 class="display-4 col-12">{{ 'GLOBAL.info_persona' | translate }}</h6>
+                            <div class="row-fluid">
+                                <div class="col">
+                                    <p class="lead"> {{ 'GLOBAL.nombre' | translate }} : {{ Persona.PrimerNombre }} {{ Persona.SegundoNombre }} </p>
+                                </div>
+                                <div class="col">
+                                    <p class="lead"> Apellido : {{ Persona.PrimerApellido }} {{ Persona.SegundoApellido }} </p>
+                                </div>
+                                <div class="col">
+                                    <p class="lead"> {{ 'GLOBAL.numero_documento' | translate }} : {{ Persona.TipoIdentificacion }} {{ Persona.NumeroDocumento }} </p>
+                                </div>
+                                <div class="col">
+                                    <p class="lead"> {{ 'GLOBAL.estado_civil' | translate }} : {{ Persona.EstadoCivil }} </p>
+                                </div>
+                                <div class="col">
+                                    <p class="lead"> {{ 'GLOBAL.genero' | translate }} : {{ Persona.Genero }} </p>
+                                </div>
+                                <div class="col">
+                                    <p class="lead"> {{ 'GLOBAL.fecha_nacimiento' | translate }} : {{ Persona.FechaNacimiento | date: 'dd/MM/yyyy' }} </p>
+                                </div>
                             </div>
-                            <div class="col">
-                                <p class="lead"> Apellido : {{ Persona.PrimerApellido }} {{ Persona.SegundoApellido }} </p>
-                            </div>
-                            <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.numero_documento' | translate }} : {{ Persona.TipoIdentificacion }} {{ Persona.NumeroDocumento }} </p>
-                            </div>
-                            <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.estado_civil' | translate }} : {{ Persona.EstadoCivil }} </p>
-                            </div>
-                            <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.genero' | translate }} : {{ Persona.Genero }} </p>
-                            </div>
-                            <div class="col">
-                                <p class="lead"> {{ 'GLOBAL.fecha_nacimiento' | translate }} : {{ Persona.FechaNacimiento | date: 'dd/MM/yyyy' }} </p>
+                            <div class="row-fluid m-3" *ngIf="Telefono.length != 0">
+                                <h4>{{ 'GLOBAL.informacion_contacto' | translate }}</h4>
+                                <div class="col" *ngFor="let contacto of Telefono">
+                                    <p class="lead"> {{ 'GLOBAL.telefono' | translate }} : {{ contacto }} </p>
+                                </div>
                             </div>
                         </div>
-                        <div class="row-fluid m-3" *ngIf="Telefono.length != 0">
-                            <h4>{{ 'GLOBAL.informacion_contacto' | translate }}</h4>
-                            <div class="col" *ngFor="let contacto of Telefono">
-                                <p class="lead"> {{ 'GLOBAL.telefono' | translate }} : {{ contacto }} </p>
-                            </div>
+                    </div>
+                    <div class="card col-3">
+                        <div>
+                            <br>
+                            <p class="lead"> {{ 'GLOBAL.foto' | translate }}</p>
+                            <img id="Foto" class="carousel-image" [src]="'assets/images/foto.png'" (click)="download(Persona.Foto,Foto,300,300)" class="img-thumbnail" alt="Foto" width="100px" height="100px">
+                        </div>
+                        <div>
+                            <br>
+                            <p class="lead"> {{ 'GLOBAL.soporte_documento' | translate }}</p>
+                            <img class="carousel-image" [src]="'assets/images/file.png'" (click)="download(Persona.SoporteDocumento,Foto,500,500)" class="img-thumbnail" alt="Foto" width="100px" height="100px">
                         </div>
                     </div>
                 </div>
@@ -127,23 +141,32 @@
             <!-- fin frmacion academica  -->
             <!-- propuesta proyecto -->
             <div class="row m-5" *ngIf="Propuesta.length != 0">
-                <div class="card col-12">
-                    <div class="container">
-                        <h6 class="display-4 col-12">{{ 'GLOBAL.propuesta' | translate }}</h6>
-                        <div class="col">
-                            <p class="lead"> {{ 'GLOBAL.titulo_proyecto' | translate }} : {{ Propuesta.Nombre }} </p>
+                <div class="card-group col-12">
+                    <div class="card col-9">
+                        <div class="container">
+                            <h6 class="display-4 col-12">{{ 'GLOBAL.propuesta' | translate }}</h6>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.titulo_proyecto' | translate }} : {{ Propuesta.Nombre }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.tipoproyecto' | translate }} : {{ Propuesta.TipoProyecto }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.grupo_investigacion' | translate }} : {{ Propuesta.GrupoInvestigacion }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.linea_investigacion' | translate }} : {{ Propuesta.LineaInvestigacion }} </p>
+                            </div>
+                            <div class="col">
+                                <p class="lead"> {{ 'GLOBAL.resumen' | translate }} : {{ Propuesta.Resumen }} </p>
+                            </div>
                         </div>
-                        <div class="col">
-                            <p class="lead"> {{ 'GLOBAL.tipoproyecto' | translate }} : {{ Propuesta.TipoProyecto }} </p>
-                        </div>
-                        <div class="col">
-                            <p class="lead"> {{ 'GLOBAL.grupo_investigacion' | translate }} : {{ Propuesta.GrupoInvestigacion }} </p>
-                        </div>
-                        <div class="col">
-                            <p class="lead"> {{ 'GLOBAL.linea_investigacion' | translate }} : {{ Propuesta.LineaInvestigacion }} </p>
-                        </div>
-                        <div class="col">
-                            <p class="lead"> {{ 'GLOBAL.resumen' | translate }} : {{ Propuesta.Resumen }} </p>
+                    </div>
+                    <div class="card col-3">
+                        <div>
+                            <br>
+                            <p class="lead"> {{ 'GLOBAL.formatoproyecto' | translate }}</p>
+                            <img class="carousel-image" [src]="'assets/images/file.png'" (click)="download(Propuesta.FormatoProyecto,Foto,500,500)" class="img-thumbnail" alt="Foto" width="100px" height="100px">
                         </div>
                     </div>
                 </div>

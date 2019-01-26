@@ -85,14 +85,14 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_aspirante => {
       if (res_aspirante !== null) {
         this.Persona = <any>res_aspirante; // puede traer documento
-        console.info(this.Persona);
+        // console.info(this.Persona);
         this.Persona['EstadoCivil'] = this.Persona['EstadoCivil']['Nombre'];
         this.Persona['Genero'] = this.Persona['Genero']['Nombre'];
         this.Persona['TipoIdentificacion'] = this.Persona['TipoIdentificacion']['Nombre'];
         if (this.Persona['Foto'] + '' !== '0') {
           this.Files.push({ Id: this.Persona['Foto'], key: 'Foto' });
         }
-        if (this.Propuesta['SoporteDocumento'] + '' !== '0') {
+        if (this.Persona['SoporteDocumento'] + '' !== '0') {
           this.Files.push({ Id: this.Persona['SoporteDocumento'], key: 'SoporteDocumento' });
         }
         this.FormacionAcad();
@@ -173,7 +173,7 @@ export class DetalleAdmisionComponent implements OnInit {
       if (res_for !== null) {
         this.Formacion = <any>res_for; // puede traer documento
         this.PropuestaGrado();
-        console.info(this.Formacion);
+        // console.info(this.Formacion);
         for (let i = 0; i < this.Formacion.length; i++) {
             // this.Formacion[i]['Institucion'] = this.Formacion[i]['Titulacion'][0]['Institucion'];
             this.Formacion[i]['Titulacion'] = this.Formacion[i]['Titulacion'][0]['Nombre'];
@@ -224,7 +224,7 @@ export class DetalleAdmisionComponent implements OnInit {
     .subscribe(res_prop => {
       if (res_prop !== null) {
         this.Propuesta = <any>res_prop[0];
-        console.info(this.Propuesta)
+        // console.info(this.Propuesta)
         // console.info(this.Propuesta['GrupoInvestigacion'])
         this.Propuesta['GrupoInvestigacion'] = this.Propuesta['GrupoInvestigacion']['Nombre'];
         this.Propuesta['LineaInvestigacion'] = this.Propuesta['LineaInvestigacion']['Nombre'];
@@ -232,7 +232,7 @@ export class DetalleAdmisionComponent implements OnInit {
         if (this.Propuesta['FormatoProyecto'] + '' !== '0') {
           this.Files.push({ Id: this.Propuesta['FormatoProyecto'], key: 'FormatoProyecto' });
         }
-        console.info(this.Files)
+        // console.info(this.Files)
         this.Archivos();
       } else {
         Swal({
@@ -257,10 +257,21 @@ export class DetalleAdmisionComponent implements OnInit {
     this.nuxeoService.getDocumentoById$(this.Files, this.documentoService)
     .subscribe(response => {
       const filesResponse = <any>response;
-      console.info(filesResponse);
+      // console.info(filesResponse);
       // console.info("-- "+ Object.keys(filesResponse_2).length + " >>> " + files.length)  && (filesResponse['FormatoProyecto'] != undefined) 
-      if ( (Object.keys(filesResponse).length != 0) ) {
-        console.info('archivos')
+      if ( (Object.keys(filesResponse).length != 0) && (Object.keys(filesResponse).length === this.Files.length) ) {
+        if ((filesResponse['FormatoProyecto'] != undefined)) {
+          this.Propuesta['FormatoProyecto'] = filesResponse['FormatoProyecto'] + '';
+          // console.info(this.Propuesta)
+        }
+        if ((filesResponse['Foto'] != undefined)) {
+          this.Persona['Foto'] = filesResponse['Foto'] + '';
+          // console.info(this.Persona);
+        }
+        if ((filesResponse['SoporteDocumento'] != undefined)) {
+          this.Persona['SoporteDocumento'] = filesResponse['SoporteDocumento'] + '';
+          // console.info(this.Persona);
+        }
       }
     },
     (error_2: HttpErrorResponse) => {
@@ -271,6 +282,15 @@ export class DetalleAdmisionComponent implements OnInit {
         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
       });
     });
+  }
+
+  download(url, title, w, h) {
+    const left = (screen.width / 2) - (w / 2);
+    const top = (screen.height / 2) - (h / 2);
+    window.open(url, title, 'toolbar=no,' +
+      'location=no, directories=no, status=no, menubar=no,' +
+      'scrollbars=no, resizable=no, copyhistory=no, ' +
+      'width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
   }
 
 }
