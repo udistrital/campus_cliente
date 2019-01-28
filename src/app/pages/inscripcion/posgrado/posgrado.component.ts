@@ -84,7 +84,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   setPercentage_proy(number, tab) {
     this.percentage_tab_proy[tab] = (number * 100) / 1;
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
-  }
+}
 
   traerInfoPersona(event, tab) {
     this.setPercentage_info(event, tab);

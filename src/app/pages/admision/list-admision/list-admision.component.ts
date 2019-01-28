@@ -8,6 +8,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'ngx-list-admision',
@@ -30,6 +31,7 @@ export class ListAdmisionComponent implements OnInit {
     private admisionesService: AdmisionesService,
     private toasterService: ToasterService,
     private personaService: PersonaService,
+    private router: Router,
     private programaService: ProgramaAcademicoService) {
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -51,8 +53,15 @@ export class ListAdmisionComponent implements OnInit {
         cancelButtonContent: '<i class="nb-close"></i>',
       },
       delete: {
-        deleteButtonContent: '<i class="nb-trash"></i>',
-        confirmDelete: true,
+        deleteButtonContent: '<i class="nb-person"></i>', // este boton no elimina, sera usado para informacion
+        // confirmDelete: true,
+      },
+      actions: {
+        add: false,
+        edit: false,
+        delete: true,
+        // custom: [{ name: 'ourVerInfo', title: '<i class="nb-person"></i>' }],
+        // position: 'right'
       },
       mode: 'external',
       columns: {
@@ -117,8 +126,8 @@ export class ListAdmisionComponent implements OnInit {
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
                       if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
-                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+                        ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
                         data[index].Aspirante = aspirante;
                         if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
@@ -163,8 +172,8 @@ export class ListAdmisionComponent implements OnInit {
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
                     .subscribe(res_aspirante => {
                       if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}
-                        ${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}`
+                        const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+                        ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
                         data[index].Aspirante = aspirante;
                         if ( index === (data.length - 1 ) ) {
                           this.source.load(data);
@@ -198,12 +207,17 @@ export class ListAdmisionComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
+    console.info(event.data)
     this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
     this.activetab();
+  }
+  onVerInfo(event): void {
+    console.info('info chida')
+    this.router.navigate( ['/pages/detalleInfo', event.data.Id] )
   }
 
   onDelete(event): void {
@@ -260,7 +274,7 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   itemselec(event): void {
-    // console.log("afssaf");
+     // console.info(event);
   }
 
   loadInfoSelectFiltro() {
