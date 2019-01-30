@@ -8,7 +8,6 @@ import { IdiomaService } from '../../data/idioma.service';
 import { UbicacionesService } from '../../data/ubicaciones.service';
 import { ProgramaAcademicoService } from '../../data/programa_academico.service';
 import { EnteService } from '../../data/ente.service';
-// import { ProduccionAcademicaService } from '../../data/produccion_academica.service';
 @Injectable()
 export class ListService {
 
@@ -402,25 +401,6 @@ export class ListService {
       },
     );
   }
-
-  // public findTipoProduccionLibro() {
-  //   this.store.select(REDUCER_LIST.TipoPublicacionLibro).subscribe(
-  //     (list: any) => {
-  //       if (!list || list.length === 0) {
-  //         this.producccionAcademicaService.get('tipo_publicacion_libro/?limit=0')
-  //         .subscribe(
-  //           (result: any[]) => {
-  //             this.addList(REDUCER_LIST.TipoPublicacionLibro, result);
-  //           },
-  //           error => {
-  //             this.addList(REDUCER_LIST.TipoPublicacionLibro, []);
-  //           },
-  //         );
-  //       }
-  //     },
-  //   );
-  // }
-
 
   private addList(type: string, object: Array < any > ) {
     this.store.dispatch({
