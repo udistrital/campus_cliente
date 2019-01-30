@@ -24,4 +24,5 @@ export const rootReducer: ActionReducerMap<IAppState> = {
   listTipoIdentificacion: ListReducer.ListReducerTipoIdentificacion,
   listTipoProyecto: ListReducer.ListReducerTipoProyecto,
   listGrupoInvestigacion: ListReducer.ListReducerGrupoInvestigacion,
+  // listTipoPublicacionLibro: ListReducer.listReducerTipoPublicacionLibro,
 }

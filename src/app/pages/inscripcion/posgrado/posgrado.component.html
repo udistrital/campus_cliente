@@ -1,5 +1,5 @@
 <div class="col-md-12 col-lg-12 ">
-    <nb-card [hidden]="show_profile || show_info || show_acad || show_expe || show_proy">
+    <nb-card [hidden]="show_profile || show_info || show_acad || show_expe || show_proy || show_prod">
         <nb-card-header>
             <!-- select -->
             <mat-form-field style="width: 100%;">
@@ -30,6 +30,16 @@
                             <p class="percentage">{{percentage_acad}} %</p>
                         </nb-card-body>
                     </nb-card>
+                </div>
+
+                <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+                  <nb-card class="exp-card" *ngIf="info_ente_id" (click)="perfil_editar('produccion_academica')">
+                    <nb-card-header>{{ 'GLOBAL.produccion_academica' | translate }}</nb-card-header>
+                    <nb-card-body class="icon-form">
+                      <i class="fa fa-book fa-5x"></i>
+                      <!-- <p class="percentage">{{percentage_prod}} %</p> -->
+                    </nb-card-body>
+                  </nb-card>
                 </div>
 
                 <div class="col-sm-6 col-md-4 col-lg-3" align="center">
@@ -80,7 +90,7 @@
                     <ngb-progressbar showValue="true" type="success" [value]="percentage_info" [animated]="true" [height]="'15px'"></ngb-progressbar>
                 </div>
                 <div class="col-md-1" align="right">
-                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false;">X</button>
+                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false; show_prod=false">X</button>
                 </div>
             </div>
             <nb-tabset fullWidth (changeTab)="selectTab($event)">
@@ -102,7 +112,7 @@
                     <ngb-progressbar showValue="true" type="success" [value]="percentage_acad" [animated]="true" [height]="'15px'"></ngb-progressbar>
                 </div>
                 <div class="col-md-1" align="right">
-                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false">X</button>
+                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false; show_prod=false">X</button>
                 </div>
             </div>
             <nb-tabset fullWidth (changeTab)="selectTab($event)">
@@ -116,6 +126,42 @@
         </nb-card-body>
     </nb-card>
 
+    <nb-card [hidden]="!show_prod">
+        <nb-card-body>
+            <div class="row">
+                <!-- <div class="col-md-11">
+                    <ngb-progressbar showValue="true" type="success" [value]="percentage_prod" [animated]="true" [height]="'15px'"></ngb-progressbar>
+                </div> -->
+                <div class="col-md-1" align="right">
+                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false; show_prod=false">M</button>
+                </div>
+            </div>
+            <nb-tabset fullWidth (changeTab)="selectTab($event)">
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_libro' | translate }}">
+                  <ngx-list-libro></ngx-list-libro>
+                </nb-tab>
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_articulo' | translate }}">
+                  <ngx-list-articulo></ngx-list-articulo>
+                </nb-tab>
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_traduccion' | translate }}">
+                    <ngx-list-traduccion></ngx-list-traduccion>
+                </nb-tab>
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_otra_publicacion' | translate }}">
+                    <ngx-list-otra-publicacion></ngx-list-otra-publicacion>
+                </nb-tab>
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_otro_documento' | translate }}">
+                    <ngx-list-otro-documento></ngx-list-otro-documento>
+                </nb-tab>
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_tecnica' | translate }}">
+                    <ngx-list-produccion-tecnica></ngx-list-produccion-tecnica>
+                </nb-tab>
+                <nb-tab tabTitle="{{ 'GLOBAL.produccion_artes_arqu_diseno' | translate }}">
+                    <ngx-list-produccion-artes-arqu-diseno></ngx-list-produccion-artes-arqu-diseno>
+                </nb-tab>
+            </nb-tabset>
+        </nb-card-body>
+    </nb-card>
+
     <nb-card [hidden]="!show_proy">
         <nb-card-body>
             <div class="row">
@@ -123,7 +169,7 @@
                     <ngb-progressbar showValue="true" type="success" [value]="percentage_proy" [animated]="true" [height]="'15px'"></ngb-progressbar>
                 </div>
                 <div class="col-md-1" align="right">
-                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false;">X</button>
+                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false; show_prod=false;">X</button>
                 </div>
             </div>
             <nb-tabset fullWidth (changeTab)="selectTab($event)">
@@ -141,7 +187,7 @@
                     <ngb-progressbar showValue="true" type="success" [value]="percentage_expe" [animated]="true" [height]="'15px'"></ngb-progressbar>
                 </div>
                 <div class="col-md-1" align="right">
-                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false">X</button>
+                    <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false; show_prod=false">X</button>
                 </div>
             </div>
             <nb-tabset fullWidth (changeTab)="selectTab($event)">

@@ -192,5 +192,13 @@ export class ListReducer {
       }
   }
 
-}
+  // static listReducerTipoPublicacionLibro(state: Array<any> =  new Array, action) {
+  //   switch (action.type) {
+  //     case REDUCER_LIST.TipoPublicacionLibro:
+  //       return [...state, action.payload];
+  //     default:
+  //       return state;
+  //     }
+  // }
 
+}
