@@ -21,12 +21,6 @@ export class ListArticuloComponent implements OnInit {
   settings: any;
   source: LocalDataSource = new LocalDataSource();
 
-  // @Input('ente_id')
-  // set name(ente_id: number) {
-  //   this.eid = ente_id;
-  //   this.loadData();
-  // }
-
   constructor(private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
     private userService: UserService,

@@ -29,12 +29,12 @@ export class PosgradoComponent implements OnInit {
   percentage_acad: number = 0;
   percentage_expe: number = 0;
   percentage_proy: number = 0;
-  percentage_prod: number = 0;
+  // percentage_prod: number = 0;
   percentage_tab_info = [];
   percentage_tab_expe = [];
   percentage_tab_acad = [];
   percentage_tab_proy = [];
-  percentage_tab_prod = [];
+  // percentage_tab_prod = [];
   posgrados = [];
   show_info = false;
   show_profile = false;
@@ -86,10 +86,10 @@ export class PosgradoComponent implements OnInit {
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
   }
 
-  setPercentage_prod(number, tab) {
-    this.percentage_tab_prod[tab] = (number * 100) / 1;
-    this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
-  }
+  // setPercentage_prod(number, tab) {
+  //   this.percentage_tab_prod[tab] = (number * 100) / 1;
+  //   this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
+  // }
 
   traerInfoPersona(event, tab) {
     this.setPercentage_info(event, tab);
@@ -203,16 +203,19 @@ export class PosgradoComponent implements OnInit {
         this.show_profile = false;
         this.show_acad = false;
         this.show_expe = false;
+        this.info_contacto = false;
+        this.info_caracteristica = false;
+        this.info_persona = true;
         this.show_proy = false;
         this.show_prod = true;
         break;
       case 'propuesta_grado':
-        // this.show_info = false;
-        // this.show_profile = false;
-        // this.show_acad = false;
-        // this.show_expe = false;
-        // this.show_proy = true;
-        // this.show_prod = false;
+        this.show_info = false;
+        this.show_profile = false;
+        this.show_acad = false;
+        this.show_expe = false;
+        this.show_proy = true;
+        this.show_prod = false;
         break;
       case 'perfil':
         this.show_info = false;
