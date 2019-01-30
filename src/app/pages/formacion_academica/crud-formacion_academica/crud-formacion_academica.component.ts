@@ -95,7 +95,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   }
 
   loadInfoPostgrados() {
-    this.programaService.get('programa_academico')
+    this.programaService.get('programa_academico/?limit=0')
       .subscribe(res => {
         if (res !== null) {
           const r = <any>res;
@@ -385,6 +385,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
         FechaFinalizacion: event.data.InfoFormacionAcademica.FechaFinalizacion,
         DescripcionTrabajoGrado: event.data.InfoFormacionAcademica.DescripcionTrabajoGrado,
         Documento: event.data.InfoFormacionAcademica.Documento,
+        TituloTrabajoGrado: event.data.InfoFormacionAcademica.TituloTrabajoGrado,
       }
       console.info(formacion);
       const organizacion = this.organizacion.Ente ? this.organizacion.Ente.Id : null;

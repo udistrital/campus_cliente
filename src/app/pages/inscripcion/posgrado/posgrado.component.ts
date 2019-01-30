@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit , OnChanges} from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from './../../../@core/utils/implicit_autentication.service';
 import { PersonaService } from '../../../@core/data/persona.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
@@ -17,7 +18,7 @@ import html2canvas from 'html2canvas';
   templateUrl: './posgrado.component.html',
   styleUrls: ['./posgrado.component.scss'],
 })
-export class PosgradoComponent implements OnInit {
+export class PosgradoComponent implements OnInit, OnChanges {
 
   info_persona_id: number;
   info_ente_id: number;
@@ -47,12 +48,14 @@ export class PosgradoComponent implements OnInit {
   info_caracteristica: boolean;
   button_politica: boolean = true;
   programa_seleccionado: any;
+  selectedValue: any;
 
   constructor(
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
     private translate: TranslateService,
   //  private router: Router,
+    private admisionesService: AdmisionesService,
     private programaService: ProgramaAcademicoService) {
     this.translate = translate;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -84,7 +87,7 @@ export class PosgradoComponent implements OnInit {
   setPercentage_proy(number, tab) {
     this.percentage_tab_proy[tab] = (number * 100) / 1;
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
-  }
+}
 
   // setPercentage_prod(number, tab) {
   //   this.percentage_tab_prod[tab] = (number * 100) / 1;
@@ -97,11 +100,26 @@ export class PosgradoComponent implements OnInit {
   }
 
   loadInfoPostgrados() {
-    this.programaService.get('programa_academico')
+    this.programaService.get('programa_academico/?limit=0')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.posgrados = <any>res;
+          this.admisionesService.get(`admision/?query=Aspirante:${this.info_ente_id}`)
+      .subscribe(res_2 => {
+        const r_2 = <any>res_2;
+        if (res_2 !== null && r_2.Type !== 'error') {
+          this.selectedValue = res[res_2[0].ProgramaAcademico - 1];
+        }
+      },
+      (error_2: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error_2.status + '',
+          text: this.translate.instant('ERROR.' + error_2.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
         }
       },
       (error: HttpErrorResponse) => {
@@ -248,6 +266,13 @@ export class PosgradoComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
+  }
+
+  pruebita() {
+    window.localStorage.setItem('programa', this.selectedValue.Id);
   }
 
   public captureScreen() {

@@ -15,7 +15,6 @@ pipeline:
      - apt-get install -y zip
      - rm -rf node_modules
      - npm i
-     - npm install @ngrx/store@latest
      - npm run lint:ci
      - npm run build:prod
 

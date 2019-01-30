@@ -332,7 +332,7 @@
         "placeholder_periodo": "Ej: 1",
         "propuesta": "Propuesta",
         "placeholder_propuesta": "Ej: Propuesta de trabajo de grado",
-        "programa_academico": "Programa",
+        "programa_academico": "Programa Academico",
         "placeholder_programa_academico": "Ej: Ingeniería de sistemas",
         "enfasis": "Énfasis",
         "placeholder_enfasis": "Ej: Investigación",
@@ -342,16 +342,10 @@
         "placeholder_titulo_proyecto": "ej: Inteligenci artificial aplicada a..",
         "resumen": "Resumen",
         "placeholder_resumen": "ej: resumen",
-        "duracion_proyecto": "Duracion en meses",
-        "placeholder_duracion_proyecto": "ej: 7 ",
-        "unidad_tiempo_duracion_proyecto": "Unidad de tiempo de duración",
-        "placeholder_tiempo_duracion_proyecto": "Ej: Meses",
-        "tipoproyecto": "Tipo de proyecto",
+        "tipoproyecto": "Modalidad",
         "placeholder_tipoproyecto": "ej: Investigacion Basica",
-        "lugarejecucion": "Lugar de ejecucion",
-        "placeholder_lugarejecucion": "ej: Bogotá",
-        "tipo_proyecto": "Tipo proyecto",
-        "placeholder_tipo_proyecto": "ej: Tipo proyecto",
+        "tipo_proyecto": "Modalidad",
+        "placeholder_tipo_proyecto": "ej: Modalidad",
         "tipo_proyecto_descripcion": "Descripcion",
         "placeholder_tipo_proyecto_descripcion": "ej: proyecto de investigacion basica",
         "tipo_poyecto_nombre": "Nombre",
@@ -360,6 +354,7 @@
         "error_carga_datos": "Recargue la página o cierre y abra de nuevo la ventana para poder cargar exitosamente sus datos",
         "warning": "Advertencia",
         "create_propuesta": "Crear Propuesta de Grado",
+<<<<<<< HEAD
         "medio_divulgacion": "medio_divulgacion",
         "placeholder_medio_divulgacion": "ej: medio_divulgacion",
         "id": "id",
@@ -468,5 +463,11 @@
         "placeholder_idiomaoriginal": "ej: Inglés",
         "idiomatraducido": "Idioma traducido",
         "placeholder_idiomatraducido": "ej: Español"
+=======
+        "inscrito": "Ha sido inscrito al periodo academico:",
+        "periodo_academico": "Periodo Academico",
+        "filtrar": "Filtrar",
+        "Limpiar": "Limpiar"
+>>>>>>> develop
     }
 }

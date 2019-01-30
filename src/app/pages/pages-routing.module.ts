@@ -2,6 +2,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { PagesComponent } from './pages.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { DetalleAdmisionComponent } from './detalle-admision/detalle-admision.component';
 
 const routes: Routes = [{
   path: '',
@@ -35,6 +36,8 @@ const routes: Routes = [{
       path: 'tipo_proyecto',
       loadChildren: './tipo_proyecto/tipo_proyecto.module#TipoProyectoModule',
     },
+    { path: 'detalleInfo/:id',
+      component: DetalleAdmisionComponent },
     {
       path: '',
       redirectTo: 'dashboard',

@@ -332,7 +332,7 @@
         "placeholder_periodo": "E.g.: 1",
         "propuesta": "Thesis proposal",
         "placeholder_propuesta": "E.g.: Thesis proposal",
-        "programa_academico": "Program",
+        "programa_academico": "Academic Program",
         "placeholder_programa_academico": "E.g.: Systems engineer",
         "enfasis": "Emphasis",
         "placeholder_enfasis": "E.g.: Research",
@@ -342,16 +342,12 @@
         "placeholder_titulo_proyecto": "e.g. Artificial intelligence applied to...",
         "resumen": "Summary",
         "placeholder_resumen": "e.g. summary",
-        "duracion_proyecto": "Duration in months",
-        "placeholder_duracion_proyecto": "e.g. 7",
-        "unidad_tiempo_duracion_proyecto": "Duration time unit",
-        "placeholder_tiempo_duracion_proyecto": "Ej: Months",
-        "tipoproyecto": "Type of project",
+        "tipoproyecto": "Modality",
         "placeholder_tipoproyecto": "e.g. Basic Research",
         "lugarejecucion": "Place of execution",
         "placeholder_lugarejecucion": "e.g. Bogotá",
-        "tipo_proyecto": "Project type",
-        "placeholder_tipo_proyecto": "e.g. Project type",
+        "tipo_proyecto": "Modality",
+        "placeholder_tipo_proyecto": "e.g. Modality",
         "tipo_proyecto_descripcion": "Description",
         "placeholder_tipo_proyecto_descripcion": "e.g. basic research project",
         "tipo_poyecto_nombre": "Name",
@@ -360,6 +356,7 @@
         "error_carga_datos": "Reload the page or close and reopen the window to successfully load your data.",
         "warning": "Warning",
         "create_propuesta": "Create Grade Proposal",
+<<<<<<< HEAD
         "medio_divulgacion": "Disclosure media",
         "placeholder_medio_divulgacion": "e.g. electronic",
         "id": "id",
@@ -468,5 +465,11 @@
         "placeholder_idiomaoriginal": "e.g. Spanish",
         "idiomatraducido": "Translated language",
         "placeholder_idiomatraducido": "e.g. English"
+=======
+        "inscrito": "He's been enrolled in the academic period:",
+        "periodo_academico": "Academic Period",
+        "filtrar": "Filter",
+        "Limpiar": "Clean"
+>>>>>>> develop
     }
 }
