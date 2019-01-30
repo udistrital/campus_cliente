@@ -356,7 +356,6 @@
         "error_carga_datos": "Reload the page or close and reopen the window to successfully load your data.",
         "warning": "Warning",
         "create_propuesta": "Create Grade Proposal",
-<<<<<<< HEAD
         "medio_divulgacion": "Disclosure media",
         "placeholder_medio_divulgacion": "e.g. electronic",
         "id": "id",
@@ -464,12 +463,10 @@
         "idiomaoriginal": "original language",
         "placeholder_idiomaoriginal": "e.g. Spanish",
         "idiomatraducido": "Translated language",
-        "placeholder_idiomatraducido": "e.g. English"
-=======
+        "placeholder_idiomatraducido": "e.g. English",
         "inscrito": "He's been enrolled in the academic period:",
         "periodo_academico": "Academic Period",
         "filtrar": "Filter",
         "Limpiar": "Clean"
->>>>>>> develop
     }
 }

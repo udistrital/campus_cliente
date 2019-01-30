@@ -354,7 +354,6 @@
         "error_carga_datos": "Recargue la página o cierre y abra de nuevo la ventana para poder cargar exitosamente sus datos",
         "warning": "Advertencia",
         "create_propuesta": "Crear Propuesta de Grado",
-<<<<<<< HEAD
         "medio_divulgacion": "medio_divulgacion",
         "placeholder_medio_divulgacion": "ej: medio_divulgacion",
         "id": "id",
@@ -462,12 +461,10 @@
         "idiomaoriginal": "Idioma original",
         "placeholder_idiomaoriginal": "ej: Inglés",
         "idiomatraducido": "Idioma traducido",
-        "placeholder_idiomatraducido": "ej: Español"
-=======
+        "placeholder_idiomatraducido": "ej: Español",
         "inscrito": "Ha sido inscrito al periodo academico:",
         "periodo_academico": "Periodo Academico",
         "filtrar": "Filtrar",
         "Limpiar": "Limpiar"
->>>>>>> develop
     }
 }
