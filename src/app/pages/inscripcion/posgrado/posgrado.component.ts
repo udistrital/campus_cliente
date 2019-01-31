@@ -30,16 +30,19 @@ export class PosgradoComponent implements OnInit, OnChanges {
   percentage_acad: number = 0;
   percentage_expe: number = 0;
   percentage_proy: number = 0;
+  // percentage_prod: number = 0;
   percentage_tab_info = [];
   percentage_tab_expe = [];
   percentage_tab_acad = [];
   percentage_tab_proy = [];
+  // percentage_tab_prod = [];
   posgrados = [];
   show_info = false;
   show_profile = false;
   show_acad = false;
   show_expe = false;
   show_proy = false;
+  show_prod = false;
   info_contacto: boolean;
   info_persona: boolean;
   info_caracteristica: boolean;
@@ -85,6 +88,11 @@ export class PosgradoComponent implements OnInit, OnChanges {
     this.percentage_tab_proy[tab] = (number * 100) / 1;
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
 }
+
+  // setPercentage_prod(number, tab) {
+  //   this.percentage_tab_prod[tab] = (number * 100) / 1;
+  //   this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
+  // }
 
   traerInfoPersona(event, tab) {
     this.setPercentage_info(event, tab);
@@ -168,6 +176,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.info_caracteristica = false;
         this.info_persona = false;
         this.show_proy = false;
+        this.show_prod = false;
         break;
       case 'info_caracteristica':
         this.show_info = true;
@@ -178,6 +187,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.info_caracteristica = true;
         this.info_persona = false;
         this.show_proy = false;
+        this.show_prod = false;
         break;
       case 'info_persona':
         this.show_info = true;
@@ -188,6 +198,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.info_caracteristica = false;
         this.info_persona = true;
         this.show_proy = false;
+        this.show_prod = false;
         break;
       case 'experiencia_laboral':
         this.show_info = false;
@@ -195,6 +206,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.show_acad = false;
         this.show_expe = true;
         this.show_proy = false;
+        this.show_prod = false;
         break;
       case 'formacion_academica':
         this.show_info = false;
@@ -202,6 +214,18 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.show_acad = true;
         this.show_expe = false;
         this.show_proy = false;
+        this.show_prod = false;
+        break;
+      case 'produccion_academica':
+        this.show_info = false;
+        this.show_profile = false;
+        this.show_acad = false;
+        this.show_expe = false;
+        this.info_contacto = false;
+        this.info_caracteristica = false;
+        this.info_persona = true;
+        this.show_proy = false;
+        this.show_prod = true;
         break;
       case 'propuesta_grado':
         this.show_info = false;
@@ -209,6 +233,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.show_acad = false;
         this.show_expe = false;
         this.show_proy = true;
+        this.show_prod = false;
         break;
       case 'perfil':
         this.show_info = false;
@@ -216,6 +241,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.show_acad = false;
         this.show_expe = false;
         this.show_proy = false;
+        this.show_prod = false;
         break;
       default:
         this.show_info = false;
@@ -223,6 +249,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
         this.show_acad = false;
         this.show_expe = false;
         this.show_proy = false;
+        this.show_prod = false;
         break;
     }
   }

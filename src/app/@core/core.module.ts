@@ -20,6 +20,7 @@ import { rootReducer } from './store/rootReducer';
 import { AdmisionesService } from './data/admisiones.service';
 import { IdiomaService } from './data/idioma.service';
 import { ProgramaAcademicoService } from './data/programa_academico.service';
+import { ProduccionAcademicaService } from './data/produccion_academica.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 const socialLinks = [
@@ -104,6 +105,7 @@ export const NB_CORE_PROVIDERS = [
     IdiomaService,
     UbicacionesService,
     ProgramaAcademicoService,
+    ProduccionAcademicaService,
     EnteService,
     {
       provide: HTTP_INTERCEPTORS,

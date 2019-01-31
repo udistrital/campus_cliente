@@ -8,7 +8,6 @@ import { IdiomaService } from '../../data/idioma.service';
 import { UbicacionesService } from '../../data/ubicaciones.service';
 import { ProgramaAcademicoService } from '../../data/programa_academico.service';
 import { EnteService } from '../../data/ente.service';
-
 @Injectable()
 export class ListService {
 
@@ -18,6 +17,7 @@ export class ListService {
     private idiomaService: IdiomaService,
     private ubicacionesService: UbicacionesService,
     private programaAcademicoService: ProgramaAcademicoService,
+    // private producccionAcademicaService: ProduccionAcademicaService,
     private enteService: EnteService,
     private store: Store < IAppState > ) {
 
@@ -401,8 +401,6 @@ export class ListService {
       },
     );
   }
-
-
 
   private addList(type: string, object: Array < any > ) {
     this.store.dispatch({

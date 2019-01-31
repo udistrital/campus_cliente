@@ -28,6 +28,10 @@ const routes: Routes = [{
       path: 'propuesta_grado',
       loadChildren: './propuesta_grado/propuesta_grado.module#PropuestaGradoModule',
     },
+    // {
+    //   path: 'libro',
+    //   loadChildren: './libro/libro.module#LibroModule',
+    // },
     {
       path: 'tipo_proyecto',
       loadChildren: './tipo_proyecto/tipo_proyecto.module#TipoProyectoModule',
@@ -48,4 +52,3 @@ const routes: Routes = [{
 })
 export class PagesRoutingModule {
 }
-

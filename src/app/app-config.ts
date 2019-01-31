@@ -16,6 +16,7 @@ export const Config = {
         ADMISIONES_SERVICE: 'http://localhost:8887/v1/',
         PROGRAMA_ACADEMICO_SERVICE: 'http://localhost:8101/v1/',
         FORMACION_ACADEMICA_SERVICE: 'http://localhost:8098/v1/',
+        PRODUCCION_ACADEMICA_SERVICE: 'http://localhost:8080/v1/',
         IDIOMA_SERVICE: 'http://localhost:8103/v1/',
         CONFIGURACION_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/api/configuracion_crud_api/v1/',
         NOTIFICACION_SERVICE: 'ws://pruebasapi.intranetoas.udistrital.edu.co:8116/ws/join',
@@ -45,6 +46,7 @@ export const Config = {
         ADMISIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/admisiones_crud/',
         PROGRAMA_ACADEMICO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/programa_academico_crud/',
         FORMACION_ACADEMICA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/formacion_academica_crud/',
+        PRODUCCION_ACADEMICA_SERVICE: 'http://localhost:8080/v1/',
         IDIOMA_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/idiomas_crud/',
         CORE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/core_crud/',
         SESIONES_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/sesiones_crud/',
@@ -184,4 +186,5 @@ export const Config = {
 
 export const GENERAL = {
     ENTORNO: Config[environment.entorno],
+    // ENTORNO: 'LOCAL',
 };

@@ -20,4 +20,5 @@ export const REDUCER_LIST = {
     TipoIdentificacion: 'listTipoIdentificacion',
     TipoProyecto: 'listReducerTipoProyecto',
     GrupoInvestigacion: 'listReducerGrupoInvestigacion',
+    // TipoPublicacionLibro: 'listReducerTipoPublicacionLibro',
 };
