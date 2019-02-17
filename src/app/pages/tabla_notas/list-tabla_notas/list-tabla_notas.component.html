@@ -1,15 +1,9 @@
 <div class="col-md-12 col-lg-12 ">
   <nb-card>
     <nb-card-body>
-        <toaster-container [toasterconfig]="config"></toaster-container>
-        <nb-tabset fullWidth (changeTab)="selectTab($event)">
-            <nb-tab tabTitle="{{ 'GLOBAL.lista' | translate }}" [active]="!cambiotab">
+        <nb-tabset fullWidth>
+            <nb-tab tabTitle="{{ 'GLOBAL.lista' | translate }}">
               <br />
-                  <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDelete($event)" (rowSelect)="itemselec($event)" (edit)="onEdit($event)" (create)="onCreate($event)">
-                    </ng2-smart-table>
-
-
-              <!--button (click)="activetab()" >cambiar</button-->
             </nb-tab>
           </nb-tabset>
     </nb-card-body>
