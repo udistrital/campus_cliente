@@ -34,4 +34,18 @@ export const MENU_ITEMS: MenuItem[] = [
       },
     ],
   },
+
+  {
+    title: 'Tabla Notas',
+    icon: 'nb-compose',
+    link: '/pages/tabla_notas',
+    key: 'tabla_notas',
+    children: [
+      {
+        title: 'Lista Tabla Notas',
+        link: '/pages/tabla_notas/list-tabla_notas',
+        key: 'lista_tabla_notas',
+      },
+    ],
+  },
 ]

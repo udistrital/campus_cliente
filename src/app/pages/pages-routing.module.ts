@@ -28,6 +28,10 @@ const routes: Routes = [{
       path: 'propuesta_grado',
       loadChildren: './propuesta_grado/propuesta_grado.module#PropuestaGradoModule',
     },
+    {
+      path: 'tabla_notas',
+      loadChildren: './tabla_notas/tabla_notas.module#TablaNotasModule',
+      },
     // {
     //   path: 'libro',
     //   loadChildren: './libro/libro.module#LibroModule',
