@@ -402,6 +402,24 @@ export class ListService {
     );
   }
 
+  public findPeriodoAcademico() {
+    this.store.select(REDUCER_LIST.PeriodoAcademico).subscribe(
+      (list: any) => {
+        if (!list || list.length === 0) {
+          this.admisionesService.get('periodo_academico/?limit=0')
+          .subscribe(
+            (result: any[]) => {
+              this.addList(REDUCER_LIST.PeriodoAcademico, result);
+            },
+            error => {
+              this.addList(REDUCER_LIST.PeriodoAcademico, []);
+            },
+          );
+        }
+      },
+    );
+  }
+
   private addList(type: string, object: Array < any > ) {
     this.store.dispatch({
       type: type,

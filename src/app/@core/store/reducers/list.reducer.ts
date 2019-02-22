@@ -192,4 +192,14 @@ export class ListReducer {
       }
   }
 
+  static ListReducerPeriodoAcademico(state: Array<any> =  new Array, action) {
+    switch (action.type) {
+      case REDUCER_LIST.PeriodoAcademico:
+        return [...state, action.payload];
+      default:
+        return state;
+      }
+  }
+
+
 }
