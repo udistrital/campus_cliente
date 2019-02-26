@@ -2,12 +2,15 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Idioma } from './../../../@core/data/models/idioma';
 import { ClasificacionNivelIdioma } from './../../../@core/data/models/clasificacion_idioma';
 import { NivelIdioma } from './../../../@core/data/models/nivel_idioma';
+import { NotasIdioma } from './../../../@core/data/models/notas_idioma';
 import { InfoIdioma } from './../../../@core/data/models/info_idioma';
+import { PeriodoAcademico } from './../../../@core/data/models/periodo_academico';
 import { FORM_IDIOMAS } from './form-idiomas';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { IdiomaService } from '../../../@core/data/idioma.service';
 import { UserService } from '../../../@core/data/users.service';
+import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -36,11 +39,15 @@ export class CrudIdiomasComponent implements OnInit {
   clean: boolean;
   loading: boolean;
   percentage: number;
+  // CampoNotasIdioma: NotasIdioma;
+  periodo: PeriodoAcademico;
+  idioma: number;
 
   constructor(
     private translate: TranslateService,
     private users: UserService,
     private idiomaService: IdiomaService,
+    private admisionesService: AdmisionesService,
     private toasterService: ToasterService) {
     this.formInfoIdioma = FORM_IDIOMAS;
     this.construirForm();
@@ -51,6 +58,7 @@ export class CrudIdiomasComponent implements OnInit {
     this.loadOptionsNiveles()
     this.loadOptionsClasificacion()
     this.ente = this.users.getEnte();
+    this.CargarPeriodo();
   }
 
   construirForm() {
@@ -137,6 +145,7 @@ export class CrudIdiomasComponent implements OnInit {
   }
 
   public loadInfoIdioma(): void {
+    console.info('carga idioma');
     console.info(this.info_idioma_id);
     if (this.info_idioma_id !== undefined && this.info_idioma_id !== 0 &&
       this.info_idioma_id.toString() !== '') {
@@ -144,6 +153,9 @@ export class CrudIdiomasComponent implements OnInit {
         .subscribe(res => {
           if (res !== null) {
             this.info_idioma = <InfoIdioma>res[0];
+            console.info(res[0]);
+            this.idioma = this.info_idioma.Idioma.Id;
+            console.info(this.idioma);
           }
       },
       (error: HttpErrorResponse) => {
@@ -177,6 +189,7 @@ export class CrudIdiomasComponent implements OnInit {
           this.info_idioma = <InfoIdioma>infoIdioma;
           this.idiomaService.put('conocimiento_idioma', this.info_idioma)
             .subscribe(res => {
+              this.updateCampoNota(this.info_idioma);
               this.eventChange.emit(true);
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.idioma') + ' ' +
@@ -219,6 +232,7 @@ export class CrudIdiomasComponent implements OnInit {
               this.showToast('info', this.translate.instant('GLOBAL.crear'),
               this.translate.instant('GLOBAL.idioma') + ' ' +
               this.translate.instant('GLOBAL.confirmarCrear'));
+              this.createCampoNota(this.info_idioma);
             },
             (error: HttpErrorResponse) => {
               Swal({
@@ -247,6 +261,88 @@ export class CrudIdiomasComponent implements OnInit {
     }
   }
 
+  createCampoNota(infoIdioma) {
+    const InfIdioma = <InfoIdioma>infoIdioma;
+    const CampoNotasIdioma = {};
+    CampoNotasIdioma['Idioma'] = InfIdioma.Idioma.Id;
+    CampoNotasIdioma['Persona'] = InfIdioma.Persona;
+    CampoNotasIdioma['Periodo'] = this.periodo.Id;
+    this.idiomaService.post('notas_idioma', CampoNotasIdioma)
+            .subscribe(res_nota => {
+              const r = <any>res_nota;
+              if (res_nota !== null && r.Type !== 'error') {
+                console.info('se creo campo de notas idioma');
+              }
+            },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+    }
+  updateCampoNota(infoIdioma) {
+    const InfIdioma = <InfoIdioma>infoIdioma;
+    console.info(InfIdioma);
+    const CampoNotasIdioma = {};
+    CampoNotasIdioma['Idioma'] = InfIdioma.Idioma.Id;
+    CampoNotasIdioma['Persona'] = InfIdioma.Persona;
+    console.info(CampoNotasIdioma);
+    this.idiomaService.get(`notas_idioma/?query=Persona:${InfIdioma.Persona},Idioma:${this.idioma}`)
+        .subscribe(res_carga => {
+          if (res_carga !== null) {
+          CampoNotasIdioma['Id'] = <any>res_carga[0]['Id']
+          this.idiomaService.put('notas_idioma', CampoNotasIdioma)
+                  .subscribe(res_nota => {
+                    const r = <any>res_nota;
+                    if (res_nota !== null && r.Type !== 'error') {
+                      console.info('se actualizo campo de notas idioma');
+                    }
+                  },
+                  (error_nota: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error_nota.status + '',
+                      text: this.translate.instant('ERROR.' + error_nota.status),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
+          }
+        },
+        (error_carga: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error_carga.status + '',
+            text: this.translate.instant('ERROR.' + error_carga.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+
+    }
+
+  CargarPeriodo(): void {
+    this.admisionesService.get('periodo_academico/?query=Activo:true&sortby=Id&order=desc&limit=1')
+      .subscribe(res => {
+        const r = <any>res;
+        if (res !== null && r.Type !== 'error') {
+          this.periodo = <PeriodoAcademico>res[0]; // se carga el periodo academico activo mas reciente
+          console.info(this.periodo);
+        }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
+  }
+
+  cargarCampo() {
+  }
   private showToast(type: string, title: string, body: string) {
     this.config = new ToasterConfig({
       // 'toast-top-full-width', 'toast-bottom-full-width', 'toast-top-left', 'toast-top-center'

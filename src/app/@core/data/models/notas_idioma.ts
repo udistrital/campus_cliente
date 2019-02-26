@@ -1,7 +1,7 @@
 
 export class NotasIdioma {
   Id: number;
-  Persona: string;
+  Persona: number;
   Idioma: number;
   Periodo: number;
 }

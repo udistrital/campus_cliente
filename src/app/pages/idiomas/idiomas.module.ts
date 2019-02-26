@@ -8,6 +8,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { CrudIdiomasComponent } from './crud-idiomas/crud-idiomas.component';
 import { ListIdiomasComponent } from './list-idiomas/list-idiomas.component';
 import { UserService } from '../../@core/data/users.service';
+import { AdmisionesService } from '../../@core/data/admisiones.service';
 
 @NgModule({
   imports: [
@@ -23,6 +24,7 @@ import { UserService } from '../../@core/data/users.service';
   providers: [
     UserService,
     IdiomaService,
+    AdmisionesService,
   ],
   exports: [
     CrudIdiomasComponent,
