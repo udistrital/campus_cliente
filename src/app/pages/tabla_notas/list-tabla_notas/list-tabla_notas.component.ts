@@ -6,6 +6,7 @@ import { IAppState } from '../../../@core/store/app.state';
 import { Store } from '@ngrx/store';
 import { ListService } from '../../../@core/store/services/list.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { PersonaService } from '../../../@core/data/persona.service';
 
 @Component({
   selector: 'ngx-list-tabla-notas',
@@ -17,9 +18,11 @@ export class ListTablaNotasComponent implements OnInit {
   periodo = [];
   selectedValueIdioma: any;
   selectedValuePeriodo: any;
+  resultados_notas = [];
 
   constructor(private translate: TranslateService,
      private idiomaService: IdiomaService,
+     private personaService: PersonaService,
      private store: Store < IAppState > ,
     private listService: ListService) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {;
@@ -50,6 +53,8 @@ export class ListTablaNotasComponent implements OnInit {
     this.selectedValueIdioma = 0;
     this.selectedValuePeriodo = '--Seleccionar--'
     this.selectedValuePeriodo = 0;
+    this.resultados_notas = [];
+    console.info(this.resultados_notas);
   }
 
   BusquedaDatos(query) {
@@ -57,7 +62,9 @@ export class ListTablaNotasComponent implements OnInit {
     if (query) {
       this.idiomaService.get(query).subscribe(res => {
         if (res !== null) {
-          console.info(res)
+          this.resultados_notas = <any>res;
+          console.info(this.resultados_notas);
+          this.CargarPersonas();
         } else {
           Swal({
             type: 'info',
@@ -75,6 +82,31 @@ export class ListTablaNotasComponent implements OnInit {
       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     });
    });
+  }
+}
+
+CargarPersonas() {
+  for (let index = 0; index < this.resultados_notas.length; index++) {
+    const datos = this.resultados_notas[index];
+    this.personaService.get(`persona?query=Ente:${datos.Persona}`)
+            .subscribe(res_aspirante => {
+              if (res_aspirante !== null) {
+                const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+                ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
+                this.resultados_notas[index].Persona = aspirante;
+                // if ( index === (this.resultados_notas.length - 1 ) ) {
+                //   // this.source.load(data);
+                // }
+              }
+            },
+            (error_aspirante: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error_aspirante.status + '',
+                text: this.translate.instant('ERROR.' + error_aspirante.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
   }
 }
 
