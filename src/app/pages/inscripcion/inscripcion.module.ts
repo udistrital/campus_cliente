@@ -42,8 +42,6 @@ import { OtroDocumentoModule } from '../otro_documento/otro_documento.module';
 import { ListOtroDocumentoComponent } from '../otro_documento/list-otro_documento/list-otro_documento.component';
 import { CrudOtroDocumentoComponent } from '../otro_documento/crud-otro_documento/crud-otro_documento.component';
 import { OtraPublicacionModule } from '../otra_publicacion/otra_publicacion.module';
-import { ListOtraPublicacionComponent } from '../otra_publicacion/list-otra_publicacion/list-otra_publicacion.component';
-import { CrudOtraPublicacionComponent } from '../otra_publicacion/crud-otra_publicacion/crud-otra_publicacion.component';
 import { ProduccionTecnicaModule } from '../produccion_tecnica/produccion_tecnica.module';
 import { ListProduccionTecnicaComponent } from '../produccion_tecnica/list-produccion_tecnica/list-produccion_tecnica.component';
 import { CrudProduccionTecnicaComponent } from '../produccion_tecnica/crud-produccion_tecnica/crud-produccion_tecnica.component';
