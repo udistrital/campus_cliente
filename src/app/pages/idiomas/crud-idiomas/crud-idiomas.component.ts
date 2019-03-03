@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Idioma } from './../../../@core/data/models/idioma';
 import { ClasificacionNivelIdioma } from './../../../@core/data/models/clasificacion_idioma';
 import { NivelIdioma } from './../../../@core/data/models/nivel_idioma';
-import { NotasIdioma } from './../../../@core/data/models/notas_idioma';
 import { InfoIdioma } from './../../../@core/data/models/info_idioma';
 import { PeriodoAcademico } from './../../../@core/data/models/periodo_academico';
 import { FORM_IDIOMAS } from './form-idiomas';

@@ -1,7 +1,6 @@
 import { TipoPublicacionLibro } from './tipo_publicacion_libro';
 import { MedioDivulgacion } from './medio_divulgacion';
 import { MedioPublicacion } from './medio_publicacion';
-import { Lugar } from './lugar'
 
 export class Libro {
   Persona: number;
