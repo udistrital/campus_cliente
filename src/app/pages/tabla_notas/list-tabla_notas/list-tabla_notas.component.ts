@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { IdiomaService } from '../../../@core/data/idioma.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ import { PersonaService } from '../../../@core/data/persona.service';
   templateUrl: './list-tabla_notas.component.html',
   styleUrls: ['./list-tabla_notas.component.scss'],
   })
-export class ListTablaNotasComponent implements OnInit {
+export class ListTablaNotasComponent implements OnInit, OnChanges {
   idioma: any = [];
   periodo = [];
   selectedValueIdioma: any;
@@ -37,6 +37,9 @@ export class ListTablaNotasComponent implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges() {
   }
 
   Filtrar() {
@@ -108,6 +111,10 @@ CargarPersonas() {
               });
             });
   }
+}
+
+mostarNota() {
+  console.info(this.resultados_notas)
 }
 
   public loadLists() {

@@ -57,8 +57,8 @@
                                         <table class="table">
                                                 <thead>
                                                   <tr>
-                                                    <th scope="col">Arpirante</th>
-                                                    <!-- <th scope="col">First</th> -->
+                                                    <th scope="col">{{ 'GLOBAL.aspirante' | translate }}</th>
+                                                    <th scope="col">{{ 'GLOBAL.nota' | translate }}</th>
                                                     <!-- <th scope="col">Last</th>
                                                     <th scope="col">Handle</th> -->
                                                   </tr>
@@ -66,22 +66,15 @@
                                                 <tbody>
                                                   <tr *ngFor="let resultado of resultados_notas">
                                                     <th scope="row"><nb-user name="{{resultado['Persona']}}" ></nb-user> </th>
-                                                    <!-- <td>Mark</td>
-                                                    <td>Otto</td>
+                                                    <td> 
+                                                            <mat-form-field appearance="outline" style="width: 10%;">
+                                                                    <mat-label> Nota </mat-label>
+                                                                    <input matInput placeholder="" [(ngModel)]="resultado['nota']" (ngModelChange)="mostarNota()">
+                                                                  </mat-form-field>
+                                                    </td>
+                                                    <!-- <td>Otto</td>
                                                     <td>@mdo</td> -->
                                                   </tr>
-                                                  <!-- <tr>
-                                                    <th scope="row">2</th>
-                                                    <td>Jacob</td>
-                                                    <td>Thornton</td>
-                                                    <td>@fat</td>
-                                                  </tr>
-                                                  <tr>
-                                                    <th scope="row">3</th>
-                                                    <td>Larry</td>
-                                                    <td>the Bird</td>
-                                                    <td>@twitter</td>
-                                                  </tr> -->
                                                 </tbody>
                                               </table>
 
