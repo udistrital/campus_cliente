@@ -43,7 +43,6 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   }
 
   Filtrar() {
-    console.info('boton de filtrar');
     if ( (this.selectedValueIdioma !== undefined && this.selectedValueIdioma !== 0 )
     && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0 ) ) {
       this.BusquedaDatos(`notas_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']}`);
@@ -51,23 +50,20 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   }
 
   ClearFiltro() {
-    console.info('boton de limpiar filtro');
     this.selectedValueIdioma = '--Seleccionar--'
     this.selectedValueIdioma = 0;
     this.selectedValuePeriodo = '--Seleccionar--'
     this.selectedValuePeriodo = 0;
     this.resultados_notas = [];
-    console.info(this.resultados_notas);
   }
 
   BusquedaDatos(query) {
-    console.info(query);
     if (query) {
       this.idiomaService.get(query).subscribe(res => {
         if (res !== null) {
           this.resultados_notas = <any>res;
-          console.info(this.resultados_notas);
           this.CargarPersonas();
+          this.CargarNotas();
         } else {
           Swal({
             type: 'info',
@@ -113,11 +109,29 @@ CargarPersonas() {
   }
 }
 
+CargarNotas() {
+  for (let i = 0; i < this.resultados_notas.length; i++) {
+    this.idiomaService.get(`valor_nota/?query=NotasIdioma:${this.resultados_notas[i]['Id']}`)
+            .subscribe(res_notas => {
+              if (res_notas !== null) {
+                this.resultados_notas[i]['GetNota'] = <any>res_notas[0]['ValorNota'];
+                this.resultados_notas[i]['id_nota'] = <any>res_notas[0]['Id'];
+              }
+            },
+            (error_notas: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error_notas.status + '',
+                text: this.translate.instant('ERROR.' + error_notas.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+  }
+}
+
 mostarNota(index: number) {
   if ( (this.resultados_notas[index]['nota'] <= 5.0) && (this.resultados_notas[index]['nota'] >= 1.0) ) {
     this.resultados_notas[index]['modificado'] = true;
-    // console.info(this.resultados_notas);
-    // console.info(index);
   } else {
     this.resultados_notas[index]['nota'] = null;
     Swal({
@@ -142,8 +156,8 @@ GuardarNota() {
     .then((willDelete) => {
       if (willDelete.value) {
         for (let i = 0; i < this.resultados_notas.length; i++) {
-          if (this.resultados_notas[i]['modificado']) {
-            console.info(this.resultados_notas[i]);
+          // el siguiente bloque de codigo crea las notas por primera vez
+          if (   (this.resultados_notas[i]['modificado']) && (!this.resultados_notas[i]['GetNota'])  ) {
             const nota = {
               NotasIdioma : {
                 Id : this.resultados_notas[i]['Id'],
@@ -151,12 +165,10 @@ GuardarNota() {
               Porcentaje: 100,
               ValorNota: this.resultados_notas[i]['nota'],
             }
-            console.info(nota);
         this.idiomaService.post('valor_nota', nota)
         .subscribe(res => {
         if (res !== null) {
           this.resultados_notas = <any>res;
-          console.info(this.resultados_notas);
           this.CargarPersonas();
         }
         },
@@ -169,7 +181,34 @@ GuardarNota() {
           });
           });
         }
+        // el siguiente bloque de codigo con el if hace un put a las notas
+        if (   (this.resultados_notas[i]['modificado']) && (this.resultados_notas[i]['GetNota'])  ) {
+          const nota = {
+            Id: this.resultados_notas[i]['id_nota'],
+            NotasIdioma : {
+              Id : this.resultados_notas[i]['Id'],
+            },
+            Porcentaje: 100,
+            ValorNota: this.resultados_notas[i]['nota'],
+          }
+          this.idiomaService.put('valor_nota', nota)
+          .subscribe(res => {
+          if (res !== null) {
+            this.resultados_notas = <any>res;
+            this.CargarPersonas();
+          }
+          },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+            });
       }
+      }
+      this.Filtrar();
       }
     });
 }
