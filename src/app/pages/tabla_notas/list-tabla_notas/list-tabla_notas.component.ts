@@ -113,8 +113,65 @@ CargarPersonas() {
   }
 }
 
-mostarNota() {
-  console.info(this.resultados_notas)
+mostarNota(index: number) {
+  if ( (this.resultados_notas[index]['nota'] <= 5.0) && (this.resultados_notas[index]['nota'] >= 1.0) ) {
+    this.resultados_notas[index]['modificado'] = true;
+    // console.info(this.resultados_notas);
+    // console.info(index);
+  } else {
+    this.resultados_notas[index]['nota'] = null;
+    Swal({
+      type: 'error',
+      title: this.translate.instant('GLOBAL.error'),
+      text: `Ingrese una nota entre 1.0 y 5.0`,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    });
+  }
+}
+
+GuardarNota() {
+  const opt: any = {
+    title:  this.translate.instant('GLOBAL.crear'),
+    text: this.translate.instant('Guardar Nota'),
+    icon: 'warning',
+    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    dangerMode: true,
+    showCancelButton: true,
+  };
+  Swal(opt)
+    .then((willDelete) => {
+      if (willDelete.value) {
+        for (let i = 0; i < this.resultados_notas.length; i++) {
+          if (this.resultados_notas[i]['modificado']) {
+            console.info(this.resultados_notas[i]);
+            const nota = {
+              NotasIdioma : {
+                Id : this.resultados_notas[i]['Id'],
+              },
+              Porcentaje: 100,
+              ValorNota: this.resultados_notas[i]['nota'],
+            }
+            console.info(nota);
+        this.idiomaService.post('valor_nota', nota)
+        .subscribe(res => {
+        if (res !== null) {
+          this.resultados_notas = <any>res;
+          console.info(this.resultados_notas);
+          this.CargarPersonas();
+        }
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+          });
+        }
+      }
+      }
+    });
 }
 
   public loadLists() {
