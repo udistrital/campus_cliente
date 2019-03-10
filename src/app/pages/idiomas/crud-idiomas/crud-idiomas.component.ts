@@ -188,7 +188,7 @@ export class CrudIdiomasComponent implements OnInit {
           this.info_idioma = <InfoIdioma>infoIdioma;
           this.idiomaService.put('conocimiento_idioma', this.info_idioma)
             .subscribe(res => {
-              this.updateCampoNota(this.info_idioma);
+              // this.updateCampoNota(this.info_idioma);
               this.eventChange.emit(true);
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.idioma') + ' ' +
@@ -224,6 +224,7 @@ export class CrudIdiomasComponent implements OnInit {
         if (willDelete.value) {
           this.info_idioma = <InfoIdioma>infoIdioma;
           this.info_idioma.Persona = this.users.getEnte();
+          this.info_idioma.Periodo = this.periodo.Id;
           this.idiomaService.post('conocimiento_idioma', this.info_idioma)
             .subscribe(res => {
               this.info_idioma = <InfoIdioma>res;
@@ -231,7 +232,7 @@ export class CrudIdiomasComponent implements OnInit {
               this.showToast('info', this.translate.instant('GLOBAL.crear'),
               this.translate.instant('GLOBAL.idioma') + ' ' +
               this.translate.instant('GLOBAL.confirmarCrear'));
-              this.createCampoNota(this.info_idioma);
+              // this.createCampoNota(this.info_idioma);
             },
             (error: HttpErrorResponse) => {
               Swal({
@@ -259,67 +260,6 @@ export class CrudIdiomasComponent implements OnInit {
       this.result.emit(event);
     }
   }
-
-  createCampoNota(infoIdioma) {
-    const InfIdioma = <InfoIdioma>infoIdioma;
-    const CampoNotasIdioma = {};
-    CampoNotasIdioma['Idioma'] = InfIdioma.Idioma.Id;
-    CampoNotasIdioma['Persona'] = InfIdioma.Persona;
-    CampoNotasIdioma['Periodo'] = this.periodo.Id;
-    this.idiomaService.post('notas_idioma', CampoNotasIdioma)
-            .subscribe(res_nota => {
-              const r = <any>res_nota;
-              if (res_nota !== null && r.Type !== 'error') {
-                console.info('se creo campo de notas idioma');
-              }
-            },
-            (error: HttpErrorResponse) => {
-              Swal({
-                type: 'error',
-                title: error.status + '',
-                text: this.translate.instant('ERROR.' + error.status),
-                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-              });
-            });
-    }
-  updateCampoNota(infoIdioma) {
-    const InfIdioma = <InfoIdioma>infoIdioma;
-    console.info(InfIdioma);
-    const CampoNotasIdioma = {};
-    CampoNotasIdioma['Idioma'] = InfIdioma.Idioma.Id;
-    CampoNotasIdioma['Persona'] = InfIdioma.Persona;
-    console.info(CampoNotasIdioma);
-    this.idiomaService.get(`notas_idioma/?query=Persona:${InfIdioma.Persona},Idioma:${this.idioma}`)
-        .subscribe(res_carga => {
-          if (res_carga !== null) {
-          CampoNotasIdioma['Id'] = <any>res_carga[0]['Id']
-          this.idiomaService.put('notas_idioma', CampoNotasIdioma)
-                  .subscribe(res_nota => {
-                    const r = <any>res_nota;
-                    if (res_nota !== null && r.Type !== 'error') {
-                      console.info('se actualizo campo de notas idioma');
-                    }
-                  },
-                  (error_nota: HttpErrorResponse) => {
-                    Swal({
-                      type: 'error',
-                      title: error_nota.status + '',
-                      text: this.translate.instant('ERROR.' + error_nota.status),
-                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                    });
-                  });
-          }
-        },
-        (error_carga: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error_carga.status + '',
-            text: this.translate.instant('ERROR.' + error_carga.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        });
-
-    }
 
   CargarPeriodo(): void {
     this.admisionesService.get('periodo_academico/?query=Activo:true&sortby=Id&order=desc&limit=1')

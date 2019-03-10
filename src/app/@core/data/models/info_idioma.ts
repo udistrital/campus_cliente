@@ -12,4 +12,5 @@ export class InfoIdioma {
   NivelHabla: NivelIdioma;
   NivelLee: NivelIdioma;
   ClasificacionNivelIdioma: ClasificacionNivelIdioma;
+  Periodo: number;
 }
