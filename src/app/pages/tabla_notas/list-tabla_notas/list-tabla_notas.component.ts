@@ -45,7 +45,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   Filtrar() {
     if ( (this.selectedValueIdioma !== undefined && this.selectedValueIdioma !== 0 )
     && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0 ) ) {
-      this.BusquedaDatos(`notas_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']}`);
+      this.BusquedaDatos(`conocimiento_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']},Nativo:false`);
     }
   }
 
@@ -111,7 +111,7 @@ CargarPersonas() {
 
 CargarNotas() {
   for (let i = 0; i < this.resultados_notas.length; i++) {
-    this.idiomaService.get(`valor_nota/?query=NotasIdioma:${this.resultados_notas[i]['Id']}`)
+    this.idiomaService.get(`valor_nota/?query=ConocimientoIdioma:${this.resultados_notas[i]['Id']}`)
             .subscribe(res_notas => {
               if (res_notas !== null) {
                 this.resultados_notas[i]['GetNota'] = <any>res_notas[0]['ValorNota'];
@@ -130,14 +130,14 @@ CargarNotas() {
 }
 
 mostarNota(index: number) {
-  if ( (this.resultados_notas[index]['nota'] <= 5.0) && (this.resultados_notas[index]['nota'] >= 1.0) ) {
+  if ( (this.resultados_notas[index]['nota'] <= 100) && (this.resultados_notas[index]['nota'] >= 0) ) {
     this.resultados_notas[index]['modificado'] = true;
   } else {
     this.resultados_notas[index]['nota'] = null;
     Swal({
       type: 'error',
       title: this.translate.instant('GLOBAL.error'),
-      text: `Ingrese una nota entre 1.0 y 5.0`,
+      text: `Ingrese una nota entre 0 y 100`,
       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
     });
   }
@@ -159,10 +159,9 @@ GuardarNota() {
           // el siguiente bloque de codigo crea las notas por primera vez
           if (   (this.resultados_notas[i]['modificado']) && (!this.resultados_notas[i]['GetNota'])  ) {
             const nota = {
-              NotasIdioma : {
+              ConocimientoIdioma : {
                 Id : this.resultados_notas[i]['Id'],
               },
-              Porcentaje: 100,
               ValorNota: this.resultados_notas[i]['nota'],
             }
         this.idiomaService.post('valor_nota', nota)
@@ -185,7 +184,7 @@ GuardarNota() {
         if (   (this.resultados_notas[i]['modificado']) && (this.resultados_notas[i]['GetNota'])  ) {
           const nota = {
             Id: this.resultados_notas[i]['id_nota'],
-            NotasIdioma : {
+            ConocimientoIdioma : {
               Id : this.resultados_notas[i]['Id'],
             },
             Porcentaje: 100,

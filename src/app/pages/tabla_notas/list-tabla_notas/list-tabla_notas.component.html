@@ -69,11 +69,11 @@
                                                     <td> 
                                                             <mat-form-field appearance="outline" style="width: 10%;" *ngIf="resultado['GetNota']">
                                                               <mat-label> {{resultado['GetNota']}} </mat-label>
-                                                              <input matInput placeholder="" [(ngModel)]="resultado['nota']" (ngModelChange)="mostarNota(i)" type="number" min="1.0" max="5.0">
+                                                              <input matInput placeholder="" [(ngModel)]="resultado['nota']" (ngModelChange)="mostarNota(i)" type="number" min="0" max="100">
                                                             </mat-form-field>
                                                             <mat-form-field appearance="outline" style="width: 10%;" *ngIf="!resultado['GetNota']">
                                                               <mat-label> Nota </mat-label>
-                                                              <input matInput placeholder="" [(ngModel)]="resultado['nota']" (ngModelChange)="mostarNota(i)" type="number" min="1.0" max="5.0">
+                                                              <input matInput placeholder="" [(ngModel)]="resultado['nota']" (ngModelChange)="mostarNota(i)" type="number" min="0" max="100">
                                                             </mat-form-field>
                                                     </td>
                                                     <!-- <td>Otto</td>

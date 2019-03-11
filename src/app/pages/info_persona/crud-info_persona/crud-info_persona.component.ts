@@ -105,7 +105,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   public loadAdmision(): void {
     // if (this.admision_id !== undefined && this.admision_id !== 0) {
     console.info (this.info_persona_id)
-      this.admisionesService.get('admision/?query=Aspirante:' + this.info_persona_id + ',periodo:1')
+      this.admisionesService.get(`admision/?query=Aspirante:${this.info_persona_id}`)
         .subscribe(res => {
           if (res !== null) {
             this.info_admision = res[0];
