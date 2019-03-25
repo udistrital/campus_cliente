@@ -57,7 +57,7 @@
                         <nb-card-header>{{ 'GLOBAL.experiencia_laboral' | translate }}</nb-card-header>
                         <nb-card-body class="icon-form">
                             <i class="fa fa-briefcase fa-5x"></i>
-                            <p class="percentage">{{percentage_expe}} %</p>
+                            <!-- <p class="percentage">{{percentage_expe}} %</p> -->
                         </nb-card-body>
                     </nb-card>
                 </div>
@@ -78,7 +78,8 @@
                 <blockquote class="blockquote ">
                     <li>{{ 'GLOBAL.aviso_progreso' | translate}}</li>
                 </blockquote>
-                <button class="btn btn-success pull-right" disabled>{{ 'GLOBAL.inscribirse' | translate }}</button>
+                <button class="btn btn-success pull-right" >{{ 'GLOBAL.inscribirse' | translate }}</button>
+                <!-- <button class="btn btn-success pull-right" disabled>{{ 'GLOBAL.inscribirse' | translate }}</button> -->
             </div>
         </nb-card-body>
     </nb-card>
@@ -184,7 +185,7 @@
         <nb-card-body>
             <div class="row">
                 <div class="col-md-11">
-                    <ngb-progressbar showValue="true" type="success" [value]="percentage_expe" [animated]="true" [height]="'15px'"></ngb-progressbar>
+                    <!-- <ngb-progressbar showValue="true" type="success" [value]="percentage_expe" [animated]="true" [height]="'15px'"></ngb-progressbar> -->
                 </div>
                 <div class="col-md-1" align="right">
                     <button class="btn btn-danger btn-icon input-group-text btn-tn" (click)="show_profile=false; show_info=false; show_acad=false; show_expe=false; show_proy=false; show_prod=false">X</button>
