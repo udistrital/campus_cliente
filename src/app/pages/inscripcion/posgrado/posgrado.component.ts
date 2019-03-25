@@ -8,7 +8,7 @@ import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
-import * as jspdf from 'jspdf';
+import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 // import Swal from 'sweetalert2';
 // import { Router } from '@angular/router';
@@ -28,7 +28,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   nForms: number;
   percentageTotal: number = 0;
   percentage_info: number = 0;
-  percentage_acad: number = 0;
+  percentage_acad: number = 100;
   // percentage_expe: number = 0;
   percentage_proy: number = 0;
   // percentage_prod: number = 0;
@@ -285,15 +285,20 @@ export class PosgradoComponent implements OnInit, OnChanges {
     window.localStorage.setItem('programa', this.selectedValue.Id);
   }
 
+  Inscribirse() {
+    console.info('inscribirse');
+    this.captureScreen();
+  }
+
   public captureScreen() {
-    const data = document.getElementById('contentToConvert');
+    const data = document.getElementById('demo-capture');
     html2canvas(data).then(canvas => {
       const imgWidth = 208;
       // const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       // const heightLeft = imgHeight;
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4');
+      const pdf = new jsPDF('p', 'mm', 'a4');
       const position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
       pdf.save('MYPdf.pdf');
