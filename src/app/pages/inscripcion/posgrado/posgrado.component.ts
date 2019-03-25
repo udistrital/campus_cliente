@@ -2,6 +2,7 @@ import { Component, OnInit , OnChanges} from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from './../../../@core/utils/implicit_autentication.service';
 import { PersonaService } from '../../../@core/data/persona.service';
+import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
@@ -23,6 +24,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   info_persona_id: number;
   info_ente_id: number;
   info_info_persona: any;
+  datos_persona: any;
   step = 0;
   cambioTab = 0;
   nForms: number;
@@ -54,6 +56,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   constructor(
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
+    private campusMidService: CampusMidService,
     private translate: TranslateService,
   //  private router: Router,
     private admisionesService: AdmisionesService,
@@ -287,7 +290,28 @@ export class PosgradoComponent implements OnInit, OnChanges {
 
   Inscribirse() {
     console.info('inscribirse');
-    this.captureScreen();
+    // this.captureScreen();
+    this.DatosMidPersona();
+  }
+
+  DatosMidPersona() {
+    this.campusMidService.get(`persona/ConsultaPersona/?id=${this.info_ente_id}`)
+        .subscribe(res => {
+          const r = <any>res;
+          if (res !== null && r.Type !== 'error') {
+            this.datos_persona = r;
+            console.info(this.datos_persona);
+            this.captureScreen();
+          }
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
   }
 
   public captureScreen() {
@@ -299,9 +323,16 @@ export class PosgradoComponent implements OnInit, OnChanges {
       // const heightLeft = imgHeight;
       const contentDataURL = canvas.toDataURL('image/png');
       const pdf = new jsPDF('p', 'mm', 'a4');
-      const position = 0;
+      const position = 60;
+      pdf.setFontSize(20);
+      pdf.text(`Comprobante de Inscripcion`, 50, 15);
+      pdf.setFontSize(10);
+      pdf.text(`Nombres: ${this.datos_persona['PrimerNombre']} ${this.datos_persona['SegundoNombre']}`, 10, 35);
+      pdf.text(`Apellidos: ${this.datos_persona['PrimerApellido']} ${this.datos_persona['SegundoApellido']}`, 10, 40);
+      pdf.text(`${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 10, 45);
+      pdf.text(`Imagen de la plataforma : `, 10, 55);
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf');
+      pdf.save('ComprobanteCampus.pdf');
     });
   }
 }
