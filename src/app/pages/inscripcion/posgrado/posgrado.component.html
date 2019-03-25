@@ -78,8 +78,8 @@
                 <blockquote class="blockquote ">
                     <li>{{ 'GLOBAL.aviso_progreso' | translate}}</li>
                 </blockquote>
-                <button class="btn btn-success pull-right" >{{ 'GLOBAL.inscribirse' | translate }}</button>
-                <!-- <button class="btn btn-success pull-right" disabled>{{ 'GLOBAL.inscribirse' | translate }}</button> -->
+                <button *ngIf="percentageTotal == 100" class="btn btn-success pull-right" >{{ 'GLOBAL.inscribirse' | translate }}</button>
+                <button *ngIf="percentageTotal !== 100" class="btn btn-success pull-right" disabled>{{ 'GLOBAL.inscribirse' | translate }}</button>
             </div>
         </nb-card-body>
     </nb-card>
