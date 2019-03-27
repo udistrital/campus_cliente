@@ -2,16 +2,16 @@ import { Component, OnInit , OnChanges} from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from './../../../@core/utils/implicit_autentication.service';
 import { PersonaService } from '../../../@core/data/persona.service';
+import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Admision } from '../../../@core/data/models/admision';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
-import * as jspdf from 'jspdf';
+import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
-// import Swal from 'sweetalert2';
-// import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-posgrado',
@@ -23,6 +23,8 @@ export class PosgradoComponent implements OnInit, OnChanges {
   info_persona_id: number;
   info_ente_id: number;
   info_info_persona: any;
+  datos_persona: any;
+  admision: Admision;
   step = 0;
   cambioTab = 0;
   nForms: number;
@@ -31,6 +33,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   percentage_expe: number = 0;
   percentage_proy: number = 0;
   // percentage_prod: number = 0;
+  percentage_total: number = 0;
   percentage_tab_info = [];
   percentage_tab_expe = [];
   percentage_tab_acad = [];
@@ -54,7 +57,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
     private autenticacion: ImplicitAutenticationService,
     private personaService: PersonaService,
     private translate: TranslateService,
-  //  private router: Router,
+    private campusMidService: CampusMidService,
     private admisionesService: AdmisionesService,
     private programaService: ProgramaAcademicoService) {
     this.translate = translate;
@@ -62,37 +65,41 @@ export class PosgradoComponent implements OnInit, OnChanges {
     });
     this.getInfoPersonaId();
     this.loadInfoPostgrados();
-    // if (this.autenticacion.live()) {
-    //  this.loadInfoPostgrados();
-    // }else {
-    //  Swal({type: 'error', text: ' No hay sesión abierta'});
-    //  this.router.navigate(['/']);
-    // }
   }
 
   setPercentage_info(number, tab) {
     this.percentage_tab_info[tab] = (number * 100) / 3;
     this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
+    this.setPercentage_total();
   }
 
   setPercentage_acad(number, tab) {
-    this.percentage_tab_info[tab] = (number * 100) / 1;
-    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
+    this.percentage_tab_acad[tab] = (number * 100) / 2;
+    this.percentage_acad = Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad));
+    this.setPercentage_total();
   }
 
   setPercentage_expe(number, tab) {
-    this.percentage_tab_info[tab] = (number * 100) / 1;
-    this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
+    this.percentage_tab_expe[tab] = (number * 100) / 2;
+    this.percentage_expe = Math.round(UtilidadesService.getSumArray(this.percentage_tab_expe));
+    this.setPercentage_total();
   }
+
   setPercentage_proy(number, tab) {
     this.percentage_tab_proy[tab] = (number * 100) / 1;
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
-}
+  }
 
   // setPercentage_prod(number, tab) {
   //   this.percentage_tab_prod[tab] = (number * 100) / 1;
   //   this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
   // }
+
+  setPercentage_total() {
+    this.percentage_total = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info)) / 5;
+    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad)) / 5;
+    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_expe)) / 5;
+  }
 
   traerInfoPersona(event, tab) {
     this.setPercentage_info(event, tab);
@@ -275,18 +282,68 @@ export class PosgradoComponent implements OnInit, OnChanges {
     window.localStorage.setItem('programa', this.selectedValue.Id);
   }
 
+  Inscribirse() {
+    this.DatosMidPersona();
+  }
+
+  DatosMidPersona() {
+    this.campusMidService.get(`persona/ConsultaPersona/?id=${this.info_ente_id}`)
+        .subscribe(res => {
+          const r = <any>res;
+          if (res !== null && r.Type !== 'error') {
+            this.datos_persona = r;
+            this.admision.EstadoAdmision.Id = 2;
+            this.UpdateEstadoAdmision();
+          }
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+  }
+
+  UpdateEstadoAdmision() {
+    this.admisionesService.put('admision', this.admision, this.admision.Id)
+          .subscribe(res_ad => {
+            const r_ad = <any>res_ad;
+          if (res_ad !== null && r_ad.Type !== 'error') {
+            this.captureScreen();
+          }
+          },
+          (error_ad: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error_ad.status + '',
+              text: this.translate.instant('ERROR.' + error_ad.status),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+  }
+
   public captureScreen() {
-    const data = document.getElementById('contentToConvert');
+    const data = document.getElementById('demo-capture');
     html2canvas(data).then(canvas => {
       const imgWidth = 208;
       // const pageHeight = 295;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       // const heightLeft = imgHeight;
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jspdf('p', 'mm', 'a4');
-      const position = 0;
+      const pdf = new jsPDF('p', 'mm', 'letter');
+      const position = 60;
+      pdf.setFontSize(20);
+      pdf.text(`Comprobante de Inscripcion`, 50, 15);
+      pdf.setFontSize(10);
+      pdf.text(`Nombres: ${this.datos_persona['PrimerNombre']} ${this.datos_persona['SegundoNombre']}`, 10, 35);
+      pdf.text(`Apellidos: ${this.datos_persona['PrimerApellido']} ${this.datos_persona['SegundoApellido']}`, 10, 40);
+      pdf.text(`${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 10, 45);
+      pdf.text(`Imagen de la plataforma : `, 10, 55);
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('MYPdf.pdf');
+      const nombre_archivo = `${this.datos_persona['PrimerNombre']}_${this.datos_persona['NumeroDocumento']}`;
+      pdf.save(`${nombre_archivo}.pdf`);
     });
   }
 }
