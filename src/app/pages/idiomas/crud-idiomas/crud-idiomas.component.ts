@@ -267,7 +267,6 @@ export class CrudIdiomasComponent implements OnInit {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.periodo = <PeriodoAcademico>res[0]; // se carga el periodo academico activo mas reciente
-          console.info(this.periodo);
         }
       },
       (error: HttpErrorResponse) => {

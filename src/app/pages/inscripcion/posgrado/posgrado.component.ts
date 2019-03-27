@@ -32,7 +32,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   nForms: number;
   percentageTotal: number = 0;
   percentage_info: number = 0;
-  percentage_acad: number = 100;
+  percentage_acad: number = 0;
   // percentage_expe: number = 0;
   percentage_proy: number = 0;
   // percentage_prod: number = 0;
@@ -77,7 +77,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   setPercentage_info(number, tab) {
-    this.percentage_tab_info[tab] = (number * 100) / 1; // (number * 100) / 3;
+    this.percentage_tab_info[tab] = (number * 100) / 2; // (number * 100) / 3; se coloco el 2 ya que solo parecen 2 tabs
     this.percentage_info = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info));
     this.totalPercentage();
   }
@@ -123,7 +123,6 @@ export class PosgradoComponent implements OnInit, OnChanges {
         const r_2 = <any>res_2;
         if (res_2 !== null && r_2.Type !== 'error') {
           this.admision = <Admision>r_2[0];
-          console.info(this.admision);
           this.selectedValue = res[res_2[0].ProgramaAcademico - 1];
         }
       },
@@ -291,8 +290,6 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   Inscribirse() {
-    console.info('inscribirse');
-    // this.captureScreen();
     this.DatosMidPersona();
   }
 
@@ -302,9 +299,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
           const r = <any>res;
           if (res !== null && r.Type !== 'error') {
             this.datos_persona = r;
-            console.info(this.datos_persona);
             this.admision.EstadoAdmision.Id = 2;
-            console.info(this.admision);
             this.UpdateEstadoAdmision();
           }
         },
@@ -319,12 +314,10 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   UpdateEstadoAdmision() {
-    console.info('entra a update')
     this.admisionesService.put('admision', this.admision, this.admision.Id)
           .subscribe(res_ad => {
             const r_ad = <any>res_ad;
           if (res_ad !== null && r_ad.Type !== 'error') {
-            console.info(res_ad);
             this.captureScreen();
           }
           },
