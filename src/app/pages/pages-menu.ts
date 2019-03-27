@@ -34,4 +34,30 @@ export const MENU_ITEMS: MenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Tabla Notas',
+    icon: 'nb-compose',
+    link: '/pages/tabla_notas',
+    key: 'tabla_notas',
+    children: [
+      {
+        title: 'Lista Tabla Notas',
+        link: '/pages/tabla_notas/list-tabla_notas',
+        key: 'lista_tabla_notas',
+      },
+    ],
+  },
+  {
+    title: 'Comprobante',
+    icon: 'nb-compose',
+    link: '/pages/comprobante',
+    key: 'comprobante',
+    children: [
+      {
+        title: 'Descarga',
+        link: '/pages/comprobante/descarga',
+        key: 'descarga',
+      },
+    ],
+  },
 ]

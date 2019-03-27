@@ -51,7 +51,6 @@ export class CrudTipoProyectoComponent implements OnInit {
     this.translate.use(language);
   }
 
-
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formTipoProyecto.campos.length; index++) {
       const element = this.formTipoProyecto.campos[index];
@@ -61,7 +60,6 @@ export class CrudTipoProyectoComponent implements OnInit {
     }
     return 0;
   }
-
 
   public loadTipoProyecto(): void {
     if (this.tipo_proyecto_id !== undefined && this.tipo_proyecto_id !== 0) {
@@ -78,7 +76,6 @@ export class CrudTipoProyectoComponent implements OnInit {
   }
 
   updateTipoProyecto(tipoProyecto: any): void {
-
     const opt: any = {
       title: 'Update?',
       text: 'Update TipoProyecto!',

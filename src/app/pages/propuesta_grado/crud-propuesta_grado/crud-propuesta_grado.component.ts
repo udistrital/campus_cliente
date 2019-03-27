@@ -80,7 +80,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.translate.use(language);
   }
 
-
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formPropuestaGrado.campos.length; index++) {
       const element = this.formPropuestaGrado.campos[index];
@@ -114,7 +113,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
           }
         });
   }
-
 
   public loadPropuestaGrado(): void {
     if (this.prop_id !== undefined && this.prop_id !== 0 &&
@@ -163,7 +161,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   updatePropuestaGrado(propuestaGrado: any): void {
-
     const opt: any = {
       title: this.translate.instant('GLOBAL.actualizar'),
       text: this.translate.instant('GLOBAL.actualizar') + '?',

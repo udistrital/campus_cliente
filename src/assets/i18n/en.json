@@ -29,6 +29,10 @@
             "inscripcion": "Inscription",
             "inscripcion_posgrado": "Postgraduate"
         },
+        "tabla_notas": {
+          "tabla_notas": "Language Notes",
+          "lista_tabla_notas": "List of notes"
+        },
         "formacion_academica": {
             "formacion_academica": "Academic training",
             "lista_formacion_academica": "Academic training list",
@@ -467,6 +471,7 @@
         "inscrito": "He's been enrolled in the academic period:",
         "periodo_academico": "Academic Period",
         "filtrar": "Filter",
-        "Limpiar": "Clean"
+        "Limpiar": "Clean",
+        "nota": "Note"
     }
 }

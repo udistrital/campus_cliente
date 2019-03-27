@@ -29,6 +29,10 @@
             "inscripcion": "Inscripción",
             "inscripcion_posgrado": "Posgrado"
         },
+        "tabla_notas": {
+          "tabla_notas": "Notas de Idioma",
+          "lista_tabla_notas": "Listado de notas"
+        },
         "formacion_academica": {
             "formacion_academica": "Formación académica",
             "lista_formacion_academica": "Listado de formación académica",
@@ -465,6 +469,7 @@
         "inscrito": "Ha sido inscrito al periodo academico:",
         "periodo_academico": "Periodo Academico",
         "filtrar": "Filtrar",
-        "Limpiar": "Limpiar"
+        "Limpiar": "Limpiar",
+        "nota": "Nota"
     }
 }

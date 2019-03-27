@@ -21,12 +21,20 @@ const routes: Routes = [{
       loadChildren: './admision/admision.module#AdmisionModule',
     },
     {
+      path: 'comprobante',
+      loadChildren: './comprobante/comprobante.module#ComprobanteModule',
+    },
+    {
       path: 'notificacion',
       loadChildren: './notificacion/notificacion.module#NotificacionModule',
     },
     {
       path: 'propuesta_grado',
       loadChildren: './propuesta_grado/propuesta_grado.module#PropuestaGradoModule',
+    },
+    {
+      path: 'tabla_notas',
+      loadChildren: './tabla_notas/tabla_notas.module#TablaNotasModule',
     },
     // {
     //   path: 'libro',

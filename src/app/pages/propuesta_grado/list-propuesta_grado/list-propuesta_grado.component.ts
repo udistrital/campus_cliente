@@ -142,7 +142,6 @@ export class ListPropuestaGradoComponent implements OnInit {
     };
     Swal(opt)
     .then((willDelete) => {
-
       if (willDelete.value) {
         this.admisionesService.delete('propuesta/', event.data).subscribe(res => {
           if (res !== null) {
@@ -172,7 +171,6 @@ export class ListPropuestaGradoComponent implements OnInit {
       this.cambiotab = !this.cambiotab;
     }
   }
-
 
   itemselec(event): void {
     // console.log("afssaf");

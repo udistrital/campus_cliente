@@ -107,7 +107,6 @@ export class ListTipoProyectoComponent implements OnInit {
     };
     Swal(opt)
     .then((willDelete) => {
-
       if (willDelete.value) {
         this.admisionesService.delete('tipo_proyecto/', event.data).subscribe(res => {
           if (res !== null) {
