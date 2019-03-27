@@ -7,6 +7,7 @@ import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { Admision } from '../../../@core/data/models/admision';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import * as jsPDF from 'jspdf';
@@ -25,6 +26,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   info_ente_id: number;
   info_info_persona: any;
   datos_persona: any;
+  admision: Admision;
   step = 0;
   cambioTab = 0;
   nForms: number;
@@ -103,8 +105,6 @@ export class PosgradoComponent implements OnInit, OnChanges {
 
   totalPercentage() {
     this.percentageTotal = (this.percentage_info + this.percentage_acad + this.percentage_proy) / 3;
-    console.info(`total es = ${this.percentage_info} + ${this.percentage_acad} + ${this.percentage_proy}
-    = ${this.percentageTotal}`);
   }
 
   traerInfoPersona(event, tab) {
@@ -122,6 +122,8 @@ export class PosgradoComponent implements OnInit, OnChanges {
       .subscribe(res_2 => {
         const r_2 = <any>res_2;
         if (res_2 !== null && r_2.Type !== 'error') {
+          this.admision = <Admision>r_2[0];
+          console.info(this.admision);
           this.selectedValue = res[res_2[0].ProgramaAcademico - 1];
         }
       },
@@ -301,7 +303,9 @@ export class PosgradoComponent implements OnInit, OnChanges {
           if (res !== null && r.Type !== 'error') {
             this.datos_persona = r;
             console.info(this.datos_persona);
-            this.captureScreen();
+            this.admision.EstadoAdmision.Id = 2;
+            console.info(this.admision);
+            this.UpdateEstadoAdmision();
           }
         },
         (error: HttpErrorResponse) => {
@@ -312,6 +316,26 @@ export class PosgradoComponent implements OnInit, OnChanges {
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });
+  }
+
+  UpdateEstadoAdmision() {
+    console.info('entra a update')
+    this.admisionesService.put('admision', this.admision, this.admision.Id)
+          .subscribe(res_ad => {
+            const r_ad = <any>res_ad;
+          if (res_ad !== null && r_ad.Type !== 'error') {
+            console.info(res_ad);
+            this.captureScreen();
+          }
+          },
+          (error_ad: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error_ad.status + '',
+              text: this.translate.instant('ERROR.' + error_ad.status),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
   }
 
   public captureScreen() {
@@ -332,7 +356,8 @@ export class PosgradoComponent implements OnInit, OnChanges {
       pdf.text(`${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 10, 45);
       pdf.text(`Imagen de la plataforma : `, 10, 55);
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight);
-      pdf.save('ComprobanteCampus.pdf');
+      const nombre_archivo = `${this.datos_persona['PrimerNombre']}_${this.datos_persona['NumeroDocumento']}`;
+      pdf.save(`${nombre_archivo}.pdf`);
     });
   }
 }
