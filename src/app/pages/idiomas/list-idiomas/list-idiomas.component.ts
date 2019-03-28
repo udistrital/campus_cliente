@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { IdiomaService } from '../../../@core/data/idioma.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -19,6 +19,11 @@ export class ListIdiomasComponent implements OnInit {
     config: ToasterConfig;
     settings: any;
     source: LocalDataSource = new LocalDataSource();
+
+    @Output() eventChange = new EventEmitter();
+    @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+    percentage: number;
 
     constructor(private translate: TranslateService,
         private idiomaService: IdiomaService,
@@ -92,6 +97,7 @@ export class ListIdiomasComponent implements OnInit {
         .subscribe(res => {
             if (res !== null) {
                 const data = <Array<any>>res;
+                this.getPercentage(1);
                 this.source.load(data);
             }
         },
@@ -123,6 +129,12 @@ export class ListIdiomasComponent implements OnInit {
       if (event) {
         this.loadData();
       }
+    }
+
+    getPercentage(event) {
+        this.percentage = event;
+        console.info(JSON.stringify(this.percentage));
+        this.result.emit(this.percentage);
     }
 
     onDelete(event): void {

@@ -14,7 +14,7 @@ import { InfoPersonaModule } from '../info_persona/info_persona.module';
 import { InfoCaracteristicaModule } from '../info_caracteristica/info_caracteristica.module';
 import { ImplicitAutenticationService } from './../../@core/utils/implicit_autentication.service';
 import { NuxeoService } from './../../@core/utils/nuxeo.service';
-import {MatExpansionModule} from '@angular/material/expansion';
+import { MatExpansionModule } from '@angular/material/expansion';
 import { UtilidadesService } from '../../@core/utils/utilidades.service';
 import { IdiomasModule } from '../idiomas/idiomas.module';
 import { ListIdiomasComponent } from '../idiomas/list-idiomas/list-idiomas.component';

@@ -210,5 +210,4 @@ export class ListInfoCaracteristicaComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

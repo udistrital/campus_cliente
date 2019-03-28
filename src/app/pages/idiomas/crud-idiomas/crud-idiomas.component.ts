@@ -143,13 +143,14 @@ export class CrudIdiomasComponent implements OnInit {
   }
 
   public loadInfoIdioma(): void {
-    console.info(this.info_idioma_id);
+    this.loading = true;
     if (this.info_idioma_id !== undefined && this.info_idioma_id !== 0 &&
       this.info_idioma_id.toString() !== '') {
       this.idiomaService.get('conocimiento_idioma/?query=id:' + this.info_idioma_id)
         .subscribe(res => {
           if (res !== null) {
             this.info_idioma = <InfoIdioma>res[0];
+            this.loading = false;
             this.idioma = this.info_idioma.Idioma.Id;
           }
       },
@@ -164,6 +165,7 @@ export class CrudIdiomasComponent implements OnInit {
     } else {
       this.info_idioma = undefined;
       this.clean = !this.clean;
+      this.loading = false;
     }
   }
 
@@ -181,9 +183,11 @@ export class CrudIdiomasComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
+          this.loading = true;
           this.info_idioma = <InfoIdioma>infoIdioma;
           this.idiomaService.put('conocimiento_idioma', this.info_idioma)
             .subscribe(res => {
+              this.loading = false;
               this.eventChange.emit(true);
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.idioma') + ' ' +
@@ -241,6 +245,11 @@ export class CrudIdiomasComponent implements OnInit {
 
   ngOnInit() {
     this.loadInfoIdioma();
+  }
+
+  setPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   validarForm(event) {

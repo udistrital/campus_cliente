@@ -1,5 +1,5 @@
 import { OrganizacionService } from './../../../@core/data/organizacion.service';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -28,6 +28,11 @@ export class ListExperienciaLaboralComponent implements OnInit {
     this.eid = ente_id;
     this.loadData();
   }
+
+  @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+  percentage: number;
 
   constructor(private translate: TranslateService, private toasterService: ToasterService,
     private experienciaService: ExperienciaService, private organizacionService: OrganizacionService) {
@@ -62,6 +67,12 @@ export class ListExperienciaLaboralComponent implements OnInit {
             return value.Nombre;
           },
         },
+        Cargo: {
+          title: this.translate.instant('GLOBAL.cargo'),
+          valuePrepareFunction: (value) => {
+            return value.Nombre;
+          },
+        },
         FechaInicio: {
           title: this.translate.instant('GLOBAL.fecha_inicio'),
           valuePrepareFunction: (value) => {
@@ -72,12 +83,6 @@ export class ListExperienciaLaboralComponent implements OnInit {
           title: this.translate.instant('GLOBAL.fecha_fin'),
           valuePrepareFunction: (value) => {
             return value;
-          },
-        },
-        Cargo: {
-          title: this.translate.instant('GLOBAL.cargo'),
-          valuePrepareFunction: (value) => {
-            return value.Nombre;
           },
         },
       },
@@ -97,6 +102,7 @@ export class ListExperienciaLaboralComponent implements OnInit {
             if (res !== null) {
               element.Organizacion = r[0];
             }
+            this.getPercentage(1);
             this.source.load(this.data);
           },
           (error: HttpErrorResponse) => {
@@ -123,7 +129,7 @@ export class ListExperienciaLaboralComponent implements OnInit {
   ngOnInit() {
   }
 
-    onEdit(event): void {
+  onEdit(event): void {
     this.uid = event.data.Id;
     this.crud = true;
   }
@@ -144,8 +150,13 @@ export class ListExperienciaLaboralComponent implements OnInit {
   onChange(event) {
     if (event) {
       this.loadData();
-      this.cambiotab = !this.cambiotab;
     }
+  }
+
+  getPercentage(event) {
+    this.percentage = event;
+    console.info(JSON.stringify(this.percentage));
+    this.result.emit(this.percentage);
   }
 
   itemselec(event): void {

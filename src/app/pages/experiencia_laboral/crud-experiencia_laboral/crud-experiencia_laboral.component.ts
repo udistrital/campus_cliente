@@ -45,6 +45,8 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   formInfoExperienciaLaboral: any;
   regInfoExperienciaLaboral: any;
   clean: boolean;
+  percentage: number;
+  loading: boolean;
 
   constructor(
     private translate: TranslateService,
@@ -66,6 +68,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     this.loadOptionsCargo();
     this.loadOptionsTipoDedicacion();
     this.loadOptionsTipoVinculacion();
+    this.loading = false;
   }
 
   construirForm() {
@@ -94,6 +97,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   public loadInfoExperienciaLaboral(): void {
+    this.loading = true;
     if (this.info_experiencia_laboral_id !== undefined &&
       this.info_experiencia_laboral_id !== 0 &&
       this.info_experiencia_laboral_id.toString() !== '') {
@@ -116,6 +120,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                       this.info_experiencia_laboral.Organizacion + ',TipoIdentificacion.Id:5').subscribe(r => {
                         if (r !== null) {
                           this.searchOrganizacion(r[0].NumeroIdentificacion);
+                          this.loading = false;
                         }
                       },
                       (error: HttpErrorResponse) => {
@@ -167,6 +172,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     } else {
       this.info_experiencia_laboral = undefined
       this.clean = !this.clean;
+      this.loading = false;
     }
   }
 
@@ -184,6 +190,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
+          this.loading = true;
           this.info_experiencia_laboral = <any>infoExperienciaLaboral;
           this.info_experiencia_laboral.Id = this.info_experiencia_laboral_id;
           console.info(this.info_experiencia_laboral);
@@ -202,11 +209,13 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                       if (documentos_actualizados['Soporte'] !== undefined) {
                         this.info_experiencia_laboral.Soporte = documentos_actualizados['Soporte'].url + '';
                       }
-                      this.loadInfoExperienciaLaboral();
+                      this.loading = false;
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                         this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
+                        this.info_experiencia_laboral_id = 0;
+                        this.loadInfoExperienciaLaboral();
                     },
                     (error: HttpErrorResponse) => {
                       Swal({
@@ -229,11 +238,13 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           } else {
             this.experienciaService.put('experiencia_laboral', this.info_experiencia_laboral)
               .subscribe(res => {
-                this.loadInfoExperienciaLaboral();
+                this.loading = false;
                 this.eventChange.emit(true);
                 this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                   this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
+                  this.info_experiencia_laboral_id = 0;
+                  this.loadInfoExperienciaLaboral();
               },
               (error: HttpErrorResponse) => {
                 Swal({
@@ -432,13 +443,14 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
+          this.loading = true;
           this.info_experiencia_laboral = <any>infoExperienciaLaboral;
           const files = [];
           console.info(this.info_experiencia_laboral);
           if (this.info_experiencia_laboral.Soporte.file !== undefined) {
             files.push({
               nombre: this.info_experiencia_laboral.Cargo.Nombre, key: 'Soporte',
-              file: this.info_experiencia_laboral.Soporte.file, IdDocumento: 3,
+              file: this.info_experiencia_laboral.Soporte.file, IdDocumento: 4,
             });
           }
           this.nuxeoService.getDocumentos$(files, this.documentoService)
@@ -449,10 +461,11 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                   this.info_experiencia_laboral.Soporte = filesUp['Soporte'].Id;
                 }
                 console.info(this.info_experiencia_laboral);
-                this.campusMidService.post('experiencia_laboral', this.info_experiencia_laboral)
+                this.campusMidService.post('experiencia_laboral/', this.info_experiencia_laboral)
                   .subscribe(res => {
                     const r = <any>res;
                     if (r !== null && r.Type !== 'error') {
+                      this.loading = false;
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
@@ -483,7 +496,8 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   addUbicacionOrganizacion(ubicacion: any): void {
-    this.campusMidService.post('persona/RegistrarUbicaciones', ubicacion).subscribe(res => {
+    this.campusMidService.post('persona/RegistrarUbicaciones', ubicacion)
+    .subscribe(res => {
       const r = res as any;
       if (res !== null && r.Type === 'error') {
         this.showToast('error', 'error',
@@ -536,8 +550,14 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     this.loadInfoExperienciaLaboral();
   }
 
+  setPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
+  }
+
   validarForm(event) {
     if (event.valid) {
+      console.info(JSON.stringify(event.data.InfoExperienciaLaboral));
       const experiencia = {
         Persona: this.ente_id,
         Actividades: event.data.InfoExperienciaLaboral.Actividades,

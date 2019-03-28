@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IdiomasComponent } from './idiomas.component';
 import { ListIdiomasComponent } from './list-idiomas/list-idiomas.component';
 import { CrudIdiomasComponent } from './crud-idiomas/crud-idiomas.component';
+import { ViewIdiomasComponent } from './view-idiomas/view-idiomas.component';
 // import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
@@ -15,6 +16,10 @@ const routes: Routes = [{
  }, {
     path: 'crud-idiomas',
     component: CrudIdiomasComponent,
+    // canActivate: [AuthGuard],
+  }, {
+    path: 'view-idiomas',
+    component: ViewIdiomasComponent,
     // canActivate: [AuthGuard],
   }],
 }];
@@ -33,5 +38,6 @@ export class IdiomasRoutingModule { }
 export const routedComponents = [
     IdiomasComponent,
     ListIdiomasComponent,
+    ViewIdiomasComponent,
     CrudIdiomasComponent,
 ];

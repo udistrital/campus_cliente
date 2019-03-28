@@ -57,8 +57,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     this.listService.findPais();
     this.listService.findGrupoEtnico();
     this.listService.findTipoDiscapacidad();
-    this.loadLists()
-
+    this.loadLists();
    }
 
   construirForm() {

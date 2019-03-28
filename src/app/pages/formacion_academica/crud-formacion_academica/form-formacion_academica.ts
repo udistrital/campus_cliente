@@ -7,7 +7,7 @@ export let FORM_FORMACION_ACADEMICA = {
   campos: [
     {
       etiqueta: 'input',
-      claseGrid: 'col-lg-5 col-md-6 col-sm-11 col-xs-11',
+      claseGrid: 'col-lg-6 col-md-5 col-sm-12 col-xs-12',
       nombre: 'NombreUniversidad',
       label_i18n: 'nombre_universidad',
       placeholder_i18n: 'nombre_universidad',
@@ -26,14 +26,14 @@ export let FORM_FORMACION_ACADEMICA = {
     },
     {
       etiqueta: 'button',
-      claseGrid: 'col-2',
+      claseGrid: 'col-lg-1 col-md-1 col-sm-1 col-xs-1',
       nombre: 'BusquedaBoton',
       claseBoton: 'btn btn-primary btn-sm',
       icono: 'fa fa-search',
     },
     {
       etiqueta: 'select',
-      claseGrid: 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
+      claseGrid: 'col-lg-3 col-md-6 col-sm-12 col-xs-12',
       nombre: 'Pais',
       label_i18n: 'pais_universidad',
       placeholder_i18n: 'pais_universidad',
@@ -45,7 +45,7 @@ export let FORM_FORMACION_ACADEMICA = {
     },
     {
       etiqueta: 'input',
-      claseGrid: 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
+      claseGrid: 'col-lg-3 col-md-6 col-sm-12 col-xs-12',
       nombre: 'Direccion',
       label_i18n: 'direccion_universidad',
       placeholder_i18n: 'direccion_universidad',
@@ -55,7 +55,7 @@ export let FORM_FORMACION_ACADEMICA = {
     },
     {
       etiqueta: 'input',
-      claseGrid: 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
+      claseGrid: 'col-lg-3 col-md-6 col-sm-12 col-xs-12',
       nombre: 'Correo',
       label_i18n: 'correo_universidad',
       placeholder_i18n: 'correo_universidad',
@@ -65,7 +65,7 @@ export let FORM_FORMACION_ACADEMICA = {
     },
     {
       etiqueta: 'input',
-      claseGrid: 'col-lg-4 col-md-4 col-sm-12 col-xs-12',
+      claseGrid: 'col-lg-3 col-md-6 col-sm-12 col-xs-12',
       nombre: 'Telefono',
       label_i18n: 'telefono_universidad',
       placeholder_i18n: 'telefono_universidad',
@@ -74,26 +74,8 @@ export let FORM_FORMACION_ACADEMICA = {
       tipo: 'text',
     },
     {
-      etiqueta: 'mat-date',
-      claseGrid: 'col-lg-2 col-md-2 col-sm-12 col-xs-12',
-      nombre: 'FechaInicio',
-      label_i18n: 'fecha_inicio',
-      placeholder_i18n: 'fecha_inicio',
-      requerido: true,
-      tipo: 'date',
-    },
-    {
-      etiqueta: 'mat-date',
-      claseGrid: 'col-lg-2 col-md-2 col-sm-12 col-xs-12',
-      nombre: 'FechaFinalizacion',
-      label_i18n: 'fecha_fin',
-      placeholder_i18n: 'fecha_fin',
-      requerido: true,
-      tipo: 'date',
-    },
-    {
       etiqueta: 'select',
-      claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
+      claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
       nombre: 'ProgramaAcademico',
       label_i18n: 'programa_academico',
       placeholder_i18n: 'programa_academico',
@@ -102,6 +84,25 @@ export let FORM_FORMACION_ACADEMICA = {
       key: 'Nombre',
       opciones: [],
     },
+    {
+      etiqueta: 'mat-date',
+      claseGrid: 'col-lg-3 col-md-3 col-sm-12 col-xs-12',
+      nombre: 'FechaInicio',
+      label_i18n: 'fecha_inicio',
+      placeholder_i18n: 'fecha_inicio',
+      requerido: true,
+      tipo: 'date',
+    },
+    {
+      etiqueta: 'mat-date',
+      claseGrid: 'col-lg-3 col-md-3 col-sm-12 col-xs-12',
+      nombre: 'FechaFinalizacion',
+      label_i18n: 'fecha_fin',
+      placeholder_i18n: 'fecha_fin',
+      requerido: true,
+      tipo: 'date',
+    },
+
     {
       etiqueta: 'input',
       claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',

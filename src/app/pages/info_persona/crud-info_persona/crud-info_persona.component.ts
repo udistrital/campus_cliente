@@ -116,7 +116,8 @@ export class CrudInfoPersonaComponent implements OnInit {
                 }
           }
         });
-   }
+  }
+
   public loadInfoPersona(): void {
     this.loading = true;
     if (this.info_persona_id !== undefined && this.info_persona_id !== 0 &&
