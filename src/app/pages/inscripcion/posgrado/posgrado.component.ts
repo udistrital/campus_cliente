@@ -28,25 +28,30 @@ export class PosgradoComponent implements OnInit, OnChanges {
   step = 0;
   cambioTab = 0;
   nForms: number;
+
   percentage_info: number = 0;
   percentage_acad: number = 0;
   percentage_expe: number = 0;
   percentage_proy: number = 0;
-  // percentage_prod: number = 0;
+  percentage_prod: number = 0;
   percentage_total: number = 0;
+
   total: boolean = false;
+
   percentage_tab_info = [];
   percentage_tab_expe = [];
   percentage_tab_acad = [];
   percentage_tab_proy = [];
-  // percentage_tab_prod = [];
+  percentage_tab_prod = [];
   posgrados = [];
+
   show_info = false;
   show_profile = false;
   show_acad = false;
   show_expe = false;
   show_proy = false;
   show_prod = false;
+
   info_contacto: boolean;
   info_persona: boolean;
   info_caracteristica: boolean;
@@ -90,12 +95,14 @@ export class PosgradoComponent implements OnInit, OnChanges {
   setPercentage_proy(number, tab) {
     this.percentage_tab_proy[tab] = (number * 100) / 1;
     this.percentage_proy = Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy));
+    this.setPercentage_total();
   }
 
-  // setPercentage_prod(number, tab) {
-  //   this.percentage_tab_prod[tab] = (number * 100) / 1;
-  //   this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
-  // }
+  setPercentage_prod(number, tab) {
+    this.percentage_tab_prod[tab] = (number * 100) / 1;
+    this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
+    this.setPercentage_total();
+  }
 
   setPercentage_total() {
     this.percentage_total = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info)) / 2;
