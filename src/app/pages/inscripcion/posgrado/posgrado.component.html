@@ -1,4 +1,4 @@
-<div class="col-md-12 col-lg-12 ">
+<div class="col-md-12 col-lg-12 " id="demo-capture">
     <nb-card [hidden]="show_profile || show_info || show_acad || show_expe || show_proy || show_prod">
         <nb-card-header>
             <!-- select -->
@@ -78,7 +78,7 @@
               <blockquote class="blockquote ">
                 <li>{{ 'GLOBAL.aviso_progreso' | translate}}</li>
               </blockquote>
-              <button class="btn btn-success pull-right" disabled>{{ 'GLOBAL.inscribirse' | translate }}</button>
+              <button class="btn btn-success pull-right" [disabled]="total" (click)="Inscribirse()">{{ 'GLOBAL.inscribirse' | translate }}</button>
             </div>
           </nb-card-body>
         </nb-card>
@@ -144,12 +144,10 @@
             <nb-tab tabTitle="{{ 'GLOBAL.experiencia_laboral' | translate }}">
               <ngx-list-experiencia-laboral ente_id="{{info_ente_id}}" (result)="setPercentage_expe($event,0)"></ngx-list-experiencia-laboral>
             </nb-tab>
-            <nb-tab tabTitle="{{ 'GLOBAL.publicaciones' | translate }}">
-            </nb-tab>
           </nb-tabset>
         </nb-card-body>
       </nb-card>
-    
+
     <nb-card [hidden]="!show_prod">
         <nb-card-body>
             <div class="row">

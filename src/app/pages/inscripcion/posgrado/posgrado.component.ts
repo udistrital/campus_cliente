@@ -34,6 +34,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   percentage_proy: number = 0;
   // percentage_prod: number = 0;
   percentage_total: number = 0;
+  total: boolean = false;
   percentage_tab_info = [];
   percentage_tab_expe = [];
   percentage_tab_acad = [];
@@ -65,6 +66,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
     });
     this.getInfoPersonaId();
     this.loadInfoPostgrados();
+    this.total = true;
   }
 
   setPercentage_info(number, tab) {
@@ -80,7 +82,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   setPercentage_expe(number, tab) {
-    this.percentage_tab_expe[tab] = (number * 100) / 2;
+    this.percentage_tab_expe[tab] = (number * 100) / 1;
     this.percentage_expe = Math.round(UtilidadesService.getSumArray(this.percentage_tab_expe));
     this.setPercentage_total();
   }
@@ -96,9 +98,11 @@ export class PosgradoComponent implements OnInit, OnChanges {
   // }
 
   setPercentage_total() {
-    this.percentage_total = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info)) / 5;
-    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad)) / 5;
-    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_expe)) / 5;
+    this.percentage_total = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info)) / 2;
+    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad)) / 2;
+    if (this.percentage_total >= 100) {
+      this.total = false;
+    }
   }
 
   traerInfoPersona(event, tab) {
@@ -287,6 +291,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   DatosMidPersona() {
+    this.captureScreen();
     this.campusMidService.get(`persona/ConsultaPersona/?id=${this.info_ente_id}`)
         .subscribe(res => {
           const r = <any>res;
