@@ -6,7 +6,9 @@ import { IAppState } from '../../../@core/store/app.state';
 import { Store } from '@ngrx/store';
 import { ListService } from '../../../@core/store/services/list.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { PersonaService } from '../../../@core/data/persona.service';
+import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import * as XLSX from 'ts-xlsx';
 
 @Component({
@@ -24,8 +26,10 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   file: File;
 
   constructor(private translate: TranslateService,
+     private admisionesService: AdmisionesService,
+     private programaService: ProgramaAcademicoService,
+     private campusMidService: CampusMidService,
      private idiomaService: IdiomaService,
-     private personaService: PersonaService,
      private store: Store < IAppState > ,
     private listService: ListService) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {;
@@ -90,11 +94,11 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
 CargarPersonas() {
   for (let index = 0; index < this.resultados_notas.length; index++) {
     const datos = this.resultados_notas[index];
-    this.personaService.get(`persona?query=Ente:${datos.Persona}`)
+    this.campusMidService.get(`persona/ConsultaPersona/?id=${datos.Persona}`)
             .subscribe(res_aspirante => {
               if (res_aspirante !== null) {
-                const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
-                ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
+                const aspirante = `${res_aspirante['PrimerApellido']} ${res_aspirante['SegundoApellido']}
+                ${res_aspirante['PrimerNombre']} ${res_aspirante['SegundoNombre']}`
                 this.resultados_notas[index].Persona = aspirante;
                 // if ( index === (this.resultados_notas.length - 1 ) ) {
                 //   // this.source.load(data);
