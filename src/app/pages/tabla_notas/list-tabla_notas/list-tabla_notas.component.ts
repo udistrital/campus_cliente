@@ -7,6 +7,7 @@ import { Store } from '@ngrx/store';
 import { ListService } from '../../../@core/store/services/list.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PersonaService } from '../../../@core/data/persona.service';
+import * as XLSX from 'ts-xlsx';
 
 @Component({
   selector: 'ngx-list-tabla-notas',
@@ -19,6 +20,8 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   selectedValueIdioma: any;
   selectedValuePeriodo: any;
   resultados_notas = [];
+  arrayBuffer: any;
+  file: File;
 
   constructor(private translate: TranslateService,
      private idiomaService: IdiomaService,
@@ -210,6 +213,26 @@ GuardarNota() {
       this.Filtrar();
       }
     });
+}
+
+incomingfile(event) {
+  this.file = event.target.files[0];
+}
+
+Upload() {
+  const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+        this.arrayBuffer = fileReader.result;
+        const data = new Uint8Array(this.arrayBuffer);
+        const arr = new Array();
+        for ( let i = 0; i !== data.length; ++i ) arr[i] = String.fromCharCode(data[i]);
+        const bstr = arr.join('');
+        const workbook = XLSX.read(bstr, {type: 'binary'});
+        const first_sheet_name = workbook.SheetNames[0];
+        const worksheet = workbook.Sheets[first_sheet_name];
+        console.info(XLSX.utils.sheet_to_json(worksheet, {raw: true}));
+    }
+    fileReader.readAsArrayBuffer(this.file);
 }
 
   public loadLists() {
