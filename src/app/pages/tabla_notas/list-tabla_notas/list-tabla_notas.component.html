@@ -118,16 +118,16 @@
                           <div class="row m-1">
                             <mat-form-field style="width: 70%;">
                               <mat-label>{{ 'GLOBAL.programa_academico' | translate }} :</mat-label>
-                              <mat-select [(ngModel)]="selectedValueIdioma">
+                              <mat-select [(ngModel)]="selectedValueprograma">
                                 <mat-option>--Seleccionar--</mat-option>
-                                <mat-option *ngFor="let item of idioma[0]" [value]="item">
-                                  {{item.Nombre}}
+                                <mat-option *ngFor="let prog of posgrados" [value]="prog">
+                                  {{prog.Nombre}}
                                 </mat-option>
                               </mat-select>
                             </mat-form-field>
                           </div>
                           <div class="col">
-                            <button class="btn btn-info btn-sm" style="width: 50%;" (click)="Filtrar()"><i
+                            <button class="btn btn-info btn-sm" style="width: 50%;" (click)="Filtrar_entrevista()"><i
                                 class="nb-search"></i> {{ 'GLOBAL.filtrar' | translate }}</button>
                           </div>
                         </div>

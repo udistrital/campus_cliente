@@ -15,28 +15,32 @@ import * as XLSX from 'ts-xlsx';
   selector: 'ngx-list-tabla-notas',
   templateUrl: './list-tabla_notas.component.html',
   styleUrls: ['./list-tabla_notas.component.scss'],
-  })
+})
 export class ListTablaNotasComponent implements OnInit, OnChanges {
   idioma: any = [];
   periodo = [];
+  posgrados = [];
   selectedValueIdioma: any;
   selectedValuePeriodo: any;
+  selectedValueprograma: any;
   resultados_notas = [];
   arrayBuffer: any;
   file: File;
 
   constructor(private translate: TranslateService,
-     private admisionesService: AdmisionesService,
-     private programaService: ProgramaAcademicoService,
-     private campusMidService: CampusMidService,
-     private idiomaService: IdiomaService,
-     private store: Store < IAppState > ,
+    private admisionesService: AdmisionesService,
+    private programaService: ProgramaAcademicoService,
+    private campusMidService: CampusMidService,
+    private idiomaService: IdiomaService,
+    private store: Store<IAppState>,
     private listService: ListService) {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {;
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      ;
     });
     this.listService.findPeriodoAcademico();
     this.listService.findIdioma();
     this.loadLists();
+    this.loadPrograma();
   }
 
   useLanguage(language: string) {
@@ -50,9 +54,18 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   }
 
   Filtrar() {
-    if ( (this.selectedValueIdioma !== undefined && this.selectedValueIdioma !== 0 )
-    && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0 ) ) {
-      this.BusquedaDatos(`conocimiento_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']},Nativo:false`);
+    if ((this.selectedValueIdioma !== undefined && this.selectedValueIdioma !== 0)
+      && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
+      this.BusquedaDatos_idioma(`conocimiento_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']},Nativo:false`);
+    }
+  }
+
+  Filtrar_entrevista() {
+    // console.info('entro entrevista');
+    if ((this.selectedValueprograma !== undefined && this.selectedValueprograma !== 0)
+      && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
+      // console.info(`conocimiento_idioma/?query=Idioma:${this.selectedValueprograma['Id']},Periodo:${this.selectedValuePeriodo['Id']}`);
+      this.BusquedaDatos_entrevista(`admision/?query=ProgramaAcademico:${this.selectedValueprograma['Id']},Periodo:${this.selectedValuePeriodo['Id']}`);
     }
   }
 
@@ -61,10 +74,12 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
     this.selectedValueIdioma = 0;
     this.selectedValuePeriodo = '--Seleccionar--'
     this.selectedValuePeriodo = 0;
+    this.selectedValueprograma = '--Seleccionar--'
+    this.selectedValueprograma = 0;
     this.resultados_notas = [];
   }
 
-  BusquedaDatos(query) {
+  BusquedaDatos_idioma(query) {
     if (query) {
       this.idiomaService.get(query).subscribe(res => {
         if (res !== null) {
@@ -79,105 +94,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         }
-  },
-  (error: HttpErrorResponse) => {
-    Swal({
-      type: 'error',
-      title: error.status + '',
-      text: this.translate.instant('ERROR.' + error.status),
-      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-    });
-   });
-  }
-}
-
-CargarPersonas() {
-  for (let index = 0; index < this.resultados_notas.length; index++) {
-    const datos = this.resultados_notas[index];
-    this.campusMidService.get(`persona/ConsultaPersona/?id=${datos.Persona}`)
-            .subscribe(res_aspirante => {
-              if (res_aspirante !== null) {
-                const aspirante = `${res_aspirante['PrimerApellido']} ${res_aspirante['SegundoApellido']}
-                ${res_aspirante['PrimerNombre']} ${res_aspirante['SegundoNombre']}`
-                this.resultados_notas[index].Persona = aspirante;
-                // if ( index === (this.resultados_notas.length - 1 ) ) {
-                //   // this.source.load(data);
-                // }
-              }
-            },
-            (error_aspirante: HttpErrorResponse) => {
-              Swal({
-                type: 'error',
-                title: error_aspirante.status + '',
-                text: this.translate.instant('ERROR.' + error_aspirante.status),
-                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-              });
-            });
-  }
-}
-
-CargarNotas() {
-  for (let i = 0; i < this.resultados_notas.length; i++) {
-    this.idiomaService.get(`valor_nota/?query=ConocimientoIdioma:${this.resultados_notas[i]['Id']}`)
-            .subscribe(res_notas => {
-              if (res_notas !== null) {
-                this.resultados_notas[i]['GetNota'] = <any>res_notas[0]['ValorNota'];
-                this.resultados_notas[i]['id_nota'] = <any>res_notas[0]['Id'];
-              }
-            },
-            (error_notas: HttpErrorResponse) => {
-              Swal({
-                type: 'error',
-                title: error_notas.status + '',
-                text: this.translate.instant('ERROR.' + error_notas.status),
-                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-              });
-            });
-  }
-}
-
-mostarNota(index: number) {
-  if ( (this.resultados_notas[index]['nota'] <= 100) && (this.resultados_notas[index]['nota'] >= 0) ) {
-    this.resultados_notas[index]['modificado'] = true;
-  } else {
-    this.resultados_notas[index]['nota'] = null;
-    Swal({
-      type: 'error',
-      title: this.translate.instant('GLOBAL.error'),
-      text: `Ingrese una nota entre 0 y 100`,
-      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-    });
-  }
-}
-
-GuardarNota() {
-  const opt: any = {
-    title:  this.translate.instant('GLOBAL.crear'),
-    text: this.translate.instant('Guardar Nota'),
-    icon: 'warning',
-    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-    dangerMode: true,
-    showCancelButton: true,
-  };
-  Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        for (let i = 0; i < this.resultados_notas.length; i++) {
-          // el siguiente bloque de codigo crea las notas por primera vez
-          if (   (this.resultados_notas[i]['modificado']) && (!this.resultados_notas[i]['GetNota'])  ) {
-            const nota = {
-              ConocimientoIdioma : {
-                Id : this.resultados_notas[i]['Id'],
-              },
-              ValorNota: this.resultados_notas[i]['nota'],
-            }
-        this.idiomaService.post('valor_nota', nota)
-        .subscribe(res => {
-        if (res !== null) {
-          this.resultados_notas = <any>res;
-          this.CargarPersonas();
-        }
-        },
+      },
         (error: HttpErrorResponse) => {
           Swal({
             type: 'error',
@@ -185,59 +102,189 @@ GuardarNota() {
             text: this.translate.instant('ERROR.' + error.status),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
+        });
+    }
+  }
+
+  BusquedaDatos_entrevista(query) {
+    if (query) {
+      this.admisionesService.get(query).subscribe(res => {
+        if (res !== null) {
+          this.resultados_notas = <any>res;
+          this.CargarPersonas();
+          // this.CargarNotas();
+        } else {
+          Swal({
+            type: 'info',
+            title: this.translate.instant('GLOBAL.warning'),
+            text: `no se encontraron resultados`,
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         }
-        // el siguiente bloque de codigo con el if hace un put a las notas
-        if (   (this.resultados_notas[i]['modificado']) && (this.resultados_notas[i]['GetNota'])  ) {
-          const nota = {
-            Id: this.resultados_notas[i]['id_nota'],
-            ConocimientoIdioma : {
-              Id : this.resultados_notas[i]['Id'],
-            },
-            Porcentaje: 100,
-            ValorNota: this.resultados_notas[i]['nota'],
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+    }
+  }
+
+  CargarPersonas() {
+    for (let index = 0; index < this.resultados_notas.length; index++) {
+      const datos = this.resultados_notas[index];
+      if ((datos.Persona === null) || (datos.Persona === undefined)) {
+        datos.Persona = datos.Aspirante;
+      } else {
+        datos.Persona = datos.Persona;
+      }
+      this.campusMidService.get(`persona/ConsultaPersona/?id=${datos.Persona}`)
+        .subscribe(res_aspirante => {
+          if (res_aspirante !== null) {
+            const aspirante = `${res_aspirante['PrimerApellido']} ${res_aspirante['SegundoApellido']}
+                ${res_aspirante['PrimerNombre']} ${res_aspirante['SegundoNombre']}`
+            this.resultados_notas[index].Persona = aspirante;
+            // if ( index === (this.resultados_notas.length - 1 ) ) {
+            //   // this.source.load(data);
+            // }
           }
-          this.idiomaService.put('valor_nota', nota)
-          .subscribe(res => {
-          if (res !== null) {
-            this.resultados_notas = <any>res;
-            this.CargarPersonas();
-          }
-          },
-          (error: HttpErrorResponse) => {
+        },
+          (error_aspirante: HttpErrorResponse) => {
             Swal({
               type: 'error',
-              title: error.status + '',
-              text: this.translate.instant('ERROR.' + error.status),
+              title: error_aspirante.status + '',
+              text: this.translate.instant('ERROR.' + error_aspirante.status),
               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
+          });
+    }
+  }
+
+  CargarNotas() {
+    for (let i = 0; i < this.resultados_notas.length; i++) {
+      this.idiomaService.get(`valor_nota/?query=ConocimientoIdioma:${this.resultados_notas[i]['Id']}`)
+        .subscribe(res_notas => {
+          if (res_notas !== null) {
+            this.resultados_notas[i]['GetNota'] = <any>res_notas[0]['ValorNota'];
+            this.resultados_notas[i]['id_nota'] = <any>res_notas[0]['Id'];
+          }
+        },
+          (error_notas: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error_notas.status + '',
+              text: this.translate.instant('ERROR.' + error_notas.status),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
-      }
-      }
-      this.Filtrar();
-      }
-    });
-}
+          });
+    }
+  }
 
-incomingfile(event) {
-  this.file = event.target.files[0];
-}
+  mostarNota(index: number) {
+    if ((this.resultados_notas[index]['nota'] <= 100) && (this.resultados_notas[index]['nota'] >= 0)) {
+      this.resultados_notas[index]['modificado'] = true;
+    } else {
+      this.resultados_notas[index]['nota'] = null;
+      Swal({
+        type: 'error',
+        title: this.translate.instant('GLOBAL.error'),
+        text: `Ingrese una nota entre 0 y 100`,
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
+    }
+  }
 
-Upload() {
-  const fileReader = new FileReader();
+  GuardarNota() {
+    const opt: any = {
+      title: this.translate.instant('GLOBAL.crear'),
+      text: this.translate.instant('Guardar Nota'),
+      icon: 'warning',
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      dangerMode: true,
+      showCancelButton: true,
+    };
+    Swal(opt)
+      .then((willDelete) => {
+        if (willDelete.value) {
+          for (let i = 0; i < this.resultados_notas.length; i++) {
+            // el siguiente bloque de codigo crea las notas por primera vez
+            if ((this.resultados_notas[i]['modificado']) && (!this.resultados_notas[i]['GetNota'])) {
+              const nota = {
+                ConocimientoIdioma: {
+                  Id: this.resultados_notas[i]['Id'],
+                },
+                ValorNota: this.resultados_notas[i]['nota'],
+              }
+              this.idiomaService.post('valor_nota', nota)
+                .subscribe(res => {
+                  if (res !== null) {
+                    this.resultados_notas = <any>res;
+                    this.CargarPersonas();
+                  }
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
+            }
+            // el siguiente bloque de codigo con el if hace un put a las notas
+            if ((this.resultados_notas[i]['modificado']) && (this.resultados_notas[i]['GetNota'])) {
+              const nota = {
+                Id: this.resultados_notas[i]['id_nota'],
+                ConocimientoIdioma: {
+                  Id: this.resultados_notas[i]['Id'],
+                },
+                Porcentaje: 100,
+                ValorNota: this.resultados_notas[i]['nota'],
+              }
+              this.idiomaService.put('valor_nota', nota)
+                .subscribe(res => {
+                  if (res !== null) {
+                    this.resultados_notas = <any>res;
+                    this.CargarPersonas();
+                  }
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
+            }
+          }
+          this.Filtrar();
+        }
+      });
+  }
+
+  incomingfile(event) {
+    this.file = event.target.files[0];
+  }
+
+  Upload() {
+    const fileReader = new FileReader();
     fileReader.onload = (e) => {
-        this.arrayBuffer = fileReader.result;
-        const data = new Uint8Array(this.arrayBuffer);
-        const arr = new Array();
-        for ( let i = 0; i !== data.length; ++i ) arr[i] = String.fromCharCode(data[i]);
-        const bstr = arr.join('');
-        const workbook = XLSX.read(bstr, {type: 'binary'});
-        const first_sheet_name = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[first_sheet_name];
-        console.info(XLSX.utils.sheet_to_json(worksheet, {raw: true}));
+      this.arrayBuffer = fileReader.result;
+      const data = new Uint8Array(this.arrayBuffer);
+      const arr = new Array();
+      for (let i = 0; i !== data.length; ++i) arr[i] = String.fromCharCode(data[i]);
+      const bstr = arr.join('');
+      const workbook = XLSX.read(bstr, { type: 'binary' });
+      const first_sheet_name = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[first_sheet_name];
+      console.info(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
     }
     fileReader.readAsArrayBuffer(this.file);
-}
+  }
 
   public loadLists() {
     this.store.select((state) => state).subscribe(
@@ -246,6 +293,24 @@ Upload() {
         this.periodo[0] = list.listPeriodoAcademico[0];
       },
     );
+  }
+
+  loadPrograma() {
+    this.programaService.get('programa_academico/?limit=0')
+      .subscribe(res => {
+        const r = <any>res;
+        if (res !== null && r.Type !== 'error') {
+          this.posgrados = <any>res;
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
   }
 
 
