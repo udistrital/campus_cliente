@@ -26,6 +26,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   resultados_notas = [];
   arrayBuffer: any;
   file: File;
+  busqueda: boolean; // se usa en la seccion de subir las notas, para saber si es entrevista o idioma
 
   constructor(private translate: TranslateService,
     private admisionesService: AdmisionesService,
@@ -56,6 +57,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   Filtrar() {
     if ((this.selectedValueIdioma !== undefined && this.selectedValueIdioma !== 0)
       && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
+      this.busqueda = true;
       this.BusquedaDatos_idioma(`conocimiento_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']},Nativo:false`);
     }
   }
@@ -63,6 +65,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   Filtrar_entrevista() {
     if ((this.selectedValueprograma !== undefined && this.selectedValueprograma !== 0)
       && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
+      this.busqueda = false;
       this.BusquedaDatos_entrevista(`admision/?query=ProgramaAcademico:${this.selectedValueprograma['Id']},Periodo:${this.selectedValuePeriodo['Id']}`);
     }
   }
@@ -75,6 +78,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
     this.selectedValueprograma = '--Seleccionar--'
     this.selectedValueprograma = 0;
     this.resultados_notas = [];
+    this.busqueda = false;
   }
 
   BusquedaDatos_idioma(query) {
@@ -238,50 +242,108 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
                 },
                 ValorNota: this.resultados_notas[i]['nota'],
               }
-              this.idiomaService.post('valor_nota', nota)
-                .subscribe(res => {
-                  if (res !== null) {
-                    this.resultados_notas = <any>res;
-                    this.CargarPersonas();
-                  }
+              const nota_entre = {
+                Admision: {
+                  Id: this.resultados_notas[i]['Id'],
                 },
-                  (error: HttpErrorResponse) => {
-                    Swal({
-                      type: 'error',
-                      title: error.status + '',
-                      text: this.translate.instant('ERROR.' + error.status),
-                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                ValorNota: this.resultados_notas[i]['nota'],
+              }
+              if (this.busqueda === true) {
+                this.idiomaService.post('valor_nota', nota)
+                  .subscribe(res => {
+                    if (res !== null) {
+                      // this.resultados_notas = <any>res;
+                      // this.CargarPersonas();
+                      this.Filtrar();
+                    }
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
                     });
-                  });
+              } else {
+                this.admisionesService.post('nota_entrevista', nota_entre)
+                  .subscribe(res => {
+                    if (res !== null) {
+                      // this.resultados_notas = <any>res;
+                      // this.CargarPersonas();
+                      this.Filtrar_entrevista();
+                    }
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+              }
             }
             // el siguiente bloque de codigo con el if hace un put a las notas
             if ((this.resultados_notas[i]['modificado']) && (this.resultados_notas[i]['GetNota'])) {
               const nota = {
                 Id: this.resultados_notas[i]['id_nota'],
-                ConocimientoIdioma: {
+                Admision: {
                   Id: this.resultados_notas[i]['Id'],
                 },
                 Porcentaje: 100,
                 ValorNota: this.resultados_notas[i]['nota'],
               }
-              this.idiomaService.put('valor_nota', nota)
-                .subscribe(res => {
-                  if (res !== null) {
-                    this.resultados_notas = <any>res;
-                    this.CargarPersonas();
-                  }
+              const nota_entre = {
+                Id: this.resultados_notas[i]['id_nota'],
+                Admision: {
+                  Id: this.resultados_notas[i]['Id'],
                 },
-                  (error: HttpErrorResponse) => {
-                    Swal({
-                      type: 'error',
-                      title: error.status + '',
-                      text: this.translate.instant('ERROR.' + error.status),
-                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                ValorNota: this.resultados_notas[i]['nota'],
+              }
+              if (this.busqueda === true) {
+                this.idiomaService.put('valor_nota', nota)
+                  .subscribe(res => {
+                    if (res !== null) {
+                      // this.resultados_notas = <any>res;
+                      // this.CargarPersonas();
+                      this.Filtrar();
+                    }
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
                     });
-                  });
+              } else {
+                this.admisionesService.put('nota_entrevista', nota_entre, nota_entre['Id'])
+                  .subscribe(res => {
+                    if (res !== null) {
+                      // this.resultados_notas = <any>res;
+                      // this.CargarPersonas();
+                      this.Filtrar_entrevista();
+                    }
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+              }
             }
           }
-          this.Filtrar();
+          // this.ClearFiltro();
+          // if (this.busqueda === true) {
+          //   this.Filtrar();
+          // } else {
+          //   this.Filtrar_entrevista();
+          // }
         }
       });
   }
