@@ -27,6 +27,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
   arrayBuffer: any;
   file: File;
   busqueda: boolean; // se usa en la seccion de subir las notas, para saber si es entrevista o idioma
+  excel = [];
 
   constructor(private translate: TranslateService,
     private admisionesService: AdmisionesService,
@@ -58,6 +59,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
     if ((this.selectedValueIdioma !== undefined && this.selectedValueIdioma !== 0)
       && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
       this.busqueda = true;
+      this.excel = [];
       this.BusquedaDatos_idioma(`conocimiento_idioma/?query=Idioma:${this.selectedValueIdioma['Id']},Periodo:${this.selectedValuePeriodo['Id']},Nativo:false`);
     }
   }
@@ -66,6 +68,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
     if ((this.selectedValueprograma !== undefined && this.selectedValueprograma !== 0)
       && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
       this.busqueda = false;
+      this.excel = [];
       this.BusquedaDatos_entrevista(`admision/?query=ProgramaAcademico:${this.selectedValueprograma['Id']},Periodo:${this.selectedValuePeriodo['Id']}`);
     }
   }
@@ -79,6 +82,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
     this.selectedValueprograma = 0;
     this.resultados_notas = [];
     this.busqueda = false;
+    this.excel = [];
   }
 
   BusquedaDatos_idioma(query) {
@@ -288,7 +292,7 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
             if ((this.resultados_notas[i]['modificado']) && (this.resultados_notas[i]['GetNota'])) {
               const nota = {
                 Id: this.resultados_notas[i]['id_nota'],
-                Admision: {
+                ConocimientoIdioma: {
                   Id: this.resultados_notas[i]['Id'],
                 },
                 Porcentaje: 100,
@@ -363,9 +367,28 @@ export class ListTablaNotasComponent implements OnInit, OnChanges {
       const workbook = XLSX.read(bstr, { type: 'binary' });
       const first_sheet_name = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[first_sheet_name];
-      console.info(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      // console.info(XLSX.utils.sheet_to_json(worksheet, { raw: true }));
+      this.excel = XLSX.utils.sheet_to_json(worksheet, { raw: true })
+      console.info(this.excel);
+      this.AsignarNotasExcel();
     }
     fileReader.readAsArrayBuffer(this.file);
+  }
+
+  AsignarNotasExcel() {
+    for (let index = 0; index < this.excel.length; index++) {
+      const carga = this.excel[index];
+      console.info(carga);
+      for (let index_2 = 0; index_2 < this.resultados_notas.length; index_2++) {
+        const persona = this.resultados_notas[index_2];
+        // console.info(persona);
+        if (carga['Documento'].toString() === persona['NumeroDocumento']) {
+            console.info('son la misma persona')
+            this.resultados_notas[index_2]['nota'] = carga['Nota'];
+            this.mostarNota(index_2);
+        }
+      }
+    }
   }
 
   public loadLists() {
