@@ -22,7 +22,7 @@ const PAGES_COMPONENTS = [
     ThemeModule,
     DashboardModule,
     SharedModule,
-  ],
+  ],           
   declarations: [
     ...PAGES_COMPONENTS,
     DetalleAdmisionComponent,
