@@ -17,13 +17,9 @@ import { Titulacion } from '../data/models/titulacion';
 import { TipoIdentificacion } from '../data/models/tipo_identificacion';
 import { TipoProyecto } from '../data/models/tipo_proyecto';
 import { GrupoInvestigacion } from '../data/models/grupo_investigacion';
-<<<<<<< HEAD
 import { PeriodoAcademico } from '../data/models/periodo_academico';
 // import { TipoPublicacionLibro } from '../data/models/tipo_publicacion_libro';
 
-=======
-// import { TipoPublicacionLibro } from '../data/models/tipo_publicacion_libro';
->>>>>>> fe20e04a2f3af1c51a4d4ea874bcd63ed1954203
 export interface IAppState {
   listGenero: Genero[],
   listClasificacionNivelIdioma: ClasificacionNivelIdioma[],
