@@ -18,7 +18,7 @@ import { ViewInformacionContactoComponent } from './view-informacion_contacto/vi
   ],
   declarations: [
     ...routedComponents,
-],
+  ],
   providers: [
     UbicacionesService,
   ],

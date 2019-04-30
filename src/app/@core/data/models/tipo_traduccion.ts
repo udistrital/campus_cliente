@@ -1,4 +1,3 @@
-
 export class TipoTraduccion {
   Id: number;
   Nombre: string;

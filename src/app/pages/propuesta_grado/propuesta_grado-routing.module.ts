@@ -3,8 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PropuestaGradoComponent } from './propuesta_grado.component';
 import { ListPropuestaGradoComponent } from './list-propuesta_grado/list-propuesta_grado.component';
 import { CrudPropuestaGradoComponent } from './crud-propuesta_grado/crud-propuesta_grado.component';
-
-
+// import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -12,18 +11,20 @@ const routes: Routes = [{
   children: [{
     path: 'list-propuesta_grado',
     component: ListPropuestaGradoComponent,
+    // canActivate: [AuthGuard],
   }, {
     path: 'crud-propuesta_grado',
     component: CrudPropuestaGradoComponent,
+    // canActivate: [AuthGuard],
   }],
 }];
 
 @NgModule({
   imports: [
-      RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
   ],
   exports: [
-      RouterModule,
+    RouterModule,
   ],
 })
 

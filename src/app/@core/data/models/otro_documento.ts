@@ -1,4 +1,3 @@
-
 export class OtroDocumento {
   Persona: number;
   Titulo: string;

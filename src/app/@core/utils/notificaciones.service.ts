@@ -8,8 +8,6 @@ import { from } from 'rxjs';
 
 const CHAT_URL = GENERAL.ENTORNO.NOTIFICACION_SERVICE;
 
-
-
 @Injectable()
 export class NotificacionesService {
     public messages: Subject<any>;

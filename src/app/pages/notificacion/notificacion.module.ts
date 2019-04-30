@@ -6,7 +6,6 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { NotificacionesService } from '../../@core/utils/notificaciones.service';
 
-
 @NgModule({
   imports: [
     ThemeModule,

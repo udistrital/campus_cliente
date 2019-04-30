@@ -1,4 +1,3 @@
-
 export class MedioPublicacion {
   Id: number;
   Nombre: string;

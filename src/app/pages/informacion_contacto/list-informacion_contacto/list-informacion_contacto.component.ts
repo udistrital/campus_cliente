@@ -11,7 +11,7 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-list-informacion-contacto',
   templateUrl: './list-informacion_contacto.component.html',
   styleUrls: ['./list-informacion_contacto.component.scss'],
-  })
+})
 export class ListInformacionContactoComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
@@ -115,16 +115,16 @@ export class ListInformacionContactoComponent implements OnInit {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
-          }
+      }
     },
-    (error: HttpErrorResponse) => {
-      Swal({
-        type: 'error',
-        title: error.status + '',
-        text: this.translate.instant('ERROR.' + error.status),
-        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
       });
-    });
   }
 
   ngOnInit() {
@@ -152,26 +152,26 @@ export class ListInformacionContactoComponent implements OnInit {
       cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.ubicacionesService.delete('informacion_contacto/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
-            this.translate.instant('GLOBAL.informacion_contacto') + ' ' +
-            this.translate.instant('GLOBAL.confirmarEliminar'));
-          }
-        },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        });
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.ubicacionesService.delete('informacion_contacto/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.informacion_contacto') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
+            }
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+        }
+      });
   }
 
   activetab(): void {

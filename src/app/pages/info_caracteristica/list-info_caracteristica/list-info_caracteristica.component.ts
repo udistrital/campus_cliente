@@ -11,7 +11,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   selector: 'ngx-list-info-caracteristica',
   templateUrl: './list-info_caracteristica.component.html',
   styleUrls: ['./list-info_caracteristica.component.scss'],
-  })
+})
 export class ListInfoCaracteristicaComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
@@ -108,16 +108,16 @@ export class ListInfoCaracteristicaComponent implements OnInit {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
-          }
+      }
     },
-    (error: HttpErrorResponse) => {
-      Swal({
-        type: 'error',
-        title: error.status + '',
-        text: this.translate.instant('ERROR.' + error.status),
-        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
       });
-    });
   }
 
   ngOnInit() {
@@ -145,26 +145,26 @@ export class ListInfoCaracteristicaComponent implements OnInit {
       cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.personaService.delete('info_caracteristica/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
-            this.translate.instant('GLOBAL.info_caracteristica') + ' ' +
-            this.translate.instant('GLOBAL.confirmarEliminar'));
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.personaService.delete('info_caracteristica/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.info_caracteristica') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-        },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        });
-      }
-    });
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+        }
+      });
   }
 
   activetab(): void {
@@ -210,5 +210,4 @@ export class ListInfoCaracteristicaComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

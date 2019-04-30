@@ -51,9 +51,11 @@ export class DashboardComponent implements OnDestroy {
     default: CardSettings[];
     cosmic: CardSettings[];
     corporate: CardSettings[];
+    ud: CardSettings[];
   } = {
     default: this.commonStatusCardsSet,
     cosmic: this.commonStatusCardsSet,
+    ud: this.commonStatusCardsSet,
     corporate: [
       {
         ...this.lightCard,

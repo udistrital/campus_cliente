@@ -63,23 +63,36 @@ export class ViewInfoPersonaComponent implements OnInit {
           if (r !== null && r.Type !== 'error') {
             this.info_info_persona = <InfoPersona>res;
             const foto = [];
-            foto.push({Id: this.info_info_persona.Foto, key: 'Foto'});
+            foto.push({ Id: this.info_info_persona.Foto, key: 'Foto' });
             this.nuxeoService.getDocumentoById$(foto, this.documentoService)
               .subscribe(response => {
                 this.foto = this.cleanURL(response['Foto'] + '');
-              });
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.info_persona') + '|' +
+                      this.translate.instant('GLOBAL.soporte_documento'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           } else {
             this.info_info_persona = undefined;
           }
         },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.info_persona'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
     } else {
       this.info_info_persona = undefined
     }

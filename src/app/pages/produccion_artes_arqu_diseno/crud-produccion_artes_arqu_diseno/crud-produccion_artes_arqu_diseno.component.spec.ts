@@ -2,7 +2,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { CrudProduccionArtesArquDisenoComponent } from './crud-produccion_artes_arqu_diseno.component';
 
 describe('CrudProduccionArtesArquDisenoComponent', () => {
@@ -11,9 +10,9 @@ describe('CrudProduccionArtesArquDisenoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudProduccionArtesArquDisenoComponent ],
+      declarations: [CrudProduccionArtesArquDisenoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -42,7 +42,7 @@ export class CrudAdmisionComponent implements OnInit {
     this.loadOptionsEstadoAdmision();
     this.loadOptionsLineaInvestigacion();
     this.loadOptionsEnfasis();
-   }
+  }
 
   construirForm() {
     this.formAdmision.titulo = this.translate.instant('GLOBAL.admision');
@@ -59,13 +59,13 @@ export class CrudAdmisionComponent implements OnInit {
 
   loadOptionsEstadoAdmision(): void {
     let estadoAdmision: Array<any> = [];
-      this.admisionesService.get('estado_admision/?limit=0')
-        .subscribe(res => {
-          if (res !== null) {
-            estadoAdmision = <Array<EstadoAdmision>>res;
-          }
-          this.formAdmision.campos[ this.getIndexForm('EstadoAdmision') ].opciones = estadoAdmision;
-        },
+    this.admisionesService.get('estado_admision/?limit=0')
+      .subscribe(res => {
+        if (res !== null) {
+          estadoAdmision = <Array<EstadoAdmision>>res;
+        }
+        this.formAdmision.campos[this.getIndexForm('EstadoAdmision')].opciones = estadoAdmision;
+      },
         (error: HttpErrorResponse) => {
           Swal({
             type: 'error',
@@ -78,13 +78,13 @@ export class CrudAdmisionComponent implements OnInit {
 
   loadOptionsLineaInvestigacion(): void {
     let lineaInvestigacion: Array<any> = [];
-      this.admisionesService.get('linea_investigacion/?limit=0')
-        .subscribe(res => {
-          if (res !== null) {
-            lineaInvestigacion = <Array<LineaInvestigacion>>res;
-          }
-          this.formAdmision.campos[ this.getIndexForm('LineaInvestigacion') ].opciones = lineaInvestigacion;
-        },
+    this.admisionesService.get('linea_investigacion/?limit=0')
+      .subscribe(res => {
+        if (res !== null) {
+          lineaInvestigacion = <Array<LineaInvestigacion>>res;
+        }
+        this.formAdmision.campos[this.getIndexForm('LineaInvestigacion')].opciones = lineaInvestigacion;
+      },
         (error: HttpErrorResponse) => {
           Swal({
             type: 'error',
@@ -97,13 +97,13 @@ export class CrudAdmisionComponent implements OnInit {
 
   loadOptionsEnfasis(): void {
     let enfasis: Array<any> = [];
-      this.admisionesService.get('enfasis/?limit=0')
-        .subscribe(res => {
-          if (res !== null) {
-            enfasis = <Array<Enfasis>>res;
-          }
-          this.formAdmision.campos[ this.getIndexForm('Enfasis') ].opciones = enfasis;
-        },
+    this.admisionesService.get('enfasis/?limit=0')
+      .subscribe(res => {
+        if (res !== null) {
+          enfasis = <Array<Enfasis>>res;
+        }
+        this.formAdmision.campos[this.getIndexForm('Enfasis')].opciones = enfasis;
+      },
         (error: HttpErrorResponse) => {
           Swal({
             type: 'error',
@@ -132,15 +132,15 @@ export class CrudAdmisionComponent implements OnInit {
             this.info_admision = <Admision>res[0];
           }
         },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
-    } else  {
+    } else {
       this.info_admision = undefined;
       this.clean = !this.clean;
     }
@@ -158,27 +158,27 @@ export class CrudAdmisionComponent implements OnInit {
       cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.info_admision = <Admision>admision;
-        this.admisionesService.put('admision', this.info_admision, this.info_admision.Id)
-          .subscribe(res => {
-            this.loadAdmision();
-            this.eventChange.emit(true);
-            this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
-            this.translate.instant('GLOBAL.admision') + ' ' +
-            this.translate.instant('GLOBAL.confirmarActualizar'));
-          },
-          (error: HttpErrorResponse) => {
-            Swal({
-              type: 'error',
-              title: error.status + '',
-              text: this.translate.instant('ERROR.' + error.status),
-              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-            });
-          });
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.info_admision = <Admision>admision;
+          this.admisionesService.put('admision', this.info_admision, this.info_admision.Id)
+            .subscribe(res => {
+              this.loadAdmision();
+              this.eventChange.emit(true);
+              this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
+                this.translate.instant('GLOBAL.admision') + ' ' +
+                this.translate.instant('GLOBAL.confirmarActualizar'));
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+        }
+      });
   }
 
   createAdmision(admision: any): void {
@@ -193,27 +193,27 @@ export class CrudAdmisionComponent implements OnInit {
       cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.info_admision = <Admision>admision;
-        this.admisionesService.post('admision', this.info_admision)
-          .subscribe(res => {
-            this.info_admision = <Admision>res;
-            this.eventChange.emit(true);
-            this.showToast('info', this.translate.instant('GLOBAL.crear'),
-            this.translate.instant('GLOBAL.admision') + ' ' +
-            this.translate.instant('GLOBAL.confirmarCrear'));
-          },
-          (error: HttpErrorResponse) => {
-            Swal({
-              type: 'error',
-              title: error.status + '',
-              text: this.translate.instant('ERROR.' + error.status),
-              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-            });
-          });
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.info_admision = <Admision>admision;
+          this.admisionesService.post('admision', this.info_admision)
+            .subscribe(res => {
+              this.info_admision = <Admision>res;
+              this.eventChange.emit(true);
+              this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                this.translate.instant('GLOBAL.admision') + ' ' +
+                this.translate.instant('GLOBAL.confirmarCrear'));
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+        }
+      });
   }
 
   ngOnInit() {

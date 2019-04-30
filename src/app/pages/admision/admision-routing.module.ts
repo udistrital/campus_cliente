@@ -12,7 +12,7 @@ const routes: Routes = [{
     path: 'list-admision',
     component: ListAdmisionComponent,
     // canActivate: [AuthGuard],
-}, {
+  }, {
     path: 'crud-admision',
     component: CrudAdmisionComponent,
     // canActivate: [AuthGuard],
@@ -21,10 +21,10 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [
-      RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
   ],
   exports: [
-      RouterModule,
+    RouterModule,
   ],
 })
 

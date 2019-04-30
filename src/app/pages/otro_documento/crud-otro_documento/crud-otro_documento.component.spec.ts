@@ -2,7 +2,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { CrudOtroDocumentoComponent } from './crud-otro_documento.component';
 
 describe('CrudOtroDocumentoComponent', () => {
@@ -11,9 +10,9 @@ describe('CrudOtroDocumentoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudOtroDocumentoComponent ],
+      declarations: [CrudOtroDocumentoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -2,7 +2,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { ListProduccionArtesArquDisenoComponent } from './list-produccion_artes_arqu_diseno.component';
 
 describe('ListProduccionArtesArquDisenoComponent', () => {
@@ -11,9 +10,9 @@ describe('ListProduccionArtesArquDisenoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListProduccionArtesArquDisenoComponent ],
+      declarations: [ListProduccionArtesArquDisenoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

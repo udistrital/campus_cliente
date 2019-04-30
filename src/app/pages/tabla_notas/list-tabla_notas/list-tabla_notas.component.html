@@ -1,0 +1,124 @@
+<div class="col-md-12 col-lg-12">
+  <nb-card>
+    <nb-card-body>
+      <nb-tabset fullWidth>
+        <nb-tab tabTitle="{{ 'GLOBAL.lista' | translate }}">
+          <br />
+          <div class="col-md-12 col-lg-12 col-xl-12">
+            <div class="row m-1">
+              <div class="card-group col-12">
+                <div class="card col-12">
+                  <div class="row">
+                    <div class="container">
+                      <h3 class="display-5 col-12">Filtro</h3>
+                      <div class="row">
+                        <div class="col">
+                          <div class="row m-1">
+                            <mat-form-field style="width: 70%;">
+                              <mat-label>{{ 'GLOBAL.idiomas' | translate }} :</mat-label>
+                              <mat-select [(ngModel)]="selectedValueIdioma">
+                                <mat-option>--Seleccionar--</mat-option>
+                                <mat-option *ngFor="let item of idioma[0]"
+                                  [value]="item">
+                                  {{item.Nombre}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col">
+                            <button class="btn btn-info btn-sm" style="width:
+                              50%;" (click)="Filtrar()"><i class="nb-search"></i>
+                              {{ 'GLOBAL.filtrar' | translate }}</button>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="row m-1">
+                            <mat-form-field style="width: 35%;">
+                              <mat-label>{{ 'GLOBAL.periodo_academico' |
+                                translate }} :</mat-label>
+                              <mat-select [(ngModel)]="selectedValuePeriodo">
+                                <mat-option>--Seleccionar--</mat-option>
+                                <mat-option *ngFor="let item_periodo of
+                                  periodo[0]" [value]="item_periodo">
+                                  {{item_periodo.Nombre}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                          </div>
+                          <div class="col">
+                            <button class="btn btn-info btn-sm" style="width:
+                              50%;" (click)="ClearFiltro()">{{ 'GLOBAL.Limpiar'
+                              | translate }}</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+
+                    <!-- inicio de tabla de resultados -->
+                    <div class="col" *ngIf="resultados_notas.length != 0">
+                      <br/>
+                        <br/>
+                          <div class="col-12">
+                            <table class="table">
+                              <thead>
+                                <tr>
+                                  <th scope="col">{{ 'GLOBAL.aspirante' |
+                                    translate }}</th>
+                                  <th scope="col">{{ 'GLOBAL.nota' | translate
+                                    }}</th>
+                                  <!-- <th scope="col">Last</th>
+                                                    <th scope="col">Handle</th> -->
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let resultado of resultados_notas
+                                  let i= index">
+                                  <th scope="row"><nb-user
+                                      name="{{resultado['Persona']}}"></nb-user>
+                                  </th>
+                                  <td>
+                                    <mat-form-field appearance="outline"
+                                      style="width: 10%;"
+                                      *ngIf="resultado['GetNota']">
+                                      <mat-label> {{resultado['GetNota']}}
+                                      </mat-label>
+                                      <input matInput placeholder=""
+                                        [(ngModel)]="resultado['nota']"
+                                        (ngModelChange)="mostarNota(i)"
+                                        type="number" min="0" max="100">
+                                    </mat-form-field>
+                                    <mat-form-field appearance="outline"
+                                      style="width: 10%;"
+                                      *ngIf="!resultado['GetNota']">
+                                      <mat-label> Nota </mat-label>
+                                      <input matInput placeholder=""
+                                        [(ngModel)]="resultado['nota']"
+                                        (ngModelChange)="mostarNota(i)"
+                                        type="number" min="0" max="100">
+                                    </mat-form-field>
+                                  </td>
+                                  <!-- <td>Otto</td>
+                                                    <td>@mdo</td> -->
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                          <br>
+                          <div class="col">
+                            <button class="btn btn-outline-success btn-sm
+                              float-right" style="width: 30%;"
+                              (click)="GuardarNota()">Guardar Notas</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nb-tab>
+          </nb-tabset>
+        </nb-card-body>
+      </nb-card>
+    </div>

@@ -1,25 +1,30 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProduccionAcademicaService } from '../../../@core/data/produccion_academica.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { UserService } from '../../../@core/data/users.service';
-import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'ngx-list-otra-publicacion',
   templateUrl: './list-otra_publicacion.component.html',
   styleUrls: ['./list-otra_publicacion.component.scss'],
-  })
+})
 export class ListOtraPublicacionComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
-
   source: LocalDataSource = new LocalDataSource();
+
+  @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+  loading: boolean;
+  percentage: number;
 
   constructor(private translate: TranslateService,
     private users: UserService,
@@ -30,6 +35,12 @@ export class ListOtraPublicacionComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
+    this.loading = false;
+  }
+
+  getPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   cargarCampos() {
@@ -52,35 +63,24 @@ export class ListOtraPublicacionComponent implements OnInit {
       columns: {
         Titulo: {
           title: this.translate.instant('GLOBAL.titulo_otra_publicacion'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Autor: {
           title: this.translate.instant('GLOBAL.autor'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Ano: {
           title: this.translate.instant('GLOBAL.ano'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Mes: {
-          title: this.translate.instant('GLOBAL.mes'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Tipo: {
-          title: this.translate.instant('GLOBAL.tipo'),
-          // type: 'tipo_otra_publicacion;',
+          title: this.translate.instant('GLOBAL.tipo_otra_publicacion'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
@@ -98,8 +98,18 @@ export class ListOtraPublicacionComponent implements OnInit {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
-          }
-    });
+      }
+    },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+            this.translate.instant('GLOBAL.otra_publicacion'),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
   }
 
   ngOnInit() {
@@ -107,35 +117,46 @@ export class ListOtraPublicacionComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
-    this.activetab();
   }
 
   onDelete(event): void {
     const opt: any = {
-      title: 'Deleting?',
-      text: 'Delete OtraPublicacion!',
+      title: this.translate.instant('GLOBAL.eliminar'),
+      text: this.translate.instant('GLOBAL.eliminar') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-
-      if (willDelete.value) {
-        this.produccionAcademicaService.delete('otra_publicacion/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', 'deleted', 'OtraPublicacion deleted');
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.produccionAcademicaService.delete('otra_publicacion/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.otra_publicacion') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-         });
-      }
-    });
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.eliminar') + '-' +
+                  this.translate.instant('GLOBAL.otra_publicacion'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+        }
+      });
   }
 
   activetab(): void {
@@ -153,13 +174,11 @@ export class ListOtraPublicacionComponent implements OnInit {
   onChange(event) {
     if (event) {
       this.loadData();
-      this.cambiotab = !this.cambiotab;
+      this.uid = 0;
     }
   }
 
-
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -182,5 +201,4 @@ export class ListOtraPublicacionComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

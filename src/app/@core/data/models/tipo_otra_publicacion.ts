@@ -1,4 +1,3 @@
-
 export class TipoOtraPublicacion {
   Id: number;
   Nombre: string;

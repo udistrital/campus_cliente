@@ -10,9 +10,9 @@ describe('ListArticuloComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListArticuloComponent ],
+      declarations: [ListArticuloComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

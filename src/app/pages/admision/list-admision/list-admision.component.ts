@@ -8,13 +8,13 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-list-admision',
   templateUrl: './list-admision.component.html',
   styleUrls: ['./list-admision.component.scss'],
-  })
+})
 export class ListAdmisionComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
@@ -124,42 +124,42 @@ export class ListAdmisionComponent implements OnInit {
           for (let index = 0; index < data.length; index++) {
             const datos = data[index];
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
-                    .subscribe(res_aspirante => {
-                      if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+              .subscribe(res_aspirante => {
+                if (res_aspirante !== null) {
+                  const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
                         ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
-                        data[index].Aspirante = aspirante;
-                        if ( index === (data.length - 1 ) ) {
-                          this.source.load(data);
-                        }
-                      }
-                    },
-                    (error_aspirante: HttpErrorResponse) => {
-                      Swal({
-                        type: 'error',
-                        title: error_aspirante.status + '',
-                        text: this.translate.instant('ERROR.' + error_aspirante.status),
-                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                      });
-                    });
+                  data[index].Aspirante = aspirante;
+                  if (index === (data.length - 1)) {
+                    this.source.load(data);
+                  }
+                }
+              },
+                (error_aspirante: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error_aspirante.status + '',
+                    text: this.translate.instant('ERROR.' + error_aspirante.status),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
-            } else {
-              Swal({
-                type: 'info',
-                title: this.translate.instant('GLOBAL.warning'),
-                text: `no se encontraron resultados`,
-                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-              });
-            }
+        } else {
+          Swal({
+            type: 'info',
+            title: this.translate.instant('GLOBAL.warning'),
+            text: `no se encontraron resultados`,
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        }
       },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
     } else {
       this.admisionesService.get('admision/?limit=0').subscribe(res => {
         if (res !== null) {
@@ -170,35 +170,35 @@ export class ListAdmisionComponent implements OnInit {
           for (let index = 0; index < data.length; index++) {
             const datos = data[index];
             this.personaService.get(`persona?query=Ente:${datos.Aspirante}`)
-                    .subscribe(res_aspirante => {
-                      if (res_aspirante !== null) {
-                        const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
+              .subscribe(res_aspirante => {
+                if (res_aspirante !== null) {
+                  const aspirante = `${res_aspirante[0].PrimerApellido} ${res_aspirante[0].SegundoApellido}
                         ${res_aspirante[0].PrimerNombre} ${res_aspirante[0].SegundoNombre}`
-                        data[index].Aspirante = aspirante;
-                        if ( index === (data.length - 1 ) ) {
-                          this.source.load(data);
-                        }
-                      }
-                    },
-                    (error_aspirante: HttpErrorResponse) => {
-                      Swal({
-                        type: 'error',
-                        title: error_aspirante.status + '',
-                        text: this.translate.instant('ERROR.' + error_aspirante.status),
-                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                      });
-                    });
+                  data[index].Aspirante = aspirante;
+                  if (index === (data.length - 1)) {
+                    this.source.load(data);
+                  }
+                }
+              },
+                (error_aspirante: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error_aspirante.status + '',
+                    text: this.translate.instant('ERROR.' + error_aspirante.status),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
-            }
+        }
       },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
     }
   }
 
@@ -217,7 +217,7 @@ export class ListAdmisionComponent implements OnInit {
   }
   onVerInfo(event): void {
     console.info('info chida')
-    this.router.navigate( ['/pages/detalleInfo', event.data.Id] )
+    this.router.navigate(['/pages/detalleInfo', event.data.Id])
   }
 
   onDelete(event): void {
@@ -232,26 +232,26 @@ export class ListAdmisionComponent implements OnInit {
       cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.admisionesService.delete('admision/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
-            this.translate.instant('GLOBAL.admision') + ' ' +
-            this.translate.instant('GLOBAL.confirmarEliminar'));
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.admisionesService.delete('admision/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.admision') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-         },
-         (error: HttpErrorResponse) => {
-           Swal({
-             type: 'error',
-             title: error.status + '',
-             text: this.translate.instant('ERROR.' + error.status),
-             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-           });
-         });
-      }
-    });
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+        }
+      });
   }
 
   activetab(): void {
@@ -274,7 +274,7 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   itemselec(event): void {
-     // console.info(event);
+    // console.info(event);
   }
 
   loadInfoSelectFiltro() {
@@ -286,15 +286,15 @@ export class ListAdmisionComponent implements OnInit {
           this.loadData();
         }
       },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
-      this.admisionesService.get('periodo_academico/?limit=0')
+    this.admisionesService.get('periodo_academico/?limit=0')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
@@ -302,23 +302,23 @@ export class ListAdmisionComponent implements OnInit {
           this.loadData();
         }
       },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
   }
 
   Filtrar() {
     if (this.selectedValuePrograma && !this.selectedValuePeriodo) {
       this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePrograma.Id}`);
-    } else if ( !this.selectedValuePrograma && this.selectedValuePeriodo ) {
+    } else if (!this.selectedValuePrograma && this.selectedValuePeriodo) {
       this.loadData(`admision/?query=Periodo:${this.selectedValuePeriodo.Id}`);
-    } else if ( (this.selectedValuePrograma !== undefined && this.selectedValuePrograma !== 0 )
-    && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0 ) ) {
+    } else if ((this.selectedValuePrograma !== undefined && this.selectedValuePrograma !== 0)
+      && (this.selectedValuePeriodo !== undefined && this.selectedValuePeriodo !== 0)) {
       this.loadData(`admision/?query=ProgramaAcademico:${this.selectedValuePeriodo.Id},Periodo:${this.selectedValuePeriodo.Id}`);
     } else {
       this.loadData();

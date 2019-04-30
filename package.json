@@ -75,6 +75,8 @@
         "ng2-ckeditor": "1.1.13",
         "ng2-smart-table": "1.2.2",
         "ngx-echarts": "2.0.1",
+        "ngx-export-as": "^1.2.2",
+        "ngx-qrcode2": "0.0.9",
         "normalize.css": "6.0.0",
         "nuxeo": "^3.6.0",
         "pace-js": "1.0.2",

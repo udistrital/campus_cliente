@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProduccionAcademicaService } from '../../../@core/data/produccion_academica.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -12,7 +12,7 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-list-articulo',
   templateUrl: './list-articulo.component.html',
   styleUrls: ['./list-articulo.component.scss'],
-  })
+})
 export class ListArticuloComponent implements OnInit {
   uid: number;
   eid: number;
@@ -20,6 +20,12 @@ export class ListArticuloComponent implements OnInit {
   config: ToasterConfig;
   settings: any;
   source: LocalDataSource = new LocalDataSource();
+
+  @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+  loading: boolean;
+  percentage: number;
 
   constructor(private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
@@ -30,6 +36,12 @@ export class ListArticuloComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
+    this.loading = false;
+  }
+
+  getPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   cargarCampos() {
@@ -50,94 +62,38 @@ export class ListArticuloComponent implements OnInit {
       },
       mode: 'external',
       columns: {
+        Nombre: {
+          title: this.translate.instant('GLOBAL.nombre'),
+          valuePrepareFunction: (value) => {
+            return value;
+          },
+        },
         Tipo: {
-          title: this.translate.instant('GLOBAL.tipo'),
-          // type: 'tipo_articulo;',
+          title: this.translate.instant('GLOBAL.tipo_articulo'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
-        Nombre: {
-          title: this.translate.instant('GLOBAL.nombre'),
-          // type: 'string;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Idioma: {
-          title: this.translate.instant('GLOBAL.idioma'),
-          // type: 'string;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
         Ano: {
           title: this.translate.instant('GLOBAL.ano'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Mes: {
-          title: this.translate.instant('GLOBAL.mes'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Revista: {
           title: this.translate.instant('GLOBAL.revista'),
-          // type: 'string;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Volumen: {
-          title: this.translate.instant('GLOBAL.volumen'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Fasciculo: {
-          title: this.translate.instant('GLOBAL.fasciculo'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Serie: {
-          title: this.translate.instant('GLOBAL.serie'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Ubicacion: {
-          title: this.translate.instant('GLOBAL.ubicacion'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         MedioDivulgacion: {
-          title: this.translate.instant('GLOBAL.mediodivulgacion'),
-          // type: 'medio_divulgacion;',
+          title: this.translate.instant('GLOBAL.medio_divulgacion'),
           valuePrepareFunction: (value) => {
-            // console.info(value.Nombre);
             return value.Nombre;
-          },
-        },
-        Url: {
-          title: this.translate.instant('GLOBAL.url'),
-          // type: 'string;',
-          valuePrepareFunction: (value) => {
-            return value;
           },
         },
         Doi: {
           title: this.translate.instant('GLOBAL.doi'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -152,12 +108,24 @@ export class ListArticuloComponent implements OnInit {
 
   loadData(): void {
     this.produccionAcademicaService.get('articulo/?query=Persona:' + this.userService.getEnte())
-    .subscribe(res => {
-      if (res !== null) {
-        const data = <Array<any>>res;
-        this.source.load(data);
-          }
-    });
+      .subscribe(res => {
+        if (res !== null) {
+          const data = <Array<any>>res;
+          this.loading = false;
+          this.getPercentage(1);
+          this.source.load(data);
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.articulos'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
   }
 
   ngOnInit() {
@@ -165,35 +133,46 @@ export class ListArticuloComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
-    this.activetab();
   }
 
   onDelete(event): void {
     const opt: any = {
-      title: 'Deleting?',
-      text: 'Delete Articulo!',
+      title: this.translate.instant('GLOBAL.eliminar'),
+      text: this.translate.instant('GLOBAL.eliminar') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-
-      if (willDelete.value) {
-        this.produccionAcademicaService.delete('articulo/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', 'deleted', 'Articulo deleted');
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.produccionAcademicaService.delete('articulo/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.articulo') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-         });
-      }
-    });
+          },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.eliminar') + '-' +
+                this.translate.instant('GLOBAL.articulo'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+        }
+      });
   }
 
   activetab(): void {
@@ -211,13 +190,11 @@ export class ListArticuloComponent implements OnInit {
   onChange(event) {
     if (event) {
       this.loadData();
-      this.cambiotab = !this.cambiotab;
+      this.uid = 0;
     }
   }
 
-
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -240,5 +217,4 @@ export class ListArticuloComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

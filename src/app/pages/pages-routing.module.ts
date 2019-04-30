@@ -21,12 +21,24 @@ const routes: Routes = [{
       loadChildren: './admision/admision.module#AdmisionModule',
     },
     {
+      path: 'comprobante',
+      loadChildren: './comprobante/comprobante.module#ComprobanteModule',
+    },
+    {
       path: 'notificacion',
       loadChildren: './notificacion/notificacion.module#NotificacionModule',
     },
     {
+      path: 'descuento_matricula',
+      loadChildren: './descuento_matricula/descuento_matricula.module#DescuentoMatriculaModule',
+    },
+    {
       path: 'propuesta_grado',
       loadChildren: './propuesta_grado/propuesta_grado.module#PropuestaGradoModule',
+    },
+    {
+      path: 'tabla_notas',
+      loadChildren: './tabla_notas/tabla_notas.module#TablaNotasModule',
     },
     // {
     //   path: 'libro',
@@ -36,8 +48,10 @@ const routes: Routes = [{
       path: 'tipo_proyecto',
       loadChildren: './tipo_proyecto/tipo_proyecto.module#TipoProyectoModule',
     },
-    { path: 'detalleInfo/:id',
-      component: DetalleAdmisionComponent },
+    {
+      path: 'detalleInfo/:id',
+      component: DetalleAdmisionComponent,
+    },
     {
       path: '',
       redirectTo: 'dashboard',

@@ -36,7 +36,7 @@ export class CrudTipoProyectoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
-   }
+  }
 
   construirForm() {
     this.formTipoProyecto.titulo = this.translate.instant('GLOBAL.tipo_proyecto');
@@ -51,7 +51,6 @@ export class CrudTipoProyectoComponent implements OnInit {
     this.translate.use(language);
   }
 
-
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formTipoProyecto.campos.length; index++) {
       const element = this.formTipoProyecto.campos[index];
@@ -62,7 +61,6 @@ export class CrudTipoProyectoComponent implements OnInit {
     return 0;
   }
 
-
   public loadTipoProyecto(): void {
     if (this.tipo_proyecto_id !== undefined && this.tipo_proyecto_id !== 0) {
       this.admisionesService.get('tipo_proyecto/?query=id:' + this.tipo_proyecto_id)
@@ -71,14 +69,13 @@ export class CrudTipoProyectoComponent implements OnInit {
             this.info_tipo_proyecto = <TipoProyecto>res[0];
           }
         });
-    } else  {
+    } else {
       this.info_tipo_proyecto = undefined;
       this.clean = !this.clean;
     }
   }
 
   updateTipoProyecto(tipoProyecto: any): void {
-
     const opt: any = {
       title: 'Update?',
       text: 'Update TipoProyecto!',
@@ -88,17 +85,17 @@ export class CrudTipoProyectoComponent implements OnInit {
       showCancelButton: true,
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
-        this.admisionesService.put('tipo_proyecto', this.info_tipo_proyecto, this.info_tipo_proyecto.Id)
-          .subscribe(res => {
-            this.loadTipoProyecto();
-            this.eventChange.emit(true);
-            this.showToast('info', 'updated', 'TipoProyecto updated');
-          });
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
+          this.admisionesService.put('tipo_proyecto', this.info_tipo_proyecto, this.info_tipo_proyecto.Id)
+            .subscribe(res => {
+              this.loadTipoProyecto();
+              this.eventChange.emit(true);
+              this.showToast('info', 'updated', 'TipoProyecto updated');
+            });
+        }
+      });
   }
 
   createTipoProyecto(tipoProyecto: any): void {
@@ -111,17 +108,17 @@ export class CrudTipoProyectoComponent implements OnInit {
       showCancelButton: true,
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
-        this.admisionesService.post('tipo_proyecto', this.info_tipo_proyecto)
-          .subscribe(res => {
-            this.info_tipo_proyecto = <TipoProyecto>res;
-            this.eventChange.emit(true);
-            this.showToast('info', 'created', 'TipoProyecto created');
-          });
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.info_tipo_proyecto = <TipoProyecto>tipoProyecto;
+          this.admisionesService.post('tipo_proyecto', this.info_tipo_proyecto)
+            .subscribe(res => {
+              this.info_tipo_proyecto = <TipoProyecto>res;
+              this.eventChange.emit(true);
+              this.showToast('info', 'created', 'TipoProyecto created');
+            });
+        }
+      });
   }
 
   ngOnInit() {

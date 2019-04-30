@@ -10,7 +10,7 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-list-tipo-proyecto',
   templateUrl: './list-tipo_proyecto.component.html',
   styleUrls: ['./list-tipo_proyecto.component.scss'],
-  })
+})
 export class ListTipoProyectoComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
@@ -79,7 +79,7 @@ export class ListTipoProyectoComponent implements OnInit {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
-          }
+      }
     });
   }
 
@@ -106,17 +106,16 @@ export class ListTipoProyectoComponent implements OnInit {
       showCancelButton: true,
     };
     Swal(opt)
-    .then((willDelete) => {
-
-      if (willDelete.value) {
-        this.admisionesService.delete('tipo_proyecto/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', 'deleted', 'TipoProyecto deleted');
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.admisionesService.delete('tipo_proyecto/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', 'deleted', 'TipoProyecto deleted');
             }
-         });
-      }
-    });
+          });
+        }
+      });
   }
 
   activetab(): void {

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProduccionAcademicaService } from '../../../@core/data/produccion_academica.service';
 import { UserService } from '../../../@core/data/users.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 
@@ -11,14 +12,19 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-list-produccion-artes-arqu-diseno',
   templateUrl: './list-produccion_artes_arqu_diseno.component.html',
   styleUrls: ['./list-produccion_artes_arqu_diseno.component.scss'],
-  })
+})
 export class ListProduccionArtesArquDisenoComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
-
   source: LocalDataSource = new LocalDataSource();
+
+  @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+  loading: boolean;
+  percentage: number;
 
   constructor(private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
@@ -29,6 +35,12 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
+    this.loading = false;
+  }
+
+  getPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   cargarCampos() {
@@ -51,35 +63,18 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
       columns: {
         Nombre: {
           title: this.translate.instant('GLOBAL.titulo_produccion_artes'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         TipoDisciplina: {
-          title: this.translate.instant('GLOBAL.tipodisciplina'),
-          // type: 'tipo_disciplina;',
+          title: this.translate.instant('GLOBAL.tipo_disciplina'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
-        Mes: {
-          title: this.translate.instant('GLOBAL.mes'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
         Ano: {
           title: this.translate.instant('GLOBAL.ano'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Descripcion: {
-          title: this.translate.instant('GLOBAL.descripcion'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -97,7 +92,17 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
-          }
+      }
+    },
+    (error: HttpErrorResponse) => {
+      Swal({
+        type: 'error',
+        title: error.status + '',
+        text: this.translate.instant('ERROR.' + error.status),
+        footer: this.translate.instant('GLOBAL.cargar') + '-' +
+          this.translate.instant('GLOBAL.produccion_artes_arqu_diseno'),
+        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      });
     });
   }
 
@@ -106,35 +111,36 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
-    this.activetab();
   }
 
   onDelete(event): void {
     const opt: any = {
-      title: 'Deleting?',
-      text: 'Delete ProduccionArtesArquDiseno!',
+      title: this.translate.instant('GLOBAL.eliminar'),
+      text: this.translate.instant('GLOBAL.eliminar') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-
-      if (willDelete.value) {
-        this.produccionAcademicaService.delete('produccion_artes_arqu_diseno/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', 'deleted', 'ProduccionArtesArquDiseno deleted');
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.produccionAcademicaService.delete('produccion_artes_arqu_diseno/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.produccion_artes_arqu_diseno') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-         });
-      }
-    });
+          });
+        }
+      });
   }
 
   activetab(): void {
@@ -156,9 +162,7 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
     }
   }
 
-
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -181,5 +185,4 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

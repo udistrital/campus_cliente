@@ -10,9 +10,9 @@ describe('CrudExperienciaLaboralComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudExperienciaLaboralComponent ],
+      declarations: [CrudExperienciaLaboralComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

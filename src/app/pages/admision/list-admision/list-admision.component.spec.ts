@@ -10,9 +10,9 @@ describe('ListAdmisionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListAdmisionComponent ],
+      declarations: [ListAdmisionComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

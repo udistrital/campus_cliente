@@ -34,8 +34,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   set name(info_persona_id: number) {
     this.info_persona_id = info_persona_id;
     this.loadInfoPersona();
-    // this.loadAdmision();
-    console.info ('InfoPersonaId: ' + info_persona_id);
+    console.info('InfoPersonaId: ' + info_persona_id);
   }
 
   @Output() eventChange = new EventEmitter();
@@ -60,7 +59,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
     private nuxeoService: NuxeoService,
-    private store: Store < IAppState > ,
+    private store: Store<IAppState>,
     private listService: ListService,
     private admisionesService: AdmisionesService,
     private userService: UserService,
@@ -103,20 +102,28 @@ export class CrudInfoPersonaComponent implements OnInit {
   }
 
   public loadAdmision(): void {
-    // if (this.admision_id !== undefined && this.admision_id !== 0) {
-    console.info (this.info_persona_id)
-      this.admisionesService.get('admision/?query=Aspirante:' + this.info_persona_id + ',periodo:1')
-        .subscribe(res => {
-          if (res !== null) {
-            this.info_admision = res[0];
-                if (res !== null ) {
-                  this.info_admision = <Admision>res[0];
-                  console.info('Estado Terminos: ' + this.info_admision.AceptaTerminos)
-                    this.aceptaTerminos = true;
-                }
-          }
+    // console.info (this.info_persona_id)
+    this.admisionesService.get('admision/?query=Aspirante:' + this.info_persona_id + ',periodo:1')
+      .subscribe(res => {
+        if (res !== null) {
+          this.info_admision = <Admision>res[0];
+          // console.info('Estado Terminos: ' + this.info_admision.AceptaTerminos)
+          this.aceptaTerminos = true;
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.info_persona') + '|' +
+              this.translate.instant('GLOBAL.admision'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-   }
+  }
+
   public loadInfoPersona(): void {
     this.loading = true;
     if (this.info_persona_id !== undefined && this.info_persona_id !== 0 &&
@@ -144,30 +151,35 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.loading = false;
                 }
               },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.info_persona') + '|' +
+                      this.translate.instant('GLOBAL.soporte_documento'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
           }
         },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.info_persona'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
     } else {
       this.info_info_persona = undefined
       this.clean = !this.clean;
       this.loading = false;
-  }
-  this.loadAdmision()
+    }
+    this.loadAdmision();
   }
 
   updateInfoPersona(infoPersona: any): void {
@@ -215,26 +227,31 @@ export class CrudInfoPersonaComponent implements OnInit {
                         this.translate.instant('GLOBAL.info_persona') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
                     },
-                    (error: HttpErrorResponse) => {
-                      Swal({
-                        type: 'error',
-                        title: error.status + '',
-                        text: this.translate.instant('ERROR.' + error.status),
-                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      (error: HttpErrorResponse) => {
+                        Swal({
+                          type: 'error',
+                          title: error.status + '',
+                          text: this.translate.instant('ERROR.' + error.status),
+                          footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                            this.translate.instant('GLOBAL.info_persona'),
+                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                        });
                       });
-                    });
                 }
               },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                      this.translate.instant('GLOBAL.info_persona') + '|' +
+                      this.translate.instant('GLOBAL.soporte_documento'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
           } else {
-            console.info(this.info_info_persona);
+            // console.info(this.info_info_persona);
             this.info_info_persona.Foto = this.Foto;
             this.info_info_persona.SoporteDocumento = this.SoporteDocumento;
             this.campusMidService.put('persona/ActualizarPersona', this.info_info_persona)
@@ -246,29 +263,32 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.translate.instant('GLOBAL.info_persona') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
               },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                      this.translate.instant('GLOBAL.info_persona'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
           }
         }
-         // this.createAdmision(this.info_info_persona.ente);
+        // this.createAdmision(this.info_info_persona.ente);
       });
   }
 
   createInfoPersona(infoPersona: any): void {
     const opt: any = {
       title: this.translate.instant('GLOBAL.crear'),
-       // text: this.translate.instant('GLOBAL.crear') + '?',
-       type: 'success',
-       showConfirmButton: true,
-       //   timer: 1500,
-       //   buttons: true,
-       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      text: this.translate.instant('GLOBAL.crear') + '?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
       .then((willDelete) => {
@@ -276,16 +296,18 @@ export class CrudInfoPersonaComponent implements OnInit {
         if (willDelete.value) {
           const files = []
           this.info_info_persona = <any>infoPersona;
-          console.info(this.info_info_persona);
+          // console.info(this.info_info_persona);
           if (this.info_info_persona.Foto.file !== undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: 'Foto',
-              file: this.info_info_persona.Foto.file, IdDocumento: 1});
+              file: this.info_info_persona.Foto.file, IdDocumento: 1,
+            });
           }
           if (this.info_info_persona.SoporteDocumento.file !== undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: 'SoporteDocumento',
-              file: this.info_info_persona.SoporteDocumento.file, IdDocumento: 2});
+              file: this.info_info_persona.SoporteDocumento.file, IdDocumento: 2,
+            });
           }
           this.nuxeoService.getDocumentos$(files, this.documentoService)
             .subscribe(response => {
@@ -298,82 +320,93 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.info_info_persona.SoporteDocumento = this.filesUp['SoporteDocumento'].Id;
                 }
                 this.info_info_persona.Usuario = this.autenticationService.getPayload().sub;
-                console.info(this.info_info_persona);
+                // console.info(this.info_info_persona);
                 this.campusMidService.post('persona/GuardarPersona', this.info_info_persona)
                   .subscribe(res => {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {
-                      this.eventChange.emit(true);
                       this.info_persona_id = r.Body.Ente;
                       this.createAdmision(this.info_persona_id);
                       this.loadInfoPersona();
                       this.loading = false;
+                      this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                      this.translate.instant('GLOBAL.info_persona') + ' ' + this.translate.instant('GLOBAL.confirmarCrear'));
+                        this.translate.instant('GLOBAL.info_persona') + ' ' +
+                        this.translate.instant('GLOBAL.confirmarCrear'));
                     } else {
                       this.showToast('error', this.translate.instant('GLOBAL.error'),
-                      this.translate.instant('GLOBAL.error'));
+                        this.translate.instant('GLOBAL.error'));
                     }
                   },
-                  (error: HttpErrorResponse) => {
-                    const usu = window.localStorage.getItem('usuario').toString()
-                    this.personaService.get(`persona?query=Usuario:${usu}`)
-                    .subscribe(res_usu => {
-                      const r_usu = <any>res_usu;
-                      if (res_usu !== null && r_usu.Type !== 'error') {
-                        this.admisionesService.get(`admision/?query=Aspirante:${res_usu[0].Ente}`)
-                        .subscribe(res_2 => {
-                          const r_2 = <any>res_2;
-                          if (res_2 !== null && r_2.Type !== 'error') {
-                            console.info(`ya existe esta admision`);
-                          } else {
-                            console.info(`aun no existe una admision`);
-                            this.info_persona_id =  res_usu[0].Ente;
-                            this.createAdmision(res_usu[0].Ente);
+                    (error: HttpErrorResponse) => {
+                      const usu = window.localStorage.getItem('usuario').toString();
+                      this.personaService.get(`persona?query=Usuario:${usu}`)
+                        .subscribe(res_usu => {
+                          const r_usu = <any>res_usu;
+                          if (res_usu !== null && r_usu.Type !== 'error') {
+                            this.admisionesService.get(`admision/?query=Aspirante:${res_usu[0].Ente}`)
+                              .subscribe(res_2 => {
+                                const r_2 = <any>res_2;
+                                if (res_2 !== null && r_2.Type !== 'error') {
+                                  console.info('Ya existe esta admision');
+                                } else {
+                                  console.info(`aun no existe una admision`);
+                                  this.info_persona_id = res_usu[0].Ente;
+                                  this.createAdmision(res_usu[0].Ente);
+                                }
+                              },
+                                (error_1: HttpErrorResponse) => {
+                                  Swal({
+                                    type: 'error',
+                                    title: error_1.status + '',
+                                    text: this.translate.instant('ERROR.' + error_1.status),
+                                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                      this.translate.instant('GLOBAL.info_persona') + '|' +
+                                      this.translate.instant('GLOBAL.admision'),
+                                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                  });
+                                });
                           }
                         },
-                        (error_1: HttpErrorResponse) => {
-                          Swal({
-                            type: 'error',
-                            title: error_1.status + '',
-                            text: this.translate.instant('ERROR.' + error_1.status),
-                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                          (error_2: HttpErrorResponse) => {
+                            Swal({
+                              type: 'error',
+                              title: error_2.status + '',
+                              text: this.translate.instant('ERROR.' + error_2.status),
+                              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                this.translate.instant('GLOBAL.info_persona') + '|' +
+                                this.translate.instant('GLOBAL.info_persona'),
+                              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                            });
                           });
-                        });
-
-                      }
-                    },
-                    (error_2: HttpErrorResponse) => {
                       Swal({
                         type: 'error',
-                        title: error_2.status + '',
-                        text: this.translate.instant('ERROR.' + error_2.status),
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        footer: this.translate.instant('GLOBAL.crear') + '-' +
+                          this.translate.instant('GLOBAL.info_persona'),
                         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                       });
                     });
-                    Swal({
-                      type: 'error',
-                      title: error.status + '',
-                      text: this.translate.instant('ERROR.' + error.status),
-                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                    });
-                  });
               }
             },
-            (error: HttpErrorResponse) => {
-              Swal({
-                type: 'error',
-                title: error.status + '',
-                text: this.translate.instant('ERROR.' + error.status),
-                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.crear') + '-' +
+                    this.translate.instant('GLOBAL.info_persona') + '|' +
+                    this.translate.instant('GLOBAL.soporte_documento'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
               });
-            })
         }
       });
   }
 
   ngOnInit() {
-      // this.info_admision()
+    // this.info_admision()
   }
 
   // validarForm(event) {
@@ -390,18 +423,17 @@ export class CrudInfoPersonaComponent implements OnInit {
   // }
 
   validarForm(event) {
-    // this.loadAdmision();
     if (event.valid) {
       if (this.info_admision === undefined) {
-      // if (this.aceptaTerminos !== true) {
+        // if (this.aceptaTerminos !== true) {
         this.validarTerminos(event);
       } else {
-          if (this.info_admision.AceptaTerminos !== true) {
-            this.validarTerminos(event);
-            this.loadAdmision();
-          }else {
-             this.updateInfoPersona(event.data.InfoPersona)
-           }
+        if (this.info_admision.AceptaTerminos !== true) {
+          this.validarTerminos(event);
+          this.loadAdmision();
+        } else {
+          this.updateInfoPersona(event.data.InfoPersona)
+        }
       }
     }
   }
@@ -417,23 +449,23 @@ export class CrudInfoPersonaComponent implements OnInit {
       inputPlaceholder: 'He leido y estoy de acuerdo con los terminos de la política de tratamiento y privacidad de la información',
       confirmButtonText: '<u>Aceptar</u>',
     })
-    .then((result) => {
+      .then((result) => {
         if (result.value) {
-            if ( this.info_info_persona === undefined) {
-              this.createInfoPersona(event.data.InfoPersona);
-            }else {
-              this.updateInfoPersona(event.data.InfoPersona);
-              if (this.info_admision === undefined) {
-                this.createAdmision(this.info_persona_id)
-              }else {
-                this.updateAdmision();
-              }
+          if (this.info_info_persona === undefined) {
+            this.createInfoPersona(event.data.InfoPersona);
+          } else {
+            this.updateInfoPersona(event.data.InfoPersona);
+            if (this.info_admision === undefined) {
+              this.createAdmision(this.info_persona_id)
+            } else {
+              this.updateAdmision();
             }
-            this.loadAdmision();
+          }
+          this.loadAdmision();
         } else if (result.value === 0) {
-              Swal({type: 'error', text: ' Para poder guardar acepte los terminos'});
-              this.aceptaTerminos = false;
-              // this.loading = false;  // rev
+          Swal({ type: 'error', text: ' Para poder guardar acepte los terminos' });
+          this.aceptaTerminos = false;
+          // this.loading = false;  // rev
         }
         // } else if (result.dismiss === Swal.DismissReason.cancel) {
         //     Swal(
@@ -442,8 +474,9 @@ export class CrudInfoPersonaComponent implements OnInit {
         //         'error',
         //       )
         //     }
-    });
+      });
   }
+
   createAdmision(ente_id): void {
     // this.loadInfoPersona();
     console.info(ente_id);
@@ -451,38 +484,38 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.programa = this.userService.getPrograma();
     console.info(`este es el aspirante numero: ${this.aspirante}`)
     const admisionPost = {
-     Periodo: {
+      Periodo: {
         Id: this.periodo.Id,
-     },
-     Aspirante: this.aspirante,
-     ProgramaAcademico: this.programa,
-     LineaInvestigacion: {
-       Id: 1, // TODO: Cambiar a nulo
-     },
-     EstadoAdmision: {
-       Id: 1,
-     },
-     Enfasis: {
-       Id: 1, // TODO: Cambiar a nulo
-     },
-     AceptaTerminos: true,
-   };
-        console.info(admisionPost);
-        this.info_admision = <Admision>admisionPost;
-        this.info_admision.Aspirante = Number(this.info_persona_id);
-        console.info(this.info_admision);
-        this.admisionesService.post('admision', this.info_admision)
-          .subscribe(res => {
-            this.info_admision = <Admision>res;
-            this.eventChange.emit(true);
-            Swal({
-              type: 'info',
-              title: this.translate.instant('GLOBAL.crear'),
-              text: `${this.translate.instant('GLOBAL.inscrito')} ${this.periodo.Nombre};`,
-              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-            });
-            // this.showToast('info', 'created', 'Admision created');
-          });
+      },
+      Aspirante: this.aspirante,
+      ProgramaAcademico: this.programa,
+      LineaInvestigacion: {
+        Id: 1, // TODO: Cambiar a nulo
+      },
+      EstadoAdmision: {
+        Id: 1,
+      },
+      Enfasis: {
+        Id: 1, // TODO: Cambiar a nulo
+      },
+      AceptaTerminos: true,
+    };
+    console.info(admisionPost);
+    this.info_admision = <Admision>admisionPost;
+    this.info_admision.Aspirante = Number(this.info_persona_id);
+    console.info(this.info_admision);
+    this.admisionesService.post('admision', this.info_admision)
+      .subscribe(res => {
+        this.info_admision = <Admision>res;
+        this.eventChange.emit(true);
+        Swal({
+          type: 'info',
+          title: this.translate.instant('GLOBAL.crear'),
+          text: `${this.translate.instant('GLOBAL.inscrito')} ${this.periodo.Nombre};`,
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+        // this.showToast('info', 'created', 'Admision created');
+      });
 
   }
   updateAdmision(): void {
@@ -493,8 +526,8 @@ export class CrudInfoPersonaComponent implements OnInit {
       .subscribe(res => {
         this.eventChange.emit(true);
         this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
-        this.translate.instant('GLOBAL.admision') + ' ' +
-        this.translate.instant('GLOBAL.confirmarActualizar'));
+          this.translate.instant('GLOBAL.admision') + ' ' +
+          this.translate.instant('GLOBAL.confirmarActualizar'));
       });
     this.loadAdmision();
   }
@@ -512,14 +545,14 @@ export class CrudInfoPersonaComponent implements OnInit {
           this.periodo = <any>res[0]; // se carga el periodo academico activo mas reciente
         }
       },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
   }
 
   private showToast(type: string, title: string, body: string) {

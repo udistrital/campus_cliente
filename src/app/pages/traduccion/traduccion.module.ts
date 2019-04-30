@@ -6,7 +6,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudTraduccionComponent } from './crud-traduccion/crud-traduccion.component';
-import { ListTraduccionComponent} from './list-traduccion/list-traduccion.component';
+import { ListTraduccionComponent } from './list-traduccion/list-traduccion.component';
+
 @NgModule({
   imports: [
     ThemeModule,

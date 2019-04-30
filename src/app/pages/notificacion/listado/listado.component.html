@@ -2,7 +2,9 @@
   <div class="col-6 offset-3">
     <nb-card>
       <div class="input-group">
-        <input type="text" class="form-control" (keyup)="searchTerm$.next($event.target.value)" placeholder="Search for...">
+        <input type="text" class="form-control"
+          (keyup)="searchTerm$.next($event.target.value)" placeholder="Search
+          for...">
         <span class="input-group-append">
         </span>
       </div>
@@ -17,7 +19,8 @@
       <nb-card-body>
         <mat-list>
           <mat-list-item *ngFor="let notificacion of notificaciones">
-            <img matListAvatar src="assets/images/polux.png" [alt]="notificacion.User">
+            <img matListAvatar src="assets/images/polux.png"
+              [alt]="notificacion.User">
             <h3 matLine> {{notificacion.User}} </h3>
             <h4 matLine>
               {{notificacion.Content.Message}}
