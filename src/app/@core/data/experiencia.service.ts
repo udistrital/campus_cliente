@@ -10,7 +10,7 @@ const httpOptions = {
   }),
 }
 
-const path = GENERAL.ENTORNO.EXPERIENCIASERVICE;
+const path = GENERAL.ENTORNO.EXPERIENCIA_SERVICE;
 
 @Injectable()
 export class ExperienciaService {

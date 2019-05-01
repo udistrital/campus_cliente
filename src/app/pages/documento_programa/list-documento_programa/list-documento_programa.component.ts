@@ -59,7 +59,7 @@ export class ListDocumentoProgramaComponent implements OnInit {
         DocumentoPrograma: {
           title: this.translate.instant('GLOBAL.tipo_documento_programa'),
           valuePrepareFunction: (value) => {
-            return value.Nombre;
+            return value.TipoDocumentoPrograma.Nombre;
           },
         },
       },

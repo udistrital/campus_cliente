@@ -10,7 +10,7 @@ const httpOptions = {
   }),
 }
 
-const path = GENERAL.ENTORNO.DOCUMENTOPROGRAMASERVICE;
+const path = GENERAL.ENTORNO.DOCUMENTO_PROGRAMA_SERVICE;
 
 @Injectable()
 export class DocumentoProgramaService {

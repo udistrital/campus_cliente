@@ -35,10 +35,12 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   @Output('result') result: EventEmitter<any> = new EventEmitter();
 
   info_documento_programa: any;
+  documentoTemp: any;
   formDocumentoPrograma: any;
   regDocumentoPrograma: any;
   clean: boolean;
   loading: boolean;
+  valido: boolean;
   percentage: number;
 
   constructor(
@@ -83,12 +85,34 @@ export class CrudDocumentoProgramaComponent implements OnInit {
 
   loadOptionsTipodocumentoprograma(): void {
     let tipodocumentoprograma: Array<any> = [];
+    let tipo: any = {};
     this.documentoProgramaService.get('documento_programa/?limit=0')
       .subscribe(res => {
         if (res !== null) {
           tipodocumentoprograma = <Array<DocumentoPrograma>>res;
+          tipodocumentoprograma.forEach(element => {
+            this.documentoProgramaService.get('tipo_documento_programa/' + element.TipoDocumentoPrograma.Id)
+              .subscribe(res2 => {
+                if (res2 !== null) {
+                  tipo = res2;
+                  element.TipoDocumentoPrograma = tipo;
+                  element.Nombre = tipo.Nombre;
+                }
+                this.formDocumentoPrograma.campos[this.getIndexForm('DocumentoPrograma')].opciones = tipodocumentoprograma;
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.documento_programa') + '|' +
+                      this.translate.instant('GLOBAL.tipo_documento_programa'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
+          });
         }
-        this.formDocumentoPrograma.campos[this.getIndexForm('DocumentoPrograma')].opciones = tipodocumentoprograma;
       },
         (error: HttpErrorResponse) => {
           Swal({
@@ -251,13 +275,16 @@ export class CrudDocumentoProgramaComponent implements OnInit {
       .subscribe(res => {
         if (res !== null) {
           if (Object.keys(res).length !== 0) {
-
-
-          /** const temp = res[0];
-            if (tipoDescuento === 1 && temp.TipoDescuentoMatricula.Id !== 1) {
-              this.createDescuentoMatricula(descuentoMatricula);
-            } else if (tipoDescuento !== 1 && temp.TipoDescuentoMatricula.Id === 1) {
-              this.createDescuentoMatricula(descuentoMatricula);
+            this.valido = true;
+            this.documentoTemp = <SoporteDocumentoPrograma>res;
+            this.documentoTemp.forEach(element => {
+              if (element.Id === this.info_documento_programa.Id) {
+                this.valido = false;
+              }
+            });
+            if (this.valido) {
+              this.createDocumentoPrograma(documentoPrograma);
+              this.documento_programa_id = undefined;
             } else {
               Swal({
                 type: 'error',
@@ -267,15 +294,24 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                   this.translate.instant('GLOBAL.documentos_programa'),
                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
               });
-              this.eventChange.emit(true);
               this.clean = !this.clean;
-            }*/
+            }
           }
         } else {
           this.createDocumentoPrograma(documentoPrograma);
         }
-      });
-    this.eventChange.emit(true);
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.documento_programa') + '|' +
+              this.translate.instant('GLOBAL.soporte_documento'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
   }
 
   createDocumentoPrograma(documentoPrograma: any): void {
