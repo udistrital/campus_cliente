@@ -159,7 +159,7 @@
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_acad">/<!--/*ngIf="info_ente_id">-->
+  <nb-card [hidden]="!show_acad"><!--*ngIf="info_ente_id">/-->
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -251,8 +251,7 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-
-  <nb-card [hidden]="!show_docu"> <!--*ngIf="info_ente_id">-->
+  <nb-card [hidden]="!show_docu" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">

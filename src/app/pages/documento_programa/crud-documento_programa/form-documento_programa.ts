@@ -20,7 +20,7 @@ export let FORM_DOCUMENTO_PROGRAMA = {
             etiqueta: 'file',
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
             clase: 'form-control',
-            nombre: 'Soporte',
+            nombre: 'Documento',
             label_i18n: 'soporte_documento',
             placeholder_i18n: 'soporte_documento',
             requerido: false,

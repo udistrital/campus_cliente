@@ -18,6 +18,9 @@ export class ListDocumentoProgramaComponent implements OnInit {
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
+  data: any;
+  programaDocumento: any;
+  tipoProgramaDocumento: any;
   source: LocalDataSource = new LocalDataSource();
 
   @Output() eventChange = new EventEmitter();
@@ -46,7 +49,7 @@ export class ListDocumentoProgramaComponent implements OnInit {
         cancelButtonContent: '<i class="nb-close"></i>',
       },
       edit: {
-        editButtonContent: '<i class="nb-edit" hidden="true"></i>',
+        editButtonContent: '<i class="nb-edit"></i>',
         saveButtonContent: '<i class="nb-checkmark"></i>',
         cancelButtonContent: '<i class="nb-close"></i>',
       },
@@ -71,13 +74,50 @@ export class ListDocumentoProgramaComponent implements OnInit {
   }
 
   loadData(): void {
-    this.documentoProgramaService.get('soporte_documento_programa/?query=ente:' + this.userService.getEnte())
+    this.documentoProgramaService.get('soporte_documento_programa/?query=Ente:' + this.userService.getEnte())
       .subscribe(res => {
         if (res !== null) {
-          const data = <Array<any>>res;
-          this.loading = false;
-          // this.getPercentage(1);
-          this.source.load(data);
+          this.data = <Array<any>>res;
+          this.data.forEach(element => {
+            this.documentoProgramaService.get('documento_programa/' + element.DocumentoPrograma.Id)
+              .subscribe(documentoPrograma => {
+                if (documentoPrograma !== null) {
+                  this.programaDocumento =  <Array<any>>documentoPrograma;
+                  element.DocumentoPrograma = this.programaDocumento;
+                  this.documentoProgramaService.get('tipo_documento_programa/' +
+                    this.programaDocumento.TipoDocumentoPrograma.Id)
+                    .subscribe(tipoDocumentoPrograma => {
+                      if (tipoDocumentoPrograma !== null) {
+                        this.tipoProgramaDocumento =  <Array<any>>tipoDocumentoPrograma;
+                        element.DocumentoPrograma.TipoDocumentoPrograma = this.tipoProgramaDocumento;
+                      }
+                      this.loading = false;
+                      this.getPercentage(1);
+                      this.source.load(this.data);
+                    },
+                      (error: HttpErrorResponse) => {
+                        Swal({
+                          type: 'error',
+                          title: error.status + '',
+                          text: this.translate.instant('ERROR.' + error.status),
+                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                            this.translate.instant('GLOBAL.tipo_documento_programa'),
+                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                        });
+                      });
+                }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.documento_programa'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
+          });
         }
       },
         (error: HttpErrorResponse) => {
@@ -86,7 +126,7 @@ export class ListDocumentoProgramaComponent implements OnInit {
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.documento_programa'),
+              this.translate.instant('GLOBAL.documentos_programa'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });
