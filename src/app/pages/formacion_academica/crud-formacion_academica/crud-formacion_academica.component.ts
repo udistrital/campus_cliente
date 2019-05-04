@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Lugar } from './../../../@core/data/models/lugar';
-// import { InfoFormacionAcademica } from './../../../@core/data/models/info_formacion_academica';
+import { ProgramaAcademico } from './../../../@core/data/models/programa_academico';
 import { FORM_FORMACION_ACADEMICA } from './form-formacion_academica';
 import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -41,6 +41,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   info_formacion_academica: any;
   formInfoFormacionAcademica: any;
   regInfoFormacionAcademica: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -111,7 +112,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
     this.programaService.get('/programa_academico/?query=Institucion:' + institucion + '&limit=0')
       .subscribe(res => {
         if (res !== null) {
-          const r = <any>res;
+          const r = <ProgramaAcademico>res;
           this.formInfoFormacionAcademica.campos[this.getIndexForm('ProgramaAcademico')].opciones = r;
         }
       },
@@ -302,6 +303,8 @@ export class CrudFormacionAcademicaComponent implements OnInit {
 
   public loadInfoFormacionAcademica(): void {
     this.loading = true;
+    this.temp = {};
+    console.info(this.info_formacion_academica_id);
     if (this.info_formacion_academica_id !== undefined &&
       this.info_formacion_academica_id !== 0 &&
       this.info_formacion_academica_id.toString() !== '') {
@@ -309,28 +312,30 @@ export class CrudFormacionAcademicaComponent implements OnInit {
         this.info_formacion_academica_id)
         .subscribe(res => {
           if (res !== null) {
-            const temp = <any>res;
+            this.temp = <any>res;
             const files = []
-            if (temp.Documento + '' !== '0') {
-              files.push({ Id: temp.Documento, key: 'Documento' });
+            if (this.temp.Documento + '' !== '0') {
+              files.push({ Id: this.temp.Documento, key: 'Documento' });
             }
             this.nuxeoService.getDocumentoById$(files, this.documentoService)
               .subscribe(response => {
                 const filesResponse = <any>response;
                 if (Object.keys(filesResponse).length === files.length) {
-                  this.programaService.get('programa_academico/?query=id:' + temp.Titulacion)
+                  this.programaService.get('programa_academico/?query=id:' + this.temp.Titulacion)
                     .subscribe(programa => {
                       if (programa !== null) {
-                        const programa_info = <any>programa[0];
-                        temp.ProgramaAcademico = programa_info;
+                        const programa_info = <ProgramaAcademico>programa[0];
                         this.campusMidService.get('organizacion/identificacionente/?Ente=' + programa_info.Institucion)
                           .subscribe(organizacion => {
                             if (organizacion !== null) {
                               const organizacion_info = <any>organizacion;
                               this.searchDoc(organizacion_info.NumeroIdentificacion);
-                              this.SoporteDocumento = temp.Documento;
-                              temp.Documento = filesResponse['Documento'] + '';
-                              this.info_formacion_academica = temp;
+                              this.SoporteDocumento = this.temp.Documento;
+                              this.temp.Documento = filesResponse['Documento'] + '';
+                              this.temp.Titulacion = programa_info;
+                              this.temp.ProgramaAcademico = programa_info;
+                              this.info_formacion_academica = this.temp;
+                              this.formInfoFormacionAcademica.campos[this.getIndexForm('ProgramaAcademico')].opciones.push(programa_info);
                               this.loading = false;
                             }
                           },
@@ -429,6 +434,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                         this.translate.instant('GLOBAL.formacion_academica') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
+                      this.clean = !this.clean;
                       this.info_formacion_academica_id = 0;
                       this.loadInfoFormacionAcademica();
                     },
@@ -467,6 +473,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                 this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                   this.translate.instant('GLOBAL.formacion_academica') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
+                this.clean = !this.clean;
                 this.info_formacion_academica_id = 0;
                 this.loadInfoFormacionAcademica();
               },

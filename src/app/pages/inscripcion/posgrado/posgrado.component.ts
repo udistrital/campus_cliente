@@ -122,6 +122,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   setPercentage_prod(number, tab) {
     this.percentage_tab_prod[tab] = (number * 100) / 1;
     this.percentage_prod = Math.round(UtilidadesService.getSumArray(this.percentage_tab_prod));
+    this.percentage_prod = this.percentage_prod / this.percentage_prod;
     this.setPercentage_total();
   }
 

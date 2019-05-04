@@ -195,6 +195,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   activetab(): void {
@@ -203,7 +204,6 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    console.info(event.data.Id);
   }
 
   onCreate(event): void {
@@ -220,6 +220,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
       this.loadData();
     }
   }

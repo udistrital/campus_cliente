@@ -23,9 +23,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('formacion_academica')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('formacion_academica')">
             <nb-card-header>{{ 'GLOBAL.formacion_academica' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-graduation-cap fa-5x"></i>
@@ -34,9 +34,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('experiencia_laboral')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('experiencia_laboral')">
             <nb-card-header>{{ 'GLOBAL.experiencia_laboral' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-briefcase fa-5x"></i>
@@ -45,9 +45,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('produccion_academica')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('produccion_academica')">
             <nb-card-header>{{ 'GLOBAL.produccion_academica' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-book fa-5x"></i>
@@ -56,9 +56,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('documento_programa')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('documento_programa')">
             <nb-card-header>{{ 'GLOBAL.documento_programa' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-list-alt fa-5x"></i>
@@ -67,9 +67,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('descuento_matricula')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('descuento_matricula')">
             <nb-card-header>{{ 'GLOBAL.descuento_matricula' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-dollar fa-5x"></i>
@@ -78,9 +78,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('propuesta_grado')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('propuesta_grado')">
             <nb-card-header>{{ 'GLOBAL.propuesta_grado' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-file-pdf-o fa-5x"></i>
@@ -89,9 +89,9 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id">
           <nb-card class="exp-card"
-            (click)="perfil_editar('perfil')"><!--//*ngIf="info_ente_id"-->
+            (click)="perfil_editar('perfil')">
             <nb-card-header>{{ 'GLOBAL.perfil' | translate }}</nb-card-header>
             <nb-card-body class="icon-form">
               <i class="fa fa-user fa-5x"></i>
@@ -158,8 +158,8 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-
-  <nb-card [hidden]="!show_acad"><!--*ngIf="info_ente_id">/-->
+<!--
+  <nb-card [hidden]="!show_acad" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -184,7 +184,7 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-
+-->
   <nb-card [hidden]="!show_expe"> <!--*ngIf="info_ente_id">-->
     <nb-card-body>
       <div class="row">
@@ -209,7 +209,7 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-
+<!--
   <nb-card [hidden]="!show_prod">
     <nb-card-body>
       <div class="row">
@@ -275,7 +275,7 @@
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_desc"> <!--*ngIf="info_ente_id">-->
+  <nb-card [hidden]="!show_desc"> /<!--*ngIf="info_ente_id">--/>
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -320,7 +320,7 @@
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
-  </nb-card>
+  </nb-card>-->
   <!------------------------------------------------------------------------------------------------------------->
   <div [hidden]="!show_profile" *ngIf="info_ente_id && show_profile">
     <ngx-perfil (url_editar)="perfil_editar($event)"

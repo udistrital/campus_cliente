@@ -136,6 +136,7 @@ export class ListExperienciaLaboralComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -158,13 +159,13 @@ export class ListExperienciaLaboralComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
       this.loadData();
     }
   }
 
   getPercentage(event) {
     this.percentage = event;
-    console.info(JSON.stringify(this.percentage));
     this.result.emit(this.percentage);
   }
 

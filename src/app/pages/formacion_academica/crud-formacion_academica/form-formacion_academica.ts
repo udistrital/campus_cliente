@@ -80,7 +80,7 @@ export let FORM_FORMACION_ACADEMICA = {
       label_i18n: 'programa_academico',
       placeholder_i18n: 'programa_academico',
       requerido: true,
-      tipo: 'any',
+      tipo: 'ProgramaAcademico',
       key: 'Nombre',
       opciones: [],
     },

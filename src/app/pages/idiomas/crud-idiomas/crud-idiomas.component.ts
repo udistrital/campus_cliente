@@ -36,6 +36,7 @@ export class CrudIdiomasComponent implements OnInit {
   formInfoIdioma: any;
   regInfoIdioma: any;
   clean: boolean;
+  temp: any;
   loading: boolean;
   percentage: number;
   periodo: PeriodoAcademico;
@@ -159,6 +160,7 @@ export class CrudIdiomasComponent implements OnInit {
       this.idiomaService.get('conocimiento_idioma/?query=id:' + this.info_idioma_id)
         .subscribe(res => {
           if (res !== null) {
+            console.info(JSON.stringify(res));
             this.info_idioma = <InfoIdioma>res[0];
             this.idioma = this.info_idioma.Idioma.Id;
             this.loading = false;
@@ -176,6 +178,7 @@ export class CrudIdiomasComponent implements OnInit {
           });
     } else {
       this.info_idioma = undefined;
+      this.idioma = undefined;
       this.clean = !this.clean;
       this.loading = false;
     }
@@ -204,6 +207,7 @@ export class CrudIdiomasComponent implements OnInit {
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.idioma') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
               this.info_idioma_id = 0;
               this.loadInfoIdioma();
             },
@@ -241,12 +245,19 @@ export class CrudIdiomasComponent implements OnInit {
           this.info_idioma.Persona = this.users.getEnte();
           this.idiomaService.post('conocimiento_idioma', this.info_idioma)
             .subscribe(res => {
-              this.info_idioma = <InfoIdioma>res;
-              this.loading = false;
-              this.eventChange.emit(true);
-              this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                this.translate.instant('GLOBAL.idioma') + ' ' +
-                this.translate.instant('GLOBAL.confirmarCrear'));
+              const r = <any>res;
+              // this.info_idioma = <InfoIdioma>res;
+              if (r !== null && r.Type !== 'error') {
+                this.loading = false;
+                this.eventChange.emit(true);
+                this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                  this.translate.instant('GLOBAL.idioma') + ' ' +
+                  this.translate.instant('GLOBAL.confirmarCrear'));
+                  this.clean = !this.clean;
+              } else {
+                this.showToast('error', this.translate.instant('GLOBAL.error'),
+                  this.translate.instant('GLOBAL.error'));
+              }
             },
               (error: HttpErrorResponse) => {
                 Swal({

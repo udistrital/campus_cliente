@@ -44,6 +44,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   info_experiencia_laboral: any;
   formInfoExperienciaLaboral: any;
   regInfoExperienciaLaboral: any;
+  temp: any;
   clean: boolean;
   percentage: number;
   loading: boolean;
@@ -98,16 +99,18 @@ export class CrudExperienciaLaboralComponent implements OnInit {
 
   public loadInfoExperienciaLaboral(): void {
     this.loading = true;
+    this.temp = {};
+    this.info_experiencia_laboral = {};
     if (this.info_experiencia_laboral_id !== undefined &&
       this.info_experiencia_laboral_id !== 0 &&
       this.info_experiencia_laboral_id.toString() !== '') {
       this.campusMidService.get('experiencia_laboral/' + this.info_experiencia_laboral_id)
         .subscribe(res => {
           if (res !== null) {
-            const temp = <any>res;
+            this.temp = <any>res;
             const files = []
-            if (temp.Soporte + '' !== '0') {
-              files.push({ Id: temp.Soporte, key: 'Soporte' });
+            if (this.temp.Soporte + '' !== '0') {
+              files.push({ Id: this.temp.Soporte, key: 'Soporte' });
               this.nuxeoService.getDocumentoById$(files, this.documentoService)
                 .subscribe(response => {
                   const filesResponse = <any>response;
@@ -115,7 +118,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                     this.info_experiencia_laboral = <any>res;
                     this.soporte = this.info_experiencia_laboral.Soporte;
                     this.info_experiencia_laboral.Soporte = filesResponse['Soporte'] + '';
-                    console.info(this.info_experiencia_laboral);
                     this.enteService.get('identificacion/?query=Ente.Id:' +
                       this.info_experiencia_laboral.Organizacion + ',TipoIdentificacion.Id:5').subscribe(r => {
                         if (r !== null) {
@@ -203,7 +205,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           this.loading = true;
           this.info_experiencia_laboral = <any>infoExperienciaLaboral;
           this.info_experiencia_laboral.Id = this.info_experiencia_laboral_id;
-          console.info(this.info_experiencia_laboral);
           const files = [];
           if (this.info_experiencia_laboral.Soporte.file !== undefined) {
             files.push({ file: this.info_experiencia_laboral.Soporte.file, documento: this.soporte, key: 'Soporte' });
@@ -224,6 +225,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                         this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
+                      this.clean = !this.clean;
                       this.info_experiencia_laboral_id = 0;
                       this.loadInfoExperienciaLaboral();
                     },
@@ -259,6 +261,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                 this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                   this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
+                this.clean = !this.clean;
                 this.info_experiencia_laboral_id = 0;
                 this.loadInfoExperienciaLaboral();
               },
@@ -505,7 +508,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                 if (filesUp['Soporte'] !== undefined) {
                   this.info_experiencia_laboral.Soporte = filesUp['Soporte'].Id;
                 }
-                console.info(this.info_experiencia_laboral);
                 this.campusMidService.post('experiencia_laboral/', this.info_experiencia_laboral)
                   .subscribe(res => {
                     const r = <any>res;
