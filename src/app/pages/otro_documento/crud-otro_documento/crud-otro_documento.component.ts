@@ -30,6 +30,7 @@ export class CrudOtroDocumentoComponent implements OnInit {
   info_otro_documento: OtroDocumento;
   formOtroDocumento: any;
   regOtroDocumento: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -43,6 +44,7 @@ export class CrudOtroDocumentoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
+    this.loading = false;
   }
 
   construirForm() {
@@ -69,11 +71,17 @@ export class CrudOtroDocumentoComponent implements OnInit {
   }
 
   public loadOtroDocumento(): void {
+    this.loading = true;
+    this.info_otro_documento = <OtroDocumento>{};
+    this.temp = {};
     if (this.otro_documento_id !== undefined && this.otro_documento_id !== 0) {
       this.produccionAcademicaService.get('otro_documento/?query=id:' + this.otro_documento_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_otro_documento = <OtroDocumento>res[0];
+            this.temp = <OtroDocumento>res[0];
+            this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+            this.info_otro_documento = <OtroDocumento>this.temp;
+            this.loading = false;
           }
         },
           (error: HttpErrorResponse) => {
@@ -113,11 +121,12 @@ export class CrudOtroDocumentoComponent implements OnInit {
             .subscribe(res => {
               this.loading = false;
               this.eventChange.emit(true);
-              this.loadOtroDocumento();
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.documento') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
               this.otro_documento_id = 0;
+              this.loadOtroDocumento();
             },
               (error: HttpErrorResponse) => {
                 Swal({
@@ -150,6 +159,7 @@ export class CrudOtroDocumentoComponent implements OnInit {
         if (willDelete.value) {
           this.info_otro_documento = <OtroDocumento>otroDocumento;
           this.info_otro_documento.Persona = this.users.getEnte();
+          console.info(JSON.stringify(this.info_otro_documento));
           this.produccionAcademicaService.post('otro_documento', this.info_otro_documento)
             .subscribe(res => {
               const r = <any>res;

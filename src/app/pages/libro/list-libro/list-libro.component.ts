@@ -128,6 +128,7 @@ export class ListLibroComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -188,8 +189,8 @@ export class ListLibroComponent implements OnInit {
 
   onChange(event) {
     if (event) {
-      this.loadData();
       this.uid = 0;
+      this.loadData();
     }
   }
 

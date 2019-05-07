@@ -77,6 +77,5 @@ export let FORM_OTRO_DOCUMENTO = {
             requerido: false,
             tipo: 'text',
         },
-
     ],
 }

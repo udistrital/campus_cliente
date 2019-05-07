@@ -97,7 +97,30 @@ export class ListOtraPublicacionComponent implements OnInit {
     this.produccionAcademicaService.get('otra_publicacion/?query=persona:' + this.users.getEnte()).subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
-        this.source.load(data);
+        const data_info = <Array<any>>[];
+        data.forEach(element => {
+          this.produccionAcademicaService.get('tipo_otra_publicacion/' + element.Tipo.Id)
+            .subscribe(tipo => {
+              if (tipo !== null) {
+                const tipo_op = <any>tipo;
+                element.Tipo = tipo_op;
+                data_info.push(element);
+                this.loading = false;
+                this.getPercentage(1);
+                this.source.load(data_info);
+              }
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                    this.translate.instant('GLOBAL.otra_publicacion'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+            });
       }
     },
       (error: HttpErrorResponse) => {
@@ -113,6 +136,7 @@ export class ListOtraPublicacionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -173,8 +197,8 @@ export class ListOtraPublicacionComponent implements OnInit {
 
   onChange(event) {
     if (event) {
-      this.loadData();
       this.uid = 0;
+      this.loadData();
     }
   }
 

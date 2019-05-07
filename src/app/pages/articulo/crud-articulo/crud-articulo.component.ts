@@ -34,6 +34,7 @@ export class CrudArticuloComponent implements OnInit {
 
   info_articulo: Articulo;
   formArticulo: any;
+  temp: any;
   regArticulo: any;
   clean: boolean;
   loading: boolean;
@@ -52,7 +53,9 @@ export class CrudArticuloComponent implements OnInit {
     });
     this.loadOptionsTipo();
     this.loadOptionsMediodivulgacion();
+    this.loadOptionsCiudadPublicacion();
     this.ente_id = this.users.getEnte();
+    this.loading = false;
   }
 
   construirForm() {
@@ -114,7 +117,7 @@ export class CrudArticuloComponent implements OnInit {
 
   loadOptionsCiudadPublicacion(): void {
     let ciudadPublicacion: Array<any> = [];
-    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2')
+    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2&limit=0')
       .subscribe(res => {
         if (res !== null) {
           ciudadPublicacion = <Array<Lugar>>res;
@@ -145,12 +148,31 @@ export class CrudArticuloComponent implements OnInit {
   }
 
   public loadArticulo(): void {
+    this.loading = true;
+    this.info_articulo = <Articulo>{};
+    this.temp = {}
     if (this.articulo_id !== undefined && this.articulo_id !== 0 && this.articulo_id.toString() !== '') {
       this.produccionAcademicaService.get('articulo/?query=id:' + this.articulo_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_articulo = <Articulo>res[0];
-            this.loading = false;
+            this.temp = <Articulo>res[0];
+            this.ubicacionesService.get('lugar/' + this.temp.Ubicacion)
+              .subscribe(ubicacion => {
+                this.temp.Ubicacion = <Lugar>ubicacion;
+                this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+                this.info_articulo = <Articulo>this.temp;
+                this.loading = false;
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.articulo | GLOBAL.ubicacion'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
         },
           (error: HttpErrorResponse) => {
@@ -189,11 +211,12 @@ export class CrudArticuloComponent implements OnInit {
             .subscribe(res => {
               this.loading = false;
               this.eventChange.emit(true);
-              this.loadArticulo();
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.articulo') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
               this.articulo_id = 0;
+              this.loadArticulo();
             },
               (error: HttpErrorResponse) => {
                 Swal({
@@ -267,7 +290,7 @@ export class CrudArticuloComponent implements OnInit {
       } else {
         this.updateArticulo(event.data.Articulo);
       }
-      this.result.emit(event);
+      // this.result.emit(event);
     }
   }
 
@@ -296,5 +319,4 @@ export class CrudArticuloComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

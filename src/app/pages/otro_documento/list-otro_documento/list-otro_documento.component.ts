@@ -97,6 +97,8 @@ export class ListOtroDocumentoComponent implements OnInit {
     this.produccionAcademicaService.get('otro_documento/?query=persona:' + this.user.getEnte()).subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
+        this.loading = false;
+        this.getPercentage(1);
         this.source.load(data);
       }
     },
@@ -113,6 +115,7 @@ export class ListOtroDocumentoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -173,8 +176,8 @@ export class ListOtroDocumentoComponent implements OnInit {
 
   onChange(event) {
     if (event) {
-      this.loadData();
       this.uid = 0;
+      this.loadData();
     }
   }
 

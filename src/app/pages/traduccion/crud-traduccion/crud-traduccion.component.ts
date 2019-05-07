@@ -34,6 +34,7 @@ export class CrudTraduccionComponent implements OnInit {
   info_traduccion: Traduccion;
   formTraduccion: any;
   regTraduccion: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -52,6 +53,7 @@ export class CrudTraduccionComponent implements OnInit {
     this.loadOptionsTipotraduccion();
     this.loadOptionsMediodivulgacion();
     this.loadOptionsIdiomas();
+    this.loading = false;
   }
 
   construirForm() {
@@ -74,7 +76,7 @@ export class CrudTraduccionComponent implements OnInit {
         if (res !== null) {
           tipotraduccion = <Array<TipoTraduccion>>res;
         }
-        this.formTraduccion.campos[this.getIndexForm('Tipotraduccion')].opciones = tipotraduccion;
+        this.formTraduccion.campos[this.getIndexForm('TipoTraduccion')].opciones = tipotraduccion;
       },
         (error: HttpErrorResponse) => {
           Swal({
@@ -146,18 +148,61 @@ export class CrudTraduccionComponent implements OnInit {
 
   public loadTraduccion(): void {
     this.loading = true;
+    this.info_traduccion = <Traduccion>{};
+    this.temp = {};
     if (this.traduccion_id !== undefined && this.traduccion_id !== 0 &&
       this.traduccion_id.toString() !== '') {
       this.produccionAcademicaService.get('traduccion/?query=id:' + this.traduccion_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_traduccion = <Traduccion>res[0];
-            this.loading = false;
+            this.temp = <Traduccion>res[0];
+            this.idiomaService.get('idioma/' + this.temp.IdiomaOriginal)
+              .subscribe(idioma1 => {
+                this.temp.IdiomaOriginal = <Idioma>idioma1;
+                this.idiomaService.get('idioma/' + this.temp.IdiomaTraducido)
+                  .subscribe(idioma2 => {
+                    this.temp.IdiomaTraducido = <Idioma>idioma2;
+                    this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+                    this.info_traduccion = <Traduccion>this.temp;
+                    this.loading = false;
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                          this.translate.instant('GLOBAL.traduccion | GLOBAL.idioma'),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.traduccion | GLOBAL.idioma'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
-        });
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.traduccion'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
     } else {
       this.info_traduccion = undefined;
       this.clean = !this.clean;
+      this.loading = false;
     }
   }
 
@@ -175,17 +220,17 @@ export class CrudTraduccionComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          this.loading = true;
           this.info_traduccion = <Traduccion>traduccion;
           this.produccionAcademicaService.put('traduccion', this.info_traduccion)
             .subscribe(res => {
               this.loading = false;
               this.eventChange.emit(true);
-              this.loadTraduccion();
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.traduccion') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
               this.traduccion_id = 0;
+              this.loadTraduccion();
             },
               (error: HttpErrorResponse) => {
                 Swal({

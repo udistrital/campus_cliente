@@ -91,6 +91,8 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
     this.produccionAcademicaService.get('produccion_artes_arqu_diseno/?query=persona:' + this.user.getEnte()).subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
+        this.loading = false;
+        this.getPercentage(1);
         this.source.load(data);
       }
     },
@@ -107,6 +109,7 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -140,6 +143,16 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
             }
           });
         }
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          footer: this.translate.instant('GLOBAL.eliminar') + '-' +
+            this.translate.instant('GLOBAL.produccion_artes_arqu_diseno'),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
       });
   }
 
@@ -157,8 +170,8 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
       this.loadData();
-      this.cambiotab = !this.cambiotab;
     }
   }
 

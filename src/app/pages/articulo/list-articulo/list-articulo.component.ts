@@ -129,6 +129,7 @@ export class ListArticuloComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -189,8 +190,8 @@ export class ListArticuloComponent implements OnInit {
 
   onChange(event) {
     if (event) {
-      this.loadData();
       this.uid = 0;
+      this.loadData();
     }
   }
 

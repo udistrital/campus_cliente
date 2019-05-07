@@ -304,7 +304,6 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   public loadInfoFormacionAcademica(): void {
     this.loading = true;
     this.temp = {};
-    console.info(this.info_formacion_academica_id);
     if (this.info_formacion_academica_id !== undefined &&
       this.info_formacion_academica_id !== 0 &&
       this.info_formacion_academica_id.toString() !== '') {
@@ -508,7 +507,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
       .then((willDelete) => {
         this.loading = true;
         if (willDelete.value) {
-          const files = []
+          const files = [];
           this.info_formacion_academica = <any>infoFormacionAcademica;
           if (this.info_formacion_academica.Documento.file !== undefined) {
             files.push({

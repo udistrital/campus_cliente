@@ -79,12 +79,6 @@ export class ListProduccionTecnicaComponent implements OnInit {
             return value;
           },
         },
-        Ubicacion: {
-          title: this.translate.instant('GLOBAL.ubicacion'),
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
       },
     };
   }
@@ -97,6 +91,8 @@ export class ListProduccionTecnicaComponent implements OnInit {
     this.produccionAcademicaService.get('produccion_tecnica/?query=persona:' + this.user.getEnte()).subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
+        this.loading = false;
+        this.getPercentage(1);
         this.source.load(data);
       }
     },
@@ -113,6 +109,7 @@ export class ListProduccionTecnicaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -173,8 +170,8 @@ export class ListProduccionTecnicaComponent implements OnInit {
 
   onChange(event) {
     if (event) {
-      this.loadData();
       this.uid = 0;
+      this.loadData();
     }
   }
 

@@ -74,7 +74,8 @@ export class ListDocumentoProgramaComponent implements OnInit {
   }
 
   loadData(): void {
-    this.documentoProgramaService.get('soporte_documento_programa/?query=Ente:' + this.userService.getEnte())
+    this.documentoProgramaService.get('soporte_documento_programa/?query=Ente:' + this.userService.getEnte() +
+      '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           this.data = <Array<any>>res;
@@ -133,10 +134,12 @@ export class ListDocumentoProgramaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
     this.uid = event.data.Id;
+    console.info(this.uid);
   }
 
   onCreate(event): void {
@@ -192,6 +195,8 @@ export class ListDocumentoProgramaComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
+      console.info(this.uid);
       this.loadData();
     }
   }

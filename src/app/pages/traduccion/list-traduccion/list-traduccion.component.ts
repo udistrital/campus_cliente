@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProduccionAcademicaService } from '../../../@core/data/produccion_academica.service';
+import { IdiomaService } from '../../../@core/data/idioma.service';
 import { UserService } from '../../../@core/data/users.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -29,6 +30,7 @@ export class ListTraduccionComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
+    private idiomaService: IdiomaService,
     private users: UserService,
     private toasterService: ToasterService) {
     this.loadData();
@@ -70,7 +72,6 @@ export class ListTraduccionComponent implements OnInit {
         },
         Titulo: {
           title: this.translate.instant('GLOBAL.titulo_traduccion'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -84,18 +85,17 @@ export class ListTraduccionComponent implements OnInit {
         IdiomaOriginal: {
           title: this.translate.instant('GLOBAL.idioma_original'),
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         IdiomaTraducido: {
           title: this.translate.instant('GLOBAL.idioma_traducido'),
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         Ano: {
           title: this.translate.instant('GLOBAL.ano'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -119,9 +119,47 @@ export class ListTraduccionComponent implements OnInit {
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
-          this.loading = false;
-          this.getPercentage(1);
-          this.source.load(data);
+          const data_info = <Array<any>>[];
+          data.forEach(element => {
+            this.idiomaService.get('idioma/' + element.IdiomaOriginal)
+              .subscribe(idioma1 => {
+                if (idioma1 !== null) {
+                  const idioma_1 = <any>idioma1;
+                  element.IdiomaOriginal = idioma_1;
+                  this.idiomaService.get('idioma/' + element.IdiomaTraducido)
+                    .subscribe(idioma2 => {
+                      if (idioma2 !== null) {
+                        const idioma_2 = <any>idioma2;
+                        element.IdiomaTraducido = idioma_2;
+                        data_info.push(element);
+                        this.loading = false;
+                        this.getPercentage(1);
+                        this.source.load(data_info);
+                      }
+                    },
+                      (error: HttpErrorResponse) => {
+                        Swal({
+                          type: 'error',
+                          title: error.status + '',
+                          text: this.translate.instant('ERROR.' + error.status),
+                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                            this.translate.instant('GLOBAL.traduccion | GLOBAL.idioma'),
+                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                        });
+                      });
+                  }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.traduccion | GLOBAL.idioma'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
+          });
         }
       },
         (error: HttpErrorResponse) => {
@@ -137,6 +175,7 @@ export class ListTraduccionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -197,8 +236,8 @@ export class ListTraduccionComponent implements OnInit {
 
   onChange(event) {
     if (event) {
-      this.loadData();
       this.uid = 0;
+      this.loadData();
     }
   }
 

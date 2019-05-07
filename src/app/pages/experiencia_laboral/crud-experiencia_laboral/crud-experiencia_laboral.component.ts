@@ -108,7 +108,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
         .subscribe(res => {
           if (res !== null) {
             this.temp = <any>res;
-            const files = []
+            const files = [];
             if (this.temp.Soporte + '' !== '0') {
               files.push({ Id: this.temp.Soporte, key: 'Soporte' });
               this.nuxeoService.getDocumentoById$(files, this.documentoService)

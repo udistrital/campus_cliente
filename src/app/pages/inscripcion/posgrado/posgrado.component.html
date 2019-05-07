@@ -184,8 +184,8 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
--->
-  <nb-card [hidden]="!show_expe"> <!--*ngIf="info_ente_id">-->
+
+  <nb-card [hidden]="!show_expe" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -209,8 +209,8 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-<!--
-  <nb-card [hidden]="!show_prod">
+
+  <nb-card [hidden]="!show_prod" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -234,8 +234,7 @@
         <nb-tab tabTitle="{{ 'GLOBAL.traducciones' | translate }}">
           <ngx-list-traduccion (result)="setPercentage_prod($event,2)"></ngx-list-traduccion>
         </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.otra_publicacion' | translate
-          }}">
+        <nb-tab tabTitle="{{ 'GLOBAL.otra_publicacion' | translate }}">
           <ngx-list-otra-publicacion (result)="setPercentage_prod($event,3)"></ngx-list-otra-publicacion>
         </nb-tab>
         <nb-tab tabTitle="{{ 'GLOBAL.otro_documento' | translate }}">
@@ -244,13 +243,13 @@
         <nb-tab tabTitle="{{ 'GLOBAL.produccion_tecnica' | translate }}">
           <ngx-list-produccion-tecnica (result)="setPercentage_prod($event,5)"></ngx-list-produccion-tecnica>
         </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.produccion_artes_arqu_diseno' | translate
-          }}">
+        <nb-tab tabTitle="{{ 'GLOBAL.produccion_artes_arqu_diseno' | translate }}">
           <ngx-list-produccion-artes-arqu-diseno (result)="setPercentage_prod($event,6)"></ngx-list-produccion-artes-arqu-diseno>
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
   </nb-card>
+-->
   <nb-card [hidden]="!show_docu" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
@@ -274,7 +273,7 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-
+<!--
   <nb-card [hidden]="!show_desc"> /<!--*ngIf="info_ente_id">--/>
     <nb-card-body>
       <div class="row">

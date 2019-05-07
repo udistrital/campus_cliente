@@ -33,6 +33,7 @@ export class CrudProduccionTecnicaComponent implements OnInit {
   info_produccion_tecnica: ProduccionTecnica;
   formProduccionTecnica: any;
   regProduccionTecnica: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -49,6 +50,7 @@ export class CrudProduccionTecnicaComponent implements OnInit {
     });
     this.loadOptionsTipoproducciontecnica();
     this.loadOptionsCiudadPublicacion();
+    this.loading = false;
   }
 
   construirForm() {
@@ -88,7 +90,7 @@ export class CrudProduccionTecnicaComponent implements OnInit {
 
   loadOptionsCiudadPublicacion(): void {
     let ciudadPublicacion: Array<any> = [];
-    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2')
+    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2&limit=0')
       .subscribe(res => {
         if (res !== null) {
           ciudadPublicacion = <Array<Lugar>>res;
@@ -119,11 +121,31 @@ export class CrudProduccionTecnicaComponent implements OnInit {
   }
 
   public loadProduccionTecnica(): void {
+    this.loading = true;
+    this.info_produccion_tecnica = <ProduccionTecnica>{};
+    this.temp = {};
     if (this.produccion_tecnica_id !== undefined && this.produccion_tecnica_id !== 0) {
       this.produccionAcademicaService.get('produccion_tecnica/?query=id:' + this.produccion_tecnica_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_produccion_tecnica = <ProduccionTecnica>res[0];
+            this.temp = <ProduccionTecnica>res[0];
+            this.ubicacionesService.get('lugar/' + this.temp.Ubicacion)
+              .subscribe(ubicacion => {
+                this.temp.Ubicacion = <Lugar>ubicacion;
+                this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+                this.info_produccion_tecnica = <ProduccionTecnica>this.temp;
+                this.loading = false;
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.produccion_tecnica | GLOBAL.ubicacion'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
         },
           (error: HttpErrorResponse) => {
@@ -163,11 +185,12 @@ export class CrudProduccionTecnicaComponent implements OnInit {
             .subscribe(res => {
               this.loading = false;
               this.eventChange.emit(true);
-              this.loadProduccionTecnica();
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.produccion_tecnica') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
               this.produccion_tecnica_id = 0;
+              this.loadProduccionTecnica();
             },
               (error: HttpErrorResponse) => {
                 Swal({

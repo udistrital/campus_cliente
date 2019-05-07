@@ -36,6 +36,7 @@ export class CrudLibroComponent implements OnInit {
   info_libro: Libro;
   formLibro: any;
   regLibro: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -59,6 +60,7 @@ export class CrudLibroComponent implements OnInit {
     this.loadOptionsCiudadPublicacion();
     this.ente = this.user.getEnte();
     this.activarTituloCapitulo = false;
+    this.loading = false;
   }
 
   construirForm() {
@@ -152,7 +154,7 @@ export class CrudLibroComponent implements OnInit {
 
   loadOptionsCiudadPublicacion(): void {
     let ciudadPublicacion: Array<any> = [];
-    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2')
+    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2&limit=0')
       .subscribe(res => {
         if (res !== null) {
           ciudadPublicacion = <Array<Lugar>>res;
@@ -174,13 +176,30 @@ export class CrudLibroComponent implements OnInit {
 
   public loadLibro(): void {
     this.loading = true;
+    this.info_libro = <Libro>{};
+    this.temp = {};
     if (this.libro_id !== undefined && this.libro_id !== 0 && this.libro_id.toString() !== '') {
       this.produccionAcademicaService.get('libro/?query=id:' + this.libro_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_libro = <Libro>res[0];
-            this.loading = false;
-            console.info('Ciudadela: ' + this.info_libro.Ubicacion);
+            this.temp = <Libro>res[0];
+            this.ubicacionesService.get('lugar/' + this.temp.Ubicacion)
+              .subscribe(ubicacion => {
+                this.temp.Ubicacion = <Lugar>ubicacion;
+                this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+                this.info_libro = <Libro>this.temp;
+                this.loading = false;
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.libro | GLOBAL.ubicacion'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
         },
           (error: HttpErrorResponse) => {
@@ -220,11 +239,13 @@ export class CrudLibroComponent implements OnInit {
             .subscribe(res => {
               this.loading = false;
               this.eventChange.emit(true);
-              this.loadLibro();
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.libro') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              // por si algo
+              this.clean = !this.clean;
               this.libro_id = 0;
+              this.loadLibro();
             },
               (error: HttpErrorResponse) => {
                 Swal({

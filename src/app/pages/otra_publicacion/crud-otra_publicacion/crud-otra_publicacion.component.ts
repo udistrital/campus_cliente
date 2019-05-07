@@ -31,6 +31,7 @@ export class CrudOtraPublicacionComponent implements OnInit {
   info_otra_publicacion: OtraPublicacion;
   formOtraPublicacion: any;
   regOtraPublicacion: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -45,6 +46,7 @@ export class CrudOtraPublicacionComponent implements OnInit {
       this.construirForm();
     });
     this.loadOptionsTipo();
+    this.loading = false;
   }
 
   construirForm() {
@@ -93,11 +95,17 @@ export class CrudOtraPublicacionComponent implements OnInit {
   }
 
   public loadOtraPublicacion(): void {
+    this.loading = true;
+    this.info_otra_publicacion = <OtraPublicacion>{};
+    this.temp = {};
     if (this.otra_publicacion_id !== undefined && this.otra_publicacion_id !== 0) {
       this.produccionAcademicaService.get('otra_publicacion/?query=id:' + this.otra_publicacion_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_otra_publicacion = <OtraPublicacion>res[0];
+            this.temp = <OtraPublicacion>res[0];
+            this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+            this.info_otra_publicacion = <OtraPublicacion>this.temp;
+            this.loading = false;
           }
         },
           (error: HttpErrorResponse) => {
@@ -137,11 +145,12 @@ export class CrudOtraPublicacionComponent implements OnInit {
             .subscribe(res => {
               this.loading = false;
               this.eventChange.emit(true);
-              this.loadOtraPublicacion();
               this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                 this.translate.instant('GLOBAL.publicacion') + ' ' +
                 this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
               this.otra_publicacion_id = 0;
+              this.loadOtraPublicacion();
             },
               (error: HttpErrorResponse) => {
                 Swal({
