@@ -65,6 +65,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   construirForm() {
     // this.formDocumentoPrograma.titulo = this.translate.instant('GLOBAL.documento_programa');
     this.formDocumentoPrograma.btn = this.translate.instant('GLOBAL.guardar');
+    this.formDocumentoPrograma.btnLimpiar = this.translate.instant('GLOBAL.limpiar');
     for (let i = 0; i < this.formDocumentoPrograma.campos.length; i++) {
       this.formDocumentoPrograma.campos[i].label = this.translate.instant('GLOBAL.' + this.formDocumentoPrograma.campos[i].label_i18n);
       this.formDocumentoPrograma.campos[i].placeholder = this.translate.instant('GLOBAL.placeholder_' + this.formDocumentoPrograma.campos[i].label_i18n);
@@ -130,12 +131,11 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   }
 
   public loadDocumentoPrograma(): void {
-    console.info(JSON.stringify(this.clean));
-
     this.loading = true;
     this.temp = {};
     this.Documento = [];
     this.info_documento_programa = {};
+    this.filesUp = <any>{};
     if (this.documento_programa_id !== undefined &&
       this.documento_programa_id !== 0 &&
       this.documento_programa_id.toString() !== '') {
@@ -218,9 +218,11 @@ export class CrudDocumentoProgramaComponent implements OnInit {
               });
             });
     } else {
+      this.temp = {};
+      this.Documento = [];
+      this.filesUp = <any>{};
       this.info_documento_programa = undefined;
       this.clean = !this.clean;
-      this.Documento = [];
       this.loading = false;
     }
   }
@@ -349,7 +351,6 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
               });
               this.eventChange.emit(true);
-              this.clean = !this.clean;
             }
           }
         } else {
@@ -410,6 +411,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.documento_programa') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
+                      this.documento_programa_id = 0;
                       this.info_documento_programa = undefined;
                       this.clean = !this.clean;
                     } else {

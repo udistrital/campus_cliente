@@ -80,7 +80,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
     });
     this.getInfoPersonaId();
     this.loadInfoPostgrados();
-    this.total = false; // true;
+    this.total = true;
   }
 
   setPercentage_info(number, tab) {
@@ -438,7 +438,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
       pdf.text(`Apellidos: ${this.datos_persona['PrimerApellido']} ${this.datos_persona['SegundoApellido']}`, 15, 75);
       pdf.text(`${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 15, 82);
       pdf.text(`Fecha de inscripción: ${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 15, 89);
-      pdf.text(`Programa académico: ${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 15, 96);
+      pdf.text(`Programa académico: ${this.selectedValue.Nombre}`, 15, 96);
 
       pdf.text(`Formulario: `, 15, 103);
       pdf.addImage(contentDataURL, 'PNG', 0, 108, imgWidth, imgHeight);

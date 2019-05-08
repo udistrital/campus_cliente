@@ -46,7 +46,7 @@ export class ListDescuentoMatriculaComponent implements OnInit {
         cancelButtonContent: '<i class="nb-close"></i>',
       },
       edit: {
-        editButtonContent: '<i class="nb-edit" hidden="true"></i>',
+        editButtonContent: '<i class="nb-edit"></i>',
         saveButtonContent: '<i class="nb-checkmark"></i>',
         cancelButtonContent: '<i class="nb-close"></i>',
       },
@@ -71,7 +71,8 @@ export class ListDescuentoMatriculaComponent implements OnInit {
   }
 
   loadData(): void {
-    this.descuentosPosgradoService.get('descuento_matricula/?query=ente:' + this.userService.getEnte())
+    this.descuentosPosgradoService.get('descuento_matricula/?query=ente:' + this.userService.getEnte() +
+      '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
@@ -93,6 +94,7 @@ export class ListDescuentoMatriculaComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
@@ -152,10 +154,10 @@ export class ListDescuentoMatriculaComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
       this.loadData();
     }
   }
-
 
   itemselec(event): void {
   }

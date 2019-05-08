@@ -37,6 +37,7 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
   info_descuento_matricula: any;
   formDescuentoMatricula: any;
   regDescuentoMatricula: any;
+  temp: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -61,6 +62,7 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
   construirForm() {
     // this.formDescuentoMatricula.titulo = this.translate.instant('GLOBAL.descuento_matricula');
     this.formDescuentoMatricula.btn = this.translate.instant('GLOBAL.guardar');
+    this.formDescuentoMatricula.btnLimpiar = this.translate.instant('GLOBAL.limpiar');
     for (let i = 0; i < this.formDescuentoMatricula.campos.length; i++) {
       this.formDescuentoMatricula.campos[i].label = this.translate.instant('GLOBAL.' + this.formDescuentoMatricula.campos[i].label_i18n);
       this.formDescuentoMatricula.campos[i].placeholder = this.translate.instant('GLOBAL.placeholder_' + this.formDescuentoMatricula.campos[i].label_i18n);
@@ -105,25 +107,33 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
 
   public loadDescuentoMatricula(): void {
     this.loading = true;
+    this.temp = {};
+    this.SoporteDescuento = [];
+    this.info_descuento_matricula = {};
+    this.filesUp = <any>{};
     if (this.descuento_matricula_id !== undefined &&
       this.descuento_matricula_id !== 0 &&
       this.descuento_matricula_id.toString() !== '') {
       this.descuentosPosgradoService.get('descuento_matricula/?query=id:' + this.descuento_matricula_id)
         .subscribe(res => {
           if (res !== null) {
-            const temp = <DescuentoMatricula>res[0];
-            const files = []
-            if (temp.SoporteDescuento + '' !== '0') {
-              files.push({ Id: temp.Enlace, key: 'SoporteDescuento' });
+            this.temp = <DescuentoMatricula>res[0];
+            const files = [];
+            if (this.temp.SoporteDescuento + '' !== '0') {
+              files.push({ Id: this.temp.Enlace, key: 'SoporteDescuento' });
             }
             this.nuxeoService.getDocumentoById$(files, this.documentoService)
               .subscribe(response => {
                 const filesResponse = <any>response;
-                // if ( (Object.keys(filesResponse).length !== 0) && (filesResponse['SoporteDescuento'] !== undefined) ) {
                 if (Object.keys(filesResponse).length === files.length) {
-                  this.info_descuento_matricula = <any>res// temp;
-                  this.SoporteDescuento = this.info_descuento_matricula.Soporte;
-                  this.info_descuento_matricula.Soporte = filesResponse['SoporteDescuento'] + '';
+                  this.SoporteDescuento = this.temp.SoporteDescuento;
+                  this.temp.SoporteDescuento = filesResponse['SoporteDescuento'] + '';
+                  this.info_descuento_matricula = this.temp;
+                  this.info_descuento_matricula.SoporteDescuento = filesResponse['SoporteDescuento'] + '';
+                  this.loading = false;
+                  // this.info_descuento_matricula = <any>res// temp;
+                  // this.SoporteDescuento = this.info_descuento_matricula.Soporte;
+                  // this.info_descuento_matricula.Soporte = filesResponse['SoporteDescuento'] + '';
                 }
               },
                 (error: HttpErrorResponse) => {
@@ -150,6 +160,9 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
             });
           });
     } else {
+      this.temp = {};
+      this.SoporteDescuento = [];
+      this.filesUp = <any>{};
       this.info_descuento_matricula = undefined;
       this.clean = !this.clean;
       this.loading = false;
@@ -173,26 +186,30 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
           this.loading = true;
           this.info_descuento_matricula = <any>descuentoMatricula;
           const files = [];
-          if (this.info_descuento_matricula.Soporte.file !== undefined) {
-            files.push({ file: this.info_descuento_matricula.Soporte.file, documento: this.SoporteDescuento, key: 'SoporteDescuento' });
-            // console.info ('FILES: ' + JSON.stringify(files) + 'Longitud:' + files.length);
+          if (this.info_descuento_matricula.SoporteDescuento.file !== undefined) {
+            files.push({ file: this.info_descuento_matricula.SoporteDescuento.file, documento: this.SoporteDescuento, key: 'SoporteDescuento' });
           }
           if (files.length !== 0) {
             this.nuxeoService.updateDocument$(files, this.documentoService)
               .subscribe(response => {
                 if (Object.keys(response).length === files.length) {
                   const documentos_actualizados = <any>response;
+                  this.info_descuento_matricula.SoporteDescuento = this.SoporteDescuento;
+                  this.info_descuento_matricula.Id = this.descuento_matricula_id;
                   this.descuentosPosgradoService.put('descuento_matricula', this.info_descuento_matricula)
                     .subscribe(res => {
                       if (documentos_actualizados['SoporteDescuento'] !== undefined) {
-                        this.info_descuento_matricula.Soporte = documentos_actualizados['SoporteDescuento'].url + '';
+                        this.info_descuento_matricula.SoporteDescuento = documentos_actualizados['SoporteDescuento'].url + '';
                       }
-                      this.loadDescuentoMatricula();
                       this.loading = false;
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                         this.translate.instant('GLOBAL.descuento_matricula') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
+                      this.clean = !this.clean;
+                      this.info_descuento_matricula = undefined;
+                      this.descuento_matricula_id = 0;
+                      this.loadDescuentoMatricula();
                     },
                       (error: HttpErrorResponse) => {
                         Swal({
@@ -219,14 +236,19 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
                   });
                 });
           } else {
-            this.info_descuento_matricula.Soporte = this.SoporteDescuento;
+            this.info_descuento_matricula.SoporteDescuento = this.SoporteDescuento;
+            this.info_descuento_matricula.Id = this.descuento_matricula_id;
             this.descuentosPosgradoService.put('descuentoMatricula', this.info_descuento_matricula)
               .subscribe(res => {
+                this.loading = false;
                 this.eventChange.emit(true);
-                this.loadDescuentoMatricula();
                 this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                   this.translate.instant('GLOBAL.descuento_matricula') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
+                this.clean = !this.clean;
+                this.info_descuento_matricula = undefined;
+                this.descuento_matricula_id = 0;
+                this.loadDescuentoMatricula();
               },
                 (error: HttpErrorResponse) => {
                   this.loading = false;
@@ -259,11 +281,12 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
                 this.translate.instant('GLOBAL.descuento_matricula'),
               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
+            this.eventChange.emit(true);
           } else if (Object.keys(res).length === 1) {
-            const temp = res[0];
-            if (tipoDescuento === 1 && temp.TipoDescuentoMatricula.Id !== 1) {
+            const tempDescuento = res[0];
+            if (tipoDescuento === 1 && tempDescuento.TipoDescuentoMatricula.Id !== 1) {
               this.createDescuentoMatricula(descuentoMatricula);
-            } else if (tipoDescuento !== 1 && temp.TipoDescuentoMatricula.Id === 1) {
+            } else if (tipoDescuento !== 1 && tempDescuento.TipoDescuentoMatricula.Id === 1) {
               this.createDescuentoMatricula(descuentoMatricula);
             } else {
               Swal({
@@ -281,8 +304,19 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
         } else {
           this.createDescuentoMatricula(descuentoMatricula);
         }
-      });
-    this.eventChange.emit(true);
+        this.eventChange.emit(true);
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.descuento_matricula') + '|' +
+              this.translate.instant('GLOBAL.soporte_documento'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
   }
 
   createDescuentoMatricula(descuentoMatricula: any): void {
@@ -303,11 +337,10 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
           const files = []
           this.info_descuento_matricula = <DescuentoMatricula>descuentoMatricula;
           this.info_descuento_matricula.Ente = this.user.getEnte();
-          // const valor =  descuentoMatricula.TipoDescuentoMatricula.Id;
-          if (this.info_descuento_matricula.Soporte.file !== undefined) {
+          if (this.info_descuento_matricula.SoporteDescuento.file !== undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: 'SoporteDescuento',
-              file: this.info_descuento_matricula.Soporte.file, IdDocumento: 7,
+              file: this.info_descuento_matricula.SoporteDescuento.file, IdDocumento: 7,
             });
           }
           this.nuxeoService.getDocumentos$(files, this.documentoService)
@@ -317,14 +350,18 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
                 if (filesUp['SoporteDescuento'] !== undefined) {
                   this.info_descuento_matricula.Enlace = filesUp['SoporteDescuento'].Id;
                 }
+                console.info(JSON.stringify(this.info_descuento_matricula));
                 this.descuentosPosgradoService.post('descuento_matricula', this.info_descuento_matricula)
                   .subscribe(res => {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {
+                      this.loading = false;
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.descuento_matricula') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
+                      this.descuento_matricula_id = 0;
+                      this.info_descuento_matricula = undefined;
                       this.clean = !this.clean;
                     } else {
                       this.showToast('error', this.translate.instant('GLOBAL.error'),
@@ -356,7 +393,6 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
               });
         }
       });
-    this.loadDescuentoMatricula();
   }
 
   ngOnInit() {
@@ -372,11 +408,10 @@ export class CrudDescuentoMatriculaComponent implements OnInit {
     if (event.valid) {
       if (this.info_descuento_matricula === undefined) {
         this.crearNuevoDescuentoMatricula(event.data.DescuentoMatricula)
-        this.loadDescuentoMatricula();
       } else {
         this.updateDescuentoMatricula(event.data.DescuentoMatricula);
-        this.loadDescuentoMatricula();
       }
+      this.result.emit(event);
     }
   }
 

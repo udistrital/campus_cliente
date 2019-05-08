@@ -2,6 +2,7 @@ export let FORM_DOCUMENTO_PROGRAMA = {
   // titulo: 'DocumentoPrograma',
   tipo_formulario: 'mini',
   btn: 'Guardar',
+  btnLimpiar: 'Limpiar',
   alertas: true,
   modelo: 'DocumentoPrograma',
   campos: [

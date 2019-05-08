@@ -70,6 +70,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   construirForm() {
     // this.formInfoFormacionAcademica.titulo = this.translate.instant('GLOBAL.formacion_academica');
     this.formInfoFormacionAcademica.btn = this.translate.instant('GLOBAL.guardar');
+    this.formInfoFormacionAcademica.btnLimpiar = this.translate.instant('GLOBAL.limpiar');
     for (let i = 0; i < this.formInfoFormacionAcademica.campos.length; i++) {
       this.formInfoFormacionAcademica.campos[i].label = this.translate.instant('GLOBAL.' + this.formInfoFormacionAcademica.campos[i].label_i18n);
       this.formInfoFormacionAcademica.campos[i].placeholder = this.translate.instant('GLOBAL.placeholder_' +
@@ -306,6 +307,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
     this.temp = {};
     this.SoporteDocumento = [];
     this.info_formacion_academica = {};
+    this.filesUp = <any>{};
     if (this.info_formacion_academica_id !== undefined &&
       this.info_formacion_academica_id !== 0 &&
       this.info_formacion_academica_id.toString() !== '') {
@@ -390,9 +392,11 @@ export class CrudFormacionAcademicaComponent implements OnInit {
             });
           });
     } else {
+      this.temp = {};
+      this.SoporteDocumento = [];
+      this.filesUp = <any>{};
       this.info_formacion_academica = undefined
       this.clean = !this.clean;
-      this.SoporteDocumento = [];
       this.loading = false;
     }
   }
@@ -535,6 +539,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.formacion_academica') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
+                      this.info_formacion_academica_id = 0;
                       this.info_formacion_academica = undefined;
                       this.clean = !this.clean;
                     } else {

@@ -2,6 +2,7 @@ export let FORM_DESCUENTO_MATRICULA = {
     // titulo: 'DescuentoMatricula',
     tipo_formulario: 'mini',
     btn: 'Guardar',
+    btnLimpiar: 'Limpiar',
     alertas: true,
     modelo: 'DescuentoMatricula',
     campos: [

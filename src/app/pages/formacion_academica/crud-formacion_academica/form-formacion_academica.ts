@@ -3,6 +3,7 @@ export let FORM_FORMACION_ACADEMICA = {
   tipo_formulario: 'mini',
   alertas: true,
   btn: 'Guardar',
+  btnLimpiar: 'Limpiar',
   modelo: 'InfoFormacionAcademica',
   campos: [
     {

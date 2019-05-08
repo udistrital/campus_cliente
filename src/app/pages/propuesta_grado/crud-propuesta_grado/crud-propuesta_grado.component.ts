@@ -92,8 +92,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
 
   public buscarID_prop(): void {
     this.ENTE_id = this.ente_id.getEnte();
-    this.admisionesService.get('admision/?query=Aspirante:' + this.ENTE_id)
+    this.admisionesService.get('admision/?query=Aspirante:' + this.ENTE_id +
+      '&sortby=Id&order=desc')
       .subscribe(res_ente => {
+        console.info(JSON.stringify(res_ente));
         this.admision_id = res_ente[0].Id;
         if (res_ente[0].Aspirante === this.ente_id.getEnte()) {
           this.admisionesService.get('propuesta/?query=Admision:' + this.admision_id)

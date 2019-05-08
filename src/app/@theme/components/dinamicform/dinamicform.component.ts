@@ -118,7 +118,6 @@ export class DinamicformComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-
     if (!this.normalform.tipo_formulario) {
       this.normalform.tipo_formulario = 'grid';
     }
@@ -143,8 +142,10 @@ export class DinamicformComponent implements OnInit, OnChanges {
   }
 
   validCampo(c): boolean {
-
     if (c.etiqueta === 'file') {
+      if (c.valor === null) {
+        c.valor = '';
+      }
       console.info((c.etiqueta === 'file' && c.valor.name === undefined));
     }
     if (c.requerido && ((c.valor === '' && c.etiqueta !== 'file') || c.valor === null || c.valor === undefined ||
@@ -201,7 +202,6 @@ export class DinamicformComponent implements OnInit, OnChanges {
     return true;
   }
 
-
   clearForm() {
     this.normalform.campos.forEach(d => {
       d.valor = null;
@@ -209,7 +209,6 @@ export class DinamicformComponent implements OnInit, OnChanges {
   }
 
   validForm() {
-
     const result = {};
     let requeridos = 0;
     let resueltos = 0;
@@ -273,7 +272,6 @@ export class DinamicformComponent implements OnInit, OnChanges {
     }
     this.resultAux.emit(dataTemp);
   }
-
 
   setPercentage(): void {
     let requeridos = 0;

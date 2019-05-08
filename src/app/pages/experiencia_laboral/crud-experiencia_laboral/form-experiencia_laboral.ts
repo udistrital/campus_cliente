@@ -2,6 +2,7 @@ export let FORM_EXPERIENCIA_LABORAL = {
   tipo_formulario: 'mini',
   alertas: true,
   btn: 'Guardar',
+  btnLimpiar: 'Limpiar',
   modelo: 'InfoExperienciaLaboral',
   campos: [
     {

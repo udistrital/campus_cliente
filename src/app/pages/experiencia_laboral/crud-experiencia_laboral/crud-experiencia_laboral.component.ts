@@ -75,6 +75,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   construirForm() {
     // this.formInfoExperienciaLaboral.titulo = this.translate.instant('GLOBAL.experiencia_laboral');
     this.formInfoExperienciaLaboral.btn = this.translate.instant('GLOBAL.guardar');
+    this.formInfoExperienciaLaboral.btnLimpiar = this.translate.instant('GLOBAL.limpiar');
     for (let i = 0; i < this.formInfoExperienciaLaboral.campos.length; i++) {
       this.formInfoExperienciaLaboral.campos[i].label = this.translate.instant('GLOBAL.' +
         this.formInfoExperienciaLaboral.campos[i].label_i18n);
@@ -183,9 +184,10 @@ export class CrudExperienciaLaboralComponent implements OnInit {
             });
           });
     } else {
+      this.soporte = [];
+      this.temp = {};
       this.info_experiencia_laboral = undefined
       this.clean = !this.clean;
-      this.soporte = [];
       this.loading = false;
     }
   }
@@ -521,6 +523,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
+                      this.info_experiencia_laboral_id = 0;
                       this.info_experiencia_laboral = undefined;
                       this.clean = !this.clean;
                     }
