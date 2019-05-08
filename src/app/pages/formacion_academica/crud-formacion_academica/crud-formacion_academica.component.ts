@@ -304,6 +304,8 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   public loadInfoFormacionAcademica(): void {
     this.loading = true;
     this.temp = {};
+    this.SoporteDocumento = [];
+    this.info_formacion_academica = {};
     if (this.info_formacion_academica_id !== undefined &&
       this.info_formacion_academica_id !== 0 &&
       this.info_formacion_academica_id.toString() !== '') {
@@ -434,6 +436,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                         this.translate.instant('GLOBAL.formacion_academica') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
                       this.clean = !this.clean;
+                      this.info_formacion_academica = undefined;
                       this.info_formacion_academica_id = 0;
                       this.loadInfoFormacionAcademica();
                     },
@@ -473,6 +476,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                   this.translate.instant('GLOBAL.formacion_academica') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
                 this.clean = !this.clean;
+                this.info_formacion_academica = undefined;
                 this.info_formacion_academica_id = 0;
                 this.loadInfoFormacionAcademica();
               },
@@ -531,6 +535,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.formacion_academica') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
+                      this.info_formacion_academica = undefined;
                       this.clean = !this.clean;
                     } else {
                       this.showToast('error', this.translate.instant('GLOBAL.error'),

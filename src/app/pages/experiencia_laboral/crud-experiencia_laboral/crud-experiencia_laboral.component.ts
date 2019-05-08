@@ -101,6 +101,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     this.loading = true;
     this.temp = {};
     this.info_experiencia_laboral = {};
+    this.soporte = [];
     if (this.info_experiencia_laboral_id !== undefined &&
       this.info_experiencia_laboral_id !== 0 &&
       this.info_experiencia_laboral_id.toString() !== '') {
@@ -184,6 +185,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     } else {
       this.info_experiencia_laboral = undefined
       this.clean = !this.clean;
+      this.soporte = [];
       this.loading = false;
     }
   }
@@ -226,6 +228,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                         this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
                       this.clean = !this.clean;
+                      this.info_experiencia_laboral = undefined;
                       this.info_experiencia_laboral_id = 0;
                       this.loadInfoExperienciaLaboral();
                     },
@@ -262,6 +265,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                   this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
                 this.clean = !this.clean;
+                this.info_experiencia_laboral = undefined;
                 this.info_experiencia_laboral_id = 0;
                 this.loadInfoExperienciaLaboral();
               },
@@ -517,6 +521,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.experiencia_laboral') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
+                      this.info_experiencia_laboral = undefined;
                       this.clean = !this.clean;
                     }
                   },

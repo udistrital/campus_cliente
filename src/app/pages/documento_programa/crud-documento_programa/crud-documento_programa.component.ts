@@ -130,12 +130,12 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   }
 
   public loadDocumentoPrograma(): void {
+    console.info(JSON.stringify(this.clean));
+
     this.loading = true;
     this.temp = {};
     this.Documento = [];
-    this.filesUp = <any>{};
-    this.info_documento_programa = <SoporteDocumentoPrograma>{};
-    console.info(this.documento_programa_id);
+    this.info_documento_programa = {};
     if (this.documento_programa_id !== undefined &&
       this.documento_programa_id !== 0 &&
       this.documento_programa_id.toString() !== '') {
@@ -334,7 +334,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
             this.documentoTemp = <SoporteDocumentoPrograma>res;
             this.documentoTemp.forEach(element => {
               if (element.DocumentoPrograma.Id === documentoProgramaDocumento) {
-                // this.valido = false;
+                this.valido = false;
               }
             });
             if (this.valido) {
@@ -446,7 +446,6 @@ export class CrudDocumentoProgramaComponent implements OnInit {
 
   validarForm(event) {
     if (event.valid) {
-      console.info(JSON.stringify(this.info_documento_programa));
       if (this.info_documento_programa === undefined) {
         this.crearNuevoDocumentoPrograma(event.data.DocumentoPrograma);
       } else {
