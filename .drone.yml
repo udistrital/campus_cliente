@@ -9,6 +9,7 @@ steps:
   - apt-get install -y zip
   - rm -rf node_modules
   - npm i
+  - npm install node-sass
   - npm run lint
   - npm run build --build-optimizer=false
   when:
