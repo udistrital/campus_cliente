@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LibroComponent } from './libro.component';
 import { ListLibroComponent } from './list-libro/list-libro.component';
 import { CrudLibroComponent } from './crud-libro/crud-libro.component';
-// import { AuthGuard } from '../../@core/_guards/auth.guard';
+import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -11,11 +11,23 @@ const routes: Routes = [{
   children: [{
     path: 'list-libro',
     component: ListLibroComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'crud-libro',
     component: CrudLibroComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 

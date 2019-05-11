@@ -4,7 +4,7 @@ import { ExperienciaLaboralComponent } from './experiencia_laboral.component';
 import { ListExperienciaLaboralComponent } from './list-experiencia_laboral/list-experiencia_laboral.component';
 import { CrudExperienciaLaboralComponent } from './crud-experiencia_laboral/crud-experiencia_laboral.component';
 import { ViewExperienciaLaboralComponent } from './view-experiencia_laboral/view-experiencia_laboral.component';
-// import { AuthGuard } from '../../@core/_guards/auth.guard';
+import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -12,15 +12,33 @@ const routes: Routes = [{
   children: [{
     path: 'list-experiencia_laboral',
     component: ListExperienciaLaboralComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'crud-experiencia_laboral',
     component: CrudExperienciaLaboralComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'view-experiencia_laboral',
     component: ViewExperienciaLaboralComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 

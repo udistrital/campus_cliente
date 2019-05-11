@@ -4,7 +4,7 @@ import { DocumentoProgramaComponent } from './documento_programa.component';
 import { ListDocumentoProgramaComponent } from './list-documento_programa/list-documento_programa.component';
 import { CrudDocumentoProgramaComponent } from './crud-documento_programa/crud-documento_programa.component';
 // import { ViewDocumentoProgramaComponent } from './view-documento_programa/view-documento_programa.component';
-// import { AuthGuard } from '../../@core/_guards/auth.guard';
+import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -12,11 +12,23 @@ const routes: Routes = [{
   children: [{
     path: 'list-documento_programa',
     component: ListDocumentoProgramaComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'crud-documento_programa',
     component: CrudDocumentoProgramaComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 

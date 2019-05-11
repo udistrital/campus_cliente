@@ -1,5 +1,5 @@
 kind: pipeline
-name: suma_back
+name: campus_cliente
 
 steps:
 - name: build
@@ -10,8 +10,13 @@ steps:
   - rm -rf node_modules
   - npm i
   - npm run lint
-  - npm run build
-- name: publish-s3  
+  - npm run build --build-optimizer=false
+  when:
+    branch:
+    - develop
+    event:
+    - push
+- name: publish-s3
   image: plugins/s3
   settings:
     bucket: campus-cliente
@@ -23,7 +28,12 @@ steps:
     region: us-east-1
     source: dist/**/*
     target: /
-    strip_prefix: dist/
+    strip_prefix: dist
+  when:
+    branch:
+    - develop
+    event:
+    - push
 - name: notify
   image: appleboy/drone-telegram
   settings:
@@ -34,13 +44,13 @@ steps:
     format: html
     message: >
       {{#success build.status}}
-        <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a> 
+        <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
       {{else}}
         <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">FAILURE</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
       {{/success}}
-    when:
-    status:
-    - failure
-    - success
+  when:
+   status:
+   - failure
+   - success

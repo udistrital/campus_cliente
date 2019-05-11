@@ -9,6 +9,9 @@ import { AdmisionesService } from '../../../@core/data/admisiones.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Admision } from '../../../@core/data/models/admision';
 import { IMAGENES } from './imagenes';
+
+import {formatDate} from '@angular/common';
+
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import * as jsPDF from 'jspdf';
@@ -421,34 +424,85 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   public captureScreen() {
-    const data = document.getElementById('demo-capture');
-    html2canvas(data).then(canvas => {
-      const imgWidth = 208;
+    const data1 = document.getElementById('info_basica');
+    const data2 = document.getElementById('formacion_academica');
+    const data3 = document.getElementById('experiencia_laboral');
+    const data4 = document.getElementById('produccion_academica');
+    const data5 = document.getElementById('documento_programa');
+    const data6 = document.getElementById('descuento_matricula');
+    const data7 = document.getElementById('propuesta_grado');
+    html2canvas(data1).then(canvas => {
+      const imgWidth = 50;
       const imgHeight = (canvas.height * imgWidth) / canvas.width;
       const imgData = this.imagenes.escudo;
-
       const contentDataURL = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'letter');
-      pdf.setFontSize(20);
-      pdf.addImage(imgData, 'PNG', 10, 10, 92, 35);
-      pdf.text(`Comprobante de inscripción`, 65, 55);
-      pdf.setFontSize(12);
 
-      pdf.text(`Nombres: ${this.datos_persona['PrimerNombre']} ${this.datos_persona['SegundoNombre']}`, 15, 68);
-      pdf.text(`Apellidos: ${this.datos_persona['PrimerApellido']} ${this.datos_persona['SegundoApellido']}`, 15, 75);
-      pdf.text(`${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 15, 82);
-      pdf.text(`Fecha de inscripción: ${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']}: ${this.datos_persona['NumeroDocumento']}`, 15, 89);
-      pdf.text(`Programa académico: ${this.selectedValue.Nombre}`, 15, 96);
+      html2canvas(data2).then(canvas2 => {
+        const imgWidth2 = 50;
+        const imgHeight2 = (canvas2.height * imgWidth2) / canvas2.width;
+        const contentDataURL2 = canvas2.toDataURL('image/png');
 
-      pdf.text(`Formulario: `, 15, 103);
-      pdf.addImage(contentDataURL, 'PNG', 0, 108, imgWidth, imgHeight);
-      pdf.setFontSize(9);
-      pdf.text(`Universidad Distrital Francisco José de Caldas`, 78, 256);
-      pdf.text(`Carrera 7 # 40B - 53 - Bogotá D.C. - Colombia`, 78, 262);
-      pdf.text(`Teléfono (Colombia) : +57 3 323-9300`, 83, 267);
+        html2canvas(data3).then(canvas3 => {
+          const imgWidth3 = 50;
+          const imgHeight3 = (canvas3.height * imgWidth3) / canvas3.width;
+          const contentDataURL3 = canvas3.toDataURL('image/png');
 
-      const nombre_archivo = `${this.datos_persona['PrimerNombre']}_${this.datos_persona['NumeroDocumento']}`;
-      pdf.save(`${nombre_archivo}.pdf`);
+          html2canvas(data4).then(canvas4 => {
+            const imgWidth4 = 50;
+            const imgHeight4 = (canvas4.height * imgWidth4) / canvas4.width;
+            const contentDataURL4 = canvas4.toDataURL('image/png');
+
+            html2canvas(data5).then(canvas5 => {
+              const imgWidth5 = 50;
+              const imgHeight5 = (canvas5.height * imgWidth5) / canvas5.width;
+              const contentDataURL5 = canvas5.toDataURL('image/png');
+
+              html2canvas(data6).then(canvas6 => {
+                const imgWidth6 = 50;
+                const imgHeight6 = (canvas6.height * imgWidth6) / canvas6.width;
+                const contentDataURL6 = canvas6.toDataURL('image/png');
+
+                html2canvas(data7).then(canvas7 => {
+                  const imgWidth7 = 50;
+                  const imgHeight7 = (canvas7.height * imgWidth7) / canvas7.width;
+                  const contentDataURL7 = canvas7.toDataURL('image/png');
+                  const pdf = new jsPDF('p', 'mm', 'letter');
+
+                  pdf.setFontSize(20);
+                  pdf.addImage(imgData, 'PNG', 10, 10, 92, 35);
+                  pdf.text(`Comprobante de inscripción`, 65, 55);
+                  pdf.setFontSize(12);
+
+                  pdf.text(`Nombres: ${this.datos_persona['PrimerNombre']} ${this.datos_persona['SegundoNombre']}`, 15, 68);
+                  pdf.text(`Apellidos: ${this.datos_persona['PrimerApellido']} ${this.datos_persona['SegundoApellido']}`, 15, 75);
+                  pdf.text(
+                    `Documento de identificación: ${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']} ${this.datos_persona['NumeroDocumento']}`,
+                    15, 82);
+                  pdf.text(`Fecha de inscripción: ${formatDate(new Date(), 'yyyy-MM-dd', 'en')}`, 15, 89);
+                  pdf.text(`Programa académico: ${this.selectedValue.Nombre}`, 15, 96);
+
+                  pdf.text(`Formulario: `, 15, 103);
+                  pdf.addImage(contentDataURL, 'PNG', 18, 108, imgWidth, imgHeight);
+                  pdf.addImage(contentDataURL2, 'PNG', 82, 108, imgWidth2, imgHeight2);
+                  pdf.addImage(contentDataURL3, 'PNG', 147, 108, imgWidth3, imgHeight3);
+                  pdf.addImage(contentDataURL4, 'PNG', 18, 148, imgWidth4, imgHeight4);
+                  pdf.addImage(contentDataURL5, 'PNG', 82, 148, imgWidth5, imgHeight5);
+                  pdf.addImage(contentDataURL6, 'PNG', 147, 148, imgWidth6, imgHeight6);
+                  pdf.addImage(contentDataURL7, 'PNG', 82, 188, imgWidth7, imgHeight7);
+                  pdf.setFontSize(9);
+                  pdf.text(`Universidad Distrital Francisco José de Caldas`, 78, 256);
+                  pdf.text(`Carrera 7 # 40B - 53 - Bogotá D.C. - Colombia`, 78, 262);
+                  pdf.text(`Teléfono (Colombia) : +57 3 323-9300`, 83, 267);
+
+                  const nombre_archivo = `${this.datos_persona['PrimerNombre']}_${this.datos_persona['PrimerApellido']}_` +
+                    `${this.datos_persona['NumeroDocumento']}`;
+                  pdf.save(`${nombre_archivo}.pdf`);
+                });
+              });
+            });
+          });
+        });
+      });
     });
   }
 }

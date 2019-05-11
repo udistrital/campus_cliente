@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticuloComponent } from './articulo.component';
 import { ListArticuloComponent } from './list-articulo/list-articulo.component';
 import { CrudArticuloComponent } from './crud-articulo/crud-articulo.component';
-// import { AuthGuard } from '../../@core/_guards/auth.guard';
+import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -11,11 +11,23 @@ const routes: Routes = [{
   children: [{
     path: 'list-articulo',
     component: ListArticuloComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'crud-articulo',
     component: CrudArticuloComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
