@@ -10,7 +10,7 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-list-propuesta-grado',
   templateUrl: './list-propuesta_grado.component.html',
   styleUrls: ['./list-propuesta_grado.component.scss'],
-  })
+})
 export class ListPropuestaGradoComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
@@ -114,7 +114,7 @@ export class ListPropuestaGradoComponent implements OnInit {
       if (res !== null) {
         const data = <Array<any>>res;
         this.source.load(data);
-          }
+      }
     });
   }
 
@@ -141,17 +141,16 @@ export class ListPropuestaGradoComponent implements OnInit {
       showCancelButton: true,
     };
     Swal(opt)
-    .then((willDelete) => {
-
-      if (willDelete.value) {
-        this.admisionesService.delete('propuesta/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', 'deleted', 'PropuestaGrado deleted');
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.admisionesService.delete('propuesta/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', 'deleted', 'PropuestaGrado deleted');
             }
-         });
-      }
-    });
+          });
+        }
+      });
   }
 
   activetab(): void {
@@ -172,7 +171,6 @@ export class ListPropuestaGradoComponent implements OnInit {
       this.cambiotab = !this.cambiotab;
     }
   }
-
 
   itemselec(event): void {
     // console.log("afssaf");

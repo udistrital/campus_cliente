@@ -4,7 +4,7 @@ import { InfoPersonaComponent } from './info_persona.component';
 import { ListInfoPersonaComponent } from './list-info_persona/list-info_persona.component';
 import { CrudInfoPersonaComponent } from './crud-info_persona/crud-info_persona.component';
 import { ViewInfoPersonaComponent } from './view-info-persona/view-info-persona.component';
-// import { AuthGuard } from '../../@core/_guards/auth.guard';
+import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -12,20 +12,32 @@ const routes: Routes = [{
   children: [{
     path: 'list-info_persona',
     component: ListInfoPersonaComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'crud-info_persona',
     component: CrudInfoPersonaComponent,
-    // canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
 @NgModule({
   imports: [
-      RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
   ],
   exports: [
-      RouterModule,
+    RouterModule,
   ],
 })
 

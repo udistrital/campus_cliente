@@ -1,4 +1,3 @@
-
 export class PeriodoAcademico {
   Id: number;
   Nombre: string;

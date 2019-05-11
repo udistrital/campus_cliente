@@ -1,4 +1,3 @@
-
 export class TipoPublicacionLibro {
   Id: number;
   Nombre: string;

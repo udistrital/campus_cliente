@@ -11,9 +11,9 @@ describe('CrudArticuloComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudArticuloComponent ],
+      declarations: [CrudArticuloComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

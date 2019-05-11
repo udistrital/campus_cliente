@@ -10,9 +10,9 @@ describe('CrudInfoCaracteristicaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudInfoCaracteristicaComponent ],
+      declarations: [CrudInfoCaracteristicaComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

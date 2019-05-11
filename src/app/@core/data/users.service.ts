@@ -43,7 +43,7 @@ export class UserService {
   }
 
   public getUsuario(): string {
-    return window.localStorage.getItem('usuario').toString() ;
+    return window.localStorage.getItem('usuario').toString();
   }
 
   public getUser() {

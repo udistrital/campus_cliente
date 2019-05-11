@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { FormacionAcademicaService } from '../../../@core/data/formacion_academica.service';
+import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
 
 @Component({
   selector: 'ngx-list-formacion-academica',
@@ -20,15 +22,29 @@ export class ListFormacionAcademicaComponent implements OnInit {
   settings: any;
   source: LocalDataSource = new LocalDataSource();
 
+  @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+  loading: boolean;
+  percentage: number;
+
   constructor(private translate: TranslateService,
     private toasterService: ToasterService,
     private userService: UserService,
-    private formacionAcademica: FormacionAcademicaService) {
+    private campusMidService: CampusMidService,
+    private ubicacionesService: UbicacionesService,
+    private programaAcademicoService: ProgramaAcademicoService) {
     this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
+    this.loading = false;
+  }
+
+  getPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   cargarCampos() {
@@ -52,19 +68,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
         NivelFormacion: {
           title: this.translate.instant('GLOBAL.nivel_formacion'),
           valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        FechaInicio: {
-          title: this.translate.instant('GLOBAL.fecha_inicio'),
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        FechaFinalizacion: {
-          title: this.translate.instant('GLOBAL.fecha_fin'),
-          valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         PaisUniversidad: {
@@ -79,8 +83,20 @@ export class ListFormacionAcademicaComponent implements OnInit {
             return value;
           },
         },
-        TituloTrabajoGrado: {
-          title: this.translate.instant('GLOBAL.titulo_trabajo_grado'),
+        Titulacion: {
+          title: this.translate.instant('GLOBAL.programa_academico'),
+          valuePrepareFunction: (value) => {
+            return value.Nombre;
+          },
+        },
+        Metodologia: {
+          title: this.translate.instant('GLOBAL.metodologia'),
+          valuePrepareFunction: (value) => {
+            return value.Nombre;
+          },
+        },
+        FechaFinalizacion: {
+          title: this.translate.instant('GLOBAL.fecha_fin'),
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -94,24 +110,92 @@ export class ListFormacionAcademicaComponent implements OnInit {
   }
 
   loadData(): void {
-    this.formacionAcademica.get('formacion_academica/?query=Persona:' + this.userService.getEnte())
+    this.loading = true;
+    this.campusMidService.get('formacion/formacionacademicaente/?Ente=' + this.userService.getEnte())
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
-          this.source.load(data);
+          const data_info = <Array<any>>[];
+          data.forEach(element => {
+            if (element.Titulacion !== null && element.Titulacion !== undefined) {
+              this.programaAcademicoService.get('programa_academico/?query=id:' + element.Titulacion)
+                .subscribe(programa => {
+                  if (programa !== null) {
+                    const programa_info = <any>programa[0];
+                    element.Titulacion = programa_info;
+                    element.Metodologia = programa_info.Metodologia;
+                    element.NivelFormacion = programa_info.NivelFormacion;
+                    this.campusMidService.get('organizacion/identificacionente/?Ente=' + programa_info.Institucion)
+                      .subscribe(organizacion => {
+                        if (organizacion !== null) {
+                          const organizacion_info = <any>organizacion;
+                          element.NombreUniversidad = organizacion_info.Nombre;
+                          this.ubicacionesService.get('lugar/' + organizacion_info.Ubicacion[0].UbicacionEnte.Lugar)
+                            .subscribe(pais => {
+                              if (pais !== null) {
+                                const pais_info = <any>pais;
+                                element.PaisUniversidad = pais_info.Nombre;
+                                data_info.push(element);
+                                this.loading = false;
+                                this.getPercentage(1);
+                                this.source.load(data_info);
+                              }
+                            },
+                              (error: HttpErrorResponse) => {
+                                Swal({
+                                  type: 'error',
+                                  title: error.status + '',
+                                  text: this.translate.instant('ERROR.' + error.status),
+                                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                    this.translate.instant('GLOBAL.formacion_academica') + '|' +
+                                    this.translate.instant('GLOBAL.pais_universidad'),
+                                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                });
+                              });
+                        }
+                      },
+                        (error: HttpErrorResponse) => {
+                          Swal({
+                            type: 'error',
+                            title: error.status + '',
+                            text: this.translate.instant('ERROR.' + error.status),
+                            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                              this.translate.instant('GLOBAL.formacion_academica') + '|' +
+                              this.translate.instant('GLOBAL.nombre_universidad'),
+                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                          });
+                        });
+                  }
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.formacion_academica') + '|' +
+                        this.translate.instant('GLOBAL.programa_academico'),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
+            }
+          });
         }
       },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.formacion_academica'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   activetab(): void {
@@ -120,12 +204,10 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
-    this.activetab();
   }
 
   selectTab(event): void {
@@ -138,8 +220,8 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
       this.loadData();
-      this.cambiotab = !this.cambiotab;
     }
   }
 
@@ -160,22 +242,24 @@ export class ListFormacionAcademicaComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          /** this.Service.delete('', event.data).subscribe(res => {
-            if (res !== null) { **/
-          this.loadData();
-          this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
-            this.translate.instant('GLOBAL.formacion_academica') + ' ' +
-            this.translate.instant('GLOBAL.confirmarEliminar'));
-          /** }
-        },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        }); **/
+          this.campusMidService.delete('formacion/formacionacademica/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.formacion_academica') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
+            }
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.eliminar') + '-' +
+                  this.translate.instant('GLOBAL.formacion_academica'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
         }
       });
   }

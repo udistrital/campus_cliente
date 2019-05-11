@@ -28,11 +28,15 @@ export class CrudProduccionTecnicaComponent implements OnInit {
   }
 
   @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
 
   info_produccion_tecnica: ProduccionTecnica;
   formProduccionTecnica: any;
   regProduccionTecnica: any;
+  temp: any;
   clean: boolean;
+  loading: boolean;
+  percentage: number;
 
   constructor(private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
@@ -46,7 +50,8 @@ export class CrudProduccionTecnicaComponent implements OnInit {
     });
     this.loadOptionsTipoproducciontecnica();
     this.loadOptionsCiudadPublicacion();
-   }
+    this.loading = false;
+  }
 
   construirForm() {
     this.formProduccionTecnica.titulo = this.translate.instant('GLOBAL.produccion_tecnica');
@@ -63,29 +68,43 @@ export class CrudProduccionTecnicaComponent implements OnInit {
 
   loadOptionsTipoproducciontecnica(): void {
     let tipoproducciontecnica: Array<any> = [];
-      this.produccionAcademicaService.get('tipo_produccion_tecnica/?limit=0')
-        .subscribe(res => {
-          if (res !== null) {
-            tipoproducciontecnica = <Array<TipoProduccionTecnica>>res;
-          }
-          this.formProduccionTecnica.campos[ this.getIndexForm('Tipoproducciontecnica') ].opciones = tipoproducciontecnica;
-        });
-  }
-
-  loadOptionsCiudadPublicacion(): void {
-    let ciudadPublicacion: Array<any> = [];
-      this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2')
-        .subscribe(res => {
-          if (res !== null) {
-            ciudadPublicacion = <Array<Lugar>>res;
-          }
-          this.formProduccionTecnica.campos[this.getIndexForm('Ubicacion')].opciones = ciudadPublicacion;
-        },
+    this.produccionAcademicaService.get('tipo_produccion_tecnica/?limit=0')
+      .subscribe(res => {
+        if (res !== null) {
+          tipoproducciontecnica = <Array<TipoProduccionTecnica>>res;
+        }
+        this.formProduccionTecnica.campos[this.getIndexForm('Tipoproducciontecnica')].opciones = tipoproducciontecnica;
+      },
         (error: HttpErrorResponse) => {
           Swal({
             type: 'error',
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.produccion_tecnica') + '|' +
+              this.translate.instant('GLOBAL.tipo_produccion_tecnica'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+  }
+
+  loadOptionsCiudadPublicacion(): void {
+    let ciudadPublicacion: Array<any> = [];
+    this.ubicacionesService.get('lugar/?query=TipoLugar.Id:2&limit=0')
+      .subscribe(res => {
+        if (res !== null) {
+          ciudadPublicacion = <Array<Lugar>>res;
+        }
+        this.formProduccionTecnica.campos[this.getIndexForm('Ubicacion')].opciones = ciudadPublicacion;
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.produccion_tecnica') + '|' +
+              this.translate.instant('GLOBAL.ubicacion'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });
@@ -101,67 +120,137 @@ export class CrudProduccionTecnicaComponent implements OnInit {
     return 0;
   }
 
-
   public loadProduccionTecnica(): void {
+    this.loading = true;
+    this.info_produccion_tecnica = <ProduccionTecnica>{};
+    this.temp = {};
     if (this.produccion_tecnica_id !== undefined && this.produccion_tecnica_id !== 0) {
       this.produccionAcademicaService.get('produccion_tecnica/?query=id:' + this.produccion_tecnica_id)
         .subscribe(res => {
           if (res !== null) {
-            this.info_produccion_tecnica = <ProduccionTecnica>res[0];
+            this.temp = <ProduccionTecnica>res[0];
+            this.ubicacionesService.get('lugar/' + this.temp.Ubicacion)
+              .subscribe(ubicacion => {
+                this.temp.Ubicacion = <Lugar>ubicacion;
+                this.temp.Mes = <any>{Id: this.temp.Mes, Nombre: ''};
+                this.info_produccion_tecnica = <ProduccionTecnica>this.temp;
+                this.loading = false;
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.produccion_tecnica | GLOBAL.ubicacion'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           }
-        });
-    } else  {
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.produccion_tecnica'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+    } else {
       this.info_produccion_tecnica = undefined;
       this.clean = !this.clean;
+      this.loading = false;
     }
   }
 
   updateProduccionTecnica(produccionTecnica: any): void {
-
     const opt: any = {
-      title: 'Update?',
-      text: 'Update ProduccionTecnica!',
+      title: this.translate.instant('GLOBAL.actualizar'),
+      text: this.translate.instant('GLOBAL.actualizar') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.info_produccion_tecnica = <ProduccionTecnica>produccionTecnica;
-        this.produccionAcademicaService.put('produccion_tecnica', this.info_produccion_tecnica)
-          .subscribe(res => {
-            this.loadProduccionTecnica();
-            this.eventChange.emit(true);
-            this.showToast('info', 'updated', 'ProduccionTecnica updated');
-          });
-      }
-    });
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.loading = true;
+          this.info_produccion_tecnica = <ProduccionTecnica>produccionTecnica;
+          this.produccionAcademicaService.put('produccion_tecnica', this.info_produccion_tecnica)
+            .subscribe(res => {
+              this.loading = false;
+              this.eventChange.emit(true);
+              this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
+                this.translate.instant('GLOBAL.produccion_tecnica') + ' ' +
+                this.translate.instant('GLOBAL.confirmarActualizar'));
+              this.clean = !this.clean;
+              this.produccion_tecnica_id = 0;
+              this.loadProduccionTecnica();
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                    this.translate.instant('GLOBAL.produccion_tecnica'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+        }
+      });
   }
 
   createProduccionTecnica(produccionTecnica: any): void {
     const opt: any = {
-      title: 'Create?',
-      text: 'Create ProduccionTecnica!',
+      title: this.translate.instant('GLOBAL.crear'),
+      text: this.translate.instant('GLOBAL.crear') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-      if (willDelete.value) {
-        this.info_produccion_tecnica = <ProduccionTecnica>produccionTecnica;
-        this.info_produccion_tecnica.Persona = this.user.getEnte();
-        this.produccionAcademicaService.post('produccion_tecnica', this.info_produccion_tecnica)
-          .subscribe(res => {
-            this.info_produccion_tecnica = <ProduccionTecnica>res;
-            this.eventChange.emit(true);
-            this.showToast('info', 'created', 'ProduccionTecnica created');
-          });
-      }
-    });
+      .then((willDelete) => {
+        this.loading = true;
+        if (willDelete.value) {
+          this.info_produccion_tecnica = <ProduccionTecnica>produccionTecnica;
+          this.info_produccion_tecnica.Persona = this.user.getEnte();
+          this.produccionAcademicaService.post('produccion_tecnica', this.info_produccion_tecnica)
+            .subscribe(res => {
+              const r = <any>res;
+              if (r !== null && r.Type !== 'error') {
+                this.info_produccion_tecnica = <ProduccionTecnica>res;
+                this.loading = false;
+                this.eventChange.emit(true);
+                this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                  this.translate.instant('GLOBAL.produccion_tecnica') + ' ' +
+                  this.translate.instant('GLOBAL.confirmarCrear'));
+                this.clean = !this.clean;
+              } else {
+                this.showToast('error', this.translate.instant('GLOBAL.error'),
+                  this.translate.instant('GLOBAL.error'));
+              }
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.crear') + '-' +
+                    this.translate.instant('GLOBAL.produccion_tecnica'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+        }
+      });
   }
 
   ngOnInit() {
@@ -176,6 +265,11 @@ export class CrudProduccionTecnicaComponent implements OnInit {
         this.updateProduccionTecnica(event.data.ProduccionTecnica);
       }
     }
+  }
+
+  setPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -198,5 +292,4 @@ export class CrudProduccionTecnicaComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

@@ -6,10 +6,12 @@
 $icon-color-default: #0bbb79;
 $icon-color-cosmic: #7958fa;
 $icon-color-corporate: #a7a2be;
+$icon-color-ud: #bb0b0b;
 
 $icon-top-color-default: #01dbb5;
 $icon-top-color-cosmic: #a258fe;
 $icon-top-color-corporate: #e9e8eb;
+$icon-top-color-ud: #bb0b0b;
 
 @include nb-install-component() {
   /deep/ .themes-switcher-list {
@@ -25,6 +27,9 @@ $icon-top-color-corporate: #e9e8eb;
 
       &:hover span {
         opacity: 0.5;
+        @include nb-for-theme(ud) {
+          opacity: 0.5;
+        }
       }
 
       i {
@@ -51,9 +56,17 @@ $icon-top-color-corporate: #e9e8eb;
           background: -webkit-linear-gradient($icon-top-color-corporate, $icon-color-corporate);
         }
 
+        &.drop-icon-ud {
+          color: $icon-color-ud;
+
+          // Hack for IE11, IE11 should not set background
+          background: -webkit-linear-gradient($icon-top-color-ud, $icon-color-ud);
+        }
+
         &.drop-icon-default,
         &.drop-icon-cosmic,
-        &.drop-icon-corporate {
+        &.drop-icon-corporate,
+        &.drop-icon-ud {
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
         }

@@ -6,8 +6,9 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudArticuloComponent } from './crud-articulo/crud-articulo.component';
-import { ListArticuloComponent} from './list-articulo/list-articulo.component';
+import { ListArticuloComponent } from './list-articulo/list-articulo.component';
 import { UserService } from '../../@core/data/users.service';
+
 @NgModule({
   imports: [
     ThemeModule,

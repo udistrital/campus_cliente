@@ -1,4 +1,3 @@
-
 export class TipoDisciplina {
   Id: number;
   Nombre: string;

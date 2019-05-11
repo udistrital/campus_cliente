@@ -2,7 +2,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { ListOtraPublicacionComponent } from './list-otra_publicacion.component';
 
 describe('ListOtraPublicacionComponent', () => {
@@ -11,9 +10,9 @@ describe('ListOtraPublicacionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListOtraPublicacionComponent ],
+      declarations: [ListOtraPublicacionComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

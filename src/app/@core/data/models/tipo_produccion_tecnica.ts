@@ -1,4 +1,3 @@
-
 export class TipoProduccionTecnica {
   Id: number;
   Nombre: string;

@@ -19,7 +19,7 @@ import { ViewInfoCaracteristicaComponent } from './view-info_caracteristica/view
   ],
   declarations: [
     ...routedComponents,
-],
+  ],
   providers: [
     PersonaService,
     UbicacionesService,

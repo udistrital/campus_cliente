@@ -2,7 +2,7 @@ import { Lugar } from './lugar';
 
 export class InfoFormacionAcademica {
   NivelFormacion: string;
-  AnioInicio:  number;
+  AnioInicio: number;
   AnioGraduacion: number;
   PaisUniversidad: Lugar;
   CiudadUniversidad: Lugar;

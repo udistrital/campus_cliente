@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { ProduccionAcademicaService } from '../../../@core/data/produccion_academica.service';
+import { IdiomaService } from '../../../@core/data/idioma.service';
 import { UserService } from '../../../@core/data/users.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 
@@ -11,18 +13,24 @@ import 'style-loader!angular2-toaster/toaster.css';
   selector: 'ngx-list-traduccion',
   templateUrl: './list-traduccion.component.html',
   styleUrls: ['./list-traduccion.component.scss'],
-  })
+})
 export class ListTraduccionComponent implements OnInit {
   uid: number;
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
-
   source: LocalDataSource = new LocalDataSource();
+
+  @Output() eventChange = new EventEmitter();
+  @Output('result') result: EventEmitter<any> = new EventEmitter();
+
+  loading: boolean;
+  percentage: number;
 
   constructor(
     private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
+    private idiomaService: IdiomaService,
     private users: UserService,
     private toasterService: ToasterService) {
     this.loadData();
@@ -30,6 +38,12 @@ export class ListTraduccionComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
+    this.loading = false;
+  }
+
+  getPercentage(event) {
+    this.percentage = event;
+    this.result.emit(this.percentage);
   }
 
   cargarCampos() {
@@ -51,80 +65,45 @@ export class ListTraduccionComponent implements OnInit {
       mode: 'external',
       columns: {
         TipoTraduccion: {
-          title: this.translate.instant('GLOBAL.tipotraduccion'),
-          // type: 'tipo_traduccion;',
+          title: this.translate.instant('GLOBAL.tipo_traduccion'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         Titulo: {
           title: this.translate.instant('GLOBAL.titulo_traduccion'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         NombreOriginal: {
-          title: this.translate.instant('GLOBAL.nombreoriginal'),
-          // type: 'string;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Autor: {
-          title: this.translate.instant('GLOBAL.autor'),
-          // type: 'string;',
+          title: this.translate.instant('GLOBAL.nombre_original'),
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         IdiomaOriginal: {
-          title: this.translate.instant('GLOBAL.idiomaoriginal'),
-          // type: 'string;',
+          title: this.translate.instant('GLOBAL.idioma_original'),
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         IdiomaTraducido: {
-          title: this.translate.instant('GLOBAL.idiomatraducido'),
-          // type: 'string;',
+          title: this.translate.instant('GLOBAL.idioma_traducido'),
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         Ano: {
           title: this.translate.instant('GLOBAL.ano'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Mes: {
-          title: this.translate.instant('GLOBAL.mes'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         MedioDivulgacion: {
-          title: this.translate.instant('GLOBAL.mediodivulgacion'),
-          // type: 'medio_divulgacion;',
+          title: this.translate.instant('GLOBAL.medio_divulgacion'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
-          },
-        },
-        Edicion: {
-          title: this.translate.instant('GLOBAL.edicion'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Serie: {
-          title: this.translate.instant('GLOBAL.serie'),
-          // type: 'number;',
-          valuePrepareFunction: (value) => {
-            return value;
           },
         },
       },
@@ -137,48 +116,110 @@ export class ListTraduccionComponent implements OnInit {
 
   loadData(): void {
     this.produccionAcademicaService.get('traduccion/?query=persona:' + this.users.getEnte())
-    .subscribe(res => {
-      if (res !== null) {
-        const data = <Array<any>>res;
-        this.source.load(data);
-          }
-    });
+      .subscribe(res => {
+        if (res !== null) {
+          const data = <Array<any>>res;
+          const data_info = <Array<any>>[];
+          data.forEach(element => {
+            this.idiomaService.get('idioma/' + element.IdiomaOriginal)
+              .subscribe(idioma1 => {
+                if (idioma1 !== null) {
+                  const idioma_1 = <any>idioma1;
+                  element.IdiomaOriginal = idioma_1;
+                  this.idiomaService.get('idioma/' + element.IdiomaTraducido)
+                    .subscribe(idioma2 => {
+                      if (idioma2 !== null) {
+                        const idioma_2 = <any>idioma2;
+                        element.IdiomaTraducido = idioma_2;
+                        data_info.push(element);
+                        this.loading = false;
+                        this.getPercentage(1);
+                        this.source.load(data_info);
+                      }
+                    },
+                      (error: HttpErrorResponse) => {
+                        Swal({
+                          type: 'error',
+                          title: error.status + '',
+                          text: this.translate.instant('ERROR.' + error.status),
+                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                            this.translate.instant('GLOBAL.traduccion | GLOBAL.idioma'),
+                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                        });
+                      });
+                  }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.traduccion | GLOBAL.idioma'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
+          });
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.traducciones'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
   }
 
   ngOnInit() {
+    this.uid = 0;
   }
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    this.activetab();
   }
 
   onCreate(event): void {
     this.uid = 0;
-    this.activetab();
   }
 
   onDelete(event): void {
     const opt: any = {
-      title: 'Deleting?',
-      text: 'Delete Traduccion!',
+      title: this.translate.instant('GLOBAL.eliminar'),
+      text: this.translate.instant('GLOBAL.eliminar') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
       showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
-    .then((willDelete) => {
-
-      if (willDelete.value) {
-        this.produccionAcademicaService.delete('traduccion/', event.data).subscribe(res => {
-          if (res !== null) {
-            this.loadData();
-            this.showToast('info', 'deleted', 'Traduccion deleted');
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.produccionAcademicaService.delete('traduccion/', event.data).subscribe(res => {
+            if (res !== null) {
+              this.loadData();
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.traduccion') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-         });
-      }
-    });
+          },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.eliminar') + '-' +
+                this.translate.instant('GLOBAL.traduccion'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+        }
+      });
   }
 
   activetab(): void {
@@ -195,14 +236,12 @@ export class ListTraduccionComponent implements OnInit {
 
   onChange(event) {
     if (event) {
+      this.uid = 0;
       this.loadData();
-      this.cambiotab = !this.cambiotab;
     }
   }
 
-
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -225,5 +264,4 @@ export class ListTraduccionComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

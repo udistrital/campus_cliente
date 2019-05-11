@@ -2,7 +2,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
-
 import { CrudTraduccionComponent } from './crud-traduccion.component';
 
 describe('CrudTraduccionComponent', () => {
@@ -11,9 +10,9 @@ describe('CrudTraduccionComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudTraduccionComponent ],
+      declarations: [CrudTraduccionComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

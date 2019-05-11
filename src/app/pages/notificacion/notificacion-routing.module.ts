@@ -3,7 +3,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { NotificacionComponent } from './notificacion.component';
 import { ListadoComponent } from './listado/listado.component';
 
-
 const routes: Routes = [{
   path: '',
   component: NotificacionComponent,
@@ -15,16 +14,16 @@ const routes: Routes = [{
 
 @NgModule({
   imports: [
-      RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
   ],
   exports: [
-      RouterModule,
+    RouterModule,
   ],
 })
 
 export class NotificacionRoutingModule { }
 
 export const routedComponents = [
-    NotificacionComponent,
-    ListadoComponent,
+  NotificacionComponent,
+  ListadoComponent,
 ];

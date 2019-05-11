@@ -3,8 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { OtraPublicacionComponent } from './otra_publicacion.component';
 import { ListOtraPublicacionComponent } from './list-otra_publicacion/list-otra_publicacion.component';
 import { CrudOtraPublicacionComponent } from './crud-otra_publicacion/crud-otra_publicacion.component';
-
-
+import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
   path: '',
@@ -12,18 +11,32 @@ const routes: Routes = [{
   children: [{
     path: 'list-otra_publicacion',
     component: ListOtraPublicacionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }, {
     path: 'crud-otra_publicacion',
     component: CrudOtraPublicacionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
 @NgModule({
   imports: [
-      RouterModule.forChild(routes),
+    RouterModule.forChild(routes),
   ],
   exports: [
-      RouterModule,
+    RouterModule,
   ],
 })
 

@@ -21,17 +21,4 @@ export const MENU_ITEMS: MenuItem[] = [
       },
     ],
   },
-  {
-    title: 'Admision',
-    icon: 'nb-compose',
-    link: '/pages/admision',
-    key: 'admision',
-    children: [
-      {
-        title: 'Lista Admision',
-        link: '/pages/admision/list-admision',
-        key: 'admision',
-      },
-    ],
-  },
 ]

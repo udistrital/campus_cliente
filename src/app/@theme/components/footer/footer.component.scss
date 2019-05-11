@@ -1,77 +1,87 @@
 @import '../../styles/themes';
 @import '~@nebular/theme/styles/global/bootstrap/breakpoints';
 @import '~bootstrap/scss/mixins/breakpoints';
+
 @include nb-install-component() {
   width: 100%;
-  display: flex;
+  display: block;
   justify-content: space-between;
   align-items: center;
-  footer-title .socials {
-    font-size: 2rem;
-    a {
-      padding: 0.4rem;
-      color: nb-theme(color-fg);
-      transition: color ease-out 0.1s;
-      &:hover {
-        color: nb-theme(color-fg-heading);
-      }
+
+  .copyright {
+    text-align: center;
+
+    .final {
+      display: inline-block;
+      padding-left: 5px;
+      padding-right: 5px;
+    }
+
+    .social {
+      font-size: 2.25rem;
+      display: inline-block;
+      padding-left: 5px;
+      padding-right: 5px;
     }
   }
-  @include media-breakpoint-down(is) {
-    .socials {
-      display: block;
-      font-size: 1.5rem;
+
+  a {
+    clear: none;
+    color: #ffffff !important;
+    @include nb-for-theme(ud) {
+      color: #000000 !important;
     }
   }
-}
 
-.nit {
-  font-size: 0.8rem;
-}
+  a:hover,
+  .list-footer:hover {
+    clear: none;
+    color: #00f9a6 !important;
+    padding-left: 0.5rem;
+    @include nb-for-theme(ud) {
+      color: #ff0000 !important;
+    }
+  }
 
-.socials {
-  text-align: center;
-  display: block;
-  font-size: 2.5rem;
-  color: #fff !important;
-}
+  .footer-title {
+    border-bottom: 0.1rem solid;
+    border-bottom-color: #00f9a6;
+    text-align: center;
+    margin-bottom: 1rem;
+    @include nb-for-theme(ud) {
+      border-bottom-color: #ffef09;
+    }
+  }
 
-.footer-title {
-  border-bottom: 0.1rem solid;
-  border-bottom-color: #00f9a6;
-  text-align: center;
-  margin-bottom: 1rem;
-}
+  .nit {
+    font-size: 0.8rem;
+  }
 
-.list-footer,
-.list-footer > a {
-  color: #fff !important;
-}
+  hr {
+    color: red;
+  }
 
-.list-footer > a:hover,
-.list-footer:hover {
-  padding-left: 0.5rem;
-  color: #00f9a6 !important;
-  text-decoration: none;
-}
+  h3 {
+    font-size: 1.1rem;
+  }
 
-.list-footer {
-  display: block;
-  margin: 0.3rem;
-  text-indent: 0;
-  text-align: left;
-  list-style: none;
-  transition: padding-left 1.5s;
-}
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    color: #ffffff;
+    @include nb-for-theme(ud) {
+      color: #000000;
+    }
+  }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  color: #818181;
-}
-
-.socials a:hover {
-  color: #00f9a6 !important;
+  .list-footer {
+    display: block;
+    margin: 0.3rem;
+    text-indent: 0;
+    text-align: justify;
+    list-style: none;
+    transition: padding-left 1.5s;
+  }
 }
