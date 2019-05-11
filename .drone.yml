@@ -16,7 +16,7 @@ steps:
     - develop
     event:
     - push
-- name: publish-s3
+- name: publish-s3  
   image: plugins/s3
   settings:
     bucket: campus-cliente
