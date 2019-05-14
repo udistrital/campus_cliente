@@ -110,15 +110,15 @@ export class CrudPropuestaGradoComponent implements OnInit {
                   title: error.status + '',
                   text: this.translate.instant('ERROR.' + error.status),
                   footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                    this.translate.instant('GLOBAL.propuesta'),
+                    this.translate.instant('GLOBAL.propuesta_grado'),
                   confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                 });
               });
         } else {
           Swal({
             type: 'warning',
-            title: this.translate.instant('GLOBAL.warning'),
-            text: this.translate.instant('GLOBAL.error_carga_datos'),
+            title: this.translate.instant('GLOBAL.advertencia'),
+            text: this.translate.instant('ERROR.carga_datos'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         }
@@ -129,7 +129,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.propuesta') + '|' +
+              this.translate.instant('GLOBAL.propuesta_grado') + '|' +
               this.translate.instant('GLOBAL.admision'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
@@ -166,7 +166,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                     title: error.status + '',
                     text: this.translate.instant('ERROR.' + error.status),
                     footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                      this.translate.instant('GLOBAL.propuesta') + '|' +
+                      this.translate.instant('GLOBAL.propuesta_grado') + '|' +
                       this.translate.instant('GLOBAL.soporte_documento'),
                     confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                   });
@@ -179,7 +179,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
               title: error.status + '',
               text: this.translate.instant('ERROR.' + error.status),
               footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                this.translate.instant('GLOBAL.propuesta'),
+                this.translate.instant('GLOBAL.propuesta_grado'),
               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
           });
@@ -225,7 +225,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                       this.loadPropuestaGrado();
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
-                        this.translate.instant('GLOBAL.propuesta') + ' ' +
+                        this.translate.instant('GLOBAL.propuesta_grado') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
                     },
                       (error: HttpErrorResponse) => {
@@ -234,7 +234,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                           title: error.status + '',
                           text: this.translate.instant('ERROR.' + error.status),
                           footer: this.translate.instant('GLOBAL.actualizar') + '-' +
-                            this.translate.instant('GLOBAL.propuesta'),
+                            this.translate.instant('GLOBAL.propuesta_grado'),
                           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                         });
                       });
@@ -246,7 +246,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                     title: error.status + '',
                     text: this.translate.instant('ERROR.' + error.status),
                     footer: this.translate.instant('GLOBAL.actualizar') + '-' +
-                      this.translate.instant('GLOBAL.propuesta') + '|' +
+                      this.translate.instant('GLOBAL.propuesta_grado') + '|' +
                       this.translate.instant('GLOBAL.soporte_documento'),
                     confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                   });
@@ -258,7 +258,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                 this.eventChange.emit(true);
                 this.loadPropuestaGrado();
                 this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
-                  this.translate.instant('GLOBAL.propuesta') + ' ' +
+                  this.translate.instant('GLOBAL.propuesta_grado') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));
               },
                 (error: HttpErrorResponse) => {
@@ -267,7 +267,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                     title: error.status + '',
                     text: this.translate.instant('ERROR.' + error.status),
                     footer: this.translate.instant('GLOBAL.actualizar') + '-' +
-                      this.translate.instant('GLOBAL.propuesta'),
+                      this.translate.instant('GLOBAL.propuesta_grado'),
                     confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                   });
                 });
@@ -314,7 +314,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                       this.loading = false;
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                        this.translate.instant('GLOBAL.propuesta') + ' ' +
+                        this.translate.instant('GLOBAL.propuesta_grado') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
                     } else {
                       this.showToast('error', this.translate.instant('GLOBAL.error'),
@@ -327,7 +327,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                         title: error.status + '',
                         text: this.translate.instant('ERROR.' + error.status),
                         footer: this.translate.instant('GLOBAL.crear') + '-' +
-                          this.translate.instant('GLOBAL.propuesta'),
+                          this.translate.instant('GLOBAL.propuesta_grado'),
                         confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                       });
                     });
@@ -339,7 +339,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                   title: error.status + '',
                   text: this.translate.instant('ERROR.' + error.status),
                   footer: this.translate.instant('GLOBAL.crear') + '-' +
-                    this.translate.instant('GLOBAL.propuesta') + '|' +
+                    this.translate.instant('GLOBAL.propuesta_grado') + '|' +
                     this.translate.instant('GLOBAL.soporte_documento'),
                   confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                 });

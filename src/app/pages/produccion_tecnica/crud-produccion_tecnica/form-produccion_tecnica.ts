@@ -21,7 +21,7 @@ export let FORM_PRODUCCION_TECNICA = {
       claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
       nombre: 'Nombre',
       label_i18n: 'titulo_produccion_tecnica',
-      placeholder_i18n: 'placeholder_titulo_produccion_tecnica',
+      placeholder_i18n: 'titulo_produccion_tecnica',
       requerido: true,
       tipo: 'text',
     },

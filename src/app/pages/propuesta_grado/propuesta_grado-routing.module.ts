@@ -15,7 +15,6 @@ const routes: Routes = [{
     data: {
       roles: [
         'ADMIN_CAMPUS',
-        'ASPIRANTE',
       ],
     },
   }, {

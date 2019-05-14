@@ -347,7 +347,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                 title: this.translate.instant('GLOBAL.documento_programa') + '',
                 text: this.translate.instant('ERROR.repetir_documentos'),
                 footer: this.translate.instant('GLOBAL.crear') + '-' +
-                  this.translate.instant('GLOBAL.documentos_programa'),
+                  this.translate.instant('GLOBAL.documento_programa'),
                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
               });
               this.eventChange.emit(true);

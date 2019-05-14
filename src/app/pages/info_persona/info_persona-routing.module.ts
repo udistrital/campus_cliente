@@ -16,12 +16,21 @@ const routes: Routes = [{
     data: {
       roles: [
         'ADMIN_CAMPUS',
-        'ASPIRANTE',
       ],
     },
   }, {
     path: 'crud-info_persona',
     component: CrudInfoPersonaComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
+  }, {
+    path: 'view-info_persona',
+    component: ViewInfoPersonaComponent,
     canActivate: [AuthGuard],
     data: {
       roles: [
