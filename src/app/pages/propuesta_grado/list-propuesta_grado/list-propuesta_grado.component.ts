@@ -47,56 +47,48 @@ export class ListPropuestaGradoComponent implements OnInit {
       columns: {
         Id: {
           title: this.translate.instant('GLOBAL.id'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Nombre: {
           title: this.translate.instant('GLOBAL.titulo_proyecto'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Resumen: {
           title: this.translate.instant('GLOBAL.resumen'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Grupoinvestigacion: {
           title: this.translate.instant('GLOBAL.grupo_investigacion'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Lineainvestigacion: {
           title: this.translate.instant('GLOBAL.linea_investigacion'),
-          // type: 'string;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Enfasis: {
           title: this.translate.instant('GLOBAL.enfasis'),
-          // type: 'number;',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Tipoproyecto: {
-          title: this.translate.instant('GLOBAL.tipoproyecto'),
-          // type: 'string;',
+          title: this.translate.instant('GLOBAL.tipo_proyecto'),
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Formatoproyecto: {
-          title: this.translate.instant('GLOBAL.formatoproyecto'),
-          // type: 'string;',
+          title: this.translate.instant('GLOBAL.formato_proyecto'),
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -173,7 +165,6 @@ export class ListPropuestaGradoComponent implements OnInit {
   }
 
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {
@@ -196,5 +187,4 @@ export class ListPropuestaGradoComponent implements OnInit {
     };
     this.toasterService.popAsync(toast);
   }
-
 }

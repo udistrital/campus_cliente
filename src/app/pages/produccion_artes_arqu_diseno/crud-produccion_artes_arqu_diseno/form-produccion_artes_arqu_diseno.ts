@@ -10,7 +10,7 @@ export let FORM_PRODUCCION_ARTES_ARQU_DISENO = {
             claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
             nombre: 'Nombre',
             label_i18n: 'titulo_produccion_artes',
-            placeholder_i18n: 'placeholder_produccion_artes',
+            placeholder_i18n: 'titulo_produccion_artes',
             requerido: true,
             tipo: 'text',
         },

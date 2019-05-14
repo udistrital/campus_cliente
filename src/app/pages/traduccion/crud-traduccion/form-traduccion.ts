@@ -10,7 +10,7 @@ export let FORM_TRADUCCION = {
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
             nombre: 'Titulo',
             label_i18n: 'titulo_traduccion',
-            placeholder_i18n: 'titulo',
+            placeholder_i18n: 'titulo_traduccion',
             requerido: true,
             tipo: 'text',
         },

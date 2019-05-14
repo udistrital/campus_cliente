@@ -127,7 +127,7 @@ export class ListDocumentoProgramaComponent implements OnInit {
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.documentos_programa'),
+              this.translate.instant('GLOBAL.documento_programa'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });

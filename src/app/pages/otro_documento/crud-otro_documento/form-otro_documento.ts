@@ -10,7 +10,7 @@ export let FORM_OTRO_DOCUMENTO = {
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
             nombre: 'Titulo',
             label_i18n: 'titulo_documento',
-            placeholder_i18n: 'placeholder_titulo_documento',
+            placeholder_i18n: 'titulo_documento',
             requerido: true,
             tipo: 'text',
         },

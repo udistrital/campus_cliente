@@ -28,6 +28,16 @@ export const Config = {
     NOTIFICACION_SERVICE: 'ws://pruebasapi.intranetoas.udistrital.edu.co:8116/ws/join',
     WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
     TOKEN: {
+      AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co/oauth2/authorize',
+      CLIENTE_ID: 'avLBl_qyrtlu13oh7oHi7x7XwRka',
+      RESPONSE_TYPE: 'id_token token',
+      SCOPE: 'openid email role documento',
+      REDIRECT_URL: 'http://localhost:4200/',
+      SIGN_OUT_URL: 'https://autenticacion.udistrital.edu.co/oidc/logout',
+      SIGN_OUT_REDIRECT_URL: 'http://localhost:4200/',
+    },
+    /**
+    TOKEN: {
       AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
       CLIENTE_ID: '3Idp5LUlnZY7cOV10NaLuyRfzooa',
       RESPONSE_TYPE: 'id_token token',
@@ -36,6 +46,7 @@ export const Config = {
       SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
       SIGN_OUT_REDIRECT_URL: 'http://localhost:4200/',
     },
+    **/
   },
   PREPROD: {
     NUXEO: {
@@ -63,12 +74,12 @@ export const Config = {
     NOTIFICACION_SERVICE: 'ws://pruebasapi.intranetoas.udistrital.edu.co:8116/ws/join',
     WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
     TOKEN: {
-      AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co:8244/oauth2/authorize',
+      AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co/oauth2/authorize',
       CLIENTE_ID: 'AcLs_Mb7b3iEntpgIJ5xIxWkRLga',
       RESPONSE_TYPE: 'id_token token',
       SCOPE: 'openid email role documento',
       REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co/',
-      SIGN_OUT_URL: 'https://autenticacion.udistrital.edu.co:8244/oidc/logout',
+      SIGN_OUT_URL: 'https://autenticacion.udistrital.edu.co/oidc/logout',
       SIGN_OUT_REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co/',
     },
   },
