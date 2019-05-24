@@ -71,7 +71,7 @@ export const Config = {
     UBICACIONES_SERVICE: 'https://autenticacion.udistrital.edu.co:8244/ubicacion/v1/',
     CONFIGURACION_SERVICE: 'https://autenticacion.udistrital.edu.co:8244/configuracion_crud_api/v1/',
     CONF_MENU_SERVICE: 'https://autenticacion.udistrital.edu.co:8244/configuracion_crud_api/v1/menu_opcion_padre/ArbolMenus/',
-    NOTIFICACION_SERVICE: 'https://autenticacion.udistrital.edu.co:8244/notificacion/ws/join',
+    NOTIFICACION_SERVICE: 'ws://autenticacion.udistrital.edu.co:8244/notificacionws/v1/',
     WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
     TOKEN: {
       AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co/oauth2/authorize',

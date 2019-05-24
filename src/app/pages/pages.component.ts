@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { MenuItem } from './menu-item';
 import { MENU_ITEMS } from './pages-menu';
+import { MENU_PUBLICO } from './pages-menu';
 import { ImplicitAutenticationService } from '../@core/utils/implicit_autentication.service';
 import { MenuService } from '../@core/data/menu.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -48,105 +49,107 @@ export class PagesComponent implements OnInit {
       } else {
         this.rol = 'Menu%20campus';
       }
-    } else {
-      this.rol = 'PUBLICO';
-    }
-    this.menuws.get(this.rol + '/Campus').subscribe(
-      data => {
-        this.dataMenu = <any>data;
-        for (let i = 0; i < this.dataMenu.length; i++) {
-          if (this.dataMenu[i].TipoOpcion === 'Menú') {
-            if (!this.dataMenu[i].Opciones) {
-              if (!this.dataMenu[i].Url.indexOf('http')) {
-                this.object = {
-                  title: this.dataMenu[i].Nombre,
-                  icon: '',
-                  url: this.dataMenu[i].Url,
-                  home: false,
-                  key: this.dataMenu[i].Nombre,
-                };
+      this.menuws.get(this.rol + '/Campus').subscribe(
+        data => {
+          this.dataMenu = <any>data;
+          for (let i = 0; i < this.dataMenu.length; i++) {
+            if (this.dataMenu[i].TipoOpcion === 'Menú') {
+              if (!this.dataMenu[i].Opciones) {
+                if (!this.dataMenu[i].Url.indexOf('http')) {
+                  this.object = {
+                    title: this.dataMenu[i].Nombre,
+                    icon: '',
+                    url: this.dataMenu[i].Url,
+                    home: false,
+                    key: this.dataMenu[i].Nombre,
+                  };
+                } else {
+                  this.object = {
+                    title: this.dataMenu[i].Nombre,
+                    icon: '',
+                    link: this.dataMenu[i].Url,
+                    home: false,
+                    key: this.dataMenu[i].Nombre,
+                  };
+                }
+                if (i === 0) {
+                  this.object.title = 'Dashboard';
+                  this.object.icon = 'nb-home';
+                  this.object.home = true;
+                }
               } else {
-                this.object = {
-                  title: this.dataMenu[i].Nombre,
-                  icon: '',
-                  link: this.dataMenu[i].Url,
-                  home: false,
-                  key: this.dataMenu[i].Nombre,
-                };
-              }
-              if (i === 0) {
-                this.object.title = 'Dashboard';
-                this.object.icon = 'nb-home';
-                this.object.home = true;
-              }
-            } else {
-              if (!this.dataMenu[i].Url.indexOf('http')) {
-                this.object = {
-                  title: this.dataMenu[i].Nombre,
-                  icon: '',
-                  url: this.dataMenu[i].Url,
-                  home: false,
-                  key: this.dataMenu[i].Nombre,
-                  children: [],
-                };
-              } else {
-                this.object = {
-                  title: this.dataMenu[i].Nombre,
-                  icon: '',
-                  link: this.dataMenu[i].Url,
-                  home: false,
-                  key: this.dataMenu[i].Nombre,
-                  children: [],
-                };
-              }
-              if (i === 0) {
-                this.object.title = 'Dashboard';
-                this.object.icon = 'nb-home';
-                this.object.home = true;
-              }
-              for (let j = 0; j < this.dataMenu[i].Opciones.length; j++) {
-                if (this.dataMenu[i].TipoOpcion === 'Menú') {
-                  if (!this.dataMenu[i].Opciones[j].Opciones) {
-                    if (!this.dataMenu[i].Opciones[j].Url.indexOf('http')) {
-                      this.hijo = {
-                        title: this.dataMenu[i].Opciones[j].Nombre,
-                        icon: '',
-                        url: this.dataMenu[i].Opciones[j].Url,
-                        home: false,
-                        key: this.dataMenu[i].Opciones[j].Nombre,
-                      };
-                    } else {
-                      this.hijo = {
-                        title: this.dataMenu[i].Opciones[j].Nombre,
-                        icon: '',
-                        link: this.dataMenu[i].Opciones[j].Url,
-                        home: false,
-                        key: this.dataMenu[i].Opciones[j].Nombre,
-                      };
+                if (!this.dataMenu[i].Url.indexOf('http')) {
+                  this.object = {
+                    title: this.dataMenu[i].Nombre,
+                    icon: '',
+                    url: this.dataMenu[i].Url,
+                    home: false,
+                    key: this.dataMenu[i].Nombre,
+                    children: [],
+                  };
+                } else {
+                  this.object = {
+                    title: this.dataMenu[i].Nombre,
+                    icon: '',
+                    link: this.dataMenu[i].Url,
+                    home: false,
+                    key: this.dataMenu[i].Nombre,
+                    children: [],
+                  };
+                }
+                if (i === 0) {
+                  this.object.title = 'Dashboard';
+                  this.object.icon = 'nb-home';
+                  this.object.home = true;
+                }
+                for (let j = 0; j < this.dataMenu[i].Opciones.length; j++) {
+                  if (this.dataMenu[i].TipoOpcion === 'Menú') {
+                    if (!this.dataMenu[i].Opciones[j].Opciones) {
+                      if (!this.dataMenu[i].Opciones[j].Url.indexOf('http')) {
+                        this.hijo = {
+                          title: this.dataMenu[i].Opciones[j].Nombre,
+                          icon: '',
+                          url: this.dataMenu[i].Opciones[j].Url,
+                          home: false,
+                          key: this.dataMenu[i].Opciones[j].Nombre,
+                        };
+                      } else {
+                        this.hijo = {
+                          title: this.dataMenu[i].Opciones[j].Nombre,
+                          icon: '',
+                          link: this.dataMenu[i].Opciones[j].Url,
+                          home: false,
+                          key: this.dataMenu[i].Opciones[j].Nombre,
+                        };
+                      }
                     }
+                    this.object.children.push(this.hijo);
                   }
-                  this.object.children.push(this.hijo);
                 }
               }
+              this.results.push(this.object);
             }
-            this.results.push(this.object);
           }
-        }
-        this.menu = this.results;
-        this.translateMenu();
-      },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          footer: this.translate.instant('GLOBAL.cargar') + '-' +
-            this.translate.instant('GLOBAL.menu'),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          this.menu = this.results;
+          this.translateMenu();
+        },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.menu'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+          this.menu = MENU_ITEMS;
+          this.translateMenu();
         });
-        this.menu = MENU_ITEMS;
-        this.translateMenu();
-      });
+    } else {
+      this.rol = 'PUBLICO';
+      this.menu = MENU_PUBLICO;
+      this.translateMenu();
+    }
     this.translateMenu();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => { // Live reload
       this.translateMenu();
