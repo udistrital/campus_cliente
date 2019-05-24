@@ -1,6 +1,6 @@
 import { MenuItem } from './menu-item';
 
-export const MENU_ITEMS:  MenuItem[] = [
+export const MENU_ITEMS: MenuItem[] = [
   {
     title:  'Dashboard',
     icon:  'nb-home',
@@ -23,7 +23,7 @@ export const MENU_ITEMS:  MenuItem[] = [
   },
 ];
 
-export const MENU_PUBLICO:  MenuItem[] = [
+export const MENU_PUBLICO: MenuItem[] = [
   {
     title: 'Dashboard',
     icon: 'nb-home',
