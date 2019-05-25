@@ -10,6 +10,108 @@
   },
   "MENU": {
     "dashboard": "Inicio",
+    "directorio": "Directorio institucional",
+    "atencion_usuario": {
+      "atencion_usuario": "Atención al ciudadano",
+      "defensor_ciudadano": "Defensor del ciudadano",
+      "espacios_participacion": "Espacios de participación",
+      "sdqs": "Sistema distrital de quejas y soluciones - SDQS",
+      "pqrs": "Guía ciudadana para la gestión de las PQRS",
+      "notificaciones_judiciales": "Notificaciones judiciales"
+    },
+    "ilud": "Cursos de idiomas",
+    "facultades": "Facultades",
+    "programas": {
+      "programas": "Programas",
+      "programas_pregrado": "Programas de pregrado",
+      "programas_posgrado": "Programas de posgrado"
+    },
+    "editorial": "Editorial UD",
+    "tienda": "Tienda UD",
+    "laud": "LaUD 90.4 FM",
+    "sedes": "Listado de sedes",
+    "procesos_admisiones": {
+      "procesos_admisiones": "Admisiones",
+      "admisiones_pregrado": "Pregrado",
+      "admisiones_inscripcion": "Posgrado",
+      "estado_admision": "Estado de admisión"
+    },
+    "extension": "Cursos de extensión",
+    "movilidad_academica": "Movilidad académica",
+    "convocatorias_academicas": "Convocatorias académicas",
+    "sistema_comunicaciones": "Sistema integrado de comunicaciones",
+    "investigacion": {
+      "investigacion": "Investigación",
+      "cidc": "Centro de investigaciones y desarrollo científico - CIDC",
+      "semilleros": "Semilleros de investigación",
+      "grupos_investigacion": "Grupos de investigación",
+      "revistas_cientificas": "Revistas científicas",
+      "ieie": "Instituto de estudios e investigaciones educativas – IEIE",
+      "rita": "Red de investigaciones de tecnología avanzada - RITA",
+      "siciud": "Sistema de investigaciones - SICIUD"
+    },
+    "inscripcion": {
+      "inscripcion": "Inscripción",
+      "inscripcion_pregrado": "Pregrado",
+      "inscripcion_posgrado": "Posgrado",
+      "inscripcion_perfil": "Perfil"
+    },
+    "calendario_academico": "Calendario académico",
+    "evaluacion_ingreso": {
+      "evaluacion_ingreso": "Evaluación de ingreso",
+      "realizar_evaluacion": "Realizar evaluación"
+    },
+    "agenda": {
+      "agenda": "Agenda",
+      "ver_agenda": "Ver agenda"
+    },
+    "pago_linea": {
+      "pago_linea": "Pago en línea",
+      "pago_inscripcion": "Pago de inscripción",
+      "pago_certificado": "Pago de certificado"
+    },
+    "condor_estudiante": "Sistema de gestión académico",
+    "correo_institucional": "Correo institucional",
+    "biblioteca": {
+      "biblioteca": "Biblioteca",
+      "sistema_biblioteca": "Sistema de bibliotecas",
+      "bdigital": "Biblioteca digital",
+      "catalogo_linea": "Catálogo en línea",
+      "repositorio_institucional": "Repositorio institucional",
+      "servicio_descubrimiento": "Servicio de descubrimiento"
+    },
+    "bienestar": {
+      "bienestar": "Bienestar institucional",
+      "apoyo_alimentario": "Apoyo alimentario",
+      "reliquidacion": "Reliquidación de matrícula",
+      "deportes": "Deportes",
+      "salud": "Salud",
+      "inscripcion_linea": "Inscripciones en línea",
+      "bienestar_linea": "Bienestar en línea"
+    },
+    "licenciamiento": {
+      "licenciamiento": "Licenciamientos",
+      "microsoft": "Microsoft office",
+      "antivirus": "Kaspersky endpoint security",
+      "microsoft_imagine": "Microsoft imagine",
+      "microsoft_azure": "Microsoft azure"
+    },
+    "aulas_virtuales": {
+      "aulas_virtuales": "Aulas virtuales",
+      "facultad_ingenieria": "Ingeniería",
+      "facultad_ambiente": "Medio ambiente y recursos naturales",
+      "facultad_tecnologica": "Tecnológica",
+      "facultad_ciencias": "Ciencias de la educación",
+      "aulas_programas": "Programas virtuales"
+    },
+    "laboratorios": "Laboratorios",
+    "espacios_web": "Espacios web",
+    "certificado": {
+      "certificado": "Certificado",
+      "solicitud_certificado": "Solicitud de certificado",
+      "estado_solicitud": "Estado de solicitud"
+    },
+    "egresados": "Página de egresados",
     "info_persona": {
       "info_persona": "Información personal",
       "lista_info_persona": "Listado de información personal",
@@ -27,11 +129,6 @@
       "lista_informacion_contacto": "Listado de información de contacto",
       "crud_informacion_contacto": "Crud de información de contacto",
       "view_informacion_contacto": "Vista de información de contacto"
-    },
-    "inscripcion": {
-      "inscripcion": "Inscripción",
-      "inscripcion_posgrado": "Posgrado",
-      "inscripcion_perfil": "Perfil"
     },
     "formacion_academica": {
       "formacion_academica": "Formación académica",

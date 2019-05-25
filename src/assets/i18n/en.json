@@ -10,6 +10,108 @@
   },
   "MENU": {
     "dashboard": "Dashboard",
+    "directorio": "Institutional directory",
+    "atencion_usuario": {
+      "atencion_usuario": "Customer service",
+      "defensor_ciudadano": "Citizen defender",
+      "espacios_participacion": "Participation spaces",
+      "sdqs": "District system of complaints and solutions - SDQS",
+      "pqrs": "Citizen guide for the management of PQRS",
+      "notificaciones_judiciales": "Judicial notifications"
+    },
+    "ilud": "Language courses",
+    "facultades": "Buildings",
+    "programas": {
+      "programas": "Programs",
+      "programas_pregrado": "Undergraduate programs",
+      "programas_posgrado": "Postgraduate programs"
+    },
+    "editorial": "UD editorial",
+    "tienda": "UD store",
+    "laud": "LaUD 90.4 FM",
+    "sedes": "Venues list",
+    "procesos_admisiones": {
+      "procesos_admisiones": "Admissions",
+      "admisiones_pregrado": "Undergraduate",
+      "admisiones_inscripcion": "Postgraduate",
+      "estado_admision": "Admission status"
+    },
+    "extension": "Extension courses",
+    "movilidad_academica": "Academic mobility",
+    "convocatorias_academicas": "Academic calls",
+    "sistema_comunicaciones": "Integrated communications system",
+    "investigacion": {
+      "investigacion": "Research",
+      "cidc": "Research and scientific development center - CIDC",
+      "semilleros": "Extracurricular research groups",
+      "grupos_investigacion": "Investigation groups",
+      "revistas_cientificas": "Scientific journals",
+      "ieie": "Educational studies and research institute – IEIE",
+      "rita": "Advanced technology research network - RITA",
+      "siciud": "Research system - SICIUD"
+    },
+    "inscripcion": {
+      "inscripcion": "Enrollment",
+      "inscripcion_pregrado": "Undergraduate",
+      "inscripcion_posgrado": "Postgraduate",
+      "inscripcion_perfil": "Profile"
+    },
+    "calendario_academico": "Academic calendar",
+    "evaluacion_ingreso": {
+      "evaluacion_ingreso": "Evaluation",
+      "realizar_evaluacion": "Performing evaluation"
+    },
+    "agenda": {
+      "agenda": "Schedule",
+      "ver_agenda": "View schedule"
+    },
+    "pago_linea": {
+      "pago_linea": "Online payment",
+      "pago_inscripcion": "Enrollment payment",
+      "pago_certificado": "Certificate payment"
+    },
+    "condor_estudiante": "Academic management system",
+    "correo_institucional": "Institutional e-mail",
+    "biblioteca": {
+      "biblioteca": "Library",
+      "sistema_biblioteca": "Library system",
+      "bdigital": "Digital library",
+      "catalogo_linea": "Online catalogue",
+      "repositorio_institucional": "Institutional repository",
+      "servicio_descubrimiento": "Discovery service"
+    },
+    "bienestar": {
+      "bienestar": "Institucional welfare",
+      "apoyo_alimentario": "Food support",
+      "reliquidacion": "Tuition recalculation",
+      "deportes": "Sports",
+      "salud": "Health",
+      "inscripcion_linea": "Online registration",
+      "bienestar_linea": "Online welfare"
+    },
+    "licenciamiento": {
+      "licenciamiento": "Licensing",
+      "microsoft": "Microsoft office",
+      "antivirus": "Kaspersky endpoint security",
+      "microsoft_imagine": "Microsoft imagine",
+      "microsoft_azure": "Microsoft azure"
+    },
+    "aulas_virtuales": {
+      "aulas_virtuales": "Virtual classrooms",
+      "facultad_ingenieria": "Engineering",
+      "facultad_ambiente": "Environment and natural resources",
+      "facultad_tecnologica": "Technological",
+      "facultad_ciencias": "Education sciences",
+      "aulas_programas": "Virtual programs"
+    },
+    "laboratorios": "Laboratories",
+    "espacios_web": "Web spaces",
+    "certificado": {
+      "certificado": "Certificate",
+      "solicitud_certificado": "Certificate request",
+      "estado_solicitud": "Request state"
+    },
+    "egresados": "Graduate's page",
     "info_persona": {
       "info_persona": "Personal data",
       "lista_info_persona": "Personal data list",
@@ -27,11 +129,6 @@
       "lista_informacion_contacto": "Contact data list",
       "crud_informacion_contacto": "Contact data crud",
       "view_informacion_contacto": "Contact data view"
-    },
-    "inscripcion": {
-      "inscripcion": "Enrollment",
-      "inscripcion_posgrado": "Postgraduate",
-      "inscripcion_perfil": "Profile"
     },
     "formacion_academica": {
       "formacion_academica": "Academic training",
@@ -193,7 +290,7 @@
     "descuento_matricula": "Tuition discounts",
     "placeholder_descuento_matricula": "E.g.: Tuition discounts",
     "propuesta_grado": "Thesis proposal",
-    "propuesta_grado": "E.g.: Thesis proposal",
+    "placeholder_propuesta_grado": "E.g.: Thesis proposal",
     "notificaciones": "Notifications",
     "placeholder_notificaciones": "E.g.: Notifications",
     "id": "Id",
