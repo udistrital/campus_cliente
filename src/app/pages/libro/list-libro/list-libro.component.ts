@@ -106,7 +106,8 @@ export class ListLibroComponent implements OnInit {
   }
 
   loadData(): void {
-    this.produccionAcademicaService.get('libro/?query=persona:' + this.userService.getEnte())
+    this.produccionAcademicaService.get('libro/?query=persona:' + this.userService.getEnte() +
+      '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;

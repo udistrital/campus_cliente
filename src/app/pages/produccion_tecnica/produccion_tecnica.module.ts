@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudProduccionTecnicaComponent } from './crud-produccion_tecnica/crud-produccion_tecnica.component';
 import { ListProduccionTecnicaComponent } from './list-produccion_tecnica/list-produccion_tecnica.component';
+import { ViewProduccionTecnicaComponent } from './view-produccion_tecnica/view-produccion_tecnica.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListProduccionTecnicaComponent } from './list-produccion_tecnica/list-p
   exports: [
     CrudProduccionTecnicaComponent,
     ListProduccionTecnicaComponent,
+    ViewProduccionTecnicaComponent,
   ],
 })
 export class ProduccionTecnicaModule { }

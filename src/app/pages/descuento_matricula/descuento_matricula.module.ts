@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudDescuentoMatriculaComponent } from './crud-descuento_matricula/crud-descuento_matricula.component';
 import { ListDescuentoMatriculaComponent } from './list-descuento_matricula/list-descuento_matricula.component';
+import { ViewDescuentoMatriculaComponent } from './view-descuento_matricula/view-descuento_matricula.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListDescuentoMatriculaComponent } from './list-descuento_matricula/list
   exports: [
     CrudDescuentoMatriculaComponent,
     ListDescuentoMatriculaComponent,
+    ViewDescuentoMatriculaComponent,
   ],
 })
 export class DescuentoMatriculaModule { }

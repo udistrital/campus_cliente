@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { TraduccionComponent } from './traduccion.component';
 import { ListTraduccionComponent } from './list-traduccion/list-traduccion.component';
 import { CrudTraduccionComponent } from './crud-traduccion/crud-traduccion.component';
+import { ViewTraduccionComponent } from './view-traduccion/view-traduccion.component';
 import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
@@ -28,6 +29,16 @@ const routes: Routes = [{
         'ASPIRANTE',
       ],
     },
+  }, {
+    path: 'view-traduccion',
+    component: ViewTraduccionComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
@@ -46,4 +57,5 @@ export const routedComponents = [
   TraduccionComponent,
   ListTraduccionComponent,
   CrudTraduccionComponent,
+  ViewTraduccionComponent,
 ];

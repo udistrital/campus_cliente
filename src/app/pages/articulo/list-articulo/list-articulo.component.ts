@@ -107,7 +107,8 @@ export class ListArticuloComponent implements OnInit {
   }
 
   loadData(): void {
-    this.produccionAcademicaService.get('articulo/?query=Persona:' + this.userService.getEnte())
+    this.produccionAcademicaService.get('articulo/?query=Persona:' + this.userService.getEnte() +
+      '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;

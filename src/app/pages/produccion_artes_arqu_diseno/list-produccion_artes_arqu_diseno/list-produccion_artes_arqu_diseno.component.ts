@@ -88,13 +88,14 @@ export class ListProduccionArtesArquDisenoComponent implements OnInit {
   }
 
   loadData(): void {
-    this.produccionAcademicaService.get('produccion_artes_arqu_diseno/?query=persona:' + this.user.getEnte()).subscribe(res => {
-      if (res !== null) {
-        const data = <Array<any>>res;
-        this.loading = false;
-        this.getPercentage(1);
-        this.source.load(data);
-      }
+    this.produccionAcademicaService.get('produccion_artes_arqu_diseno/?query=persona:' + this.user.getEnte() +
+      '&limit=0').subscribe(res => {
+        if (res !== null) {
+          const data = <Array<any>>res;
+          this.loading = false;
+          this.getPercentage(1);
+          this.source.load(data);
+        }
     },
     (error: HttpErrorResponse) => {
       Swal({

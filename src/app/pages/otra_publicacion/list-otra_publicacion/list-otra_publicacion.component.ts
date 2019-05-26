@@ -94,44 +94,45 @@ export class ListOtraPublicacionComponent implements OnInit {
   }
 
   loadData(): void {
-    this.produccionAcademicaService.get('otra_publicacion/?query=persona:' + this.users.getEnte()).subscribe(res => {
-      if (res !== null) {
-        const data = <Array<any>>res;
-        const data_info = <Array<any>>[];
-        data.forEach(element => {
-          this.produccionAcademicaService.get('tipo_otra_publicacion/' + element.Tipo.Id)
-            .subscribe(tipo => {
-              if (tipo !== null) {
-                const tipo_op = <any>tipo;
-                element.Tipo = tipo_op;
-                data_info.push(element);
-                this.loading = false;
-                this.getPercentage(1);
-                this.source.load(data_info);
-              }
-            },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                    this.translate.instant('GLOBAL.otra_publicacion'),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    this.produccionAcademicaService.get('otra_publicacion/?query=persona:' + this.users.getEnte() +
+      '&limit=0').subscribe(res => {
+        if (res !== null) {
+          const data = <Array<any>>res;
+          const data_info = <Array<any>>[];
+          data.forEach(element => {
+            this.produccionAcademicaService.get('tipo_otra_publicacion/' + element.Tipo.Id)
+              .subscribe(tipo => {
+                if (tipo !== null) {
+                  const tipo_op = <any>tipo;
+                  element.Tipo = tipo_op;
+                  data_info.push(element);
+                  this.loading = false;
+                  this.getPercentage(1);
+                  this.source.load(data_info);
+                }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.otra_publicacion'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
               });
-            });
-      }
-    },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          footer: this.translate.instant('GLOBAL.cargar') + '-' +
-            this.translate.instant('GLOBAL.otra_publicacion'),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-        });
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.otra_publicacion'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
       });
   }
 

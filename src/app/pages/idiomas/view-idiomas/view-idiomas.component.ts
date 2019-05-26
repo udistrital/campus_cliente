@@ -42,7 +42,8 @@ export class ViewIdiomasComponent implements OnInit {
   }
 
   public loadInfoIdioma(): void {
-    this.idiomaService.get('conocimiento_idioma/?query=persona:' + this.ente)
+    this.idiomaService.get('conocimiento_idioma/?query=persona:' + this.ente +
+      '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           this.info_idioma = <Array<any>>res;

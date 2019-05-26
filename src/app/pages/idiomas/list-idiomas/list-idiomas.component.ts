@@ -96,7 +96,8 @@ export class ListIdiomasComponent implements OnInit {
 
   loadData(): void {
     this.loading = true;
-    this.idiomaService.get('conocimiento_idioma/?query=persona:' + this.userService.getEnte())
+    this.idiomaService.get('conocimiento_idioma/?query=persona:' + this.userService.getEnte() +
+      '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;

@@ -115,8 +115,8 @@ export class ListTraduccionComponent implements OnInit {
   }
 
   loadData(): void {
-    this.produccionAcademicaService.get('traduccion/?query=persona:' + this.users.getEnte())
-      .subscribe(res => {
+    this.produccionAcademicaService.get('traduccion/?query=persona:' + this.users.getEnte() +
+      '&limit=0').subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
           const data_info = <Array<any>>[];
