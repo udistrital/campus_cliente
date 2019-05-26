@@ -11,7 +11,7 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { DataModule } from './data/data.module';
 import { AnalyticsService } from './utils/analytics.service';
 import { DocumentoService } from './data/documento.service'
-import { NotificacionesService } from './utils/notificaciones.service';
+// import { NotificacionesService } from './utils/notificaciones.service';
 import { WebsocketService } from './utils/websocket.service';
 import { AuthGuard } from './_guards/auth.guard';
 import { ListService } from './store/services/list.service';
@@ -125,7 +125,7 @@ export class CoreModule {
       providers: [
         ...NB_CORE_PROVIDERS,
         DocumentoService,
-        NotificacionesService,
+        // NotificacionesService,
         WebsocketService,
       ],
     };

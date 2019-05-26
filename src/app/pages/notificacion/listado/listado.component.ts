@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
-import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
+// import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
@@ -17,16 +17,17 @@ export class ListadoComponent {
   searchTerm$ = new Subject<string>();
 
   notificaciones: any;
-  constructor(private notificacionesService: NotificacionesService) {
+  constructor() { // private notificacionesService: NotificacionesService) {
 
     this.notificaciones = [];
+    /**
     this.notificacionesService.getMessages()
       .pipe(debounceTime(700),
         distinctUntilChanged())
       .subscribe((notification: any) => {
         this.notificaciones = notification;
       });
-
+      **/
     this.searchTerm$
       .pipe(
         debounceTime(700),
@@ -40,7 +41,7 @@ export class ListadoComponent {
 
   searchEntries(term) {
     const array = []
-    array.push(this.notificacionesService.listMessage.filter(notify => notify.Content.Message.indexOf(term) !== -1));
+    // array.push(this.notificacionesService.listMessage.filter(notify => notify.Content.Message.indexOf(term) !== -1));
     return array
   }
 
