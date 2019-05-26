@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudOtraPublicacionComponent } from './crud-otra_publicacion/crud-otra_publicacion.component';
 import { ListOtraPublicacionComponent } from './list-otra_publicacion/list-otra_publicacion.component';
+import { ViewOtraPublicacionComponent } from './view-otra_publicacion/view-otra_publicacion.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListOtraPublicacionComponent } from './list-otra_publicacion/list-otra_
   exports: [
     CrudOtraPublicacionComponent,
     ListOtraPublicacionComponent,
+    ViewOtraPublicacionComponent,
   ],
 })
 export class OtraPublicacionModule { }

@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { PropuestaGradoComponent } from './propuesta_grado.component';
 import { ListPropuestaGradoComponent } from './list-propuesta_grado/list-propuesta_grado.component';
 import { CrudPropuestaGradoComponent } from './crud-propuesta_grado/crud-propuesta_grado.component';
+import { ViewPropuestaGradoComponent } from './view-propuesta_grado/view-propuesta_grado.component';
 import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
@@ -20,6 +21,16 @@ const routes: Routes = [{
   }, {
     path: 'crud-propuesta_grado',
     component: CrudPropuestaGradoComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
+  }, {
+    path: 'view-propuesta_grado',
+    component: ViewPropuestaGradoComponent,
     canActivate: [AuthGuard],
     data: {
       roles: [
@@ -45,4 +56,5 @@ export const routedComponents = [
   PropuestaGradoComponent,
   ListPropuestaGradoComponent,
   CrudPropuestaGradoComponent,
+  ViewPropuestaGradoComponent,
 ];

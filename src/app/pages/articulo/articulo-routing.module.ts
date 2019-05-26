@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { ArticuloComponent } from './articulo.component';
 import { ListArticuloComponent } from './list-articulo/list-articulo.component';
 import { CrudArticuloComponent } from './crud-articulo/crud-articulo.component';
+import { ViewArticuloComponent } from './view-articulo/view-articulo.component';
 import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
@@ -28,6 +29,16 @@ const routes: Routes = [{
         'ASPIRANTE',
       ],
     },
+  }, {
+    path: 'view-articulo',
+    component: ViewArticuloComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
@@ -46,4 +57,5 @@ export const routedComponents = [
   ArticuloComponent,
   ListArticuloComponent,
   CrudArticuloComponent,
+  ViewArticuloComponent,
 ];

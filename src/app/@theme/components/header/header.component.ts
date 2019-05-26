@@ -6,8 +6,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+// import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
+// import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-header',
@@ -28,7 +28,7 @@ export class HeaderComponent implements OnInit {
     private menuService: NbMenuService,
     private analyticsService: AnalyticsService,
     private autenticacion: ImplicitAutenticationService,
-    private notificacionService: NotificacionesService,
+    // private notificacionService: NotificacionesService,
     private router: Router,
     public translate: TranslateService) {
     this.translate = translate;
@@ -37,6 +37,7 @@ export class HeaderComponent implements OnInit {
         this.onContecxtItemSelection(event.item.title);
       });
 
+    /**
     this.notificacionService.getMessages()
       .pipe(debounceTime(700), distinctUntilChanged())
       .subscribe((notification: any) => {
@@ -52,7 +53,9 @@ export class HeaderComponent implements OnInit {
           this.noNotify = numero + '';
         }
       });
+      **/
   }
+
   useLanguage(language: string) {
     this.translate.use(language);
   }

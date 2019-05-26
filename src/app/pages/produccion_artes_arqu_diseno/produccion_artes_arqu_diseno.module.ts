@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudProduccionArtesArquDisenoComponent } from './crud-produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno.component';
 import { ListProduccionArtesArquDisenoComponent } from './list-produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno.component';
+import { ViewProduccionArtesArquDisenoComponent } from './view-produccion_artes_arqu_diseno/view-produccion_artes_arqu_diseno.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListProduccionArtesArquDisenoComponent } from './list-produccion_artes_
   exports: [
     CrudProduccionArtesArquDisenoComponent,
     ListProduccionArtesArquDisenoComponent,
+    ViewProduccionArtesArquDisenoComponent,
   ],
 })
 export class ProduccionArtesArquDisenoModule { }

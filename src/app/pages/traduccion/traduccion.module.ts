@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudTraduccionComponent } from './crud-traduccion/crud-traduccion.component';
 import { ListTraduccionComponent } from './list-traduccion/list-traduccion.component';
+import { ViewTraduccionComponent } from './view-traduccion/view-traduccion.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListTraduccionComponent } from './list-traduccion/list-traduccion.compo
   exports: [
     CrudTraduccionComponent,
     ListTraduccionComponent,
+    ViewTraduccionComponent,
   ],
 })
 export class TraduccionModule { }

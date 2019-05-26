@@ -3,34 +3,32 @@ import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ToasterModule } from 'angular2-toaster';
-import { PersonaService } from '../../@core/data/persona.service';
-import { CampusMidService } from '../../@core/data/campus_mid.service';
-import { UbicacionesService } from '../../@core/data/ubicaciones.service';
-import { CrudInfoCaracteristicaComponent } from '../info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component';
-import { CrudInformacionContactoComponent } from '../informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component';
-import { CrudInfoPersonaComponent } from '../info_persona/crud-info_persona/crud-info_persona.component';
-import { InformacionContactoModule } from '../informacion_contacto/informacion_contacto.module';
-import { InfoPersonaModule } from '../info_persona/info_persona.module';
-import { InfoCaracteristicaModule } from '../info_caracteristica/info_caracteristica.module';
-import { ImplicitAutenticationService } from './../../@core/utils/implicit_autentication.service';
 import { NuxeoService } from './../../@core/utils/nuxeo.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UtilidadesService } from '../../@core/utils/utilidades.service';
-import { IdiomasModule } from '../idiomas/idiomas.module';
-import { ListIdiomasComponent } from '../idiomas/list-idiomas/list-idiomas.component';
-import { CrudIdiomasComponent } from '../idiomas/crud-idiomas/crud-idiomas.component';
-import { FormacionAcademicaModule } from '../formacion_academica/formacion_academica.module';
-import { ListFormacionAcademicaComponent } from '../formacion_academica/list-formacion_academica/list-formacion_academica.component';
-import { CrudFormacionAcademicaComponent } from '../formacion_academica/crud-formacion_academica/crud-formacion_academica.component';
-import { ExperienciaLaboralModule } from '../experiencia_laboral/experiencia_laboral.module';
-import { ListExperienciaLaboralComponent } from '../experiencia_laboral/list-experiencia_laboral/list-experiencia_laboral.component';
-import { CrudExperienciaLaboralComponent } from '../experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component';
+import { ImplicitAutenticationService } from './../../@core/utils/implicit_autentication.service';
 import { ProgramaAcademicoService } from '../../@core/data/programa_academico.service';
+import { PersonaService } from '../../@core/data/persona.service';
+import { UbicacionesService } from '../../@core/data/ubicaciones.service';
 import { ProduccionAcademicaService } from '../../@core/data/produccion_academica.service';
 import { DescuentosPosgradoService } from '../../@core/data/descuentos_posgrado.service';
 import { DocumentoProgramaService } from '../../@core/data/documentos_programa.service';
-import { PropuestaGradoModule } from '../propuesta_grado/propuesta_grado.module';
-import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component';
+import { CampusMidService } from '../../@core/data/campus_mid.service';
+import { InfoPersonaModule } from '../info_persona/info_persona.module';
+import { CrudInfoPersonaComponent } from '../info_persona/crud-info_persona/crud-info_persona.component';
+import { InfoCaracteristicaModule } from '../info_caracteristica/info_caracteristica.module';
+import { CrudInfoCaracteristicaComponent } from '../info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component';
+import { InformacionContactoModule } from '../informacion_contacto/informacion_contacto.module';
+import { CrudInformacionContactoComponent } from '../informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component';
+import { FormacionAcademicaModule } from '../formacion_academica/formacion_academica.module';
+import { ListFormacionAcademicaComponent } from '../formacion_academica/list-formacion_academica/list-formacion_academica.component';
+import { CrudFormacionAcademicaComponent } from '../formacion_academica/crud-formacion_academica/crud-formacion_academica.component';
+import { IdiomasModule } from '../idiomas/idiomas.module';
+import { ListIdiomasComponent } from '../idiomas/list-idiomas/list-idiomas.component';
+import { CrudIdiomasComponent } from '../idiomas/crud-idiomas/crud-idiomas.component';
+import { ExperienciaLaboralModule } from '../experiencia_laboral/experiencia_laboral.module';
+import { ListExperienciaLaboralComponent } from '../experiencia_laboral/list-experiencia_laboral/list-experiencia_laboral.component';
+import { CrudExperienciaLaboralComponent } from '../experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component';
 import { LibroModule } from '../libro/libro.module';
 import { ListLibroComponent } from '../libro/list-libro/list-libro.component';
 import { CrudLibroComponent } from '../libro/crud-libro/crud-libro.component';
@@ -53,27 +51,29 @@ import { ProduccionArtesArquDisenoModule } from '../produccion_artes_arqu_diseno
 // tslint:disable-next-line:max-line-length
 import { ListProduccionArtesArquDisenoComponent } from '../produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno.component';
 import { CrudProduccionArtesArquDisenoComponent } from '../produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno.component';
+import { DocumentoProgramaModule } from '../documento_programa/documento_programa.module';
+// tslint:enable:max-line-length
+import { ListDocumentoProgramaComponent } from '../documento_programa/list-documento_programa/list-documento_programa.component';
+import { CrudDocumentoProgramaComponent } from '../documento_programa/crud-documento_programa/crud-documento_programa.component';
 import { DescuentoMatriculaModule } from '../descuento_matricula/descuento_matricula.module';
 import { ListDescuentoMatriculaComponent } from '../descuento_matricula/list-descuento_matricula/list-descuento_matricula.component';
 import { CrudDescuentoMatriculaComponent } from '../descuento_matricula/crud-descuento_matricula/crud-descuento_matricula.component';
-import { DocumentoProgramaModule } from '../documento_programa/documento_programa.module';
-import { ListDocumentoProgramaComponent } from '../documento_programa/list-documento_programa/list-documento_programa.component';
-import { CrudDocumentoProgramaComponent } from '../documento_programa/crud-documento_programa/crud-documento_programa.component';
+import { PropuestaGradoModule } from '../propuesta_grado/propuesta_grado.module';
+import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component';
 
 @NgModule({
   imports: [
     ThemeModule,
     InscripcionRoutingModule,
+    MatExpansionModule,
     SharedModule,
     ToasterModule,
-    InformacionContactoModule,
     InfoPersonaModule,
     InfoCaracteristicaModule,
-    MatExpansionModule,
-    IdiomasModule,
+    InformacionContactoModule,
     FormacionAcademicaModule,
+    IdiomasModule,
     ExperienciaLaboralModule,
-    PropuestaGradoModule,
     LibroModule,
     ArticuloModule,
     TraduccionModule,
@@ -81,8 +81,9 @@ import { CrudDocumentoProgramaComponent } from '../documento_programa/crud-docum
     OtraPublicacionModule,
     ProduccionTecnicaModule,
     ProduccionArtesArquDisenoModule,
-    DescuentoMatriculaModule,
     DocumentoProgramaModule,
+    DescuentoMatriculaModule,
+    PropuestaGradoModule,
   ],
   declarations: [
     ...routedComponents,
@@ -90,44 +91,44 @@ import { CrudDocumentoProgramaComponent } from '../documento_programa/crud-docum
   providers: [
     ImplicitAutenticationService,
     NuxeoService,
-    PersonaService,
-    CampusMidService,
-    UbicacionesService,
     UtilidadesService,
     ProgramaAcademicoService,
+    PersonaService,
+    UbicacionesService,
+    CampusMidService,
     ProduccionAcademicaService,
-    DescuentosPosgradoService,
     DocumentoProgramaService,
+    DescuentosPosgradoService,
   ],
   entryComponents: [
-    ListIdiomasComponent,
-    CrudIdiomasComponent,
-    ListFormacionAcademicaComponent,
-    CrudFormacionAcademicaComponent,
-    ListExperienciaLaboralComponent,
-    CrudExperienciaLaboralComponent,
     CrudInfoPersonaComponent,
     CrudInfoCaracteristicaComponent,
     CrudInformacionContactoComponent,
-    CrudPropuestaGradoComponent,
-    CrudLibroComponent,
+    ListFormacionAcademicaComponent,
+    CrudFormacionAcademicaComponent,
+    ListIdiomasComponent,
+    CrudIdiomasComponent,
+    ListExperienciaLaboralComponent,
+    CrudExperienciaLaboralComponent,
     ListLibroComponent,
-    CrudArticuloComponent,
+    CrudLibroComponent,
     ListArticuloComponent,
-    CrudTraduccionComponent,
+    CrudArticuloComponent,
     ListTraduccionComponent,
-    CrudOtroDocumentoComponent,
-    ListOtroDocumentoComponent,
-    CrudProduccionTecnicaComponent,
-    ListProduccionTecnicaComponent,
-    CrudProduccionArtesArquDisenoComponent,
-    ListProduccionArtesArquDisenoComponent,
+    CrudTraduccionComponent,
     ListOtraPublicacionComponent,
     CrudOtraPublicacionComponent,
-    ListDescuentoMatriculaComponent,
-    CrudDescuentoMatriculaComponent,
+    ListOtroDocumentoComponent,
+    CrudOtroDocumentoComponent,
+    ListProduccionTecnicaComponent,
+    CrudProduccionTecnicaComponent,
+    ListProduccionArtesArquDisenoComponent,
+    CrudProduccionArtesArquDisenoComponent,
     ListDocumentoProgramaComponent,
     CrudDocumentoProgramaComponent,
+    ListDescuentoMatriculaComponent,
+    CrudDescuentoMatriculaComponent,
+    CrudPropuestaGradoComponent,
   ],
 })
 export class InscripcionModule { }

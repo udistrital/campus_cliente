@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { LibroComponent } from './libro.component';
 import { ListLibroComponent } from './list-libro/list-libro.component';
 import { CrudLibroComponent } from './crud-libro/crud-libro.component';
+import { ViewLibroComponent } from './view-libro/view-libro.component';
 import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
@@ -28,6 +29,16 @@ const routes: Routes = [{
         'ASPIRANTE',
       ],
     },
+  }, {
+    path: 'view-libro',
+    component: ViewLibroComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
@@ -46,4 +57,5 @@ export const routedComponents = [
   LibroComponent,
   ListLibroComponent,
   CrudLibroComponent,
+  ViewLibroComponent,
 ];

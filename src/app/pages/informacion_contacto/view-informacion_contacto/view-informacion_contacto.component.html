@@ -8,7 +8,7 @@
           {{contacto.Valor}}
         </li>
         <li *ngFor="let ubicacion of info_informacion_contacto.UbicacionEnte">
-          <label><strong>{{ubicacion.TipoRelacionUbicacionEnte.Nombre}}:
+          <label><strong>{{"GLOBAL.lugar_residencia" | translate}}:
             </strong> {{ubicacion.Lugar.CIUDAD.Nombre}} /
             {{ubicacion.Lugar.DEPARTAMENTO.Nombre}} /
             {{ubicacion.Lugar.PAIS.Nombre}} </label>

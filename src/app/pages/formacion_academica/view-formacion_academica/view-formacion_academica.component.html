@@ -7,9 +7,9 @@
                 <tbody *ngIf="info_formacion_academica">
                     <tr *ngFor="let formacion of info_formacion_academica">
                         <td>
-                            <p><b>{{formacion.FechaInicio | date:'dd-MM-yyyy'}}
+                            <p><b>{{formacion.FechaInicio | date:'dd/MM/yyyy'}}
                                     - {{formacion.FechaFinalizacion |
-                                    date:'dd-MM-yyyy'}} </b></p>
+                                    date:'dd/MM/yyyy'}} </b></p>
                             <p><b>{{formacion.PaisUniversidad}}</b></p>
                             <p><b>{{formacion.NivelFormacion.Nombre}}</b></p>
                             <p><b>{{formacion.Metodologia.Nombre}}</b></p>

@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DescuentoMatriculaComponent } from './descuento_matricula.component';
 import { ListDescuentoMatriculaComponent } from './list-descuento_matricula/list-descuento_matricula.component';
 import { CrudDescuentoMatriculaComponent } from './crud-descuento_matricula/crud-descuento_matricula.component';
-// import { ViewDescuentoMatriculaComponent } from './view-descuento_matricula/view-descuento_matricula.component';
+import { ViewDescuentoMatriculaComponent } from './view-descuento_matricula/view-descuento_matricula.component';
 import { AuthGuard } from '../../@core/_guards/auth.guard';
 
 const routes: Routes = [{
@@ -29,6 +29,16 @@ const routes: Routes = [{
         'ASPIRANTE',
       ],
     },
+  }, {
+    path: 'view-descuento_matricula',
+    component: ViewDescuentoMatriculaComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        'ADMIN_CAMPUS',
+        'ASPIRANTE',
+      ],
+    },
   }],
 }];
 
@@ -47,4 +57,5 @@ export const routedComponents = [
   DescuentoMatriculaComponent,
   ListDescuentoMatriculaComponent,
   CrudDescuentoMatriculaComponent,
+  ViewDescuentoMatriculaComponent,
 ];

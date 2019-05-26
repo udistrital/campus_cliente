@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudArticuloComponent } from './crud-articulo/crud-articulo.component';
 import { ListArticuloComponent } from './list-articulo/list-articulo.component';
+import { ViewArticuloComponent } from './view-articulo/view-articulo.component';
 import { UserService } from '../../@core/data/users.service';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { UserService } from '../../@core/data/users.service';
   ],
   exports: [
     CrudArticuloComponent,
+    ViewArticuloComponent,
     ListArticuloComponent,
   ],
 })

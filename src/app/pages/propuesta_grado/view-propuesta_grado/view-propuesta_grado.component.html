@@ -1,0 +1,26 @@
+<nb-card>
+  <nb-card-header>{{"GLOBAL.propuesta_grado" | translate}}
+  </nb-card-header>
+  <nb-card-body class="row container">
+    <div class="col-md-12">
+      <table class="table-responsive">
+        <tbody *ngIf="info_propuesta_grado">
+          <tr *ngFor="let propuesta of info_propuesta_grado">
+            <td>
+              <p><b>{{"GLOBAL.grupo_investigacion" | translate}}:</b> {{propuesta.GrupoInvestigacion.Nombre}}</p>
+              <p><b>{{"GLOBAL.linea_investigacion" | translate}}:</b> {{propuesta.LineaInvestigacion.Nombre}}</p>
+              <p><b>{{"GLOBAL.tipo_proyecto" | translate}}:</b> {{propuesta.TipoProyecto.Nombre}}</p>
+            </td>
+            <td>
+              <p><b>{{"GLOBAL.titulo_proyecto" | translate}}:</b> {{propuesta.Nombre}}</p>
+              <p><b>{{"GLOBAL.formato_proyecto" | translate}}:</b> {{propuesta.FormatoProyecto}}</p>
+              <p><b>{{"GLOBAL.resumen" | translate}}:</b> {{propuesta.Resumen}}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span *ngIf="url_editar" (click)="editar()" class="link">
+        <i class="ion-edit"></i>{{"GLOBAL.actualizar" | translate}}</span>
+    </div>
+  </nb-card-body>
+</nb-card>

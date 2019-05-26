@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudDocumentoProgramaComponent } from './crud-documento_programa/crud-documento_programa.component';
 import { ListDocumentoProgramaComponent } from './list-documento_programa/list-documento_programa.component';
+import { ViewDocumentoProgramaComponent } from './view-documento_programa/view-documento_programa.component';
 
 @NgModule({
   imports: [
@@ -25,6 +26,7 @@ import { ListDocumentoProgramaComponent } from './list-documento_programa/list-d
   exports: [
     CrudDocumentoProgramaComponent,
     ListDocumentoProgramaComponent,
+    ViewDocumentoProgramaComponent,
   ],
 })
 export class DocumentoProgramaModule { }

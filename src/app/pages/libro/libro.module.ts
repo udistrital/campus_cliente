@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudLibroComponent } from './crud-libro/crud-libro.component';
 import { ListLibroComponent } from './list-libro/list-libro.component';
+import { ViewLibroComponent } from './view-libro/view-libro.component';
 import { UserService } from '../../@core/data/users.service';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { UserService } from '../../@core/data/users.service';
   exports: [
     CrudLibroComponent,
     ListLibroComponent,
+    ViewLibroComponent,
   ],
 })
 export class LibroModule { }
