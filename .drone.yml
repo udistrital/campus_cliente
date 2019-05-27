@@ -50,6 +50,11 @@ steps:
   - aws configure set aws_secret_access_key $AWS_SECRET_KEY
   - aws configure set default.region us-east-1
   - aws cloudfront update-distribution --id E26VS5XA3057IM --default-root-object index.html
+  when:
+    branch:
+    - develop
+    event:
+    - push
 - name: notify
   image: appleboy/drone-telegram
   settings:
