@@ -35,6 +35,21 @@ steps:
     - develop
     event:
     - push
+- name: build-deploy
+  image: alpine
+  environment:
+    AWS_KEY_ID:
+      from_secret: aws_access_key_id
+    AWS_SECRET_KEY:
+      from_secret: aws_secret_access_key
+  commands:
+  - apk update && apk add zip
+  - apk --no-cache add ca-certificates curl bash jq py2-pip
+  - pip install awscli
+  - aws configure set aws_access_key_id $AWS_KEY_ID
+  - aws configure set aws_secret_access_key $AWS_SECRET_KEY
+  - aws configure set default.region us-east-1
+  - aws cloudfront update-distribution --id E26VS5XA3057IM --default-root-object index.html
 - name: notify
   image: appleboy/drone-telegram
   settings:
