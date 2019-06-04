@@ -17,7 +17,6 @@ import { Titulacion } from '../data/models/titulacion';
 import { TipoIdentificacion } from '../data/models/tipo_identificacion';
 import { TipoProyecto } from '../data/models/tipo_proyecto';
 import { GrupoInvestigacion } from '../data/models/grupo_investigacion';
-import { TipoPublicacionLibro } from '../data/models/tipo_publicacion_libro';
 export interface IAppState {
   listGenero: Genero[],
   listClasificacionNivelIdioma: ClasificacionNivelIdioma[],
