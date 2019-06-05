@@ -11,12 +11,13 @@ pipeline:
   nodejs:
     image: node:10.7.0
     commands:
-     - apt-get update -y
-     - apt-get install -y zip
-     - rm -rf node_modules
-     - npm i
-     - npm run lint:ci
-     - npm run build:prod
+    - apt-get update -y
+    - apt-get install -y zip
+    - rm -rf node_modules
+    - npm i
+    - npm install node-sass
+    - npm run lint
+    - npm run build --build-optimizer=false
 
     when:
       branch: [master, develop]
