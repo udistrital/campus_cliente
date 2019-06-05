@@ -34,11 +34,11 @@ export class NotificacionesService {
         if (authService.live()) {
             this.payload = authService.getPayload();
             this.messages = <Subject<any>>wsService
-                .connect(CHAT_URL + `?id=${this.payload.sub}&profiles=admin`)
+                .connect(CHAT_URL + `?id=${this.payload.sub}&profiles=ADMIN_CAMPUS`)
                 .map((response: any) => {
                     return JSON.parse(response.data)
                 });
-            this.queryNotification('admin');
+            this.queryNotification('ADMIN_CAMPUS');
             this.messages.subscribe(response => {
                 const message = {
                     Type: response.Type,
