@@ -31,7 +31,7 @@ pipeline:
     target: /
     strip_prefix: dist/
     when:
-      branch: [develop]
+      branch: [notificacion]
       event: push
 
   publish_s3:
