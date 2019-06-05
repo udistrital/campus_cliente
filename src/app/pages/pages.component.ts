@@ -40,14 +40,14 @@ export class PagesComponent implements OnInit {
       this.roles = <any>this.autenticacion.getPayload().role;
       if (this.roles.indexOf('ADMIN_CAMPUS') !== -1) {
         this.rol = 'ASPIRANTE';
-      } else if (this.roles.indexOf('ASPIRANTE') !== -1) {
-        this.rol = 'ASPIRANTE';
-      } else if (this.roles.indexOf('ESTUDIANTE') !== -1) {
+      }else if (this.roles.indexOf('ESTUDIANTE') !== -1) {
         this.rol = 'ESTUDIANTE';
       } else if (this.roles.indexOf('EGRESADO') !== -1) {
         this.rol = 'EGRESADO';
+      } else if (this.roles.indexOf('ASPIRANTE') !== -1) {
+        this.rol = 'ASPIRANTE';
       } else {
-        this.rol = 'Menu%20campus';
+        this.rol = 'ASPIRANTE';
       }
       this.menuws.get(this.rol + '/Campus').subscribe(
         data => {

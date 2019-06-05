@@ -135,6 +135,7 @@
         <nb-tab tabTitle="{{ 'GLOBAL.info_persona' | translate }}"
           [active]="info_persona">
           <ngx-crud-info-persona info_persona_id={{this.info_ente_id}}
+            admision_id={{this.admision_id}}
             (eventChange)="perfil_editar('info_caracteristica')"
             (result)="traerInfoPersona($event,0)">
           </ngx-crud-info-persona>

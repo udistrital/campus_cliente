@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ToasterModule } from 'angular2-toaster';
+import { PosgradoComponent } from './posgrado/posgrado.component';
 import { NuxeoService } from './../../@core/utils/nuxeo.service';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UtilidadesService } from '../../@core/utils/utilidades.service';
@@ -129,6 +130,9 @@ import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_g
     ListDescuentoMatriculaComponent,
     CrudDescuentoMatriculaComponent,
     CrudPropuestaGradoComponent,
+  ],
+  exports: [
+    PosgradoComponent,
   ],
 })
 export class InscripcionModule { }

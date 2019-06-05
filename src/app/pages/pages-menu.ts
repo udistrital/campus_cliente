@@ -21,6 +21,19 @@ export const MENU_ITEMS: MenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Admision',
+    icon: 'nb-compose',
+    link: '/pages/procesos_admisiones',
+    key: 'procesos_admisiones',
+    children: [
+      {
+        title: 'Lista Admision',
+        link: '/pages/procesos_admisiones/estado_admision',
+        key: 'estado_admision',
+      },
+    ],
+  },
 ];
 
 export const MENU_PUBLICO: MenuItem[] = [
