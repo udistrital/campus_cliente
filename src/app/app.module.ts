@@ -16,7 +16,7 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { CdkTableModule } from '@angular/cdk/table';
-import {ToasterModule} from 'angular2-toaster';
+import { ToasterModule } from 'angular2-toaster';
 import { ImplicitAutenticationService } from './@core/utils/implicit_autentication.service';
 
 export function HttpLoaderFactory(http: HttpClient) {

@@ -16,6 +16,10 @@ const routes: Routes = [{
       loadChildren: './inscripcion/inscripcion.module#InscripcionModule',
     },
     {
+      path: 'procesos_admisiones',
+      loadChildren: './procesos_admisiones/admision.module#AdmisionModule',
+    },
+    {
       path: 'notificacion',
       loadChildren: './notificacion/notificacion.module#NotificacionModule',
     },
