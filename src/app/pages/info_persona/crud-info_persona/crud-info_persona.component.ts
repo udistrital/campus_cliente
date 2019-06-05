@@ -43,7 +43,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.admision_id = admision_id;
     if (this.admision_id !== undefined) {
       this.loadAdmision();
-      console.info('AdmisionId: ' + admision_id);      
+      console.info('AdmisionId: ' + admision_id);
     }
   }
 
