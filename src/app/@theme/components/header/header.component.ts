@@ -7,7 +7,6 @@ import { ImplicitAutenticationService } from '../../../@core/utils/implicit_aute
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 // import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
-// import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-header',
@@ -37,31 +36,23 @@ export class HeaderComponent implements OnInit {
         this.onContecxtItemSelection(event.item.title);
       });
 
-    /**
-    this.notificacionService.getMessages()
-      .pipe(debounceTime(700), distinctUntilChanged())
-      .subscribe((notification: any) => {
-        const temp = notification.map((notify: any) => {
-          return { title: notify.Content.Message, icon: 'fa fa-commenting-o' }
-        });
-        this.userMenu = [...temp.slice(0, 7), ...[{ title: 'ver todas', icon: 'fa fa-list' }]];
-      });
-
-    this.notificacionService.noNotify$
-      .subscribe((numero: any) => {
-        if (typeof numero !== typeof {}) {
-          this.noNotify = numero + '';
-        }
-      });
-      **/
+      /** this.notificacionService.arrayMessages$
+        .subscribe((notification: any) => {
+          const temp = notification.map((notify: any) => {
+            return { title: notify.Content.Message, icon: 'fa fa-commenting-o' }
+          });
+          this.userMenu = [...temp.slice(0, 7), ...[{ title: 'ver todas', icon: 'fa fa-list' }]];
+        });**/
   }
 
   useLanguage(language: string) {
     this.translate.use(language);
   }
+
   ngOnInit() {
     this.autenticacion.init();
   }
+
   liveToken() {
     if (this.autenticacion.live()) {
       this.username = (this.autenticacion.getPayload()).sub;
