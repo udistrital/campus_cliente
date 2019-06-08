@@ -17,8 +17,8 @@ import { SharedModule } from '../../shared/shared.module';
   declarations: [
     ...routedComponents,
   ],
-  providers: [
-    // NotificacionesService,
-  ],
+  // providers: [
+  //   NotificacionesService,
+  // ],
 })
 export class NotificacionModule { }

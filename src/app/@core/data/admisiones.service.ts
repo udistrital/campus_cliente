@@ -5,10 +5,12 @@ import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
+  }),
 };
-
-// const path = Config.LOCAL.ADMISIONES_SERVICE;
 
 const path = GENERAL.ENTORNO.ADMISIONES_SERVICE;
 

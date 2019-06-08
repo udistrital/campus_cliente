@@ -5,14 +5,13 @@ import * as Rx from 'rxjs/Rx';
 export class WebsocketService {
     constructor() { }
 
-    private subject: Rx.Subject<MessageEvent>;
+    private ws: Rx.Subject<MessageEvent>;
 
     public connect(url): Rx.Subject<MessageEvent> {
-        if (!this.subject) {
-            this.subject = this.create(url);
-            console.info('Successfully connected: ' + url);
+        if (!this.ws) {
+            this.ws = this.create(url);
         }
-        return this.subject;
+        return this.ws;
     }
 
     private create(url): Rx.Subject<MessageEvent> {
@@ -23,15 +22,8 @@ export class WebsocketService {
             ws.onclose = obs.complete.bind(obs);
             return ws.close.bind(ws);
         });
-        const observer = {
-            next: (data: Object) => {
-                console.info(data);
-                if (ws.readyState === WebSocket.OPEN) {
-                    ws.send(JSON.stringify(data));
-                }
-            },
-        }
-        return Rx.Subject.create(observer, observable);
+
+        return Rx.Subject.create(observable);
     }
 
 }

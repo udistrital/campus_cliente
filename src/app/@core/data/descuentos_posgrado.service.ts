@@ -6,12 +6,13 @@ import { throwError } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
+    'Content-Type': 'application/json',
     'Accept': 'application/json',
+    'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
   }),
 }
 
 const path = GENERAL.ENTORNO.MATRICULA_DESCUENTOS_SERVICE;
-
 
 @Injectable()
 export class DescuentosPosgradoService {

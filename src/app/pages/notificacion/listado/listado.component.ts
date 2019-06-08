@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Subject } from 'rxjs';
 // import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+// import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'ngx-listado',
@@ -13,21 +13,17 @@ export class ListadoComponent {
 
   baseUrl: string = 'https://api.cdnjs.com/libraries';
   queryUrl: string = '?search=';
-
   searchTerm$ = new Subject<string>();
 
   notificaciones: any;
-  constructor() { // private notificacionesService: NotificacionesService) {
-
+  constructor(
+    // private notificacionService: NotificacionesService,
+    ) {
     this.notificaciones = [];
-    /**
-    this.notificacionesService.getMessages()
-      .pipe(debounceTime(700),
-        distinctUntilChanged())
+    /** this.notificacionService.arrayMessages$
       .subscribe((notification: any) => {
         this.notificaciones = notification;
       });
-      **/
     this.searchTerm$
       .pipe(
         debounceTime(700),
@@ -35,14 +31,13 @@ export class ListadoComponent {
         switchMap(query => this.searchEntries(query)),
       ).subscribe(response => {
         this.notificaciones = response;
-      })
+      })**/
 
   }
 
   searchEntries(term) {
     const array = []
-    // array.push(this.notificacionesService.listMessage.filter(notify => notify.Content.Message.indexOf(term) !== -1));
+    // array.push(this.notificacionService.listMessage.filter(notify => notify.Content.Message.indexOf(term) !== -1));
     return array
   }
-
 }
