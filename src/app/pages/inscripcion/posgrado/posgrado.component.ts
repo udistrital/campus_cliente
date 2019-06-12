@@ -24,11 +24,13 @@ export class PosgradoComponent implements OnInit, OnChanges {
   @Input('admision_id')
   set name(admision_id: number) {
     this.admision_id = admision_id;
-    if (this.admision_id !== 0 && this.admision_id !== undefined) {
+    if (this.admision_id !== 0 && this.admision_id !== undefined && this.admision_id.toString() !== '') {
       this.getInfoInscripcion();
     } else {
       this.info_ente_id = undefined;
-      this.loadInfoPostgrados()
+      if (this.admision_id === 0) {
+        this.loadInfoPostgrados();
+      }
     }
   }
 
