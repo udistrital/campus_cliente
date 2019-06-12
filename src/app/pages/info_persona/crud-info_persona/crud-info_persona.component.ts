@@ -186,7 +186,7 @@ export class CrudInfoPersonaComponent implements OnInit {
           this.info_info_persona = <any>infoPersona;
           if (this.info_info_persona.Foto.file !== undefined) {
             files.push({
-              nombre: 'utest01',
+              nombre: this.autenticationService.getPayload().sub,
               name: this.autenticationService.getPayload().sub,
               key: 'Foto',
               file: this.info_info_persona.Foto.file, IdDocumento: 1,
@@ -194,7 +194,8 @@ export class CrudInfoPersonaComponent implements OnInit {
           }
           if (this.info_info_persona.SoporteDocumento.file !== undefined) {
             files.push({
-              nombre: 'utest01', // this.autenticationService.getPayload().sub,
+              nombre: this.autenticationService.getPayload().sub,
+              name: this.autenticationService.getPayload().sub,
               key: 'SoporteDocumento',
               file: this.info_info_persona.SoporteDocumento.file, IdDocumento: 2,
             });
@@ -209,7 +210,8 @@ export class CrudInfoPersonaComponent implements OnInit {
                 if (this.filesUp['SoporteDocumento'] !== undefined) {
                   this.info_info_persona.SoporteDocumento = this.filesUp['SoporteDocumento'].Id;
                 }
-                this.info_info_persona.Usuario = 'utest01'; // this.autenticationService.getPayload().sub;
+                this.info_info_persona.Usuario = this.autenticationService.getPayload().sub;
+                console.info(JSON.stringify(this.info_info_persona));
                 this.campusMidService.post('persona/GuardarPersona', this.info_info_persona)
                   .subscribe(res => {
                     const r = <any>res

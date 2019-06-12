@@ -81,45 +81,49 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   loadData(): void {
-    this.admisionesService.get('admision/?query=Aspirante:' + this.ente +
-      '&limit=0').subscribe(res => {
-        if (res !== null) {
-          const data = <Array<any>>res;
-          for (let index = 0; index < data.length; index++) {
-            const datos = data[index];
-            this.programaService.get('programa_academico/' + datos.ProgramaAcademico)
-              .subscribe(programa => {
-                if (programa !== null) {
-                  data[index].ProgramaAcademico = <any>programa;
-                  if (index === (data.length - 1)) {
-                    this.source.load(data);
+    if (this.ente !== 0 && this.ente !== undefined && this.ente.toString() !== '') {
+      this.admisionesService.get('admision/?query=Aspirante:' + this.ente +
+        '&limit=0').subscribe(res => {
+          if (res !== null) {
+            const data = <Array<any>>res;
+            for (let index = 0; index < data.length; index++) {
+              const datos = data[index];
+              this.programaService.get('programa_academico/' + datos.ProgramaAcademico)
+                .subscribe(programa => {
+                  if (programa !== null) {
+                    data[index].ProgramaAcademico = <any>programa;
+                    if (index === (data.length - 1)) {
+                      this.source.load(data);
+                    }
                   }
-                }
-              },
-                (error: HttpErrorResponse) => {
-                  Swal({
-                    type: 'error',
-                    title: error.status + '',
-                    text: this.translate.instant('ERROR.' + error.status),
-                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                      this.translate.instant('GLOBAL.admisiones') + '|' +
-                      this.translate.instant('GLOBAL.programa_academico'),
-                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.admisiones') + '|' +
+                        this.translate.instant('GLOBAL.programa_academico'),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
                   });
-                });
+            }
           }
-        }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.admision'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.admision'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
+    } else {
+      this.source.load(<any>{});
+    }
   }
 
   ngOnInit() {
