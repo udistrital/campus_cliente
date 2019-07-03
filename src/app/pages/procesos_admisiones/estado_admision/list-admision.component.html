@@ -17,8 +17,7 @@
           <ng2-smart-table [settings]="settings" [source]="source" (rowSelect)="itemselec($event)" (edit)="onEdit($event)" (create)="onCreate($event)">
           </ng2-smart-table>
         </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.formulario' | translate }}" [active]="cambiotab">
-          <!--<ngx-posgrado></ngx-posgrado>-->
+        <nb-tab tabTitle="{{ 'GLOBAL.formulario' | translate }}" [active]="cambiotab" *ngIf="uid !== undefined && uid.toString() !== ''">
           <ngx-posgrado [admision_id]="uid" (eventChange)="onChange($event)"></ngx-posgrado>
           <button (click)="activetab()" class="btn btn-info btn-sm"><i class="nb-arrow-dropleft"></i> {{ 'GLOBAL.regresar' | translate }}</button>
         </nb-tab>

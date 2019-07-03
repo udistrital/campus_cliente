@@ -36,7 +36,6 @@ export class ListAdmisionComponent implements OnInit {
       this.cargarCampos();
     });
     this.ente = this.userService.getEnte();
-    this.ente = 4;
     this.loadData();
   }
 
