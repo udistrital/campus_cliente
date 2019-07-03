@@ -6,7 +6,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
-import { PersonaService } from '../../../@core/data/persona.service';
 import { FORM_INFO_PERSONA } from './form-info_persona';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -41,7 +40,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   @Input('admision_id')
   set admision(admision_id: number) {
     this.admision_id = admision_id;
-    if (this.admision_id !== undefined) {
+    if (this.admision_id !== undefined && this.admision_id !== 0 && this.admision_id.toString() !== '') {
       this.loadAdmision();
       console.info('AdmisionId: ' + admision_id);
     }
@@ -58,7 +57,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   loading: boolean;
   percentage: number;
   aceptaTerminos: boolean;
-  programa: number = 1;
+  programa: number;
   aspirante: number;
   periodo: any;
 
@@ -72,7 +71,6 @@ export class CrudInfoPersonaComponent implements OnInit {
     private listService: ListService,
     private admisionesService: AdmisionesService,
     private userService: UserService,
-    private personaService: PersonaService,
     private toasterService: ToasterService) {
       this.formInfoPersona = FORM_INFO_PERSONA;
       this.construirForm();
@@ -118,6 +116,8 @@ export class CrudInfoPersonaComponent implements OnInit {
         .subscribe(res => {
           if (res !== null) {
             const temp = <InfoPersona>res;
+            console.info(JSON.stringify(temp));
+
             const files = []
             if (temp.Foto + '' !== '0') {
               files.push({ Id: temp.Foto, key: 'Foto' });
@@ -129,11 +129,11 @@ export class CrudInfoPersonaComponent implements OnInit {
               .subscribe(response => {
                 const filesResponse = <any>response;
                 if (Object.keys(filesResponse).length === files.length) {
+                  this.Foto = temp.Foto;
+                  this.SoporteDocumento = temp.SoporteDocumento;
+                  temp.Foto = filesResponse['Foto'] + '';
+                  temp.SoporteDocumento = filesResponse['SoporteDocumento'] + '';
                   this.info_info_persona = temp;
-                  this.Foto = this.info_info_persona.Foto;
-                  this.SoporteDocumento = this.info_info_persona.SoporteDocumento;
-                  this.info_info_persona.Foto = filesResponse['Foto'] + '';
-                  this.info_info_persona.SoporteDocumento = filesResponse['SoporteDocumento'] + '';
                   this.loading = false;
                 }
               },
@@ -211,14 +211,14 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.info_info_persona.SoporteDocumento = this.filesUp['SoporteDocumento'].Id;
                 }
                 this.info_info_persona.Usuario = this.autenticationService.getPayload().sub;
-                console.info(JSON.stringify(this.info_info_persona));
                 this.campusMidService.post('persona/GuardarPersona', this.info_info_persona)
                   .subscribe(res => {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {
-                      this.info_persona_id = r.Body.Ente;
-                      this.createAdmision(this.info_persona_id);
+                      this.info_persona_id = r.Body[5];
+                      console.info(this.info_persona_id);
                       this.loadInfoPersona();
+                      this.createAdmision(this.info_persona_id);
                       this.loadAdmision();
                       this.loading = false;
                       this.eventChange.emit(true);
@@ -231,46 +231,6 @@ export class CrudInfoPersonaComponent implements OnInit {
                     }
                   },
                     (error: HttpErrorResponse) => {
-                      const usu = window.localStorage.getItem('usuario').toString();
-                      this.personaService.get(`persona?query=Usuario:${usu}`)
-                        .subscribe(res_usu => {
-                          const r_usu = <any>res_usu;
-                          if (res_usu !== null && r_usu.Type !== 'error') {
-                            this.admisionesService.get(`admision/?query=Aspirante:${res_usu[0].Ente}`)
-                              .subscribe(res_2 => {
-                                const r_2 = <any>res_2;
-                                if (res_2 !== null && r_2.Type !== 'error') {
-                                  console.info('Ya existe esta admision');
-                                } else {
-                                  console.info(`aun no existe una admision`);
-                                  this.info_persona_id = res_usu[0].Ente;
-                                  this.createAdmision(res_usu[0].Ente);
-                                }
-                              },
-                                (error_1: HttpErrorResponse) => {
-                                  Swal({
-                                    type: 'error',
-                                    title: error_1.status + '',
-                                    text: this.translate.instant('ERROR.' + error_1.status),
-                                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                                      this.translate.instant('GLOBAL.info_persona') + '|' +
-                                      this.translate.instant('GLOBAL.admision'),
-                                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                                  });
-                                });
-                          }
-                        },
-                          (error_2: HttpErrorResponse) => {
-                            Swal({
-                              type: 'error',
-                              title: error_2.status + '',
-                              text: this.translate.instant('ERROR.' + error_2.status),
-                              footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                                this.translate.instant('GLOBAL.info_persona') + '|' +
-                                this.translate.instant('GLOBAL.info_persona'),
-                              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                            });
-                          });
                       Swal({
                         type: 'error',
                         title: error.status + '',
@@ -426,11 +386,16 @@ export class CrudInfoPersonaComponent implements OnInit {
         Id: 1,
       },
       AceptaTerminos: true,
+      Id: this.admision_id,
     };
     this.info_admision = <Admision>admisionPost;
+    console.info(JSON.stringify(this.info_admision));
     this.info_admision.Aspirante = Number(this.info_persona_id);
+    this.info_admision.Id = Number(this.admision_id);
     this.admisionesService.post('admision', this.info_admision)
       .subscribe(res => {
+        console.info('Admision');
+        console.info(JSON.stringify(res));
         this.info_admision = <Admision>res;
         this.eventChange.emit(true);
         Swal({

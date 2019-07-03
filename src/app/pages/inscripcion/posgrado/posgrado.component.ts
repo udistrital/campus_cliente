@@ -28,9 +28,6 @@ export class PosgradoComponent implements OnInit, OnChanges {
       this.getInfoInscripcion();
     } else {
       this.info_ente_id = undefined;
-      if (this.admision_id === 0) {
-        this.loadInfoPostgrados();
-      }
     }
   }
 
