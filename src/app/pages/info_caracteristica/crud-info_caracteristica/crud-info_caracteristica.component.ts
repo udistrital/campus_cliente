@@ -88,7 +88,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     let consultaHijos: Array<any> = [];
     const departamentoNacimiento: Array<any> = [];
     if (this.paisSeleccionado) {
-      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.paisSeleccionado.Id)
+      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.paisSeleccionado.Id + '&limit=0')
         .subscribe(res => {
           if (res !== null) {
             consultaHijos = <Array<Lugar>>res;
@@ -116,7 +116,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     let consultaHijos: Array<any> = [];
     const ciudadNacimiento: Array<any> = [];
     if (this.departamentoSeleccionado) {
-      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.departamentoSeleccionado.Id)
+      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.departamentoSeleccionado.Id + '&limit=0')
         .subscribe(res => {
           if (res !== null) {
             consultaHijos = <Array<Lugar>>res;

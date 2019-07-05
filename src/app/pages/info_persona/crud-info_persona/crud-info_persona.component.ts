@@ -116,8 +116,6 @@ export class CrudInfoPersonaComponent implements OnInit {
         .subscribe(res => {
           if (res !== null) {
             const temp = <InfoPersona>res;
-            console.info(JSON.stringify(temp));
-
             const files = []
             if (temp.Foto + '' !== '0') {
               files.push({ Id: temp.Foto, key: 'Foto' });
@@ -216,7 +214,6 @@ export class CrudInfoPersonaComponent implements OnInit {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {
                       this.info_persona_id = r.Body[5];
-                      console.info(this.info_persona_id);
                       this.loadInfoPersona();
                       this.createAdmision(this.info_persona_id);
                       this.loadAdmision();
@@ -389,13 +386,10 @@ export class CrudInfoPersonaComponent implements OnInit {
       Id: this.admision_id,
     };
     this.info_admision = <Admision>admisionPost;
-    console.info(JSON.stringify(this.info_admision));
     this.info_admision.Aspirante = Number(this.info_persona_id);
     this.info_admision.Id = Number(this.admision_id);
     this.admisionesService.post('admision', this.info_admision)
       .subscribe(res => {
-        console.info('Admision');
-        console.info(JSON.stringify(res));
         this.info_admision = <Admision>res;
         this.eventChange.emit(true);
         Swal({
