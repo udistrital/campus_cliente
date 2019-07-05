@@ -154,7 +154,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   loadInfoPostgrados() {
-    this.programaService.get('programa_academico/?query=Institucion:2&limit=0')
+    this.programaService.get('programa_academico/?query=Institucion:2')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
