@@ -293,8 +293,20 @@ export class CrudInfoPersonaComponent implements OnInit {
                         this.info_info_persona.SoporteDocumento = documentos_actualizados['SoporteDocumento'].url + '';
                       }
                       this.loading = false;
-                      this.eventChange.emit(true);
                       this.loadInfoPersona();
+                      this.programa = this.userService.getPrograma();
+                      if (this.admision_id === 0) {
+                        this.createAdmision(this.info_persona_id);
+                        this.loadAdmision();
+                      } else if (this.admision_id !== 0 && this.info_admision.ProgramaAcademico !== this.programa && this.programa > 0) {
+                        this.updateAdmision();
+                        this.loadAdmision();
+                      } else {
+                        this.showToast('error', this.translate.instant('GLOBAL.actualizar'),
+                          this.translate.instant('GLOBAL.admision') + ' ' +
+                          this.translate.instant('GLOBAL.confirmarActualizar'));
+                      }
+                      this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                         this.translate.instant('GLOBAL.info_persona') + ' ' +
                         this.translate.instant('GLOBAL.confirmarActualizar'));
@@ -327,9 +339,21 @@ export class CrudInfoPersonaComponent implements OnInit {
             this.info_info_persona.SoporteDocumento = this.SoporteDocumento;
             this.campusMidService.put('persona/ActualizarPersona', this.info_info_persona)
               .subscribe(res => {
-                this.eventChange.emit(true);
                 this.loadInfoPersona();
                 this.loading = false;
+                this.programa = this.userService.getPrograma();
+                if (this.admision_id === 0) {
+                  this.createAdmision(this.info_persona_id);
+                  this.loadAdmision();
+                } else if (this.admision_id !== 0 && this.info_admision.ProgramaAcademico !== this.programa && this.programa > 0) {
+                  this.updateAdmision();
+                  this.loadAdmision();
+                } else {
+                  this.showToast('error', this.translate.instant('GLOBAL.actualizar'),
+                    this.translate.instant('GLOBAL.admision') + ' ' +
+                    this.translate.instant('GLOBAL.confirmarActualizar'));
+                }
+                this.eventChange.emit(true);
                 this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
                   this.translate.instant('GLOBAL.info_persona') + ' ' +
                   this.translate.instant('GLOBAL.confirmarActualizar'));

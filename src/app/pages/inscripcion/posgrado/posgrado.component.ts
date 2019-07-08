@@ -5,6 +5,7 @@ import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Admision } from '../../../@core/data/models/admision';
 import { IMAGENES } from './imagenes';
@@ -27,7 +28,12 @@ export class PosgradoComponent implements OnInit, OnChanges {
     if (this.admision_id !== 0 && this.admision_id !== undefined && this.admision_id.toString() !== '') {
       this.getInfoInscripcion();
     } else {
-      this.info_ente_id = undefined;
+      const ENTE = this.userService.getEnte();
+      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '') {
+        this.info_ente_id = <number>ENTE;
+      } else {
+        this.info_ente_id = undefined;
+      }
     }
   }
 
@@ -85,6 +91,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
     private translate: TranslateService,
     private campusMidService: CampusMidService,
     private admisionesService: AdmisionesService,
+    private userService: UserService,
     private programaService: ProgramaAcademicoService) {
     this.imagenes = IMAGENES;
     this.translate = translate;

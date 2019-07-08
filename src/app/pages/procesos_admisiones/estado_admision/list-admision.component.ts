@@ -31,12 +31,13 @@ export class ListAdmisionComponent implements OnInit {
     private admisionesService: AdmisionesService,
     private userService: UserService,
     private programaService: ProgramaAcademicoService) {
+    this.ente = this.userService.getEnte();
+    this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
-    this.ente = this.userService.getEnte();
-    this.loadData();
+
   }
 
   cargarCampos() {
