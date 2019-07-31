@@ -3,9 +3,10 @@ import { Injectable } from '@angular/core';
 import { IAppState } from '../app.state';
 import { Store } from '@ngrx/store';
 import { REDUCER_LIST } from '../reducer.constants';
-import { AdmisionesService } from '../../data/admisiones.service';
+import { InscripcionService } from '../../data/inscripcion.service';
+import { CoreService } from '../../data/core.service';
 import { IdiomaService } from '../../data/idioma.service';
-import { UbicacionesService } from '../../data/ubicaciones.service';
+import { UbicacionService } from '../../data/ubicacion.service';
 import { ProgramaAcademicoService } from '../../data/programa_academico.service';
 import { EnteService } from '../../data/ente.service';
 @Injectable()
@@ -13,9 +14,10 @@ export class ListService {
 
   constructor(
     private personaService: PersonaService,
-    private admisionesService: AdmisionesService,
+    private inscripcionService: InscripcionService,
     private idiomaService: IdiomaService,
-    private ubicacionesService: UbicacionesService,
+    private coreService: CoreService,
+    private ubicacionService: UbicacionService,
     private programaAcademicoService: ProgramaAcademicoService,
     // private producccionAcademicaService: ProduccionAcademicaService,
     private enteService: EnteService,
@@ -60,17 +62,17 @@ export class ListService {
     );
   }
 
-  public findEstadoAdmision() {
-    this.store.select(REDUCER_LIST.EstadoAdmision).subscribe(
+  public findEstadoInscripcion() {
+    this.store.select(REDUCER_LIST.EstadoInscripcion).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.admisionesService.get('estado_admision/?limit=0')
+          this.inscripcionService.get('estado_inscripcion/?limit=0')
             .subscribe(
               (result: any[]) => {
-                this.addList(REDUCER_LIST.EstadoAdmision, result);
+                this.addList(REDUCER_LIST.EstadoInscripcion, result);
               },
               error => {
-                this.addList(REDUCER_LIST.EstadoAdmision, []);
+                this.addList(REDUCER_LIST.EstadoInscripcion, []);
               },
             );
         }
@@ -136,7 +138,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.LineaInvestigacion).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.admisionesService.get('linea_investigacion/?limit=0')
+          this.coreService.get('linea_investigacion/?limit=0')
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.LineaInvestigacion, result);
@@ -154,7 +156,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.Pais).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.ubicacionesService.get('lugar/?query=TipoLugar.Nombre:PAIS&limit=0') // TODO: filtrar pais
+          this.ubicacionService.get('lugar/?query=TipoLugar.Nombre:PAIS&limit=0') // TODO: filtrar pais
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.Pais, result);
@@ -172,7 +174,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.Ciudad).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.ubicacionesService.get('lugar/?limit=0') // TODO: filtrar ciudad
+          this.ubicacionService.get('lugar/?limit=0') // TODO: filtrar ciudad
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.Ciudad, result);
@@ -190,7 +192,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.Lugar).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.ubicacionesService.get('lugar/?limit=0')
+          this.ubicacionService.get('lugar/?limit=0')
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.Lugar, result);
@@ -316,7 +318,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.TipoLugar).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.ubicacionesService.get('tipo_lugar/?limit=0')
+          this.ubicacionService.get('tipo_lugar/?limit=0')
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.TipoLugar, result);
@@ -370,7 +372,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.TipoProyecto).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.admisionesService.get('tipo_proyecto/?query=Activo:true&limit=0')
+          this.inscripcionService.get('tipo_proyecto/?query=Activo:true&limit=0')
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.TipoProyecto, result);
@@ -388,7 +390,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.GrupoInvestigacion).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.admisionesService.get('grupo_investigacion/?query=Activo:true&limit=0')
+          this.coreService.get('grupo_investigacion/?query=Activo:true&limit=0')
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.GrupoInvestigacion, result);
@@ -406,7 +408,7 @@ export class ListService {
     this.store.select(REDUCER_LIST.PeriodoAcademico).subscribe(
       (list: any) => {
         if (!list || list.length === 0) {
-          this.admisionesService.get('periodo_academico/?limit=0')
+          this.coreService.get('periodo/?limit=0')
             .subscribe(
               (result: any[]) => {
                 this.addList(REDUCER_LIST.PeriodoAcademico, result);

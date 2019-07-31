@@ -23,7 +23,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0" id="formacion_academica">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0" id="formacion_academica">
           <nb-card class="exp-card"
             (click)="perfil_editar('formacion_academica')">
             <nb-card-header>{{ 'GLOBAL.formacion_academica' | translate }}</nb-card-header>
@@ -34,7 +34,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0" id="experiencia_laboral">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0" id="experiencia_laboral">
           <nb-card class="exp-card"
             (click)="perfil_editar('experiencia_laboral')">
             <nb-card-header>{{ 'GLOBAL.experiencia_laboral' | translate }}</nb-card-header>
@@ -45,7 +45,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0" id="produccion_academica">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0" id="produccion_academica">
           <nb-card class="exp-card"
             (click)="perfil_editar('produccion_academica')">
             <nb-card-header>{{ 'GLOBAL.produccion_academica' | translate }}</nb-card-header>
@@ -56,7 +56,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0" id="documento_programa">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0" id="documento_programa">
           <nb-card class="exp-card"
             (click)="perfil_editar('documento_programa')">
             <nb-card-header>{{ 'GLOBAL.documento_programa' | translate }}</nb-card-header>
@@ -67,7 +67,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0" id="descuento_matricula">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0" id="descuento_matricula">
           <nb-card class="exp-card"
             (click)="perfil_editar('descuento_matricula')">
             <nb-card-header>{{ 'GLOBAL.descuento_matricula' | translate }}</nb-card-header>
@@ -78,7 +78,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0" id="propuesta_grado">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0" id="propuesta_grado">
           <nb-card class="exp-card"
             (click)="perfil_editar('propuesta_grado')">
             <nb-card-header>{{ 'GLOBAL.propuesta_grado' | translate }}</nb-card-header>
@@ -89,7 +89,7 @@
           </nb-card>
         </div>
 
-        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && admision_id !== 0">
+        <div class="col-sm-6 col-md-4 col-lg-3" align="center" *ngIf="info_ente_id && inscripcion_id !== 0">
           <nb-card class="exp-card"
             (click)="perfil_editar('perfil')">
             <nb-card-header>{{ 'GLOBAL.perfil' | translate }}</nb-card-header>
@@ -109,7 +109,7 @@
           <li>{{ 'GLOBAL.aviso_progreso' | translate}}</li>
         </blockquote>
         <button class="btn btn-success pull-right" [disabled]="total"
-          (click)="Inscribirse()">{{ 'GLOBAL.inscribirse' | translate }}</button>
+          (click)="inscribirse()">{{ 'GLOBAL.inscribirse' | translate }}</button>
       </div>
     </nb-card-body>
   </nb-card>
@@ -135,7 +135,7 @@
         <nb-tab tabTitle="{{ 'GLOBAL.info_persona' | translate }}"
           [active]="info_persona">
           <ngx-crud-info-persona info_persona_id={{this.info_ente_id}}
-            admision_id={{this.admision_id}}
+            inscripcion_id={{this.inscripcion_id}}
             (eventChange)="perfil_editar('info_caracteristica')"
             (result)="traerInfoPersona($event,0)">
           </ngx-crud-info-persona>
@@ -294,8 +294,9 @@
       </div>
       <nb-tabset fullWidth (changeTab)="selectTab($event)">
         <nb-tab tabTitle="{{ 'GLOBAL.descuento_matricula' | translate }}">
-          <ngx-list-descuento-matricula (result)="setPercentage_desc($event,0)">
-          </ngx-list-descuento-matricula>
+          <ngx-list-descuento-academico (result)="setPercentage_desc($event,0)"
+           persona_id="{{info_ente_id}}" inscripcion_id="{{inscripcion_id}}">
+          </ngx-list-descuento-academico>
         </nb-tab>
       </nb-tabset>
     </nb-card-body>

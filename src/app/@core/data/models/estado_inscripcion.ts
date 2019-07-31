@@ -1,4 +1,4 @@
-export class EstadoAdmision {
+export class EstadoInscripcion {
   Id: number;
   Nombre: string;
   Descripcion: string;

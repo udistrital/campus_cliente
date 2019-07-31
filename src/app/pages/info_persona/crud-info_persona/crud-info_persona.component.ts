@@ -1,11 +1,12 @@
 import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
 import { NuxeoService } from '../../../@core/utils/nuxeo.service';
-import { Admision } from './../../../@core/data/models/admision';
+import { Inscripcion } from './../../../@core/data/models/inscripcion';
 import { InfoPersona } from './../../../@core/data/models/info_persona';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
-import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
+import { CoreService } from '../../../@core/data/core.service';
 import { FORM_INFO_PERSONA } from './form-info_persona';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -28,7 +29,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   SoporteDocumento: any;
   config: ToasterConfig;
   info_persona_id: number;
-  admision_id: number;
+  inscripcion_id: number;
 
   @Input('info_persona_id')
   set persona(info_persona_id: number) {
@@ -37,12 +38,12 @@ export class CrudInfoPersonaComponent implements OnInit {
     console.info('InfoPersonaId: ' + info_persona_id);
   }
 
-  @Input('admision_id')
-  set admision(admision_id: number) {
-    this.admision_id = admision_id;
-    if (this.admision_id !== undefined && this.admision_id !== 0 && this.admision_id.toString() !== '') {
-      this.loadAdmision();
-      console.info('AdmisionId: ' + admision_id);
+  @Input('inscripcion_id')
+  set admision(inscripcion_id: number) {
+    this.inscripcion_id = inscripcion_id;
+    if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 && this.inscripcion_id.toString() !== '') {
+      this.loadInscripcion();
+      console.info('inscripcionId: ' + inscripcion_id);
     }
   }
 
@@ -52,7 +53,7 @@ export class CrudInfoPersonaComponent implements OnInit {
   info_info_persona: any;
   formInfoPersona: any;
   regInfoPersona: any;
-  info_admision: any;
+  info_inscripcion: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
@@ -69,7 +70,8 @@ export class CrudInfoPersonaComponent implements OnInit {
     private nuxeoService: NuxeoService,
     private store: Store<IAppState>,
     private listService: ListService,
-    private admisionesService: AdmisionesService,
+    private inscripcionService: InscripcionService,
+    private coreService: CoreService,
     private userService: UserService,
     private toasterService: ToasterService) {
       this.formInfoPersona = FORM_INFO_PERSONA;
@@ -215,8 +217,8 @@ export class CrudInfoPersonaComponent implements OnInit {
                     if (r !== null && r.Type !== 'error') {
                       this.info_persona_id = r.Body[5];
                       this.loadInfoPersona();
-                      this.createAdmision(this.info_persona_id);
-                      this.loadAdmision();
+                      this.createInscripcion(this.info_persona_id);
+                      this.loadInscripcion();
                       this.loading = false;
                       this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
@@ -295,12 +297,12 @@ export class CrudInfoPersonaComponent implements OnInit {
                       this.loading = false;
                       this.loadInfoPersona();
                       this.programa = this.userService.getPrograma();
-                      if (this.admision_id === 0) {
-                        this.createAdmision(this.info_persona_id);
-                        this.loadAdmision();
-                      } else if (this.admision_id !== 0 && this.info_admision.ProgramaAcademico !== this.programa && this.programa > 0) {
-                        this.updateAdmision();
-                        this.loadAdmision();
+                      if (this.inscripcion_id === 0) {
+                        this.createInscripcion(this.info_persona_id);
+                        this.loadInscripcion();
+                      } else if (this.inscripcion_id !== 0 && this.info_inscripcion.ProgramaAcademicoId !== this.programa && this.programa > 0) {
+                        this.updateInscripcion();
+                        this.loadInscripcion();
                       } else {
                         this.showToast('error', this.translate.instant('GLOBAL.actualizar'),
                           this.translate.instant('GLOBAL.admision') + ' ' +
@@ -342,12 +344,12 @@ export class CrudInfoPersonaComponent implements OnInit {
                 this.loadInfoPersona();
                 this.loading = false;
                 this.programa = this.userService.getPrograma();
-                if (this.admision_id === 0) {
-                  this.createAdmision(this.info_persona_id);
-                  this.loadAdmision();
-                } else if (this.admision_id !== 0 && this.info_admision.ProgramaAcademico !== this.programa && this.programa > 0) {
-                  this.updateAdmision();
-                  this.loadAdmision();
+                if (this.inscripcion_id === 0) {
+                  this.createInscripcion(this.info_persona_id);
+                  this.loadInscripcion();
+                } else if (this.inscripcion_id !== 0 && this.info_inscripcion.ProgramaAcademicoId !== this.programa && this.programa > 0) {
+                  this.updateInscripcion();
+                  this.loadInscripcion();
                 } else {
                   this.showToast('error', this.translate.instant('GLOBAL.actualizar'),
                     this.translate.instant('GLOBAL.admision') + ' ' +
@@ -373,11 +375,11 @@ export class CrudInfoPersonaComponent implements OnInit {
       });
   }
 
-  public loadAdmision(): void {
-    this.admisionesService.get('admision/' + this.admision_id)
+  public loadInscripcion(): void {
+    this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
       .subscribe(res => {
         if (res !== null) {
-          this.info_admision = <Admision>res;
+          this.info_inscripcion = <Inscripcion>res;
           this.aceptaTerminos = true;
         }
       },
@@ -394,48 +396,69 @@ export class CrudInfoPersonaComponent implements OnInit {
         });
   }
 
-  createAdmision(ente_id): void {
+  createInscripcion(ente_id): void {
     this.aspirante = ente_id;
     this.programa = this.userService.getPrograma();
-    const admisionPost = {
-      Periodo: {
-        Id: this.periodo.Id,
+    const inscripcionPost = {
+      PeriodoId: this.periodo.Id,
+      PersonaId: this.aspirante,
+      ProgramaAcademicoId: this.programa,
+      EstadoInscripcionId: {
+        Id: 1,
       },
-      Aspirante: this.aspirante,
-      ProgramaAcademico: this.programa,
-      EstadoAdmision: {
+      TipoInscripcionId: {
         Id: 1,
       },
       AceptaTerminos: true,
-      Id: this.admision_id,
     };
-    this.info_admision = <Admision>admisionPost;
-    this.info_admision.Aspirante = Number(this.info_persona_id);
-    this.info_admision.Id = Number(this.admision_id);
-    this.admisionesService.post('admision', this.info_admision)
+    this.info_inscripcion = <Inscripcion>inscripcionPost;
+    this.info_inscripcion.PersonaId = Number(this.info_persona_id);
+    this.inscripcionService.post('inscripcion', this.info_inscripcion)
       .subscribe(res => {
-        this.info_admision = <Admision>res;
+        this.info_inscripcion = <Inscripcion>res;
         this.eventChange.emit(true);
         Swal({
           type: 'info',
           title: this.translate.instant('GLOBAL.crear'),
-          text: `${this.translate.instant('GLOBAL.inscrito')} ${this.periodo.Nombre};`,
+          text: this.translate.instant('GLOBAL.inscrito') + ' ' + this.periodo.Nombre,
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          footer: this.translate.instant('GLOBAL.crear') + '-' +
+            this.translate.instant('GLOBAL.info_persona') + '|' +
+            this.translate.instant('GLOBAL.admision'),
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });
   }
 
-  updateAdmision(): void {
-    this.loadAdmision();
-    this.info_admision.AceptaTerminos = true;
-    this.info_admision.ProgramaAcademico = this.userService.getPrograma();
-    this.admisionesService.put('admision', this.info_admision, this.info_admision.Id)
+  updateInscripcion(): void {
+    this.loadInscripcion();
+    this.info_inscripcion.AceptaTerminos = true;
+    this.info_inscripcion.ProgramaAcademicoId = this.userService.getPrograma();
+    this.inscripcionService.put('inscripcion', this.info_inscripcion)
       .subscribe(res => {
         this.eventChange.emit(true);
         this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
           this.translate.instant('GLOBAL.admision') + ' ' +
           this.translate.instant('GLOBAL.confirmarActualizar'));
-        this.loadAdmision();
+        this.loadInscripcion();
+      },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+            this.translate.instant('GLOBAL.info_persona') + '|' +
+            this.translate.instant('GLOBAL.admision'),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
       });
   }
 
@@ -445,12 +468,11 @@ export class CrudInfoPersonaComponent implements OnInit {
 
   validarForm(event) {
     if (event.valid) {
-      if (this.info_admision === undefined) {
+      if (this.info_inscripcion === undefined) {
         this.validarTerminos(event);
       } else {
-        if (this.info_admision.AceptaTerminos !== true) {
+        if (this.info_inscripcion.AceptaTerminos !== true) {
           this.validarTerminos(event);
-          this.loadAdmision();
         } else {
           this.updateInfoPersona(event.data.InfoPersona)
         }
@@ -475,13 +497,13 @@ export class CrudInfoPersonaComponent implements OnInit {
             this.createInfoPersona(event.data.InfoPersona);
           } else {
             this.updateInfoPersona(event.data.InfoPersona);
-            if (this.info_admision === undefined) {
-              this.createAdmision(this.info_persona_id)
+            if (this.info_inscripcion === undefined) {
+              this.createInscripcion(this.info_persona_id)
             } else {
-              this.updateAdmision();
+              this.updateInscripcion();
             }
           }
-          this.loadAdmision();
+          this.loadInscripcion();
         } else if (result.value === 0) {
           Swal({
             type: 'error',
@@ -499,11 +521,12 @@ export class CrudInfoPersonaComponent implements OnInit {
   }
 
   cargarPeriodo(): void {
-    this.admisionesService.get('periodo_academico/?query=Activo:true&sortby=Id&order=desc&limit=1')
+    this.coreService.get('periodo/?query=Activo:true&sortby=Id&order=desc&limit=1')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.periodo = <any>res[0];
+          console.info(this.periodo);
         }
       },
         (error: HttpErrorResponse) => {

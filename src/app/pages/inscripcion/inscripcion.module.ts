@@ -9,10 +9,11 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { UtilidadesService } from '../../@core/utils/utilidades.service';
 import { ImplicitAutenticationService } from './../../@core/utils/implicit_autentication.service';
 import { ProgramaAcademicoService } from '../../@core/data/programa_academico.service';
+import { ProgramaOikosService } from '../../@core/data/programa_oikos.service';
 import { PersonaService } from '../../@core/data/persona.service';
-import { UbicacionesService } from '../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../@core/data/ubicacion.service';
 import { ProduccionAcademicaService } from '../../@core/data/produccion_academica.service';
-import { DescuentosPosgradoService } from '../../@core/data/descuentos_posgrado.service';
+import { DescuentoAcademicoService } from '../../@core/data/descuento_academico.service';
 import { DocumentoProgramaService } from '../../@core/data/documentos_programa.service';
 import { CampusMidService } from '../../@core/data/campus_mid.service';
 import { InfoPersonaModule } from '../info_persona/info_persona.module';
@@ -56,9 +57,9 @@ import { DocumentoProgramaModule } from '../documento_programa/documento_program
 // tslint:enable:max-line-length
 import { ListDocumentoProgramaComponent } from '../documento_programa/list-documento_programa/list-documento_programa.component';
 import { CrudDocumentoProgramaComponent } from '../documento_programa/crud-documento_programa/crud-documento_programa.component';
-import { DescuentoMatriculaModule } from '../descuento_matricula/descuento_matricula.module';
-import { ListDescuentoMatriculaComponent } from '../descuento_matricula/list-descuento_matricula/list-descuento_matricula.component';
-import { CrudDescuentoMatriculaComponent } from '../descuento_matricula/crud-descuento_matricula/crud-descuento_matricula.component';
+import { DescuentoAcademicoModule } from '../descuento_academico/descuento_academico.module';
+import { ListDescuentoAcademicoComponent } from '../descuento_academico/list-descuento_academico/list-descuento_academico.component';
+import { CrudDescuentoAcademicoComponent } from '../descuento_academico/crud-descuento_academico/crud-descuento_academico.component';
 import { PropuestaGradoModule } from '../propuesta_grado/propuesta_grado.module';
 import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component';
 
@@ -83,7 +84,7 @@ import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_g
     ProduccionTecnicaModule,
     ProduccionArtesArquDisenoModule,
     DocumentoProgramaModule,
-    DescuentoMatriculaModule,
+    DescuentoAcademicoModule,
     PropuestaGradoModule,
   ],
   declarations: [
@@ -94,12 +95,13 @@ import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_g
     NuxeoService,
     UtilidadesService,
     ProgramaAcademicoService,
+    ProgramaOikosService,
     PersonaService,
-    UbicacionesService,
+    UbicacionService,
     CampusMidService,
     ProduccionAcademicaService,
     DocumentoProgramaService,
-    DescuentosPosgradoService,
+    DescuentoAcademicoService,
   ],
   entryComponents: [
     CrudInfoPersonaComponent,
@@ -127,8 +129,8 @@ import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_g
     CrudProduccionArtesArquDisenoComponent,
     ListDocumentoProgramaComponent,
     CrudDocumentoProgramaComponent,
-    ListDescuentoMatriculaComponent,
-    CrudDescuentoMatriculaComponent,
+    ListDescuentoAcademicoComponent,
+    CrudDescuentoAcademicoComponent,
     CrudPropuestaGradoComponent,
   ],
   exports: [

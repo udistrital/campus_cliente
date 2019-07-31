@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { UserService } from '../../../@core/data/users.service';
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
@@ -24,7 +24,7 @@ export class ViewPropuestaGradoComponent implements OnInit {
 
   @Output('url_editar') url_editar: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private translate: TranslateService, private admisionesService: AdmisionesService, private users: UserService) {
+  constructor(private translate: TranslateService, private admisionesService: InscripcionService, private users: UserService) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
     this.ente = this.users.getEnte();

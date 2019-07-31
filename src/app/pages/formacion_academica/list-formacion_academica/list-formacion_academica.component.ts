@@ -8,7 +8,7 @@ import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 
 @Component({
   selector: 'ngx-list-formacion-academica',
@@ -32,7 +32,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
     private toasterService: ToasterService,
     private userService: UserService,
     private campusMidService: CampusMidService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private programaAcademicoService: ProgramaAcademicoService) {
     this.loadData();
     this.cargarCampos();

@@ -12,7 +12,7 @@ const httpOptions = {
   }),
 }
 
-const path = GENERAL.ENTORNO.CONF_MENU_SERVICE;
+const path = GENERAL.ENTORNO.MENU_SERVICE;
 
 @Injectable()
 export class MenuService {

@@ -15,6 +15,8 @@ const routes: Routes = [{
       roles: [
         'ADMIN_CAMPUS',
         'ASPIRANTE',
+        'Internal/selfsignup',
+        'Internal/everyone',
       ],
     },
   }],

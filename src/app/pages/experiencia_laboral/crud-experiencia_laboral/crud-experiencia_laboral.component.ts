@@ -8,7 +8,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { OrganizacionService } from '../../../@core/data/organizacion.service';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { Lugar } from '../../../@core/data/models/lugar';
 import { ExperienciaService } from '../../../@core/data/experiencia.service';
 import { NuxeoService } from '../../../@core/utils/nuxeo.service';
@@ -54,7 +54,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     private toasterService: ToasterService,
     private organizacionService: OrganizacionService,
     private campusMidService: CampusMidService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private experienciaService: ExperienciaService,
     private documentoService: DocumentoService,
     private nuxeoService: NuxeoService,

@@ -1,7 +1,7 @@
 import { TipoPublicacionLibro } from './../../../@core/data/models/tipo_publicacion_libro';
 import { MedioDivulgacion } from './../../../@core/data/models/medio_divulgacion';
 import { MedioPublicacion } from './../../../@core/data/models/medio_publicacion';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service'
+import { UbicacionService } from '../../../@core/data/ubicacion.service'
 import { Libro } from './../../../@core/data/models/libro';
 import { Lugar } from './../../../@core/data/models/lugar';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -47,7 +47,7 @@ export class CrudLibroComponent implements OnInit {
     private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
     private user: UserService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private toasterService: ToasterService) {
     this.formLibro = FORM_LIBRO;
     this.construirForm();

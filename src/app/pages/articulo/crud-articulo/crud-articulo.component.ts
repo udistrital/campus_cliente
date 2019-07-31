@@ -8,7 +8,7 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { UserService } from '../../../@core/data/users.service';
 import { Lugar } from './../../../@core/data/models/lugar';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service'
+import { UbicacionService } from '../../../@core/data/ubicacion.service'
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -44,7 +44,7 @@ export class CrudArticuloComponent implements OnInit {
     private translate: TranslateService,
     private users: UserService,
     private produccionAcademicaService: ProduccionAcademicaService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private toasterService: ToasterService) {
     this.formArticulo = FORM_ARTICULO;
     this.construirForm();

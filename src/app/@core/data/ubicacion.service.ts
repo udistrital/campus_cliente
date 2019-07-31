@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { GENERAL } from './../../app-config';
-import { catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/internal/operators/catchError';
 import { throwError } from 'rxjs';
 
 const httpOptions = {
@@ -10,18 +10,18 @@ const httpOptions = {
     'Accept': 'application/json',
     'authorization': 'Bearer ' + window.localStorage.getItem('access_token'),
   }),
-};
+}
 
-const path = GENERAL.ENTORNO.ADMISIONES_SERVICE;
+const path = GENERAL.ENTORNO.UBICACION_SERVICE;
 
 @Injectable()
-export class AdmisionesService {
+export class UbicacionService {
 
   constructor(private http: HttpClient) {
   }
 
   get(endpoint) {
-    return this.http.get(path + endpoint).pipe(
+    return this.http.get(path + endpoint, httpOptions).pipe(
       catchError(this.handleError),
     );
   }
@@ -32,9 +32,8 @@ export class AdmisionesService {
     );
   }
 
-  put(endpoint, element, ID) {
-    console.info('id recibido para put ' + ID);
-    return this.http.put(path + endpoint + '/' + ID, element, httpOptions).pipe(
+  put(endpoint, element) {
+    return this.http.put(path + endpoint + '/' + element.Id, element, httpOptions).pipe(
       catchError(this.handleError),
     );
   }

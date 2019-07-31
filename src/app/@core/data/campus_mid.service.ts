@@ -36,7 +36,13 @@ export class CampusMidService {
   put(endpoint, element) {
     return this.http.put(path + endpoint + '/', element, httpOptions).pipe(
       catchError(this.handleError),
-    ); // + element.Id
+    );
+  }
+
+  put2(endpoint, element) {
+    return this.http.put(path + endpoint + '/' + element.Id, element, httpOptions).pipe(
+      catchError(this.handleError),
+    );
   }
 
   delete(endpoint, element) {

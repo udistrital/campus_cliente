@@ -1,6 +1,7 @@
 import { AuthInterceptor } from './_Interceptor/auth.Interceptor';
 import { EnteService } from './data/ente.service';
-import { UbicacionesService } from './data/ubicaciones.service';
+import { UbicacionService } from './data/ubicacion.service';
+import { CoreService } from './data/core.service';
 import { PersonaService } from './data/persona.service';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -17,7 +18,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { ListService } from './store/services/list.service';
 import { StoreModule } from '@ngrx/store';
 import { rootReducer } from './store/rootReducer';
-import { AdmisionesService } from './data/admisiones.service';
+import { InscripcionService } from './data/inscripcion.service';
 import { IdiomaService } from './data/idioma.service';
 import { ProgramaAcademicoService } from './data/programa_academico.service';
 import { ProduccionAcademicaService } from './data/produccion_academica.service';
@@ -101,9 +102,10 @@ export const NB_CORE_PROVIDERS = [
     AuthGuard,
     ListService,
     PersonaService,
-    AdmisionesService,
+    InscripcionService,
     IdiomaService,
-    UbicacionesService,
+    UbicacionService,
+    CoreService,
     ProgramaAcademicoService,
     ProduccionAcademicaService,
     EnteService,
