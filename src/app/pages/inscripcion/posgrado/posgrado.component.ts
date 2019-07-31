@@ -25,16 +25,6 @@ export class PosgradoComponent implements OnInit, OnChanges {
   @Input('inscripcion_id')
   set name(inscripcion_id: number) {
     this.inscripcion_id = inscripcion_id;
-    if (this.inscripcion_id !== 0 && this.inscripcion_id !== undefined && this.inscripcion_id.toString() !== '') {
-      this.getInfoInscripcion();
-    } else {
-      const ENTE = this.userService.getEnte();
-      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '') {
-        this.info_ente_id = <number>ENTE;
-      } else {
-        this.info_ente_id = undefined;
-      }
-    }
   }
 
   @Output() eventChange = new EventEmitter();
@@ -99,6 +89,16 @@ export class PosgradoComponent implements OnInit, OnChanges {
     });
     this.loadInfoPostgrados();
     this.total = true;
+    if (this.inscripcion_id !== 0 && this.inscripcion_id !== undefined && this.inscripcion_id.toString() !== '') {
+      this.getInfoInscripcion();
+    } else {
+      const ENTE = this.userService.getEnte();
+      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '') {
+        this.info_ente_id = <number>ENTE;
+      } else {
+        this.info_ente_id = undefined;
+      }
+    }
   }
 
   setPercentage_info(number, tab) {
@@ -183,42 +183,44 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   getInfoInscripcion() {
-    this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
-      .subscribe(inscripcion => {
-        const info_inscripcion = <any>inscripcion;
-        if (inscripcion !== null  && info_inscripcion.Type !== 'error') {
-          this.programaService.get('dependencia/' + info_inscripcion.ProgramaAcademicoId)
-            .subscribe(res_programa => {
-              const programa_admision = <any>res_programa[0];
-              if (res_programa[0] !== null && programa_admision.Type !== 'error') {
-                this.selectedValue = programa_admision;
-                this.posgrados.push(programa_admision);
-                this.info_ente_id = info_inscripcion.PersonaId;
-              }
-            },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                    this.translate.instant('GLOBAL.admision') + '|' +
-                    this.translate.instant('GLOBAL.programa_academico'),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    if (this.inscripcion_id !== undefined) {
+      this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
+        .subscribe(inscripcion => {
+          const info_inscripcion = <any>inscripcion;
+          if (inscripcion !== null  && info_inscripcion.Type !== 'error') {
+            this.programaService.get('dependencia/' + info_inscripcion.ProgramaAcademicoId)
+              .subscribe(res_programa => {
+                const programa_admision = <any>res_programa;
+                if (res_programa !== null && programa_admision.Type !== 'error') {
+                  this.selectedValue = programa_admision;
+                  this.posgrados.push(programa_admision);
+                  this.info_ente_id = info_inscripcion.PersonaId;
+                }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.admision') + '|' +
+                      this.translate.instant('GLOBAL.programa_academico'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
-        }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.admision'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.admision'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
+    }
   }
 
   useLanguage(language: string) {

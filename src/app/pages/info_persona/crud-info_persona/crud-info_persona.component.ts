@@ -211,9 +211,11 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.info_info_persona.SoporteDocumento = this.filesUp['SoporteDocumento'].Id;
                 }
                 this.info_info_persona.Usuario = this.autenticationService.getPayload().sub;
+                console.info(JSON.stringify(this.info_info_persona));
                 this.campusMidService.post('persona/GuardarPersona', this.info_info_persona)
                   .subscribe(res => {
                     const r = <any>res
+                    console.info(JSON.stringify(r));
                     if (r !== null && r.Type !== 'error') {
                       this.info_persona_id = r.Body[5];
                       this.loadInfoPersona();
@@ -403,16 +405,15 @@ export class CrudInfoPersonaComponent implements OnInit {
       PeriodoId: this.periodo.Id,
       PersonaId: this.aspirante,
       ProgramaAcademicoId: this.programa,
-      EstadoInscripcionId: {
-        Id: 1,
-      },
-      TipoInscripcionId: {
-        Id: 1,
-      },
+      EstadoInscripcionId: {Id: 1},
+      TipoInscripcionId: {Id: 1},
       AceptaTerminos: true,
+      FechaAceptaTerminos: new Date(),
+      Id: this.inscripcion_id,
     };
     this.info_inscripcion = <Inscripcion>inscripcionPost;
     this.info_inscripcion.PersonaId = Number(this.info_persona_id);
+    this.info_inscripcion.Id = Number(this.inscripcion_id);
     this.inscripcionService.post('inscripcion', this.info_inscripcion)
       .subscribe(res => {
         this.info_inscripcion = <Inscripcion>res;
