@@ -10,6 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { UbicacionService } from '../../../@core/data/ubicacion.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'ngx-list-formacion-academica',
@@ -109,7 +110,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
           title: this.translate.instant('GLOBAL.fecha_fin'),
           width: '10%',
           valuePrepareFunction: (value) => {
-            return value;
+            return formatDate(value, 'yyyy-MM-dd', 'en');
           },
         },
       },
@@ -129,7 +130,6 @@ export class ListFormacionAcademicaComponent implements OnInit {
           const data_info = <Array<any>>[];
           data.forEach(element => {
             if (element.Titulacion !== null && element.Titulacion !== undefined) {
-              console.info(JSON.stringify(element.Titulacion));
               this.programaAcademicoService.get('programa_academico/?query=Id:' + element.Titulacion)
                 .subscribe(programa => {
                   if (programa !== null) {

@@ -556,7 +556,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="558" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:558</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="557" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:557</a></div>
                             </td>
                         </tr>
 
@@ -732,7 +732,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="580" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:580</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="579" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:579</a></div>
                             </td>
                         </tr>
 
@@ -1112,7 +1112,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="615" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:615</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="614" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:614</a></div>
                             </td>
                         </tr>
 
@@ -1219,7 +1219,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="619" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:619</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="618" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:618</a></div>
                             </td>
                         </tr>
 
@@ -1286,7 +1286,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="682" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:682</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="680" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:680</a></div>
                             </td>
                         </tr>
 
@@ -1517,7 +1517,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="624" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:624</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="623" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:623</a></div>
                             </td>
                         </tr>
 
@@ -2417,7 +2417,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
 
   loadOptionsPais(): void {
     let paisNacimiento: Array&lt;any&gt; &#x3D; [];
-    this.ubicacionesService.get(&#x27;lugar/?query&#x3D;TipoLugar.Nombre:PAIS&#x27;)
+    this.ubicacionesService.get(&#x27;lugar/?query&#x3D;TipoLugar.Nombre:PAIS&amp;limit&#x3D;0&#x27;)
       .subscribe(res &#x3D;&gt; {
         if (res !&#x3D;&#x3D; null) {
           paisNacimiento &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -2606,7 +2606,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           this.loading &#x3D; true;
           this.info_experiencia_laboral &#x3D; &lt;any&gt;infoExperienciaLaboral;
           const files &#x3D; [];
-          console.info(this.info_experiencia_laboral);
           if (this.info_experiencia_laboral.Soporte.file !&#x3D;&#x3D; undefined) {
             files.push({
               nombre: this.info_experiencia_laboral.Cargo.Nombre, key: &#x27;Soporte&#x27;,
@@ -2729,7 +2728,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
 
   validarForm(event) {
     if (event.valid) {
-      console.info(JSON.stringify(event.data.InfoExperienciaLaboral));
       const experiencia &#x3D; {
         Persona: this.ente_id,
         Actividades: event.data.InfoExperienciaLaboral.Actividades,

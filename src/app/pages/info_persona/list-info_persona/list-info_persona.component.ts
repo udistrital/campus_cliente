@@ -194,7 +194,6 @@ export class ListInfoPersonaComponent implements OnInit {
   }
 
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {

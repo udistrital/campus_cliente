@@ -30,7 +30,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   persona: number;
   programa: number;
   periodo: number;
-  admision: number;
+  inscripcion: number;
 
   @Input('descuento_academico_id')
   set name(descuento_academico_id: number) {
@@ -43,9 +43,11 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     this.persona = persona_id;
   }
 
-  @Input('admision_id')
-  set info2(admision_id: number) {
-    this.admision = admision_id;
+  @Input('inscripcion_id')
+  set info2(inscripcion_id: number) {
+    this.inscripcion = inscripcion_id;
+    console.info('InscripcionDes: ' + this.inscripcion);
+    this.loadOptionsTipoDescuento();
   }
 
   @Output() eventChange = new EventEmitter();
@@ -64,8 +66,8 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     private translate: TranslateService,
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
-    private descuento: DescuentoAcademicoService,
-    private admisiones: InscripcionService,
+    private descuentoService: DescuentoAcademicoService,
+    private inscripcionService: InscripcionService,
     private mid: CampusMidService,
     private nuxeoService: NuxeoService,
     // private user: UserService,
@@ -75,10 +77,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
-    this.persona = 12;
-    this.admision = 5;
-    console.info(this.descuento_academico_id + ', ' + this.persona + ', ' + this.admision);
-    this.loadOptionsTipoDescuento();
     this.loading = false;
   }
 
@@ -107,18 +105,18 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   }
 
   loadOptionsTipoDescuento(): void {
-    this.admisiones.get('admision/' + this.admision)
-      .subscribe(dato_admision => {
-        const admisiondata = <any>dato_admision;
-        this.programa = admisiondata.ProgramaAcademico;
-        this.periodo = admisiondata.Periodo.Id;
-        this.descuento.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
+    this.inscripcionService.get('inscripcion/' + this.inscripcion)
+      .subscribe(dato_inscripcion => {
+        const inscripciondata = <any>dato_inscripcion;
+        this.programa = inscripciondata.ProgramaAcademicoId;
+        this.periodo = inscripciondata.PeriodoId;
+        this.descuentoService.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
           ',PeriodoId:' + this.periodo + '&limit=0')
           .subscribe(descuentos => {
             const descuentosdependencia = <Array<any>>descuentos;
             const tipoDescuentoAcademico: Array<DescuentoDependencia> = [];
             descuentosdependencia.forEach(element => {
-              this.descuento.get('tipo_descuento/' + element.TipoDescuentoId.Id)
+              this.descuentoService.get('tipo_descuento/' + element.TipoDescuentoId.Id)
                 .subscribe(tipo => {
                   this.info_temp = <DescuentoDependencia>element;
                   this.info_temp.TipoDescuento = <TipoDescuento>tipo;
@@ -132,6 +130,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                       title: error.status + '',
                       text: this.translate.instant('ERROR.' + error.status),
                       footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.tipo_descuento_matricula') + '|' +
                         this.translate.instant('GLOBAL.tipo_descuento_matricula'),
                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                     });
@@ -144,6 +143,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                 title: error.status + '',
                 text: this.translate.instant('ERROR.' + error.status),
                 footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                  this.translate.instant('GLOBAL.tipo_descuento_matricula') + '|' +
                   this.translate.instant('GLOBAL.descuentos_dependencia'),
                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
               });
@@ -155,6 +155,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.tipo_descuento_matricula') + '|' +
               this.translate.instant('GLOBAL.admision'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
@@ -162,7 +163,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   }
 
   public loadDescuentoAcademico(): void {
-    console.info(this.descuento_academico_id);
     this.loading = true;
     this.temp = {};
     this.SoporteDescuento = [];
@@ -328,15 +328,15 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     const tipoDescuento = this.info_descuento_academico.DescuentoDependencia.TipoDescuento.Id;
     let contador = 0;
     let contadorB = 0;
-    this.descuento.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
+    this.descuentoService.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
       ',PeriodoId:' + this.periodo + '&limit=0')
       .subscribe(descuentos => {
         const descuentosdependencia = <Array<any>>descuentos;
         descuentosdependencia.forEach( element => {
-          this.descuento.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element.Id + ',PersonaId:' + this.persona + '&limit=0')
+          this.descuentoService.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element.Id + ',PersonaId:' + this.persona + '&limit=0')
             .subscribe(solicitud => {
               contadorB++;
-              if (solicitud !== null) {
+              if (solicitud !== null && JSON.stringify(solicitud[0]) !== '{}') {
                 contador++;
               }
               if (contadorB >= descuentosdependencia.length) {
@@ -355,11 +355,11 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                   this.eventChange.emit(true);
                 } else {
                     descuentosdependencia.forEach( element2 => {
-                      this.descuento.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element2.Id + ',PersonaId:' + this.persona + '&limit=0')
+                      this.descuentoService.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element2.Id + ',PersonaId:' + this.persona + '&limit=0')
                         .subscribe(solicitud2 => {
                           if (solicitud2 !== null) {
                             const dato = <any>solicitud2[0];
-                            this.descuento.get('descuentos_dependencia/' + dato.DescuentosDependenciaId.Id)
+                            this.descuentoService.get('descuentos_dependencia/' + dato.DescuentosDependenciaId.Id)
                               .subscribe(tipodes => {
                                 const tipoDesc = <any>tipodes;
                                 if (tipoDescuento === 1 && tipoDesc.TipoDescuentoId.Id !== 1) {
@@ -431,75 +431,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
         });
   }
 
-  crearNuevoDescuentoAcademicoViejo(DescuentoAcademico: any): void {
-    this.info_descuento_academico = <SolicitudDescuento>DescuentoAcademico;
-    // const descuentoDependencia = this.info_descuento_academico.DescuentoDependencia.Id;
-    const tipoDescuento = this.info_descuento_academico.DescuentoDependencia.TipoDescuento.Id;
-    this.descuento.get('solicitud_descuento/?query=PersonaId:' + this.persona + ',PeriodoId:' + this.periodo + '&limit=0')
-      .subscribe(solicitudes => {
-        if (solicitudes !== null) {
-          if (Object.keys(solicitudes).length >= 2) {
-            Swal({
-              type: 'error',
-              title: this.translate.instant('GLOBAL.descuento_matricula') + '',
-              text: this.translate.instant('ERROR.maximo_descuentos'),
-              footer: this.translate.instant('GLOBAL.crear') + '-' +
-                this.translate.instant('GLOBAL.descuento_matricula'),
-              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-            });
-            this.eventChange.emit(true);
-          } else if (Object.keys(solicitudes).length === 1) {
-            const tempDescuento = solicitudes[0];
-            this.descuento.get('descuentos_dependencia/' + tempDescuento.DescuentosDependenciaId.Id)
-              .subscribe(tipodes => {
-                const tipoDesc = <any>tipodes;
-                if (tipoDescuento === 1 && tipoDesc.TipoDescuentoId.Id !== 1) {
-                  this.createDescuentoAcademico(DescuentoAcademico);
-                } else if (tipoDescuento !== 1 && tipoDesc.TipoDescuentoId.Id === 1) {
-                  this.createDescuentoAcademico(DescuentoAcademico);
-                } else {
-                  Swal({
-                    type: 'error',
-                    title: this.translate.instant('GLOBAL.descuento_matricula') + '',
-                    text: this.translate.instant('ERROR.repetir_descuentos'),
-                    footer: this.translate.instant('GLOBAL.crear') + '-' +
-                      this.translate.instant('GLOBAL.descuento_matricula'),
-                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                  });
-                  this.eventChange.emit(true);
-                  this.clean = !this.clean;
-                }
-              },
-                (error: HttpErrorResponse) => {
-                  Swal({
-                    type: 'error',
-                    title: error.status + '',
-                    text: this.translate.instant('ERROR.' + error.status),
-                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                      this.translate.instant('GLOBAL.descuento_matricula') + '|' +
-                      this.translate.instant('GLOBAL.tipo_descuento_matricula'),
-                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                  });
-                });
-          }
-        } else {
-          this.createDescuentoAcademico(DescuentoAcademico);
-        }
-        this.eventChange.emit(true);
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.descuento_matricula') + '|' +
-              this.translate.instant('GLOBAL.solicitud_descuento'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        });
-  }
-
   createDescuentoAcademico(DescuentoAcademico: any): void {
     const opt: any = {
       title: this.translate.instant('GLOBAL.crear'),
@@ -517,7 +448,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
         if (willDelete.value) {
           const files = [];
           this.info_descuento_academico = <SolicitudDescuento>DescuentoAcademico;
-          this.info_descuento_academico.Persona = this.persona;
+          this.info_descuento_academico.Persona = 1 * this.persona;
           this.info_descuento_academico.Periodo = this.periodo;
           if (this.info_descuento_academico.Documento.file !== undefined) {
             files.push({

@@ -74,7 +74,7 @@ import { DescuentoAcademicoComponent } from &#x27;./descuento_academico.componen
 import { ListDescuentoAcademicoComponent } from &#x27;./list-descuento_academico/list-descuento_academico.component&#x27;;
 import { CrudDescuentoAcademicoComponent } from &#x27;./crud-descuento_academico/crud-descuento_academico.component&#x27;;
 import { ViewDescuentoAcademicoComponent } from &#x27;./view-descuento_academico/view-descuento_academico.component&#x27;;
-// import { AuthGuard } from &#x27;../../@core/_guards/auth.guard&#x27;;
+import { AuthGuard } from &#x27;../../@core/_guards/auth.guard&#x27;;
 
 const routes: Routes &#x3D; [{
   path: &#x27;&#x27;,
@@ -82,35 +82,41 @@ const routes: Routes &#x3D; [{
   children: [{
     path: &#x27;list-descuento_academico&#x27;,
     component: ListDescuentoAcademicoComponent,
-    // canActivate: [AuthGuard],
-    // data: {
-    //  roles: [
-    //    &#x27;ADMIN_CAMPUS&#x27;,
-    //    &#x27;ASPIRANTE&#x27;,
-    //  ],
-    // },
-  },
-  {
-    path: &#x27;crud-descuento_academico&#x27;,
-    component: CrudDescuentoAcademicoComponent,
-  /**  canActivate: [AuthGuard],
+    canActivate: [AuthGuard],
     data: {
       roles: [
         &#x27;ADMIN_CAMPUS&#x27;,
         &#x27;ASPIRANTE&#x27;,
+        &#x27;Internal/selfsignup&#x27;,
+        &#x27;Internal/everyone&#x27;,
       ],
-    }, **/
+    },
+  },
+  {
+    path: &#x27;crud-descuento_academico&#x27;,
+    component: CrudDescuentoAcademicoComponent,
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        &#x27;ADMIN_CAMPUS&#x27;,
+        &#x27;ASPIRANTE&#x27;,
+        &#x27;Internal/selfsignup&#x27;,
+        &#x27;Internal/everyone&#x27;,
+      ],
+    },
   },
   {
     path: &#x27;view-descuento_academico&#x27;,
     component: ViewDescuentoAcademicoComponent,
-    // canActivate: [AuthGuard],
-    // data: {
-    //  roles: [
-    //    &#x27;ADMIN_CAMPUS&#x27;,
-    //    &#x27;ASPIRANTE&#x27;,
-    //  ],
-    // },
+    canActivate: [AuthGuard],
+    data: {
+      roles: [
+        &#x27;ADMIN_CAMPUS&#x27;,
+        &#x27;ASPIRANTE&#x27;,
+        &#x27;Internal/selfsignup&#x27;,
+        &#x27;Internal/everyone&#x27;,
+      ],
+    },
   }],
 }];
 

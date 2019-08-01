@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { ExperienciaService } from '../../../@core/data/experiencia.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'ngx-list-experiencia-laboral',
@@ -47,6 +48,9 @@ export class ListExperienciaLaboralComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
+      actions: {
+        columnTitle: '',
+      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -65,26 +69,30 @@ export class ListExperienciaLaboralComponent implements OnInit {
       columns: {
         Organizacion: {
           title: this.translate.instant('GLOBAL.nombre_empresa'),
+          width: '35%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         Cargo: {
           title: this.translate.instant('GLOBAL.cargo'),
+          width: '25%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         FechaInicio: {
           title: this.translate.instant('GLOBAL.fecha_inicio'),
+          width: '20%',
           valuePrepareFunction: (value) => {
-            return value;
+            return formatDate(value, 'yyyy-MM-dd', 'en');
           },
         },
         FechaFinalizacion: {
           title: this.translate.instant('GLOBAL.fecha_fin'),
+          width: '20%',
           valuePrepareFunction: (value) => {
-            return value;
+            return formatDate(value, 'yyyy-MM-dd', 'en');
           },
         },
       },

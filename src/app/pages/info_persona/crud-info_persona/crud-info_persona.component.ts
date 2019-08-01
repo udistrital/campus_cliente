@@ -211,11 +211,9 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.info_info_persona.SoporteDocumento = this.filesUp['SoporteDocumento'].Id;
                 }
                 this.info_info_persona.Usuario = this.autenticationService.getPayload().sub;
-                console.info(JSON.stringify(this.info_info_persona));
                 this.campusMidService.post('persona/GuardarPersona', this.info_info_persona)
                   .subscribe(res => {
                     const r = <any>res
-                    console.info(JSON.stringify(r));
                     if (r !== null && r.Type !== 'error') {
                       this.info_persona_id = r.Body[5];
                       this.loadInfoPersona();

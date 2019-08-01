@@ -20,7 +20,7 @@ export class ListDescuentoAcademicoComponent implements OnInit {
   persona: number;
   programa: number;
   periodo: number;
-  admision: number;
+  inscripcion: number;
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
@@ -31,12 +31,11 @@ export class ListDescuentoAcademicoComponent implements OnInit {
   @Input('persona_id')
   set info(info: number) {
     this.persona = info;
-    this.loadData();
   }
 
-  @Input('admision_id')
+  @Input('inscripcion_id')
   set info2(info2: number) {
-    this.admision = info2;
+    this.inscripcion = info2;
     this.loadData();
   }
 
@@ -48,12 +47,9 @@ export class ListDescuentoAcademicoComponent implements OnInit {
 
   constructor(private translate: TranslateService,
     private mid: CampusMidService,
-    private descuento: DescuentoAcademicoService,
-    private admisiones: InscripcionService,
+    private descuentoService: DescuentoAcademicoService,
+    private inscripcionService: InscripcionService,
     private toasterService: ToasterService) {
-    this.persona = 12;
-    this.admision = 5;
-    this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.loadData();
@@ -64,6 +60,9 @@ export class ListDescuentoAcademicoComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
+      actions: {
+        columnTitle: '',
+      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -82,6 +81,7 @@ export class ListDescuentoAcademicoComponent implements OnInit {
       columns: {
         DescuentoDependencia: {
           title: this.translate.instant('GLOBAL.tipo_descuento_matricula'),
+          width: '100%',
           valuePrepareFunction: (value) => {
             return value.TipoDescuento.Nombre;
           },
@@ -95,41 +95,44 @@ export class ListDescuentoAcademicoComponent implements OnInit {
   }
 
   loadData(): void {
-    this.admisiones.get('admision/' + this.admision)
-      .subscribe(dato_admision => {
-        const admisiondata = <any>dato_admision;
-        this.programa = admisiondata.ProgramaAcademico;
-        this.periodo = admisiondata.Periodo.Id;
-        this.descuento.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
+    this.inscripcionService.get('inscripcion/' + this.inscripcion)
+      .subscribe(dato_inscripcion => {
+        const inscripciondata = <any>dato_inscripcion;
+        this.programa = inscripciondata.ProgramaAcademicoId;
+        this.periodo = inscripciondata.PeriodoId;
+        this.descuentoService.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
           ',PeriodoId:' + this.periodo + '&limit=0')
           .subscribe(descuentos => {
             const descuentosdependencia = <Array<any>>descuentos;
             this.data = [];
             descuentosdependencia.forEach(element => {
-              this.descuento.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element.Id + ',PersonaId:' + this.persona + '&limit=0')
+              this.descuentoService.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element.Id + ',PersonaId:' + this.persona + '&limit=0')
                 .subscribe(solicitud => {
                   if (solicitud !== null) {
                     this.solicituddescuento = <any>solicitud[0];
-                    const id_aux = this.solicituddescuento.Id;
-                    this.mid.get('descuentoacademico/descuentoacademico/?Id=' + this.persona + '&idsolicitud=' + id_aux)
-                      .subscribe(res => {
-                        if (res !== null) {
-                          this.data.push(<SolicitudDescuento>res);
-                          this.loading = false;
-                          this.getPercentage(1);
-                          this.source.load(this.data);
-                        }
-                      },
-                        (error: HttpErrorResponse) => {
-                          Swal({
-                            type: 'error',
-                            title: error.status + '',
-                            text: this.translate.instant('ERROR.' + error.status),
-                            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                              this.translate.instant('GLOBAL.descuento_matricula'),
-                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    if (this.solicituddescuento.Id !== undefined && this.solicituddescuento.Id !== null) {
+                      const id_aux = this.solicituddescuento.Id;
+                      this.mid.get('descuentoacademico/descuentoacademico/?Id=' + this.persona + '&idsolicitud=' + id_aux)
+                        .subscribe(res => {
+                          if (res !== null) {
+                            this.data.push(<SolicitudDescuento>res);
+                            this.loading = false;
+                            this.getPercentage(1);
+                            this.source.load(this.data);
+                          }
+                        },
+                          (error: HttpErrorResponse) => {
+                            Swal({
+                              type: 'error',
+                              title: error.status + '',
+                              text: this.translate.instant('ERROR.' + error.status),
+                              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                this.translate.instant('GLOBAL.descuento_matricula') + '|' +
+                                this.translate.instant('GLOBAL.descuento_matricula'),
+                              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                            });
                           });
-                        });
+                    }
                   }
                 },
                   (error: HttpErrorResponse) => {
@@ -138,6 +141,7 @@ export class ListDescuentoAcademicoComponent implements OnInit {
                       title: error.status + '',
                       text: this.translate.instant('ERROR.' + error.status),
                       footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.descuento_matricula') + '|' +
                         this.translate.instant('GLOBAL.descuento_matricula'),
                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                     });
@@ -150,6 +154,7 @@ export class ListDescuentoAcademicoComponent implements OnInit {
                 title: error.status + '',
                 text: this.translate.instant('ERROR.' + error.status),
                 footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                  this.translate.instant('GLOBAL.descuento_matricula') + '|' +
                   this.translate.instant('GLOBAL.descuentos_dependencia'),
                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
               });
@@ -161,6 +166,7 @@ export class ListDescuentoAcademicoComponent implements OnInit {
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.descuento_matricula') + '|' +
               this.translate.instant('GLOBAL.admision'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
@@ -169,8 +175,6 @@ export class ListDescuentoAcademicoComponent implements OnInit {
 
   ngOnInit() {
     this.uid = 0;
-    this.persona = 12;
-    this.admision = 5;
   }
 
   onEdit(event): void {
@@ -231,8 +235,6 @@ export class ListDescuentoAcademicoComponent implements OnInit {
   onChange(event) {
     if (event) {
       this.uid = 0;
-      this.persona = 12;
-      this.admision = 5;
       this.loadData();
     }
   }

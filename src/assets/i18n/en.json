@@ -223,7 +223,9 @@
     "repetir_descuentos": "You are trying to enter a discount already selected",
     "maximo_documentos": "You have exceeded the limit of allowable documents",
     "repetir_documentos": "You are trying to enter a document already selected",
-    "carga_datos": "Recharge the page or close and open the window again to successfully load your data"
+    "carga_datos": "Recharge the page or close and open the window again to successfully load your data",
+    "nativo_examen": "You cannot choose the native language for the exam",
+    "doble_examen": "You cannot choose two languages for the exam"
   },
   "FOOTER": {
     "copyright": "© Copyright 2019. | Website created and managed by Planestic-UD | Academic Vice Rectory",
@@ -337,6 +339,8 @@
     "placeholder_documento_programa": "E.g.: Requested documents",
     "descuento_matricula": "Tuition discounts",
     "placeholder_descuento_matricula": "E.g.: Tuition discounts",
+    "descuentos_dependencia": "Program Discounts",
+    "placeholder_descuentos_dependencia": "E.g.: Program Discounts",
     "propuesta_grado": "Thesis proposal",
     "placeholder_propuesta_grado": "E.g.: Thesis proposal",
     "notificaciones": "Notifications",

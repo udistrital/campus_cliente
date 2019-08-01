@@ -42,8 +42,6 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
     private admisiones: InscripcionService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       });
-      this.persona = 12;
-      this.admision = 5;
       this.loadData();
   }
 
@@ -75,7 +73,6 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
                         this.info_temp.DescuentoDependencia = <DescuentoDependencia>element;
                         this.info_temp.DescuentoDependencia.TipoDescuento = <TipoDescuento>tipo;
                         this.data.push(this.info_temp);
-                        console.info(JSON.stringify(this.data));
                         this.info_descuento = this.data;
                       },
                         (error: HttpErrorResponse) => {

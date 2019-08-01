@@ -57,7 +57,6 @@ export class ViewExperienciaLaboralComponent implements OnInit {
                       if (pais !== null) {
                         const pais_info = <any>pais;
                         element.PaisEmpresa = pais_info.Nombre;
-                        // console.info(JSON.stringify(element));
                         this.info_experiencia_laboral.push(element);
                       }
                     },

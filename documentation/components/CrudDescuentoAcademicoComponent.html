@@ -130,9 +130,6 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#admision">admision</a>
-                            </li>
-                            <li>
                                 <a href="#clean">clean</a>
                             </li>
                             <li>
@@ -155,6 +152,9 @@
                             </li>
                             <li>
                                 <a href="#info_temp">info_temp</a>
+                            </li>
+                            <li>
+                                <a href="#inscripcion">inscripcion</a>
                             </li>
                             <li>
                                 <a href="#loading">loading</a>
@@ -197,9 +197,6 @@
                             </li>
                             <li>
                                 <a href="#crearNuevoDescuentoAcademico">crearNuevoDescuentoAcademico</a>
-                            </li>
-                            <li>
-                                <a href="#crearNuevoDescuentoAcademicoViejo">crearNuevoDescuentoAcademicoViejo</a>
                             </li>
                             <li>
                                 <a href="#createDescuentoAcademico">createDescuentoAcademico</a>
@@ -246,10 +243,10 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#admision_id">admision_id</a>
+                                <a href="#descuento_academico_id">descuento_academico_id</a>
                             </li>
                             <li>
-                                <a href="#descuento_academico_id">descuento_academico_id</a>
+                                <a href="#inscripcion_id">inscripcion_id</a>
                             </li>
                             <li>
                                 <a href="#persona_id">persona_id</a>
@@ -308,12 +305,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(translate: TranslateService, autenticationService: <a href="../injectables/ImplicitAutenticationService.html">ImplicitAutenticationService</a>, documentoService: <a href="../injectables/DocumentoService.html">DocumentoService</a>, descuento: <a href="../injectables/DescuentoAcademicoService.html">DescuentoAcademicoService</a>, admisiones: <a href="../injectables/InscripcionService.html">InscripcionService</a>, mid: <a href="../injectables/CampusMidService.html">CampusMidService</a>, nuxeoService: <a href="../injectables/NuxeoService.html">NuxeoService</a>, toasterService: ToasterService)</code>
+<code>constructor(translate: TranslateService, autenticationService: <a href="../injectables/ImplicitAutenticationService.html">ImplicitAutenticationService</a>, documentoService: <a href="../injectables/DocumentoService.html">DocumentoService</a>, descuentoService: <a href="../injectables/DescuentoAcademicoService.html">DescuentoAcademicoService</a>, inscripcionService: <a href="../injectables/InscripcionService.html">InscripcionService</a>, mid: <a href="../injectables/CampusMidService.html">CampusMidService</a>, nuxeoService: <a href="../injectables/NuxeoService.html">NuxeoService</a>, toasterService: ToasterService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:61</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:63</a></div>
                             </td>
                         </tr>
 
@@ -367,7 +364,7 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>descuento</td>
+                                                        <td>descuentoService</td>
                                                   
                                                         <td>
                                                                     <code><a href="../injectables/DescuentoAcademicoService.html" target="_self" >DescuentoAcademicoService</a></code>
@@ -379,7 +376,7 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>admisiones</td>
+                                                        <td>inscripcionService</td>
                                                   
                                                         <td>
                                                                     <code><a href="../injectables/InscripcionService.html" target="_self" >InscripcionService</a></code>
@@ -441,27 +438,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-2">
-                        <a name="admision_id"></a>
-                        <code>admision_id</code>
-                    </td>
-                    <td class="col-md-10">
-                            <p>
-                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                            </p>
-                    </td>
-                </tr>
-                        <tr>
-                            <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:47</a></div>
-                            </td>
-                        </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-2">
                         <a name="descuento_academico_id"></a>
                         <code>descuento_academico_id</code>
                     </td>
@@ -475,6 +451,27 @@
                         <tr>
                             <td class="col-md-2" colspan="2">
                                     <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:36</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="inscripcion_id"></a>
+                        <code>inscripcion_id</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:47</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -517,7 +514,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:51</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:53</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -536,7 +533,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:52</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:54</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -571,7 +568,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:85</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:83</a></div>
                             </td>
                         </tr>
 
@@ -660,75 +657,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="crearNuevoDescuentoAcademicoViejo"></a>
-                        <span class="name">
-                            <b>
-                            crearNuevoDescuentoAcademicoViejo
-                            </b>
-                            <a href="#crearNuevoDescuentoAcademicoViejo"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-<code>crearNuevoDescuentoAcademicoViejo(DescuentoAcademico: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
-                    </td>
-                </tr>
-
-
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="434" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:434</a></div>
-                            </td>
-                        </tr>
-
-
-                <tr>
-                    <td class="col-md-4">
-
-                            <div class="io-description">
-                                    <b>Parameters :</b>
-                                    <table class="params">
-                                        <thead>
-                                            <tr>
-                                                <td>Name</td>
-                                                    <td>Type</td>
-                                                <td>Optional</td>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                                <tr>
-                                                        <td>DescuentoAcademico</td>
-                                                        <td>
-                                                                    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
-                                                        </td>
-                                                    
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-
-                                                </tr>
-                                        </tbody>
-                                    </table>
-                            </div>
-                            <div>
-                            </div>
-                            <div class="io-description">
-                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
-
-                            </div>
-                                <div class="io-description">
-                                    
-                                </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="createDescuentoAcademico"></a>
                         <span class="name">
                             <b>
@@ -747,7 +675,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="503" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:503</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="434" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:434</a></div>
                             </td>
                         </tr>
 
@@ -816,7 +744,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:99</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:97</a></div>
                             </td>
                         </tr>
 
@@ -887,7 +815,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:164</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="165" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:165</a></div>
                             </td>
                         </tr>
 
@@ -925,7 +853,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="109" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:109</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:107</a></div>
                             </td>
                         </tr>
 
@@ -963,7 +891,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="579" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:579</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="510" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:510</a></div>
                             </td>
                         </tr>
 
@@ -1001,7 +929,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="583" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:583</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="514" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:514</a></div>
                             </td>
                         </tr>
 
@@ -1068,7 +996,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="599" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:599</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="530" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:530</a></div>
                             </td>
                         </tr>
 
@@ -1230,7 +1158,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:95</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:93</a></div>
                             </td>
                         </tr>
 
@@ -1299,7 +1227,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="588" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:588</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="519" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:519</a></div>
                             </td>
                         </tr>
 
@@ -1353,40 +1281,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="admision"></a>
-                        <span class="name">
-                            <b>
-                            admision
-                            </b>
-                            <a href="#admision"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>admision:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:33</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="clean"></a>
                         <span class="name">
                             <b>
@@ -1410,7 +1304,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:59</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:61</a></div>
                             </td>
                         </tr>
 
@@ -1580,7 +1474,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:55</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -1614,7 +1508,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:54</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -1648,7 +1542,41 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:58</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inscripcion"></a>
+                        <span class="name">
+                            <b>
+                            inscripcion
+                            </b>
+                            <a href="#inscripcion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>inscripcion:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:33</a></div>
                             </td>
                         </tr>
 
@@ -1682,7 +1610,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:60</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -1716,7 +1644,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:61</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:63</a></div>
                             </td>
                         </tr>
 
@@ -1852,7 +1780,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:56</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -1920,7 +1848,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:57</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/descuento_academico/crud-descuento_academico/crud-descuento_academico.component.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -2063,7 +1991,7 @@
 
                 <tr>
                     <td class="col-md-4">
-                        <span class="accessor"><b>set</b><code>info2(admision_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                        <span class="accessor"><b>set</b><code>info2(inscripcion_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
                     </td>
                 </tr>
                             <tr>
@@ -2086,7 +2014,7 @@
                                             </thead>
                                             <tbody>
                                                     <tr>
-                                                            <td>admision_id</td>
+                                                            <td>inscripcion_id</td>
                                                     
                                                             <td>
                                                                         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
@@ -2147,7 +2075,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   persona: number;
   programa: number;
   periodo: number;
-  admision: number;
+  inscripcion: number;
 
   @Input(&#x27;descuento_academico_id&#x27;)
   set name(descuento_academico_id: number) {
@@ -2160,9 +2088,11 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     this.persona &#x3D; persona_id;
   }
 
-  @Input(&#x27;admision_id&#x27;)
-  set info2(admision_id: number) {
-    this.admision &#x3D; admision_id;
+  @Input(&#x27;inscripcion_id&#x27;)
+  set info2(inscripcion_id: number) {
+    this.inscripcion &#x3D; inscripcion_id;
+    console.info(&#x27;InscripcionDes: &#x27; + this.inscripcion);
+    this.loadOptionsTipoDescuento();
   }
 
   @Output() eventChange &#x3D; new EventEmitter();
@@ -2181,8 +2111,8 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     private translate: TranslateService,
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
-    private descuento: DescuentoAcademicoService,
-    private admisiones: InscripcionService,
+    private descuentoService: DescuentoAcademicoService,
+    private inscripcionService: InscripcionService,
     private mid: CampusMidService,
     private nuxeoService: NuxeoService,
     // private user: UserService,
@@ -2192,10 +2122,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) &#x3D;&gt; {
       this.construirForm();
     });
-    this.persona &#x3D; 12;
-    this.admision &#x3D; 5;
-    console.info(this.descuento_academico_id + &#x27;, &#x27; + this.persona + &#x27;, &#x27; + this.admision);
-    this.loadOptionsTipoDescuento();
     this.loading &#x3D; false;
   }
 
@@ -2224,18 +2150,18 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   }
 
   loadOptionsTipoDescuento(): void {
-    this.admisiones.get(&#x27;admision/&#x27; + this.admision)
-      .subscribe(dato_admision &#x3D;&gt; {
-        const admisiondata &#x3D; &lt;any&gt;dato_admision;
-        this.programa &#x3D; admisiondata.ProgramaAcademico;
-        this.periodo &#x3D; admisiondata.Periodo.Id;
-        this.descuento.get(&#x27;descuentos_dependencia/?query&#x3D;DependenciaId:&#x27; + this.programa +
+    this.inscripcionService.get(&#x27;inscripcion/&#x27; + this.inscripcion)
+      .subscribe(dato_inscripcion &#x3D;&gt; {
+        const inscripciondata &#x3D; &lt;any&gt;dato_inscripcion;
+        this.programa &#x3D; inscripciondata.ProgramaAcademicoId;
+        this.periodo &#x3D; inscripciondata.PeriodoId;
+        this.descuentoService.get(&#x27;descuentos_dependencia/?query&#x3D;DependenciaId:&#x27; + this.programa +
           &#x27;,PeriodoId:&#x27; + this.periodo + &#x27;&amp;limit&#x3D;0&#x27;)
           .subscribe(descuentos &#x3D;&gt; {
             const descuentosdependencia &#x3D; &lt;Array&lt;any&gt;&gt;descuentos;
             const tipoDescuentoAcademico: Array&lt;DescuentoDependencia&gt; &#x3D; [];
             descuentosdependencia.forEach(element &#x3D;&gt; {
-              this.descuento.get(&#x27;tipo_descuento/&#x27; + element.TipoDescuentoId.Id)
+              this.descuentoService.get(&#x27;tipo_descuento/&#x27; + element.TipoDescuentoId.Id)
                 .subscribe(tipo &#x3D;&gt; {
                   this.info_temp &#x3D; &lt;DescuentoDependencia&gt;element;
                   this.info_temp.TipoDescuento &#x3D; &lt;TipoDescuento&gt;tipo;
@@ -2249,6 +2175,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                       title: error.status + &#x27;&#x27;,
                       text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
                       footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                        this.translate.instant(&#x27;GLOBAL.tipo_descuento_matricula&#x27;) + &#x27;|&#x27; +
                         this.translate.instant(&#x27;GLOBAL.tipo_descuento_matricula&#x27;),
                       confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
                     });
@@ -2261,6 +2188,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                 title: error.status + &#x27;&#x27;,
                 text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
                 footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                  this.translate.instant(&#x27;GLOBAL.tipo_descuento_matricula&#x27;) + &#x27;|&#x27; +
                   this.translate.instant(&#x27;GLOBAL.descuentos_dependencia&#x27;),
                 confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
               });
@@ -2272,6 +2200,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
             title: error.status + &#x27;&#x27;,
             text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
             footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+              this.translate.instant(&#x27;GLOBAL.tipo_descuento_matricula&#x27;) + &#x27;|&#x27; +
               this.translate.instant(&#x27;GLOBAL.admision&#x27;),
             confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
           });
@@ -2279,7 +2208,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   }
 
   public loadDescuentoAcademico(): void {
-    console.info(this.descuento_academico_id);
     this.loading &#x3D; true;
     this.temp &#x3D; {};
     this.SoporteDescuento &#x3D; [];
@@ -2445,15 +2373,15 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     const tipoDescuento &#x3D; this.info_descuento_academico.DescuentoDependencia.TipoDescuento.Id;
     let contador &#x3D; 0;
     let contadorB &#x3D; 0;
-    this.descuento.get(&#x27;descuentos_dependencia/?query&#x3D;DependenciaId:&#x27; + this.programa +
+    this.descuentoService.get(&#x27;descuentos_dependencia/?query&#x3D;DependenciaId:&#x27; + this.programa +
       &#x27;,PeriodoId:&#x27; + this.periodo + &#x27;&amp;limit&#x3D;0&#x27;)
       .subscribe(descuentos &#x3D;&gt; {
         const descuentosdependencia &#x3D; &lt;Array&lt;any&gt;&gt;descuentos;
         descuentosdependencia.forEach( element &#x3D;&gt; {
-          this.descuento.get(&#x27;solicitud_descuento/?query&#x3D;DescuentosDependenciaId:&#x27; + element.Id + &#x27;,PersonaId:&#x27; + this.persona + &#x27;&amp;limit&#x3D;0&#x27;)
+          this.descuentoService.get(&#x27;solicitud_descuento/?query&#x3D;DescuentosDependenciaId:&#x27; + element.Id + &#x27;,PersonaId:&#x27; + this.persona + &#x27;&amp;limit&#x3D;0&#x27;)
             .subscribe(solicitud &#x3D;&gt; {
               contadorB++;
-              if (solicitud !&#x3D;&#x3D; null) {
+              if (solicitud !&#x3D;&#x3D; null &amp;&amp; JSON.stringify(solicitud[0]) !&#x3D;&#x3D; &#x27;{}&#x27;) {
                 contador++;
               }
               if (contadorB &gt;&#x3D; descuentosdependencia.length) {
@@ -2472,11 +2400,11 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                   this.eventChange.emit(true);
                 } else {
                     descuentosdependencia.forEach( element2 &#x3D;&gt; {
-                      this.descuento.get(&#x27;solicitud_descuento/?query&#x3D;DescuentosDependenciaId:&#x27; + element2.Id + &#x27;,PersonaId:&#x27; + this.persona + &#x27;&amp;limit&#x3D;0&#x27;)
+                      this.descuentoService.get(&#x27;solicitud_descuento/?query&#x3D;DescuentosDependenciaId:&#x27; + element2.Id + &#x27;,PersonaId:&#x27; + this.persona + &#x27;&amp;limit&#x3D;0&#x27;)
                         .subscribe(solicitud2 &#x3D;&gt; {
                           if (solicitud2 !&#x3D;&#x3D; null) {
                             const dato &#x3D; &lt;any&gt;solicitud2[0];
-                            this.descuento.get(&#x27;descuentos_dependencia/&#x27; + dato.DescuentosDependenciaId.Id)
+                            this.descuentoService.get(&#x27;descuentos_dependencia/&#x27; + dato.DescuentosDependenciaId.Id)
                               .subscribe(tipodes &#x3D;&gt; {
                                 const tipoDesc &#x3D; &lt;any&gt;tipodes;
                                 if (tipoDescuento &#x3D;&#x3D;&#x3D; 1 &amp;&amp; tipoDesc.TipoDescuentoId.Id !&#x3D;&#x3D; 1) {
@@ -2548,75 +2476,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
         });
   }
 
-  crearNuevoDescuentoAcademicoViejo(DescuentoAcademico: any): void {
-    this.info_descuento_academico &#x3D; &lt;SolicitudDescuento&gt;DescuentoAcademico;
-    // const descuentoDependencia &#x3D; this.info_descuento_academico.DescuentoDependencia.Id;
-    const tipoDescuento &#x3D; this.info_descuento_academico.DescuentoDependencia.TipoDescuento.Id;
-    this.descuento.get(&#x27;solicitud_descuento/?query&#x3D;PersonaId:&#x27; + this.persona + &#x27;,PeriodoId:&#x27; + this.periodo + &#x27;&amp;limit&#x3D;0&#x27;)
-      .subscribe(solicitudes &#x3D;&gt; {
-        if (solicitudes !&#x3D;&#x3D; null) {
-          if (Object.keys(solicitudes).length &gt;&#x3D; 2) {
-            Swal({
-              type: &#x27;error&#x27;,
-              title: this.translate.instant(&#x27;GLOBAL.descuento_matricula&#x27;) + &#x27;&#x27;,
-              text: this.translate.instant(&#x27;ERROR.maximo_descuentos&#x27;),
-              footer: this.translate.instant(&#x27;GLOBAL.crear&#x27;) + &#x27;-&#x27; +
-                this.translate.instant(&#x27;GLOBAL.descuento_matricula&#x27;),
-              confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
-            });
-            this.eventChange.emit(true);
-          } else if (Object.keys(solicitudes).length &#x3D;&#x3D;&#x3D; 1) {
-            const tempDescuento &#x3D; solicitudes[0];
-            this.descuento.get(&#x27;descuentos_dependencia/&#x27; + tempDescuento.DescuentosDependenciaId.Id)
-              .subscribe(tipodes &#x3D;&gt; {
-                const tipoDesc &#x3D; &lt;any&gt;tipodes;
-                if (tipoDescuento &#x3D;&#x3D;&#x3D; 1 &amp;&amp; tipoDesc.TipoDescuentoId.Id !&#x3D;&#x3D; 1) {
-                  this.createDescuentoAcademico(DescuentoAcademico);
-                } else if (tipoDescuento !&#x3D;&#x3D; 1 &amp;&amp; tipoDesc.TipoDescuentoId.Id &#x3D;&#x3D;&#x3D; 1) {
-                  this.createDescuentoAcademico(DescuentoAcademico);
-                } else {
-                  Swal({
-                    type: &#x27;error&#x27;,
-                    title: this.translate.instant(&#x27;GLOBAL.descuento_matricula&#x27;) + &#x27;&#x27;,
-                    text: this.translate.instant(&#x27;ERROR.repetir_descuentos&#x27;),
-                    footer: this.translate.instant(&#x27;GLOBAL.crear&#x27;) + &#x27;-&#x27; +
-                      this.translate.instant(&#x27;GLOBAL.descuento_matricula&#x27;),
-                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
-                  });
-                  this.eventChange.emit(true);
-                  this.clean &#x3D; !this.clean;
-                }
-              },
-                (error: HttpErrorResponse) &#x3D;&gt; {
-                  Swal({
-                    type: &#x27;error&#x27;,
-                    title: error.status + &#x27;&#x27;,
-                    text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
-                    footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
-                      this.translate.instant(&#x27;GLOBAL.descuento_matricula&#x27;) + &#x27;|&#x27; +
-                      this.translate.instant(&#x27;GLOBAL.tipo_descuento_matricula&#x27;),
-                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
-                  });
-                });
-          }
-        } else {
-          this.createDescuentoAcademico(DescuentoAcademico);
-        }
-        this.eventChange.emit(true);
-      },
-        (error: HttpErrorResponse) &#x3D;&gt; {
-          Swal({
-            type: &#x27;error&#x27;,
-            title: error.status + &#x27;&#x27;,
-            text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
-            footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
-              this.translate.instant(&#x27;GLOBAL.descuento_matricula&#x27;) + &#x27;|&#x27; +
-              this.translate.instant(&#x27;GLOBAL.solicitud_descuento&#x27;),
-            confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
-          });
-        });
-  }
-
   createDescuentoAcademico(DescuentoAcademico: any): void {
     const opt: any &#x3D; {
       title: this.translate.instant(&#x27;GLOBAL.crear&#x27;),
@@ -2634,7 +2493,7 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
         if (willDelete.value) {
           const files &#x3D; [];
           this.info_descuento_academico &#x3D; &lt;SolicitudDescuento&gt;DescuentoAcademico;
-          this.info_descuento_academico.Persona &#x3D; this.persona;
+          this.info_descuento_academico.Persona &#x3D; 1 * this.persona;
           this.info_descuento_academico.Periodo &#x3D; this.periodo;
           if (this.info_descuento_academico.Documento.file !&#x3D;&#x3D; undefined) {
             files.push({

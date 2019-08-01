@@ -7,6 +7,7 @@ export class InfoIdioma {
   Persona: number;
   Idioma: Idioma;
   Nativo: boolean;
+  SeleccionExamen: boolean;
   NivelEscribe: NivelIdioma;
   NivelEscucha: NivelIdioma;
   NivelHabla: NivelIdioma;
