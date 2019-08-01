@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
@@ -29,7 +29,7 @@ export class ViewFormacionAcademicaComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private campusMidService: CampusMidService,
     private programaService: ProgramaAcademicoService,
     private users: UserService) {

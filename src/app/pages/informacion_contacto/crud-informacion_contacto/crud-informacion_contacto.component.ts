@@ -3,7 +3,7 @@ import { InformacionContacto } from './../../../@core/data/models/informacion_co
 import { InfoContactoGet } from './../../../@core/data/models/info_contacto_get';
 import { InfoContactoPut } from './../../../@core/data/models/info_contacto_put';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { FORM_INFORMACION_CONTACTO } from './form-informacion_contacto';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -48,7 +48,7 @@ export class CrudInformacionContactoComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private campusMidService: CampusMidService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private store: Store<IAppState>,
     private listService: ListService,
     private toasterService: ToasterService) {

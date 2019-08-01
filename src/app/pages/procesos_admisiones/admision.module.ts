@@ -7,7 +7,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ImplicitAutenticationService } from './../../@core/utils/implicit_autentication.service';
 import { InscripcionModule } from '../inscripcion/inscripcion.module';
 import { PosgradoComponent } from '../inscripcion/posgrado/posgrado.component';
-import { AdmisionesService } from '../../@core/data/admisiones.service';
+import { InscripcionService } from '../../@core/data/inscripcion.service';
 
 @NgModule({
   imports: [
@@ -22,7 +22,7 @@ import { AdmisionesService } from '../../@core/data/admisiones.service';
     ...routedComponents,
   ],
   providers: [
-    AdmisionesService,
+    InscripcionService,
     ImplicitAutenticationService,
   ],
   entryComponents: [

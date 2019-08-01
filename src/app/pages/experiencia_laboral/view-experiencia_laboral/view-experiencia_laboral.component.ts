@@ -2,7 +2,7 @@ import { CampusMidService } from './../../../@core/data/campus_mid.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { ExperienciaService } from '../../../@core/data/experiencia.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../@core/data/users.service';
@@ -28,7 +28,7 @@ export class ViewExperienciaLaboralComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private campusMidService: CampusMidService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private experienciaService: ExperienciaService,
     private users: UserService) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -57,7 +57,6 @@ export class ViewExperienciaLaboralComponent implements OnInit {
                       if (pais !== null) {
                         const pais_info = <any>pais;
                         element.PaisEmpresa = pais_info.Nombre;
-                        // console.info(JSON.stringify(element));
                         this.info_experiencia_laboral.push(element);
                       }
                     },

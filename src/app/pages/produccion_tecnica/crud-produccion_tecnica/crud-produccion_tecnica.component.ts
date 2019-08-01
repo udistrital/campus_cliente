@@ -1,6 +1,6 @@
 import { TipoProduccionTecnica } from './../../../@core/data/models/tipo_produccion_tecnica';
 import { UserService } from '../../../@core/data/users.service';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service'
+import { UbicacionService } from '../../../@core/data/ubicacion.service'
 import { ProduccionTecnica } from './../../../@core/data/models/produccion_tecnica';
 import { Lugar } from './../../../@core/data/models/lugar';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
@@ -41,7 +41,7 @@ export class CrudProduccionTecnicaComponent implements OnInit {
   constructor(private translate: TranslateService,
     private produccionAcademicaService: ProduccionAcademicaService,
     private user: UserService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private toasterService: ToasterService) {
     this.formProduccionTecnica = FORM_PRODUCCION_TECNICA;
     this.construirForm();

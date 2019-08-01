@@ -4,11 +4,13 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
+import { FormacionAcademicaService } from '../../../@core/data/formacion_academica.service';
 import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'ngx-list-formacion-academica',
@@ -32,7 +34,8 @@ export class ListFormacionAcademicaComponent implements OnInit {
     private toasterService: ToasterService,
     private userService: UserService,
     private campusMidService: CampusMidService,
-    private ubicacionesService: UbicacionesService,
+    private formacionService: FormacionAcademicaService,
+    private ubicacionService: UbicacionService,
     private programaAcademicoService: ProgramaAcademicoService) {
     this.loadData();
     this.cargarCampos();
@@ -49,6 +52,9 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
+      actions: {
+        columnTitle: '',
+      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -67,38 +73,44 @@ export class ListFormacionAcademicaComponent implements OnInit {
       columns: {
         NivelFormacion: {
           title: this.translate.instant('GLOBAL.nivel_formacion'),
+          width: '10%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         PaisUniversidad: {
           title: this.translate.instant('GLOBAL.pais_universidad'),
+          width: '25%',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         NombreUniversidad: {
           title: this.translate.instant('GLOBAL.nombre_universidad'),
+          width: '25%',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Titulacion: {
           title: this.translate.instant('GLOBAL.programa_academico'),
+          width: '20%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         Metodologia: {
           title: this.translate.instant('GLOBAL.metodologia'),
+          width: '10%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         FechaFinalizacion: {
           title: this.translate.instant('GLOBAL.fecha_fin'),
+          width: '10%',
           valuePrepareFunction: (value) => {
-            return value;
+            return formatDate(value, 'yyyy-MM-dd', 'en');
           },
         },
       },
@@ -111,14 +123,14 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   loadData(): void {
     this.loading = true;
-    this.campusMidService.get('formacion/formacionacademicaente/?Ente=' + this.userService.getEnte())
+    this.formacionService.get('formacion_academica/?query=Persona:' + this.userService.getEnte())
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
           const data_info = <Array<any>>[];
           data.forEach(element => {
             if (element.Titulacion !== null && element.Titulacion !== undefined) {
-              this.programaAcademicoService.get('programa_academico/?query=id:' + element.Titulacion)
+              this.programaAcademicoService.get('programa_academico/?query=Id:' + element.Titulacion)
                 .subscribe(programa => {
                   if (programa !== null) {
                     const programa_info = <any>programa[0];
@@ -130,7 +142,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
                         if (organizacion !== null) {
                           const organizacion_info = <any>organizacion;
                           element.NombreUniversidad = organizacion_info.Nombre;
-                          this.ubicacionesService.get('lugar/' + organizacion_info.Ubicacion[0].UbicacionEnte.Lugar)
+                          this.ubicacionService.get('lugar/' + organizacion_info.Ubicacion[0].UbicacionEnte.Lugar)
                             .subscribe(pais => {
                               if (pais !== null) {
                                 const pais_info = <any>pais;

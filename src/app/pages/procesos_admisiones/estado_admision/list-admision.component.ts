@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { UserService } from '../../../@core/data/users.service';
-import { AdmisionesService } from '../../../@core/data/admisiones.service';
-import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
+import { CoreService } from '../../../@core/data/core.service';
+import { ProgramaOikosService } from '../../../@core/data/programa_oikos.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -28,16 +29,16 @@ export class ListAdmisionComponent implements OnInit {
   @Output() eventChange = new EventEmitter();
 
   constructor(private translate: TranslateService,
-    private admisionesService: AdmisionesService,
+    private inscripcionService: InscripcionService,
+    private coreService: CoreService,
     private userService: UserService,
-    private programaService: ProgramaAcademicoService) {
+    private programaService: ProgramaOikosService) {
     this.ente = this.userService.getEnte();
     this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
     });
-
   }
 
   cargarCampos() {
@@ -47,26 +48,26 @@ export class ListAdmisionComponent implements OnInit {
         editButtonContent: '<i class="nb-person"></i>',
       },
       actions: {
-        columnTitle: this.translate.instant('GLOBAL.acciones'),
+        columnTitle: '',
         add: false,
         edit: true,
         delete: false,
       },
       mode: 'external',
       columns: {
-        ProgramaAcademico: {
+        ProgramaAcademicoId: {
           title: this.translate.instant('GLOBAL.programa_academico'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
-        Periodo: {
+        PeriodoId: {
           title: this.translate.instant('GLOBAL.periodo_academico'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
-        EstadoAdmision: {
+        EstadoInscripcionId: {
           title: this.translate.instant('GLOBAL.estado_admision'),
           valuePrepareFunction: (value) => {
             return value.Nombre;
@@ -82,19 +83,36 @@ export class ListAdmisionComponent implements OnInit {
 
   loadData(): void {
     if (this.ente !== 0 && this.ente !== undefined && this.ente.toString() !== '') {
-      this.admisionesService.get('admision/?query=Aspirante:' + this.ente +
+      this.inscripcionService.get('inscripcion/?query=PersonaId:' + this.ente +
         '&limit=0').subscribe(res => {
           if (res !== null) {
             const data = <Array<any>>res;
             for (let index = 0; index < data.length; index++) {
               const datos = data[index];
-              this.programaService.get('programa_academico/' + datos.ProgramaAcademico)
+              this.programaService.get('dependencia/' + datos.ProgramaAcademicoId)
                 .subscribe(programa => {
                   if (programa !== null) {
-                    data[index].ProgramaAcademico = <any>programa;
-                    if (index === (data.length - 1)) {
-                      this.source.load(data);
-                    }
+                    data[index].ProgramaAcademicoId = <any>programa;
+                    this.coreService.get('periodo/' + datos.PeriodoId)
+                    .subscribe(periodo => {
+                      if (periodo !== null) {
+                        data[index].PeriodoId = <any>periodo;
+                        if (index === (data.length - 1)) {
+                          this.source.load(data);
+                        }
+                      }
+                    },
+                      (error: HttpErrorResponse) => {
+                        Swal({
+                          type: 'error',
+                          title: error.status + '',
+                          text: this.translate.instant('ERROR.' + error.status),
+                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                            this.translate.instant('GLOBAL.admisiones') + '|' +
+                            this.translate.instant('GLOBAL.periodo_academico'),
+                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                        });
+                      });
                   }
                 },
                   (error: HttpErrorResponse) => {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Lugar } from './../../../@core/data/models/lugar';
 import { ProgramaAcademico } from './../../../@core/data/models/programa_academico';
 import { FORM_FORMACION_ACADEMICA } from './form-formacion_academica';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
@@ -49,7 +49,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
 
   constructor(
     private translate: TranslateService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private campusMidService: CampusMidService,
     private programaService: ProgramaAcademicoService,
     private autenticationService: ImplicitAutenticationService,

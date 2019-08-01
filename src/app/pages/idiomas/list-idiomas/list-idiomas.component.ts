@@ -40,6 +40,9 @@ export class ListIdiomasComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
+      actions: {
+        columnTitle: '',
+      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -58,30 +61,35 @@ export class ListIdiomasComponent implements OnInit {
       columns: {
         Idioma: {
           title: this.translate.instant('GLOBAL.idioma'),
+          width: '20%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         NivelEscribe: {
           title: this.translate.instant('GLOBAL.nivel_escribe'),
+          width: '20%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         NivelEscucha: {
           title: this.translate.instant('GLOBAL.nivel_escucha'),
+          width: '20%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         NivelHabla: {
           title: this.translate.instant('GLOBAL.nivel_habla'),
+          width: '20%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },
         },
         NivelLee: {
           title: this.translate.instant('GLOBAL.nivel_lee'),
+          width: '20%',
           valuePrepareFunction: (value) => {
             return value.Nombre;
           },

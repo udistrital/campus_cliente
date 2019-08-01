@@ -10,7 +10,7 @@ import { LineaInvestigacion } from '../data/models/linea_investigacion';
 import { Idioma } from '../data/models/idioma';
 import { GrupoEtnico } from '../data/models/grupo_etnico';
 import { EstadoCivil } from '../data/models/estado_civil';
-import { EstadoAdmision } from '../data/models/estado_admision';
+import { EstadoInscripcion } from '../data/models/estado_inscripcion';
 import { ClasificacionNivelIdioma } from '../data/models/clasificacion_idioma';
 import { Genero } from '../data/models/genero';
 import { Titulacion } from '../data/models/titulacion';
@@ -23,7 +23,7 @@ import { PeriodoAcademico } from '../data/models/periodo_academico';
 export interface IAppState {
   listGenero: Genero[],
   listClasificacionNivelIdioma: ClasificacionNivelIdioma[],
-  listEstadoAdmision: EstadoAdmision[],
+  listEstadoInscripcion: EstadoInscripcion[],
   listEstadoCivil: EstadoCivil[],
   listGrupoEtnico: GrupoEtnico[],
   listIdioma: Idioma[],

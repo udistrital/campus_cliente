@@ -3,11 +3,11 @@ import { Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { UtilidadesService } from '../../../@core/utils/utilidades.service';
-import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
-import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { ProgramaOikosService } from '../../../@core/data/programa_oikos.service';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Admision } from '../../../@core/data/models/admision';
+import { Inscripcion } from '../../../@core/data/models/inscripcion';
 import { IMAGENES } from './imagenes';
 import { formatDate } from '@angular/common';
 import Swal from 'sweetalert2';
@@ -22,30 +22,20 @@ import html2canvas from 'html2canvas';
 })
 export class PosgradoComponent implements OnInit, OnChanges {
 
-  @Input('admision_id')
-  set name(admision_id: number) {
-    this.admision_id = admision_id;
-    if (this.admision_id !== 0 && this.admision_id !== undefined && this.admision_id.toString() !== '') {
-      this.getInfoInscripcion();
-    } else {
-      const ENTE = this.userService.getEnte();
-      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '') {
-        this.info_ente_id = <number>ENTE;
-      } else {
-        this.info_ente_id = undefined;
-      }
-    }
+  @Input('inscripcion_id')
+  set name(inscripcion_id: number) {
+    this.inscripcion_id = inscripcion_id;
   }
 
   @Output() eventChange = new EventEmitter();
   @Output('result') result: EventEmitter<any> = new EventEmitter();
 
-  admision_id: number;
+  inscripcion_id: number;
   info_persona_id: number;
   info_ente_id: number;
   info_info_persona: any;
   datos_persona: any;
-  admision: Admision;
+  inscripcion: Inscripcion;
   step = 0;
   cambioTab = 0;
   nForms: number;
@@ -90,15 +80,25 @@ export class PosgradoComponent implements OnInit, OnChanges {
   constructor(
     private translate: TranslateService,
     private campusMidService: CampusMidService,
-    private admisionesService: AdmisionesService,
+    private inscripcionService: InscripcionService,
     private userService: UserService,
-    private programaService: ProgramaAcademicoService) {
+    private programaService: ProgramaOikosService) {
     this.imagenes = IMAGENES;
     this.translate = translate;
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
     this.loadInfoPostgrados();
     this.total = true;
+    if (this.inscripcion_id !== 0 && this.inscripcion_id !== undefined && this.inscripcion_id.toString() !== '') {
+      this.getInfoInscripcion();
+    } else {
+      const ENTE = this.userService.getEnte();
+      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '') {
+        this.info_ente_id = <number>ENTE;
+      } else {
+        this.info_ente_id = undefined;
+      }
+    }
   }
 
   setPercentage_info(number, tab) {
@@ -145,11 +145,10 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   setPercentage_total() {
-    this.percentage_total = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info)) / 5;
-    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad)) / 5;
-    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_docu)) / 5;
-    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_desc)) / 5;
-    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy)) / 5;
+    this.percentage_total = Math.round(UtilidadesService.getSumArray(this.percentage_tab_info)) / 4;
+    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_acad)) / 4;
+    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_docu)) / 4;
+    this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy)) / 4;
     if (this.percentage_total >= 100) {
       this.total = false;
     }
@@ -161,11 +160,14 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   loadInfoPostgrados() {
-    this.programaService.get('programa_academico/?query=Institucion:2')
+    this.programaService.get('dependencia_tipo_dependencia/?query=TipoDependenciaId:15&limit=0')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
-          this.posgrados = <any>res;
+          const programaPosgrados = <Array<any>>res;
+          programaPosgrados.forEach(element => {
+            this.posgrados.push(element.DependenciaId);
+          });
         }
       },
         (error: HttpErrorResponse) => {
@@ -181,42 +183,44 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   getInfoInscripcion() {
-    this.admisionesService.get('admision/' + this.admision_id)
-      .subscribe(admision => {
-        const info_admision = <any>admision;
-        if (admision !== null  && info_admision.Type !== 'error') {
-          this.programaService.get('programa_academico/?query=Id:' + info_admision.ProgramaAcademico)
-            .subscribe(res_programa => {
-              const programa_admision = <any>res_programa[0];
-              if (res_programa[0] !== null && programa_admision.Type !== 'error') {
-                this.selectedValue = programa_admision;
-                this.posgrados.push(programa_admision);
-                this.info_ente_id = info_admision.Aspirante;
-              }
-            },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                    this.translate.instant('GLOBAL.admision') + '|' +
-                    this.translate.instant('GLOBAL.programa_academico'),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    if (this.inscripcion_id !== undefined) {
+      this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
+        .subscribe(inscripcion => {
+          const info_inscripcion = <any>inscripcion;
+          if (inscripcion !== null  && info_inscripcion.Type !== 'error') {
+            this.programaService.get('dependencia/' + info_inscripcion.ProgramaAcademicoId)
+              .subscribe(res_programa => {
+                const programa_admision = <any>res_programa;
+                if (res_programa !== null && programa_admision.Type !== 'error') {
+                  this.selectedValue = programa_admision;
+                  this.posgrados.push(programa_admision);
+                  this.info_ente_id = info_inscripcion.PersonaId;
+                }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.admision') + '|' +
+                      this.translate.instant('GLOBAL.programa_academico'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
-        }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.admision'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.admision'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
+    }
   }
 
   useLanguage(language: string) {
@@ -392,19 +396,19 @@ export class PosgradoComponent implements OnInit, OnChanges {
     window.localStorage.setItem('programa', this.selectedValue.Id);
   }
 
-  Inscribirse() {
-    this.DatosMidPersona();
+  inscribirse() {
+    this.datosMidPersona();
   }
 
-  DatosMidPersona() {
+  datosMidPersona() {
     this.captureScreen();
-    this.campusMidService.get(`persona/ConsultaPersona/?id=${this.info_ente_id}`)
+    this.campusMidService.get('persona/ConsultaPersona/?id=' + this.info_ente_id)
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.datos_persona = r;
-          this.admision.EstadoAdmision.Id = 2;
-          this.UpdateEstadoAdmision();
+          this.inscripcion.EstadoInscripcionId.Id = 2;
+          this.updateEstadoAdmision();
         }
       },
         (error: HttpErrorResponse) => {
@@ -412,24 +416,28 @@ export class PosgradoComponent implements OnInit, OnChanges {
             type: 'error',
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.admision'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });
   }
 
-  UpdateEstadoAdmision() {
-    this.admisionesService.put('admision', this.admision, this.admision.Id)
-      .subscribe(res_ad => {
-        const r_ad = <any>res_ad;
-        if (res_ad !== null && r_ad.Type !== 'error') {
+  updateEstadoAdmision() {
+    this.inscripcionService.put('inscripcion', this.inscripcion)
+      .subscribe(res_ins => {
+        const r_ins = <any>res_ins;
+        if (res_ins !== null && r_ins.Type !== 'error') {
           this.captureScreen();
         }
       },
-        (error_ad: HttpErrorResponse) => {
+        (error: HttpErrorResponse) => {
           Swal({
             type: 'error',
-            title: error_ad.status + '',
-            text: this.translate.instant('ERROR.' + error_ad.status),
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+              this.translate.instant('GLOBAL.admision'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });

@@ -2,7 +2,7 @@ import { ImplicitAutenticationService } from '../../../@core/utils/implicit_aute
 import { NuxeoService } from '../../../@core/utils/nuxeo.service';
 import { PropuestaGrado } from './../../../@core/data/models/propuesta_grado';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { AdmisionesService } from '../../../@core/data/admisiones.service';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { FORM_PROPUESTA_GRADO } from './form-propuesta_grado';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -50,7 +50,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
     private nuxeoService: NuxeoService,
-    private admisionesService: AdmisionesService,
+    private admisionesService: InscripcionService,
     private store: Store<IAppState>,
     private listService: ListService,
     private ente_id: UserService,
@@ -216,7 +216,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                 if (Object.keys(response).length === files.length) {
                   const documentos_actualizados = <any>response;
                   this.info_propuesta_grado.FormatoProyecto = this.FormatoProyecto;
-                  this.admisionesService.put('propuesta', this.info_propuesta_grado, this.info_propuesta_grado.Id)
+                  this.admisionesService.put('propuesta', this.info_propuesta_grado)
                     .subscribe(res => {
                       if (documentos_actualizados['FormatoProyecto'] !== undefined) {
                         this.info_propuesta_grado.FormatoProyecto = documentos_actualizados['FormatoProyecto'].url + '';
@@ -253,7 +253,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                 });
           } else {
             this.info_propuesta_grado.FormatoProyecto = this.FormatoProyecto;
-            this.admisionesService.put('propuesta', this.info_propuesta_grado, this.prop_id)
+            this.admisionesService.put('propuesta', this.info_propuesta_grado)
               .subscribe(res => {
                 this.eventChange.emit(true);
                 this.loadPropuestaGrado();

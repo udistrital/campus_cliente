@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProduccionAcademicaService } from '../../../@core/data/produccion_academica.service';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service'
+import { UbicacionService } from '../../../@core/data/ubicacion.service'
 import { ProduccionTecnica } from './../../../@core/data/models/produccion_tecnica';
 import { Lugar } from './../../../@core/data/models/lugar';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
@@ -29,7 +29,7 @@ export class ViewProduccionTecnicaComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private produccionService: ProduccionAcademicaService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private users: UserService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       });

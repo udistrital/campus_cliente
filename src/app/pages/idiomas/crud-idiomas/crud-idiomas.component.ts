@@ -12,7 +12,8 @@ import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PeriodoAcademico } from './../../../@core/data/models/periodo_academico';
-import { AdmisionesService } from '../../../@core/data/admisiones.service';
+// import { InscripcionService } from '../../../@core/data/inscripcion.service';
+import { CoreService } from '../../../@core/data/core.service';
 
 @Component({
   selector: 'ngx-crud-idiomas',
@@ -41,12 +42,14 @@ export class CrudIdiomasComponent implements OnInit {
   percentage: number;
   periodo: PeriodoAcademico;
   idioma: number;
+  idioma_examen: number;
 
   constructor(
     private translate: TranslateService,
     private users: UserService,
     private idiomaService: IdiomaService,
-    private admisionesService: AdmisionesService,
+    // private inscripcionService: InscripcionService,
+    private coreService: CoreService,
     private toasterService: ToasterService) {
     this.formInfoIdioma = FORM_IDIOMAS;
     this.construirForm();
@@ -57,7 +60,7 @@ export class CrudIdiomasComponent implements OnInit {
     this.loadOptionsNiveles()
     this.loadOptionsClasificacion()
     this.ente = this.users.getEnte();
-    this.CargarPeriodo();
+    this.cargarPeriodo();
     this.loading = false;
   }
 
@@ -160,7 +163,6 @@ export class CrudIdiomasComponent implements OnInit {
       this.idiomaService.get('conocimiento_idioma/?query=id:' + this.info_idioma_id)
         .subscribe(res => {
           if (res !== null) {
-            console.info(JSON.stringify(res));
             this.info_idioma = <InfoIdioma>res[0];
             this.idioma = this.info_idioma.Idioma.Id;
             this.loading = false;
@@ -200,28 +202,50 @@ export class CrudIdiomasComponent implements OnInit {
         if (willDelete.value) {
           this.loading = true;
           this.info_idioma = <InfoIdioma>infoIdioma;
-          this.idiomaService.put('conocimiento_idioma', this.info_idioma)
-            .subscribe(res => {
-              this.loading = false;
-              this.eventChange.emit(true);
-              this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
-                this.translate.instant('GLOBAL.idioma') + ' ' +
-                this.translate.instant('GLOBAL.confirmarActualizar'));
-              this.clean = !this.clean;
-              this.info_idioma_id = 0;
-              this.loadInfoIdioma();
-            },
-              (error: HttpErrorResponse) => {
+          if (this.info_idioma.Nativo === true && this.info_idioma.Nativo === this.info_idioma.SeleccionExamen) {
+            Swal({
+              type: 'error',
+              title: this.translate.instant('GLOBAL.actualizar'),
+              text: this.translate.instant('ERROR.nativo_examen'),
+              footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                this.translate.instant('GLOBAL.idioma'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          } else if (this.info_idioma.SeleccionExamen === true && this.idioma_examen !== undefined &&
+            this.info_idioma.Idioma.Id !== this.idioma_examen) {
+            Swal({
+              type: 'error',
+              title: this.translate.instant('GLOBAL.actualizar'),
+              text: this.translate.instant('ERROR.doble_examen'),
+              footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                this.translate.instant('GLOBAL.idioma'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          } else {
+            this.idiomaService.put('conocimiento_idioma', this.info_idioma)
+              .subscribe(res => {
                 this.loading = false;
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  footer: this.translate.instant('GLOBAL.actualizar') + '-' +
-                    this.translate.instant('GLOBAL.idioma'),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                this.eventChange.emit(true);
+                this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
+                  this.translate.instant('GLOBAL.idioma') + ' ' +
+                  this.translate.instant('GLOBAL.confirmarActualizar'));
+                this.info_idioma_id = 0;
+                this.info_idioma = undefined;
+                this.clean = !this.clean;
+                this.loadInfoIdioma();
+              },
+                (error: HttpErrorResponse) => {
+                  this.loading = false;
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                      this.translate.instant('GLOBAL.idioma'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
+          }
         }
       });
   }
@@ -243,32 +267,51 @@ export class CrudIdiomasComponent implements OnInit {
         if (willDelete.value) {
           this.info_idioma = <InfoIdioma>infoIdioma;
           this.info_idioma.Persona = this.users.getEnte();
-          this.idiomaService.post('conocimiento_idioma', this.info_idioma)
-            .subscribe(res => {
-              const r = <any>res;
-              // this.info_idioma = <InfoIdioma>res;
-              if (r !== null && r.Type !== 'error') {
-                this.loading = false;
-                this.eventChange.emit(true);
-                this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                  this.translate.instant('GLOBAL.idioma') + ' ' +
-                  this.translate.instant('GLOBAL.confirmarCrear'));
+          if (this.info_idioma.Nativo === true && this.info_idioma.Nativo === this.info_idioma.SeleccionExamen) {
+            Swal({
+              type: 'error',
+              title: this.translate.instant('GLOBAL.crear'),
+              text: this.translate.instant('ERROR.nativo_examen'),
+              footer: this.translate.instant('GLOBAL.crear') + '-' +
+                this.translate.instant('GLOBAL.idioma'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          } else if (this.info_idioma.SeleccionExamen === true && this.idioma_examen !== undefined &&
+            this.info_idioma.Idioma.Id !== this.idioma_examen) {
+            Swal({
+              type: 'error',
+              title: this.translate.instant('GLOBAL.crear'),
+              text: this.translate.instant('ERROR.doble_examen'),
+              footer: this.translate.instant('GLOBAL.crear') + '-' +
+                this.translate.instant('GLOBAL.idioma'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          } else {
+            this.idiomaService.post('conocimiento_idioma', this.info_idioma)
+              .subscribe(res => {
+                const r = <any>res;
+                if (r !== null && r.Type !== 'error') {
+                  this.loading = false;
+                  this.eventChange.emit(true);
+                  this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                    this.translate.instant('GLOBAL.idioma') + ' ' +
+                    this.translate.instant('GLOBAL.confirmarCrear'));
+                  this.info_idioma_id = 0;
+                  this.info_idioma = undefined;
                   this.clean = !this.clean;
-              } else {
-                this.showToast('error', this.translate.instant('GLOBAL.error'),
-                  this.translate.instant('GLOBAL.error'));
-              }
-            },
-              (error: HttpErrorResponse) => {
-                Swal({
-                  type: 'error',
-                  title: error.status + '',
-                  text: this.translate.instant('ERROR.' + error.status),
-                  footer: this.translate.instant('GLOBAL.crear') + '-' +
-                    this.translate.instant('GLOBAL.idioma'),
-                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                }
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.crear') + '-' +
+                      this.translate.instant('GLOBAL.idioma'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
                 });
-              });
+          }
         }
       });
   }
@@ -293,13 +336,13 @@ export class CrudIdiomasComponent implements OnInit {
     }
   }
 
-  CargarPeriodo(): void {
-    this.admisionesService.get('periodo_academico/?query=Activo:true&sortby=Id&order=desc&limit=1')
+  cargarPeriodo(): void {
+    this.coreService.get('periodo/?query=Activo:true&sortby=Id&order=desc&limit=1')
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.periodo = <PeriodoAcademico>res[0]; // se carga el periodo academico activo mas reciente
-          // console.info(this.periodo);
+          console.info(JSON.stringify(this.periodo));
         }
       },
         (error: HttpErrorResponse) => {

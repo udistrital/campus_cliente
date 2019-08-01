@@ -12,7 +12,7 @@ const httpOptions = {
 
 @Injectable()
 export class ConfiguracionService {
-  // export class MenuService {
+
   constructor(private http: HttpClient) {
   }
 

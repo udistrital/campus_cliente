@@ -187,7 +187,6 @@ export class ListInfoCaracteristicaComponent implements OnInit {
   }
 
   itemselec(event): void {
-    // console.log("afssaf");
   }
 
   private showToast(type: string, title: string, body: string) {

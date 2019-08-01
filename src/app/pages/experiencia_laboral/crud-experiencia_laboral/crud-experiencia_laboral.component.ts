@@ -8,7 +8,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { OrganizacionService } from '../../../@core/data/organizacion.service';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { Lugar } from '../../../@core/data/models/lugar';
 import { ExperienciaService } from '../../../@core/data/experiencia.service';
 import { NuxeoService } from '../../../@core/utils/nuxeo.service';
@@ -54,7 +54,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
     private toasterService: ToasterService,
     private organizacionService: OrganizacionService,
     private campusMidService: CampusMidService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private experienciaService: ExperienciaService,
     private documentoService: DocumentoService,
     private nuxeoService: NuxeoService,
@@ -311,7 +311,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
 
   loadOptionsPais(): void {
     let paisNacimiento: Array<any> = [];
-    this.ubicacionesService.get('lugar/?query=TipoLugar.Nombre:PAIS')
+    this.ubicacionesService.get('lugar/?query=TipoLugar.Nombre:PAIS&limit=0')
       .subscribe(res => {
         if (res !== null) {
           paisNacimiento = <Array<Lugar>>res;
@@ -500,7 +500,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           this.loading = true;
           this.info_experiencia_laboral = <any>infoExperienciaLaboral;
           const files = [];
-          console.info(this.info_experiencia_laboral);
           if (this.info_experiencia_laboral.Soporte.file !== undefined) {
             files.push({
               nombre: this.info_experiencia_laboral.Cargo.Nombre, key: 'Soporte',
@@ -623,7 +622,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
 
   validarForm(event) {
     if (event.valid) {
-      console.info(JSON.stringify(event.data.InfoExperienciaLaboral));
       const experiencia = {
         Persona: this.ente_id,
         Actividades: event.data.InfoExperienciaLaboral.Actividades,

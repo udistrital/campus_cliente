@@ -4,7 +4,7 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import { Libro } from './../../../@core/data/models/libro';
 import { Lugar } from './../../../@core/data/models/lugar';
-import { UbicacionesService } from '../../../@core/data/ubicaciones.service';
+import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { UserService } from '../../../@core/data/users.service';
 
@@ -29,7 +29,7 @@ export class ViewLibroComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private produccionService: ProduccionAcademicaService,
-    private ubicacionesService: UbicacionesService,
+    private ubicacionesService: UbicacionService,
     private users: UserService) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
