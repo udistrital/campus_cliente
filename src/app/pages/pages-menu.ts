@@ -34,6 +34,19 @@ export const MENU_ITEMS: MenuItem[] = [
       },
     ],
   },
+  {
+    title: 'Pago en línea',
+    icon: 'nb-compose',
+    link: '/pages/pago_linea',
+    key: 'pago_linea',
+    children: [
+      {
+        title: 'Pago inscripción',
+        link: '/pages/pago_linea/pago_inscripcion',
+        key: 'pago_inscripcion',
+      },
+    ],
+  },
 ];
 
 export const MENU_PUBLICO: MenuItem[] = [

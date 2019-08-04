@@ -24,6 +24,10 @@ const routes: Routes = [{
       loadChildren: './notificacion/notificacion.module#NotificacionModule',
     },
     {
+      path: 'pago_linea',
+      loadChildren: './pago_linea/pago_linea.module#PagoLineaModule',
+    },
+    {
       path: '',
       redirectTo: 'dashboard',
       pathMatch: 'full',

@@ -70,47 +70,9 @@
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ExtraOptions, RouterModule, Routes } from &#x27;@angular/router&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
-/** import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from &#x27;@nebular/auth&#x27;;**/
 
 const routes: Routes &#x3D; [
   { path: &#x27;pages&#x27;, loadChildren: &#x27;app/pages/pages.module#PagesModule&#x27; },
-/**  {
-    path: &#x27;auth&#x27;,
-    component: NbAuthComponent,
-    children: [
-      {
-        path: &#x27;&#x27;,
-        component: NbLoginComponent,
-      },
-      {
-        path: &#x27;login&#x27;,
-        component: NbLoginComponent,
-      },
-      {
-        path: &#x27;register&#x27;,
-        component: NbRegisterComponent,
-      },
-      {
-        path: &#x27;logout&#x27;,
-        component: NbLogoutComponent,
-      },
-      {
-        path: &#x27;request-password&#x27;,
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: &#x27;reset-password&#x27;,
-        component: NbResetPasswordComponent,
-      },
-    ],
-  },**/
   { path: &#x27;&#x27;, redirectTo: &#x27;pages&#x27;, pathMatch: &#x27;full&#x27; },
   { path: &#x27;**&#x27;, redirectTo: &#x27;pages&#x27; },
 ];

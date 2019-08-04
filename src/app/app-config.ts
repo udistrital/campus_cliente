@@ -30,6 +30,8 @@ export const Config = {
     CONFIGURACION_SERVICE: 'http://pruebasapi.intranetoas.udistrital.edu.co:8086/v1/',
     NOTIFICACION_SERVICE: 'ws://pruebasapi.intranetoas.udistrital.edu.co:8116/ws/join',
     WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
+    PAGO_SERVICE: 'http://localhost/pagos/pagos2/',
+    RECIBO_SERVICE: 'http://localhost:8080/v1/',
     TOKEN: {
       AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co/oauth2/authorize',
       CLIENTE_ID: 'oOAf8PLTAzapsKaWAxPyLEHJfPIa',
@@ -68,6 +70,8 @@ export const Config = {
     CONFIGURACION_SERVICE: 'https://autenticacion.udistrital.edu.co/apioas/configuracion_crud_api/v1/',
     NOTIFICACION_SERVICE: 'ws://autenticacion.udistrital.edu.co/apioas/notificacionws/v1/',
     WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
+    PAGO_SERVICE: '',
+    RECIBO_SERVICE: '',
     TOKEN: {
       AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co/oauth2/authorize',
       CLIENTE_ID: 'AcLs_Mb7b3iEntpgIJ5xIxWkRLga',
@@ -106,6 +110,8 @@ export const Config = {
     CONFIGURACION_SERVICE: '',
     NOTIFICACION_SERVICE: '',
     WSO2_SERVICE: 'http://jbpm.udistritaloas.edu.co:8280/services',
+    PAGO_SERVICE: '',
+    RECIBO_SERVICE: '',
     TOKEN: {
       AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
       CLIENTE_ID: '',
