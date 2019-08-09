@@ -52,7 +52,6 @@ export class ListDescuentoAcademicoComponent implements OnInit {
     private toasterService: ToasterService) {
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      this.loadData();
       this.cargarCampos();
     });
     this.loading = false;

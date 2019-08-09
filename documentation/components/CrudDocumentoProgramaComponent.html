@@ -154,10 +154,22 @@
                                 <a href="#info_documento_programa">info_documento_programa</a>
                             </li>
                             <li>
+                                <a href="#inscripcion">inscripcion</a>
+                            </li>
+                            <li>
                                 <a href="#loading">loading</a>
                             </li>
                             <li>
                                 <a href="#percentage">percentage</a>
+                            </li>
+                            <li>
+                                <a href="#periodo">periodo</a>
+                            </li>
+                            <li>
+                                <a href="#persona">persona</a>
+                            </li>
+                            <li>
+                                <a href="#programa">programa</a>
                             </li>
                             <li>
                                 <a href="#programaDocumento">programaDocumento</a>
@@ -239,6 +251,12 @@
                             <li>
                                 <a href="#documento_programa_id">documento_programa_id</a>
                             </li>
+                            <li>
+                                <a href="#inscripcion_id">inscripcion_id</a>
+                            </li>
+                            <li>
+                                <a href="#persona_id">persona_id</a>
+                            </li>
                         </ul>
                     </td>
                 </tr>
@@ -274,6 +292,12 @@
                                 <li>
                                     <a href="#name">name</a>
                                 </li>
+                                <li>
+                                    <a href="#info">info</a>
+                                </li>
+                                <li>
+                                    <a href="#info2">info2</a>
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -287,12 +311,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(translate: TranslateService, autenticationService: <a href="../injectables/ImplicitAutenticationService.html">ImplicitAutenticationService</a>, documentoService: <a href="../injectables/DocumentoService.html">DocumentoService</a>, documentoProgramaService: <a href="../injectables/DocumentoProgramaService.html">DocumentoProgramaService</a>, nuxeoService: <a href="../injectables/NuxeoService.html">NuxeoService</a>, user: <a href="../injectables/UserService.html">UserService</a>, toasterService: ToasterService)</code>
+<code>constructor(translate: TranslateService, autenticationService: <a href="../injectables/ImplicitAutenticationService.html">ImplicitAutenticationService</a>, documentoService: <a href="../injectables/DocumentoService.html">DocumentoService</a>, inscripcionService: <a href="../injectables/InscripcionService.html">InscripcionService</a>, documentoProgramaService: <a href="../injectables/DocumentoProgramaService.html">DocumentoProgramaService</a>, nuxeoService: <a href="../injectables/NuxeoService.html">NuxeoService</a>, toasterService: ToasterService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:62</a></div>
                             </td>
                         </tr>
 
@@ -346,6 +370,18 @@
                                                     
                                                 </tr>
                                                 <tr>
+                                                        <td>inscripcionService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/InscripcionService.html" target="_self" >InscripcionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
                                                         <td>documentoProgramaService</td>
                                                   
                                                         <td>
@@ -362,18 +398,6 @@
                                                   
                                                         <td>
                                                                     <code><a href="../injectables/NuxeoService.html" target="_self" >NuxeoService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>user</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -420,7 +444,49 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:32</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="inscripcion_id"></a>
+                        <code>inscripcion_id</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:43</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="persona_id"></a>
+                        <code>persona_id</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:38</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -442,7 +508,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:49</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -461,7 +527,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:34</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:50</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -496,7 +562,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:65</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:80</a></div>
                             </td>
                         </tr>
 
@@ -534,7 +600,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="327" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:327</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="363" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:363</a></div>
                             </td>
                         </tr>
 
@@ -603,7 +669,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="374" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:374</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="410" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:410</a></div>
                             </td>
                         </tr>
 
@@ -672,7 +738,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:79</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:94</a></div>
                             </td>
                         </tr>
 
@@ -743,7 +809,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="133" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:133</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="166" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:166</a></div>
                             </td>
                         </tr>
 
@@ -781,7 +847,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:89</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:104</a></div>
                             </td>
                         </tr>
 
@@ -819,7 +885,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="460" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:460</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="498" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:498</a></div>
                             </td>
                         </tr>
 
@@ -857,7 +923,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="464" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:464</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="502" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:502</a></div>
                             </td>
                         </tr>
 
@@ -924,7 +990,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="469" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:469</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="507" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:507</a></div>
                             </td>
                         </tr>
 
@@ -1017,7 +1083,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:230</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:263</a></div>
                             </td>
                         </tr>
 
@@ -1086,7 +1152,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:75</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:90</a></div>
                             </td>
                         </tr>
 
@@ -1155,7 +1221,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="449" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:449</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="487" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:487</a></div>
                             </td>
                         </tr>
 
@@ -1232,7 +1298,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:59</a></div>
                             </td>
                         </tr>
 
@@ -1368,7 +1434,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:37</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:53</a></div>
                             </td>
                         </tr>
 
@@ -1436,7 +1502,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:54</a></div>
                             </td>
                         </tr>
 
@@ -1470,7 +1536,41 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="36" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:36</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inscripcion"></a>
+                        <span class="name">
+                            <b>
+                            inscripcion
+                            </b>
+                            <a href="#inscripcion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>inscripcion:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -1504,7 +1604,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -1538,7 +1638,109 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:62</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="periodo"></a>
+                        <span class="name">
+                            <b>
+                            periodo
+                            </b>
+                            <a href="#periodo"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>periodo:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:28</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="persona"></a>
+                        <span class="name">
+                            <b>
+                            persona
+                            </b>
+                            <a href="#persona"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>persona:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="programa"></a>
+                        <span class="name">
+                            <b>
+                            programa
+                            </b>
+                            <a href="#programa"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>programa:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -1572,7 +1774,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -1606,7 +1808,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:55</a></div>
                             </td>
                         </tr>
 
@@ -1640,7 +1842,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:40</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -1674,7 +1876,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -1708,7 +1910,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:61</a></div>
                             </td>
                         </tr>
 
@@ -1738,7 +1940,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:28</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:32</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1780,6 +1982,124 @@
                     </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="info"></a>
+                        <span class="name"><b>info</b><a href="#info"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>info(persona_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:38</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>persona_id</td>
+                                                    
+                                                            <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="info2"></a>
+                        <span class="name"><b>info2</b><a href="#info2"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>info2(inscripcion_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/documento_programa/crud-documento_programa/crud-documento_programa.component.ts:43</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>inscripcion_id</td>
+                                                    
+                                                            <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
 </section>
 </div>
 
@@ -1789,13 +2109,13 @@
 import { NuxeoService } from &#x27;../../../@core/utils/nuxeo.service&#x27;;
 import { DocumentoPrograma } from &#x27;./../../../@core/data/models/documento_programa&#x27;;
 import { SoporteDocumentoPrograma } from &#x27;./../../../@core/data/models/soporte_documento_programa&#x27;;
+import { InscripcionService } from &#x27;../../../@core/data/inscripcion.service&#x27;;
 import { Component, OnInit, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
 import { DocumentoProgramaService } from &#x27;../../../@core/data/documentos_programa.service&#x27;;
 import { DocumentoService } from &#x27;../../../@core/data/documento.service&#x27;;
 import { FORM_DOCUMENTO_PROGRAMA } from &#x27;./form-documento_programa&#x27;;
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from &#x27;angular2-toaster&#x27;;
 import { TranslateService, LangChangeEvent } from &#x27;@ngx-translate/core&#x27;;
-import { UserService } from &#x27;../../../@core/data/users.service&#x27;;
 import Swal from &#x27;sweetalert2&#x27;;
 import &#x27;style-loader!angular2-toaster/toaster.css&#x27;;
 import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
@@ -1810,11 +2130,27 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   documento_programa_id: number;
   filesUp: any;
   Documento: any;
+  persona: number;
+  programa: number;
+  periodo: number;
+  inscripcion: number;
 
   @Input(&#x27;documento_programa_id&#x27;)
   set name(documento_programa_id: number) {
     this.documento_programa_id &#x3D; documento_programa_id;
     this.loadDocumentoPrograma();
+  }
+
+  @Input(&#x27;persona_id&#x27;)
+  set info(persona_id: number) {
+    this.persona &#x3D; persona_id;
+  }
+
+  @Input(&#x27;inscripcion_id&#x27;)
+  set info2(inscripcion_id: number) {
+    this.inscripcion &#x3D; inscripcion_id;
+    console.info(&#x27;InscripcionDocP: &#x27; + this.inscripcion);
+    this.loadOptionsTipodocumentoprograma();
   }
 
   @Output() eventChange &#x3D; new EventEmitter();
@@ -1836,16 +2172,15 @@ export class CrudDocumentoProgramaComponent implements OnInit {
     private translate: TranslateService,
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
+    private inscripcionService: InscripcionService,
     private documentoProgramaService: DocumentoProgramaService,
     private nuxeoService: NuxeoService,
-    private user: UserService,
     private toasterService: ToasterService) {
     this.formDocumentoPrograma &#x3D; FORM_DOCUMENTO_PROGRAMA;
     this.construirForm();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) &#x3D;&gt; {
       this.construirForm();
     });
-    this.loadOptionsTipodocumentoprograma();
     this.loading &#x3D; false;
   }
 
@@ -1874,47 +2209,65 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   }
 
   loadOptionsTipodocumentoprograma(): void {
-    let tipodocumentoprograma: Array&lt;any&gt; &#x3D; [];
-    let tipo: any &#x3D; {};
-    this.documentoProgramaService.get(&#x27;documento_programa/?limit&#x3D;0&#x27;)
-      .subscribe(res &#x3D;&gt; {
-        if (res !&#x3D;&#x3D; null) {
-          tipodocumentoprograma &#x3D; &lt;Array&lt;DocumentoPrograma&gt;&gt;res;
-          tipodocumentoprograma.forEach(element &#x3D;&gt; {
-            this.documentoProgramaService.get(&#x27;tipo_documento_programa/&#x27; + element.TipoDocumentoPrograma.Id)
-              .subscribe(res2 &#x3D;&gt; {
-                if (res2 !&#x3D;&#x3D; null) {
-                  tipo &#x3D; res2;
-                  element.TipoDocumentoPrograma &#x3D; tipo;
-                  element.Nombre &#x3D; tipo.Nombre;
-                }
-                this.formDocumentoPrograma.campos[this.getIndexForm(&#x27;DocumentoPrograma&#x27;)].opciones &#x3D; tipodocumentoprograma;
-              },
-                (error: HttpErrorResponse) &#x3D;&gt; {
-                  Swal({
-                    type: &#x27;error&#x27;,
-                    title: error.status + &#x27;&#x27;,
-                    text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
-                    footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
-                      this.translate.instant(&#x27;GLOBAL.documento_programa&#x27;) + &#x27;|&#x27; +
-                      this.translate.instant(&#x27;GLOBAL.tipo_documento_programa&#x27;),
-                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
-                  });
-                });
-          });
-        }
+    this.inscripcionService.get(&#x27;inscripcion/&#x27; + this.inscripcion)
+      .subscribe(dato_inscripcion &#x3D;&gt; {
+        const inscripciondata &#x3D; &lt;any&gt;dato_inscripcion;
+        this.programa &#x3D; inscripciondata.ProgramaAcademicoId;
+        this.periodo &#x3D; inscripciondata.PeriodoId;
+        let tipodocumentoprograma: Array&lt;any&gt; &#x3D; [];
+        let tipo: any &#x3D; {};
+        this.documentoProgramaService.get(&#x27;documento_programa/?query&#x3D;ProgramaId:&#x27; + this.programa +
+          &#x27;,PeriodoId:&#x27; + this.periodo + &#x27;&amp;limit&#x3D;0&#x27;)
+          .subscribe(res &#x3D;&gt; {
+            if (res !&#x3D;&#x3D; null) {
+              tipodocumentoprograma &#x3D; &lt;Array&lt;DocumentoPrograma&gt;&gt;res;
+              tipodocumentoprograma.forEach(element &#x3D;&gt; {
+                this.documentoProgramaService.get(&#x27;tipo_documento_programa/&#x27; + element.TipoDocumentoProgramaId.Id)
+                  .subscribe(res2 &#x3D;&gt; {
+                    if (res2 !&#x3D;&#x3D; null) {
+                      tipo &#x3D; res2;
+                      element.TipoDocumentoPrograma &#x3D; tipo;
+                      element.Nombre &#x3D; tipo.Nombre;
+                    }
+                    this.formDocumentoPrograma.campos[this.getIndexForm(&#x27;DocumentoPrograma&#x27;)].opciones &#x3D; tipodocumentoprograma;
+                  },
+                    (error: HttpErrorResponse) &#x3D;&gt; {
+                      Swal({
+                        type: &#x27;error&#x27;,
+                        title: error.status + &#x27;&#x27;,
+                        text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                        footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                          this.translate.instant(&#x27;GLOBAL.documento_programa&#x27;) + &#x27;|&#x27; +
+                          this.translate.instant(&#x27;GLOBAL.tipo_documento_programa&#x27;),
+                        confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                      });
+                    });
+              });
+            }
+          },
+            (error: HttpErrorResponse) &#x3D;&gt; {
+              Swal({
+                type: &#x27;error&#x27;,
+                title: error.status + &#x27;&#x27;,
+                text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                  this.translate.instant(&#x27;GLOBAL.documento_programa&#x27;) + &#x27;|&#x27; +
+                  this.translate.instant(&#x27;GLOBAL.tipo_documento_programa&#x27;),
+                confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+              });
+            });
       },
-        (error: HttpErrorResponse) &#x3D;&gt; {
-          Swal({
-            type: &#x27;error&#x27;,
-            title: error.status + &#x27;&#x27;,
-            text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
-            footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
-              this.translate.instant(&#x27;GLOBAL.documento_programa&#x27;) + &#x27;|&#x27; +
-              this.translate.instant(&#x27;GLOBAL.tipo_documento_programa&#x27;),
-            confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
-          });
+      (error: HttpErrorResponse) &#x3D;&gt; {
+        Swal({
+          type: &#x27;error&#x27;,
+          title: error.status + &#x27;&#x27;,
+          text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+          footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+            this.translate.instant(&#x27;GLOBAL.documento_programa&#x27;) + &#x27;|&#x27; +
+            this.translate.instant(&#x27;GLOBAL.admision&#x27;),
+          confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
         });
+      });
   }
 
   public loadDocumentoPrograma(): void {
@@ -1931,27 +2284,27 @@ export class CrudDocumentoProgramaComponent implements OnInit {
             if (res !&#x3D;&#x3D; null) {
               this.temp &#x3D; &lt;SoporteDocumentoPrograma&gt;res;
               const files &#x3D; [];
-              this.documentoProgramaService.get(&#x27;documento_programa/&#x27; + this.temp.DocumentoPrograma.Id)
+              this.documentoProgramaService.get(&#x27;documento_programa/&#x27; + this.temp.DocumentoProgramaId.Id)
                 .subscribe(documentoPrograma &#x3D;&gt; {
                   if (documentoPrograma !&#x3D;&#x3D; null) {
                     this.programaDocumento &#x3D;  &lt;Array&lt;any&gt;&gt;documentoPrograma;
                     this.temp.DocumentoPrograma &#x3D; this.programaDocumento;
                     this.documentoProgramaService.get(&#x27;tipo_documento_programa/&#x27; +
-                      this.programaDocumento.TipoDocumentoPrograma.Id)
+                      this.programaDocumento.TipoDocumentoProgramaId.Id)
                       .subscribe(tipoDocumentoPrograma &#x3D;&gt; {
                         if (tipoDocumentoPrograma !&#x3D;&#x3D; null) {
                           this.tipoProgramaDocumento &#x3D;  &lt;Array&lt;any&gt;&gt;tipoDocumentoPrograma;
                           this.temp.DocumentoPrograma.TipoDocumentoPrograma &#x3D; this.tipoProgramaDocumento;
                           this.temp.DocumentoPrograma.Nombre &#x3D; this.tipoProgramaDocumento.Nombre;
                         }
-                        if (this.temp.Documento + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
-                          files.push({ Id: this.temp.Documento, key: &#x27;SoporteDocumentoPrograma&#x27; });
+                        if (this.temp.DocumentoId + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
+                          files.push({ Id: this.temp.DocumentoId, key: &#x27;SoporteDocumentoPrograma&#x27; });
                         }
                         this.nuxeoService.getDocumentoById$(files, this.documentoService)
                           .subscribe(response &#x3D;&gt; {
                             const filesResponse &#x3D; &lt;any&gt;response;
                             if (Object.keys(filesResponse).length &#x3D;&#x3D;&#x3D; files.length) {
-                              this.Documento &#x3D; this.temp.Documento;
+                              this.Documento &#x3D; this.temp.DocumentoId;
                               this.temp.Documento &#x3D; filesResponse[&#x27;SoporteDocumentoPrograma&#x27;] + &#x27;&#x27;;
                               this.info_documento_programa &#x3D; this.temp;
                               this.info_documento_programa.Documento &#x3D; filesResponse[&#x27;SoporteDocumentoPrograma&#x27;] + &#x27;&#x27;;
@@ -2039,8 +2392,9 @@ export class CrudDocumentoProgramaComponent implements OnInit {
               .subscribe(response &#x3D;&gt; {
                 if (Object.keys(response).length &#x3D;&#x3D;&#x3D; files.length) {
                   const documentos_actualizados &#x3D; &lt;any&gt;response;
-                  this.info_documento_programa.Documento &#x3D; this.Documento;
+                  this.info_documento_programa.DocumentoId &#x3D; this.Documento;
                   this.info_documento_programa.Id &#x3D; this.documento_programa_id;
+                  this.info_documento_programa.DocumentoProgramaId &#x3D; this.info_documento_programa.DocumentoPrograma;
                   this.documentoProgramaService.put(&#x27;soporte_documento_programa&#x27;, this.info_documento_programa)
                     .subscribe(res &#x3D;&gt; {
                       if (documentos_actualizados[&#x27;SoporteDocumentoPrograma&#x27;] !&#x3D;&#x3D; undefined) {
@@ -2081,8 +2435,10 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                   });
                 });
           } else {
-            this.info_documento_programa.Documento &#x3D; this.Documento;
+            console.info(JSON.stringify(this.Documento));
+            this.info_documento_programa.DocumentoId &#x3D; this.Documento;
             this.info_documento_programa.Id &#x3D; this.documento_programa_id;
+            this.info_documento_programa.DocumentoProgramaId &#x3D; this.info_documento_programa.DocumentoPrograma;
             this.documentoProgramaService.put(&#x27;soporte_documento_programa&#x27;, this.info_documento_programa)
               .subscribe(res &#x3D;&gt; {
                 this.loading &#x3D; false;
@@ -2114,7 +2470,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   crearNuevoDocumentoPrograma(documentoPrograma: any): void {
     this.info_documento_programa &#x3D; &lt;SoporteDocumentoPrograma&gt;documentoPrograma;
     const documentoProgramaDocumento &#x3D; this.info_documento_programa.DocumentoPrograma.Id;
-    this.documentoProgramaService.get(&#x27;soporte_documento_programa/?query&#x3D;ente:&#x27; + this.user.getEnte() +
+    this.documentoProgramaService.get(&#x27;soporte_documento_programa/?query&#x3D;PersonaId:&#x27; + this.persona +
       &#x27;&amp;limit&#x3D;0&#x27;)
       .subscribe(res &#x3D;&gt; {
         if (res !&#x3D;&#x3D; null) {
@@ -2122,7 +2478,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
             this.valido &#x3D; true;
             this.documentoTemp &#x3D; &lt;SoporteDocumentoPrograma&gt;res;
             this.documentoTemp.forEach(element &#x3D;&gt; {
-              if (element.DocumentoPrograma.Id &#x3D;&#x3D;&#x3D; documentoProgramaDocumento) {
+              if (element.DocumentoProgramaId.Id &#x3D;&#x3D;&#x3D; documentoProgramaDocumento) {
                 this.valido &#x3D; false;
               }
             });
@@ -2175,7 +2531,8 @@ export class CrudDocumentoProgramaComponent implements OnInit {
         if (willDelete.value) {
           const files &#x3D; [];
           this.info_documento_programa &#x3D; &lt;SoporteDocumentoPrograma&gt;documentoPrograma;
-          this.info_documento_programa.Ente &#x3D; this.user.getEnte();
+          this.info_documento_programa.PersonaId &#x3D; 1 * this.persona;
+          this.info_documento_programa.DocumentoProgramaId &#x3D; this.info_documento_programa.DocumentoPrograma;
           if (this.info_documento_programa.Documento.file !&#x3D;&#x3D; undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: &#x27;SoporteDocumentoPrograma&#x27;,
@@ -2187,8 +2544,9 @@ export class CrudDocumentoProgramaComponent implements OnInit {
               if (Object.keys(response).length &#x3D;&#x3D;&#x3D; files.length) {
                 this.filesUp &#x3D; &lt;any&gt;response;
                 if (this.filesUp[&#x27;SoporteDocumentoPrograma&#x27;] !&#x3D;&#x3D; undefined) {
-                  this.info_documento_programa.Documento &#x3D; this.filesUp[&#x27;SoporteDocumentoPrograma&#x27;].Id;
+                  this.info_documento_programa.DocumentoId &#x3D; this.filesUp[&#x27;SoporteDocumentoPrograma&#x27;].Id;
                 }
+                console.info(JSON.stringify(this.info_documento_programa));
                 this.documentoProgramaService.post(&#x27;soporte_documento_programa&#x27;, this.info_documento_programa)
                   .subscribe(res &#x3D;&gt; {
                     const r &#x3D; &lt;any&gt;res

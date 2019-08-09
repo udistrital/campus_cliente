@@ -2,13 +2,13 @@ import { ImplicitAutenticationService } from '../../../@core/utils/implicit_aute
 import { NuxeoService } from '../../../@core/utils/nuxeo.service';
 import { DocumentoPrograma } from './../../../@core/data/models/documento_programa';
 import { SoporteDocumentoPrograma } from './../../../@core/data/models/soporte_documento_programa';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentoProgramaService } from '../../../@core/data/documentos_programa.service';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { FORM_DOCUMENTO_PROGRAMA } from './form-documento_programa';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { UserService } from '../../../@core/data/users.service';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -23,11 +23,27 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   documento_programa_id: number;
   filesUp: any;
   Documento: any;
+  persona: number;
+  programa: number;
+  periodo: number;
+  inscripcion: number;
 
   @Input('documento_programa_id')
   set name(documento_programa_id: number) {
     this.documento_programa_id = documento_programa_id;
     this.loadDocumentoPrograma();
+  }
+
+  @Input('persona_id')
+  set info(persona_id: number) {
+    this.persona = persona_id;
+  }
+
+  @Input('inscripcion_id')
+  set info2(inscripcion_id: number) {
+    this.inscripcion = inscripcion_id;
+    console.info('InscripcionDocP: ' + this.inscripcion);
+    this.loadOptionsTipodocumentoprograma();
   }
 
   @Output() eventChange = new EventEmitter();
@@ -49,16 +65,15 @@ export class CrudDocumentoProgramaComponent implements OnInit {
     private translate: TranslateService,
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
+    private inscripcionService: InscripcionService,
     private documentoProgramaService: DocumentoProgramaService,
     private nuxeoService: NuxeoService,
-    private user: UserService,
     private toasterService: ToasterService) {
     this.formDocumentoPrograma = FORM_DOCUMENTO_PROGRAMA;
     this.construirForm();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.construirForm();
     });
-    this.loadOptionsTipodocumentoprograma();
     this.loading = false;
   }
 
@@ -87,47 +102,65 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   }
 
   loadOptionsTipodocumentoprograma(): void {
-    let tipodocumentoprograma: Array<any> = [];
-    let tipo: any = {};
-    this.documentoProgramaService.get('documento_programa/?limit=0')
-      .subscribe(res => {
-        if (res !== null) {
-          tipodocumentoprograma = <Array<DocumentoPrograma>>res;
-          tipodocumentoprograma.forEach(element => {
-            this.documentoProgramaService.get('tipo_documento_programa/' + element.TipoDocumentoPrograma.Id)
-              .subscribe(res2 => {
-                if (res2 !== null) {
-                  tipo = res2;
-                  element.TipoDocumentoPrograma = tipo;
-                  element.Nombre = tipo.Nombre;
-                }
-                this.formDocumentoPrograma.campos[this.getIndexForm('DocumentoPrograma')].opciones = tipodocumentoprograma;
-              },
-                (error: HttpErrorResponse) => {
-                  Swal({
-                    type: 'error',
-                    title: error.status + '',
-                    text: this.translate.instant('ERROR.' + error.status),
-                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                      this.translate.instant('GLOBAL.documento_programa') + '|' +
-                      this.translate.instant('GLOBAL.tipo_documento_programa'),
-                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                  });
-                });
-          });
-        }
+    this.inscripcionService.get('inscripcion/' + this.inscripcion)
+      .subscribe(dato_inscripcion => {
+        const inscripciondata = <any>dato_inscripcion;
+        this.programa = inscripciondata.ProgramaAcademicoId;
+        this.periodo = inscripciondata.PeriodoId;
+        let tipodocumentoprograma: Array<any> = [];
+        let tipo: any = {};
+        this.documentoProgramaService.get('documento_programa/?query=ProgramaId:' + this.programa +
+          ',PeriodoId:' + this.periodo + '&limit=0')
+          .subscribe(res => {
+            if (res !== null) {
+              tipodocumentoprograma = <Array<DocumentoPrograma>>res;
+              tipodocumentoprograma.forEach(element => {
+                this.documentoProgramaService.get('tipo_documento_programa/' + element.TipoDocumentoProgramaId.Id)
+                  .subscribe(res2 => {
+                    if (res2 !== null) {
+                      tipo = res2;
+                      element.TipoDocumentoPrograma = tipo;
+                      element.Nombre = tipo.Nombre;
+                    }
+                    this.formDocumentoPrograma.campos[this.getIndexForm('DocumentoPrograma')].opciones = tipodocumentoprograma;
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                          this.translate.instant('GLOBAL.documento_programa') + '|' +
+                          this.translate.instant('GLOBAL.tipo_documento_programa'),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+              });
+            }
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                  this.translate.instant('GLOBAL.documento_programa') + '|' +
+                  this.translate.instant('GLOBAL.tipo_documento_programa'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
       },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.documento_programa') + '|' +
-              this.translate.instant('GLOBAL.tipo_documento_programa'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+            this.translate.instant('GLOBAL.documento_programa') + '|' +
+            this.translate.instant('GLOBAL.admision'),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
+      });
   }
 
   public loadDocumentoPrograma(): void {
@@ -144,27 +177,27 @@ export class CrudDocumentoProgramaComponent implements OnInit {
             if (res !== null) {
               this.temp = <SoporteDocumentoPrograma>res;
               const files = [];
-              this.documentoProgramaService.get('documento_programa/' + this.temp.DocumentoPrograma.Id)
+              this.documentoProgramaService.get('documento_programa/' + this.temp.DocumentoProgramaId.Id)
                 .subscribe(documentoPrograma => {
                   if (documentoPrograma !== null) {
                     this.programaDocumento =  <Array<any>>documentoPrograma;
                     this.temp.DocumentoPrograma = this.programaDocumento;
                     this.documentoProgramaService.get('tipo_documento_programa/' +
-                      this.programaDocumento.TipoDocumentoPrograma.Id)
+                      this.programaDocumento.TipoDocumentoProgramaId.Id)
                       .subscribe(tipoDocumentoPrograma => {
                         if (tipoDocumentoPrograma !== null) {
                           this.tipoProgramaDocumento =  <Array<any>>tipoDocumentoPrograma;
                           this.temp.DocumentoPrograma.TipoDocumentoPrograma = this.tipoProgramaDocumento;
                           this.temp.DocumentoPrograma.Nombre = this.tipoProgramaDocumento.Nombre;
                         }
-                        if (this.temp.Documento + '' !== '0') {
-                          files.push({ Id: this.temp.Documento, key: 'SoporteDocumentoPrograma' });
+                        if (this.temp.DocumentoId + '' !== '0') {
+                          files.push({ Id: this.temp.DocumentoId, key: 'SoporteDocumentoPrograma' });
                         }
                         this.nuxeoService.getDocumentoById$(files, this.documentoService)
                           .subscribe(response => {
                             const filesResponse = <any>response;
                             if (Object.keys(filesResponse).length === files.length) {
-                              this.Documento = this.temp.Documento;
+                              this.Documento = this.temp.DocumentoId;
                               this.temp.Documento = filesResponse['SoporteDocumentoPrograma'] + '';
                               this.info_documento_programa = this.temp;
                               this.info_documento_programa.Documento = filesResponse['SoporteDocumentoPrograma'] + '';
@@ -252,8 +285,9 @@ export class CrudDocumentoProgramaComponent implements OnInit {
               .subscribe(response => {
                 if (Object.keys(response).length === files.length) {
                   const documentos_actualizados = <any>response;
-                  this.info_documento_programa.Documento = this.Documento;
+                  this.info_documento_programa.DocumentoId = this.Documento;
                   this.info_documento_programa.Id = this.documento_programa_id;
+                  this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoPrograma;
                   this.documentoProgramaService.put('soporte_documento_programa', this.info_documento_programa)
                     .subscribe(res => {
                       if (documentos_actualizados['SoporteDocumentoPrograma'] !== undefined) {
@@ -294,8 +328,10 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                   });
                 });
           } else {
-            this.info_documento_programa.Documento = this.Documento;
+            console.info(JSON.stringify(this.Documento));
+            this.info_documento_programa.DocumentoId = this.Documento;
             this.info_documento_programa.Id = this.documento_programa_id;
+            this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoPrograma;
             this.documentoProgramaService.put('soporte_documento_programa', this.info_documento_programa)
               .subscribe(res => {
                 this.loading = false;
@@ -327,7 +363,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   crearNuevoDocumentoPrograma(documentoPrograma: any): void {
     this.info_documento_programa = <SoporteDocumentoPrograma>documentoPrograma;
     const documentoProgramaDocumento = this.info_documento_programa.DocumentoPrograma.Id;
-    this.documentoProgramaService.get('soporte_documento_programa/?query=ente:' + this.user.getEnte() +
+    this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' + this.persona +
       '&limit=0')
       .subscribe(res => {
         if (res !== null) {
@@ -335,7 +371,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
             this.valido = true;
             this.documentoTemp = <SoporteDocumentoPrograma>res;
             this.documentoTemp.forEach(element => {
-              if (element.DocumentoPrograma.Id === documentoProgramaDocumento) {
+              if (element.DocumentoProgramaId.Id === documentoProgramaDocumento) {
                 this.valido = false;
               }
             });
@@ -388,7 +424,8 @@ export class CrudDocumentoProgramaComponent implements OnInit {
         if (willDelete.value) {
           const files = [];
           this.info_documento_programa = <SoporteDocumentoPrograma>documentoPrograma;
-          this.info_documento_programa.Ente = this.user.getEnte();
+          this.info_documento_programa.PersonaId = 1 * this.persona;
+          this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoPrograma;
           if (this.info_documento_programa.Documento.file !== undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: 'SoporteDocumentoPrograma',
@@ -400,8 +437,9 @@ export class CrudDocumentoProgramaComponent implements OnInit {
               if (Object.keys(response).length === files.length) {
                 this.filesUp = <any>response;
                 if (this.filesUp['SoporteDocumentoPrograma'] !== undefined) {
-                  this.info_documento_programa.Documento = this.filesUp['SoporteDocumentoPrograma'].Id;
+                  this.info_documento_programa.DocumentoId = this.filesUp['SoporteDocumentoPrograma'].Id;
                 }
+                console.info(JSON.stringify(this.info_documento_programa));
                 this.documentoProgramaService.post('soporte_documento_programa', this.info_documento_programa)
                   .subscribe(res => {
                     const r = <any>res

@@ -2,6 +2,7 @@ import { DocumentoProgramaRoutingModule, routedComponents } from './documento_pr
 import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { DocumentoProgramaService } from '../../@core/data/documentos_programa.service';
+import { InscripcionService } from '../../@core/data/inscripcion.service';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
@@ -22,6 +23,7 @@ import { ViewDocumentoProgramaComponent } from './view-documento_programa/view-d
   ],
   providers: [
     DocumentoProgramaService,
+    InscripcionService,
   ],
   exports: [
     CrudDocumentoProgramaComponent,

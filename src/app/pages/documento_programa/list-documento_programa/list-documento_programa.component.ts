@@ -1,9 +1,9 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { DocumentoProgramaService } from '../../../@core/data/documentos_programa.service';
+import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
-import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
@@ -15,13 +15,33 @@ import 'style-loader!angular2-toaster/toaster.css';
 })
 export class ListDocumentoProgramaComponent implements OnInit {
   uid: number;
+  persona: number;
+  programa: number;
+  periodo: number;
+  inscripcion: number;
   cambiotab: boolean = false;
+  contador: number;
   config: ToasterConfig;
   settings: any;
   data: any;
+  info_data: any;
   programaDocumento: any;
   tipoProgramaDocumento: any;
   source: LocalDataSource = new LocalDataSource();
+
+  @Input('persona_id')
+  set info(info: number) {
+    this.persona = info;
+  }
+
+  @Input('inscripcion_id')
+  set info2(info2: number) {
+    this.inscripcion = info2;
+    if (this.inscripcion !== null && this.inscripcion !== 0 && this.inscripcion.toString() !== '') {
+      this.getDocumentosPrograma();
+      this.loadData();
+    }
+  }
 
   @Output() eventChange = new EventEmitter();
   @Output('result') result: EventEmitter<any> = new EventEmitter();
@@ -31,9 +51,8 @@ export class ListDocumentoProgramaComponent implements OnInit {
 
   constructor(private translate: TranslateService,
     private documentoProgramaService: DocumentoProgramaService,
-    private userService: UserService,
+    private inscripcionService: InscripcionService,
     private toasterService: ToasterService) {
-    this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
@@ -43,6 +62,9 @@ export class ListDocumentoProgramaComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
+      actions: {
+        columnTitle: '',
+      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -73,53 +95,31 @@ export class ListDocumentoProgramaComponent implements OnInit {
     this.translate.use(language);
   }
 
-  loadData(): void {
-    this.documentoProgramaService.get('soporte_documento_programa/?query=Ente:' + this.userService.getEnte() +
-      '&limit=0')
-      .subscribe(res => {
-        if (res !== null) {
-          this.data = <Array<any>>res;
-          this.data.forEach(element => {
-            this.documentoProgramaService.get('documento_programa/' + element.DocumentoPrograma.Id)
-              .subscribe(documentoPrograma => {
-                if (documentoPrograma !== null) {
-                  this.programaDocumento =  <Array<any>>documentoPrograma;
-                  element.DocumentoPrograma = this.programaDocumento;
-                  this.documentoProgramaService.get('tipo_documento_programa/' +
-                    this.programaDocumento.TipoDocumentoPrograma.Id)
-                    .subscribe(tipoDocumentoPrograma => {
-                      if (tipoDocumentoPrograma !== null) {
-                        this.tipoProgramaDocumento =  <Array<any>>tipoDocumentoPrograma;
-                        element.DocumentoPrograma.TipoDocumentoPrograma = this.tipoProgramaDocumento;
-                      }
-                      this.loading = false;
-                      this.getPercentage(1);
-                      this.source.load(this.data);
-                    },
-                      (error: HttpErrorResponse) => {
-                        Swal({
-                          type: 'error',
-                          title: error.status + '',
-                          text: this.translate.instant('ERROR.' + error.status),
-                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                            this.translate.instant('GLOBAL.tipo_documento_programa'),
-                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                        });
-                      });
-                }
-              },
-                (error: HttpErrorResponse) => {
-                  Swal({
-                    type: 'error',
-                    title: error.status + '',
-                    text: this.translate.instant('ERROR.' + error.status),
-                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                      this.translate.instant('GLOBAL.documento_programa'),
-                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                  });
-                });
-          });
-        }
+  getDocumentosPrograma(): void {
+    this.contador = 0;
+    this.inscripcionService.get('inscripcion/' + this.inscripcion)
+      .subscribe(dato_inscripcion => {
+        const inscripciondata = <any>dato_inscripcion;
+        const programa = inscripciondata.ProgramaAcademicoId;
+        const periodo = inscripciondata.PeriodoId;
+        this.documentoProgramaService.get('documento_programa/?query=ProgramaId:' + programa +
+          ',PeriodoId:' + periodo + '&limit=0')
+          .subscribe(documentoPrograma => {
+            if (documentoPrograma !== null) {
+              const docProgramas = <Array<any>>documentoPrograma;
+              this.contador = docProgramas.length;
+            }
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                  this.translate.instant('GLOBAL.documento_programa'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
       },
         (error: HttpErrorResponse) => {
           Swal({
@@ -127,7 +127,89 @@ export class ListDocumentoProgramaComponent implements OnInit {
             title: error.status + '',
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.documento_programa'),
+              this.translate.instant('GLOBAL.documento_programa') + '|' +
+              this.translate.instant('GLOBAL.admision'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+  }
+
+  loadData(): void {
+    this.info_data = <any>[];
+    this.inscripcionService.get('inscripcion/' + this.inscripcion)
+      .subscribe(dato_inscripcion => {
+        const inscripciondata = <any>dato_inscripcion;
+        this.programa = inscripciondata.ProgramaAcademicoId;
+        this.periodo = inscripciondata.PeriodoId;
+        this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' +
+          this.persona + '&limit=0')
+          .subscribe(res => {
+            if (res !== null) {
+              this.data = <Array<any>>res;
+              this.data.forEach(element => {
+                this.documentoProgramaService.get('documento_programa/' + element.DocumentoProgramaId.Id)
+                  .subscribe(documentoPrograma => {
+                    if (documentoPrograma !== null) {
+                      this.programaDocumento =  <Array<any>>documentoPrograma;
+                      if (this.programaDocumento.PeriodoId = this.periodo) {
+                        element.DocumentoPrograma = this.programaDocumento;
+                        this.documentoProgramaService.get('tipo_documento_programa/' +
+                          this.programaDocumento.TipoDocumentoProgramaId.Id)
+                          .subscribe(tipoDocumentoPrograma => {
+                            if (tipoDocumentoPrograma !== null) {
+                              this.tipoProgramaDocumento =  <Array<any>>tipoDocumentoPrograma;
+                              element.DocumentoPrograma.TipoDocumentoPrograma = this.tipoProgramaDocumento;
+                              this.loading = false;
+                              this.info_data.push(element);
+                              this.getPercentage(this.info_data.length / this.contador);
+                              this.source.load(this.info_data);
+                          }
+                        },
+                          (error: HttpErrorResponse) => {
+                            Swal({
+                              type: 'error',
+                              title: error.status + '',
+                              text: this.translate.instant('ERROR.' + error.status),
+                              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                this.translate.instant('GLOBAL.tipo_documento_programa'),
+                              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                            });
+                          });
+                      }
+                    }
+                  },
+                    (error: HttpErrorResponse) => {
+                      Swal({
+                        type: 'error',
+                        title: error.status + '',
+                        text: this.translate.instant('ERROR.' + error.status),
+                        footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                          this.translate.instant('GLOBAL.documento_programa'),
+                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                      });
+                    });
+              });
+            }
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                  this.translate.instant('GLOBAL.documento_programa'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.documento_programa') + '|' +
+              this.translate.instant('GLOBAL.admision'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });
@@ -139,7 +221,6 @@ export class ListDocumentoProgramaComponent implements OnInit {
 
   onEdit(event): void {
     this.uid = event.data.Id;
-    console.info(this.uid);
   }
 
   onCreate(event): void {

@@ -89,10 +89,13 @@
                                 <a href="#NumeroOrden">NumeroOrden</a>
                             </li>
                             <li>
-                                <a href="#Programa">Programa</a>
+                                <a href="#PeriodoId">PeriodoId</a>
                             </li>
                             <li>
-                                <a href="#TipoDocumentoPrograma">TipoDocumentoPrograma</a>
+                                <a href="#ProgramaId">ProgramaId</a>
+                            </li>
+                            <li>
+                                <a href="#TipoDocumentoProgramaId">TipoDocumentoProgramaId</a>
                             </li>
                         </ul>
                     </td>
@@ -219,18 +222,52 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="Programa"></a>
+                        <a name="PeriodoId"></a>
                         <span class="name">
                             <b>
-                            Programa
+                            PeriodoId
                             </b>
-                            <a href="#Programa"><span class="icon ion-ios-link"></span></a>
+                            <a href="#PeriodoId"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>Programa:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                        <code>PeriodoId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/@core/data/models/documento_programa.ts:8</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ProgramaId"></a>
+                        <span class="name">
+                            <b>
+                            ProgramaId
+                            </b>
+                            <a href="#ProgramaId"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>ProgramaId:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
 </code>
                     </td>
                 </tr>
@@ -253,18 +290,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="TipoDocumentoPrograma"></a>
+                        <a name="TipoDocumentoProgramaId"></a>
                         <span class="name">
                             <b>
-                            TipoDocumentoPrograma
+                            TipoDocumentoProgramaId
                             </b>
-                            <a href="#TipoDocumentoPrograma"><span class="icon ion-ios-link"></span></a>
+                            <a href="#TipoDocumentoProgramaId"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>TipoDocumentoPrograma:     <code><a href="../classes/TipoDocumentoPrograma.html" target="_self" >TipoDocumentoPrograma</a></code>
+                        <code>TipoDocumentoProgramaId:     <code><a href="../classes/TipoDocumentoPrograma.html" target="_self" >TipoDocumentoPrograma</a></code>
 </code>
                     </td>
                 </tr>
@@ -276,7 +313,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="8" class="link-to-prism">src/app/@core/data/models/documento_programa.ts:8</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/@core/data/models/documento_programa.ts:9</a></div>
                             </td>
                         </tr>
 
@@ -301,8 +338,9 @@ export class DocumentoPrograma {
   Id: number;
   Activo: boolean;
   NumeroOrden: number;
-  Programa: number;
-  TipoDocumentoPrograma: TipoDocumentoPrograma;
+  ProgramaId: number;
+  PeriodoId: number;
+  TipoDocumentoProgramaId: TipoDocumentoPrograma;
 }
 </code></pre>
     </div>
