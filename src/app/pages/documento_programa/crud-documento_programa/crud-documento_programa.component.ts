@@ -42,7 +42,6 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   @Input('inscripcion_id')
   set info2(inscripcion_id: number) {
     this.inscripcion = inscripcion_id;
-    console.info('InscripcionDocP: ' + this.inscripcion);
     this.loadOptionsTipodocumentoprograma();
   }
 
@@ -439,10 +438,9 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                 if (this.filesUp['SoporteDocumentoPrograma'] !== undefined) {
                   this.info_documento_programa.DocumentoId = this.filesUp['SoporteDocumentoPrograma'].Id;
                 }
-                console.info(JSON.stringify(this.info_documento_programa));
                 this.documentoProgramaService.post('soporte_documento_programa', this.info_documento_programa)
                   .subscribe(res => {
-                    const r = <any>res
+                    const r = <any>res;
                     if (r !== null && r.Type !== 'error') {
                       this.loading = false;
                       this.eventChange.emit(true);

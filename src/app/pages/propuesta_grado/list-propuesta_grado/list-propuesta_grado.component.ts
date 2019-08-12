@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
+import { CoreService } from '../../../@core/data/core.service';
 import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
 
@@ -16,10 +18,13 @@ export class ListPropuestaGradoComponent implements OnInit {
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
-
+  data: any;
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private translate: TranslateService, private admisionesService: InscripcionService, private toasterService: ToasterService) {
+  constructor(private translate: TranslateService,
+    private inscripcionService: InscripcionService,
+    private coreService: CoreService,
+    private toasterService: ToasterService) {
     this.loadData();
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -29,6 +34,9 @@ export class ListPropuestaGradoComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
+      actions: {
+        columnTitle: '',
+      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -47,48 +55,42 @@ export class ListPropuestaGradoComponent implements OnInit {
       columns: {
         Id: {
           title: this.translate.instant('GLOBAL.id'),
+          width: '5%',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Nombre: {
-          title: this.translate.instant('GLOBAL.titulo_proyecto'),
-          valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Resumen: {
-          title: this.translate.instant('GLOBAL.resumen'),
+          title: this.translate.instant('GLOBAL.titulo_propuesta'),
+          width: '30%',
           valuePrepareFunction: (value) => {
             return value;
           },
         },
         Grupoinvestigacion: {
           title: this.translate.instant('GLOBAL.grupo_investigacion'),
+          width: '20%',
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         Lineainvestigacion: {
           title: this.translate.instant('GLOBAL.linea_investigacion'),
+          width: '20%',
           valuePrepareFunction: (value) => {
-            return value;
-          },
-        },
-        Enfasis: {
-          title: this.translate.instant('GLOBAL.enfasis'),
-          valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
         Tipoproyecto: {
           title: this.translate.instant('GLOBAL.tipo_proyecto'),
+          width: '15%',
           valuePrepareFunction: (value) => {
-            return value;
+            return value.Nombre;
           },
         },
-        Formatoproyecto: {
+        Documento: {
           title: this.translate.instant('GLOBAL.formato_proyecto'),
+          width: '10%',
           valuePrepareFunction: (value) => {
             return value;
           },
@@ -102,12 +104,88 @@ export class ListPropuestaGradoComponent implements OnInit {
   }
 
   loadData(): void {
-    this.admisionesService.get('propuesta/?limit=0').subscribe(res => {
+    this.inscripcionService.get('propuesta/?limit=0').subscribe(res => {
       if (res !== null) {
         const data = <Array<any>>res;
-        this.source.load(data);
+        data.forEach(element => {
+          element.Documento = element.DocumentoId;
+          this.inscripcionService.get('tipo_proyecto/' + element.TipoProyectoId.Id)
+            .subscribe(tipo => {
+              element.TipoProyecto = <any>tipo;
+              this.coreService.get('linea_investigacion_grupo_investigacion/' +
+                element.GrupoInvestigacionLineaInvestigacionId)
+                .subscribe(linea_grupo => {
+                  const linea_grupo_info = <any>linea_grupo;
+                  this.coreService.get('grupo_investigacion/' +
+                    linea_grupo_info.GrupoInvestigacionId)
+                    .subscribe(grupo => {
+                      element.GrupoInvestigacion = <any>grupo;
+                      this.coreService.get('linea_investigacion/' +
+                        linea_grupo_info.LineaInvestigacionId)
+                        .subscribe(linea => {
+                          element.LineaInvestigacion = <any>linea;
+                          this.source.load(data);
+                        },
+                          (error: HttpErrorResponse) => {
+                            Swal({
+                              type: 'error',
+                              title: error.status + '',
+                              text: this.translate.instant('ERROR.' + error.status),
+                              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                this.translate.instant('GLOBAL.grupo_investigacion') + '|' +
+                                this.translate.instant('GLOBAL.linea_investigacion'),
+                              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                            });
+                          });
+                    },
+                      (error: HttpErrorResponse) => {
+                        Swal({
+                          type: 'error',
+                          title: error.status + '',
+                          text: this.translate.instant('ERROR.' + error.status),
+                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                            this.translate.instant('GLOBAL.grupo_investigacion') + '|' +
+                            this.translate.instant('GLOBAL.grupo_investigacion'),
+                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                        });
+                      });
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.propuesta_grado') + '|' +
+                        this.translate.instant('GLOBAL.grupo_investigacion'),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                    this.translate.instant('GLOBAL.propuesta_grado') + '|' +
+                    this.translate.instant('GLOBAL.tipo_proyecto'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+        });
       }
-    });
+    },
+      (error: HttpErrorResponse) => {
+        Swal({
+          type: 'error',
+          title: error.status + '',
+          text: this.translate.instant('ERROR.' + error.status),
+          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+            this.translate.instant('GLOBAL.propuesta_grado'),
+          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        });
+      });
   }
 
   ngOnInit() {
@@ -125,22 +203,35 @@ export class ListPropuestaGradoComponent implements OnInit {
 
   onDelete(event): void {
     const opt: any = {
-      title: 'Deleting?',
-      text: 'Delete PropuestaGrado!',
+      title: this.translate.instant('GLOBAL.eliminar'),
+      text: this.translate.instant('GLOBAL.eliminar') + '?',
       icon: 'warning',
       buttons: true,
       dangerMode: true,
-      showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
     };
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          this.admisionesService.delete('propuesta/', event.data).subscribe(res => {
+          this.inscripcionService.delete('propuesta/', event.data).subscribe(res => {
             if (res !== null) {
               this.loadData();
-              this.showToast('info', 'deleted', 'PropuestaGrado deleted');
+              this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
+                this.translate.instant('GLOBAL.propuesta_grado') + ' ' +
+                this.translate.instant('GLOBAL.confirmarEliminar'));
             }
-          });
+          },
+            (error: HttpErrorResponse) => {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.eliminar') + '-' +
+                  this.translate.instant('GLOBAL.propuesta_grado'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            });
         }
       });
   }

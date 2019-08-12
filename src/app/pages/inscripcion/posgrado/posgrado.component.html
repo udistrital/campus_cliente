@@ -12,6 +12,9 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
+      
+      <ngx-loading [hidden]="!loading"></ngx-loading>
+
       <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-3" align="center" id="info_basica">
           <nb-card class="exp-card" (click)="perfil_editar('info_persona')">
@@ -302,7 +305,7 @@
       </nb-tabset>
     </nb-card-body>
   </nb-card>
-<!--
+
   <nb-card [hidden]="!show_proy" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
@@ -320,12 +323,14 @@
       </div>
       <nb-tabset fullWidth (changeTab)="selectTab($event)">
         <nb-tab tabTitle="{{ 'GLOBAL.propuesta_grado' | translate }}">
-          <ngx-crud-propuesta-grado (result)="setPercentage_proy($event,0)"></ngx-crud-propuesta-grado>
+          <ngx-crud-propuesta-grado (result)="setPercentage_proy($event,0)" persona_id="{{info_ente_id}}"
+            inscripcion_id="{{inscripcion_id}}">
+          </ngx-crud-propuesta-grado>
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
   </nb-card>
--->
+
   <!--Vista de perfil------------------------------------------------------------->
 
   <div [hidden]="!show_profile" *ngIf="info_ente_id && show_profile">

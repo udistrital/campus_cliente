@@ -83,6 +83,7 @@ export class ListDocumentoProgramaComponent implements OnInit {
       columns: {
         DocumentoPrograma: {
           title: this.translate.instant('GLOBAL.tipo_documento_programa'),
+          width: '100%',
           valuePrepareFunction: (value) => {
             return value.TipoDocumentoPrograma.Nombre;
           },
