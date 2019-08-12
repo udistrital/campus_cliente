@@ -1,7 +1,7 @@
 <nb-card>
   <nb-card-body>
     <toaster-container [toasterconfig]="config"></toaster-container>
-    <ngx-crud-documento-programa [documento_programa_id]="uid"
+    <ngx-crud-documento-programa [documento_programa_id]="uid" [inscripcion_id]="inscripcion" [persona_id]="persona"
       (eventChange)="onChange($event)" (result)="getPercentage($event)"></ngx-crud-documento-programa>
     <ng2-smart-table [settings]="settings" [source]="source"
       (delete)="onDelete($event)" (rowSelect)="itemselec($event)"

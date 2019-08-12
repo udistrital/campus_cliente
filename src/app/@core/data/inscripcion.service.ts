@@ -21,7 +21,7 @@ export class InscripcionService {
   }
 
   get(endpoint) {
-    return this.http.get(path + endpoint).pipe(
+    return this.http.get(path + endpoint, httpOptions).pipe(
       catchError(this.handleError),
     );
   }

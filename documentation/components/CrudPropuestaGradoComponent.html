@@ -130,19 +130,13 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
-                                <a href="#admision_id">admision_id</a>
-                            </li>
-                            <li>
                                 <a href="#clean">clean</a>
                             </li>
                             <li>
                                 <a href="#config">config</a>
                             </li>
                             <li>
-                                <a href="#ENTE_id">ENTE_id</a>
-                            </li>
-                            <li>
-                                <a href="#filesUp">filesUp</a>
+                                <a href="#filesUp9">filesUp9</a>
                             </li>
                             <li>
                                 <a href="#FormatoProyecto">FormatoProyecto</a>
@@ -151,13 +145,22 @@
                                 <a href="#formPropuestaGrado">formPropuestaGrado</a>
                             </li>
                             <li>
+                                <a href="#grupoSeleccionado">grupoSeleccionado</a>
+                            </li>
+                            <li>
                                 <a href="#info_propuesta_grado">info_propuesta_grado</a>
+                            </li>
+                            <li>
+                                <a href="#inscripcion_id">inscripcion_id</a>
                             </li>
                             <li>
                                 <a href="#loading">loading</a>
                             </li>
                             <li>
                                 <a href="#percentage">percentage</a>
+                            </li>
+                            <li>
+                                <a href="#persona_id">persona_id</a>
                             </li>
                             <li>
                                 <a href="#prop_id">prop_id</a>
@@ -194,8 +197,14 @@
                                 <a href="#getIndexForm">getIndexForm</a>
                             </li>
                             <li>
+                                <a href="#getSeleccion">getSeleccion</a>
+                            </li>
+                            <li>
                                     <span class="modifier">Public</span>
                                 <a href="#loadLists">loadLists</a>
+                            </li>
+                            <li>
+                                <a href="#loadOptionsLineaInvestigacion">loadOptionsLineaInvestigacion</a>
                             </li>
                             <li>
                                     <span class="modifier">Public</span>
@@ -232,6 +241,12 @@
                 <tr>
                     <td class="col-md-4">
                         <ul class="index-list">
+                            <li>
+                                <a href="#inscripcion_id">inscripcion_id</a>
+                            </li>
+                            <li>
+                                <a href="#persona_id">persona_id</a>
+                            </li>
                             <li>
                                 <a href="#propuesta_grado_id">propuesta_grado_id</a>
                             </li>
@@ -270,6 +285,12 @@
                                 <li>
                                     <a href="#name">name</a>
                                 </li>
+                                <li>
+                                    <a href="#info">info</a>
+                                </li>
+                                <li>
+                                    <a href="#info2">info2</a>
+                                </li>
                             </ul>
                         </td>
                     </tr>
@@ -283,12 +304,12 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-<code>constructor(translate: TranslateService, autenticationService: <a href="../injectables/ImplicitAutenticationService.html">ImplicitAutenticationService</a>, documentoService: <a href="../injectables/DocumentoService.html">DocumentoService</a>, nuxeoService: <a href="../injectables/NuxeoService.html">NuxeoService</a>, admisionesService: <a href="../injectables/InscripcionService.html">InscripcionService</a>, store: <a href="../interfaces/IAppState.html">Store<IAppState></a>, listService: <a href="../injectables/ListService.html">ListService</a>, ente_id: <a href="../injectables/UserService.html">UserService</a>, toasterService: ToasterService)</code>
+<code>constructor(translate: TranslateService, autenticationService: <a href="../injectables/ImplicitAutenticationService.html">ImplicitAutenticationService</a>, documentoService: <a href="../injectables/DocumentoService.html">DocumentoService</a>, nuxeoService: <a href="../injectables/NuxeoService.html">NuxeoService</a>, inscripcionService: <a href="../injectables/InscripcionService.html">InscripcionService</a>, coreService: <a href="../injectables/CoreService.html">CoreService</a>, store: <a href="../interfaces/IAppState.html">Store<IAppState></a>, listService: <a href="../injectables/ListService.html">ListService</a>, toasterService: ToasterService)</code>
                     </td>
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:46</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -354,10 +375,22 @@
                                                     
                                                 </tr>
                                                 <tr>
-                                                        <td>admisionesService</td>
+                                                        <td>inscripcionService</td>
                                                   
                                                         <td>
                                                                     <code><a href="../injectables/InscripcionService.html" target="_self" >InscripcionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>coreService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/CoreService.html" target="_self" >CoreService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -382,18 +415,6 @@
                                                   
                                                         <td>
                                                                     <code><a href="../injectables/ListService.html" target="_self" >ListService</a></code>
-                                                        </td>
-                                                  
-                                                    <td>
-                                                            No
-                                                    </td>
-                                                    
-                                                </tr>
-                                                <tr>
-                                                        <td>ente_id</td>
-                                                  
-                                                        <td>
-                                                                    <code><a href="../injectables/UserService.html" target="_self" >UserService</a></code>
                                                         </td>
                                                   
                                                     <td>
@@ -428,6 +449,48 @@
             <tbody>
                 <tr>
                     <td class="col-md-2">
+                        <a name="inscripcion_id"></a>
+                        <code>inscripcion_id</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:45</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="persona_id"></a>
+                        <code>persona_id</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:40</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
                         <a name="propuesta_grado_id"></a>
                         <code>propuesta_grado_id</code>
                     </td>
@@ -440,7 +503,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:34</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -462,7 +525,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:38</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:51</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -481,7 +544,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-2" colspan="2">
-                                    <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:39</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:52</a></div>
                             </td>
                         </tr>
             </tbody>
@@ -518,7 +581,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="93" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:93</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:159</a></div>
                             </td>
                         </tr>
 
@@ -556,7 +619,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:70</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:83</a></div>
                             </td>
                         </tr>
 
@@ -594,7 +657,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="279" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:279</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="475" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:475</a></div>
                             </td>
                         </tr>
 
@@ -663,7 +726,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:83</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:96</a></div>
                             </td>
                         </tr>
 
@@ -714,6 +777,71 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
+                        <a name="getSeleccion"></a>
+                        <span class="name">
+                            <b>
+                            getSeleccion
+                            </b>
+                            <a href="#getSeleccion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>getSeleccion(event)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="106" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:106</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>event</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
                         <a name="loadLists"></a>
                         <span class="name">
                             <b>
@@ -734,7 +862,45 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="402" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:402</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="591" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:591</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loadOptionsLineaInvestigacion"></a>
+                        <span class="name">
+                            <b>
+                            loadOptionsLineaInvestigacion
+                            </b>
+                            <a href="#loadOptionsLineaInvestigacion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>loadOptionsLineaInvestigacion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:113</a></div>
                             </td>
                         </tr>
 
@@ -774,7 +940,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="139" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:139</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="270" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:270</a></div>
                             </td>
                         </tr>
 
@@ -812,7 +978,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="351" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:351</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="552" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:552</a></div>
                             </td>
                         </tr>
 
@@ -850,7 +1016,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="376" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:376</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="565" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:565</a></div>
                             </td>
                         </tr>
 
@@ -917,7 +1083,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="381" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:381</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="570" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:570</a></div>
                             </td>
                         </tr>
 
@@ -1010,7 +1176,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="193" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:193</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="379" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:379</a></div>
                             </td>
                         </tr>
 
@@ -1079,7 +1245,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:79</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="92" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:92</a></div>
                             </td>
                         </tr>
 
@@ -1148,7 +1314,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="355" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:355</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="555" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:555</a></div>
                             </td>
                         </tr>
 
@@ -1202,40 +1368,6 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="admision_id"></a>
-                        <span class="name">
-                            <b>
-                            admision_id
-                            </b>
-                            <a href="#admision_id"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>admision_id:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:27</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
                         <a name="clean"></a>
                         <span class="name">
                             <b>
@@ -1259,7 +1391,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:44</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="57" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:57</a></div>
                             </td>
                         </tr>
 
@@ -1293,7 +1425,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:24</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:25</a></div>
                             </td>
                         </tr>
 
@@ -1304,52 +1436,18 @@
             <tbody>
                 <tr>
                     <td class="col-md-4">
-                        <a name="ENTE_id"></a>
+                        <a name="filesUp9"></a>
                         <span class="name">
                             <b>
-                            ENTE_id
+                            filesUp9
                             </b>
-                            <a href="#ENTE_id"><span class="icon ion-ios-link"></span></a>
+                            <a href="#filesUp9"><span class="icon ion-ios-link"></span></a>
                         </span>
                     </td>
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>ENTE_id:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-</code>
-                    </td>
-                </tr>
-                    <tr>
-                        <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
-
-                        </td>
-                    </tr>
-                        <tr>
-                            <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:28</a></div>
-                            </td>
-                        </tr>
-
-
-            </tbody>
-        </table>
-        <table class="table table-sm table-bordered">
-            <tbody>
-                <tr>
-                    <td class="col-md-4">
-                        <a name="filesUp"></a>
-                        <span class="name">
-                            <b>
-                            filesUp
-                            </b>
-                            <a href="#filesUp"><span class="icon ion-ios-link"></span></a>
-                        </span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="col-md-4">
-                        <code>filesUp:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                        <code>filesUp9:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                     </td>
                 </tr>
@@ -1361,7 +1459,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:29</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:30</a></div>
                             </td>
                         </tr>
 
@@ -1395,7 +1493,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="30" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:30</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:31</a></div>
                             </td>
                         </tr>
 
@@ -1429,7 +1527,41 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="42" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:42</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="grupoSeleccionado"></a>
+                        <span class="name">
+                            <b>
+                            grupoSeleccionado
+                            </b>
+                            <a href="#grupoSeleccionado"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>grupoSeleccionado:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:60</a></div>
                             </td>
                         </tr>
 
@@ -1451,19 +1583,53 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>info_propuesta_grado:     <code><a href="../classes/PropuestaGrado.html" target="_self" >PropuestaGrado</a></code>
+                        <code>info_propuesta_grado:     <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code><a href="../classes/PropuestaGrado.html" target="_self" >PropuestaGrado</a></code>
+                            <i>Type : </i>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
 
                         </td>
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="41" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:41</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:54</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inscripcion_id"></a>
+                        <span class="name">
+                            <b>
+                            inscripcion_id
+                            </b>
+                            <a href="#inscripcion_id"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>inscripcion_id:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:28</a></div>
                             </td>
                         </tr>
 
@@ -1497,7 +1663,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:45</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:58</a></div>
                             </td>
                         </tr>
 
@@ -1531,7 +1697,41 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="46" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:46</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:59</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="persona_id"></a>
+                        <span class="name">
+                            <b>
+                            persona_id
+                            </b>
+                            <a href="#persona_id"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>persona_id:     <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:29</a></div>
                             </td>
                         </tr>
 
@@ -1565,7 +1765,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:26</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:27</a></div>
                             </td>
                         </tr>
 
@@ -1599,7 +1799,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:25</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:26</a></div>
                             </td>
                         </tr>
 
@@ -1633,7 +1833,7 @@
                     </tr>
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:43</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:56</a></div>
                             </td>
                         </tr>
 
@@ -1663,7 +1863,7 @@
                 </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:33</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="34" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:34</a></div>
                                 </td>
                             </tr>
                     <tr>
@@ -1705,6 +1905,124 @@
                     </tr>
             </tbody>
         </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="info"></a>
+                        <span class="name"><b>info</b><a href="#info"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>info(persona_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:40</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>persona_id</td>
+                                                    
+                                                            <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="info2"></a>
+                        <span class="name"><b>info2</b><a href="#info2"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>info2(inscripcion_id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="45" class="link-to-prism">src/app/pages/propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component.ts:45</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                        <td>Type</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>inscripcion_id</td>
+                                                    
+                                                            <td>
+                                                                        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                            </td>
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
 </section>
 </div>
 
@@ -1713,7 +2031,9 @@
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { ImplicitAutenticationService } from &#x27;../../../@core/utils/implicit_autentication.service&#x27;;
 import { NuxeoService } from &#x27;../../../@core/utils/nuxeo.service&#x27;;
 import { PropuestaGrado } from &#x27;./../../../@core/data/models/propuesta_grado&#x27;;
+import { Inscripcion } from &#x27;./../../../@core/data/models/inscripcion&#x27;;
 import { Component, OnInit, Input, Output, EventEmitter } from &#x27;@angular/core&#x27;;
+import { CoreService } from &#x27;../../../@core/data/core.service&#x27;;
 import { InscripcionService } from &#x27;../../../@core/data/inscripcion.service&#x27;;
 import { DocumentoService } from &#x27;../../../@core/data/documento.service&#x27;;
 import { FORM_PROPUESTA_GRADO } from &#x27;./form-propuesta_grado&#x27;;
@@ -1725,7 +2045,6 @@ import &#x27;style-loader!angular2-toaster/toaster.css&#x27;;
 import { IAppState } from &#x27;../../../@core/store/app.state&#x27;;
 import { Store } from &#x27;@ngrx/store&#x27;;
 import { ListService } from &#x27;../../../@core/store/services/list.service&#x27;;
-import { UserService } from &#x27;../../../@core/data/users.service&#x27;;
 
 @Component({
   selector: &#x27;ngx-crud-propuesta-grado&#x27;,
@@ -1736,9 +2055,9 @@ export class CrudPropuestaGradoComponent implements OnInit {
   config: ToasterConfig;
   propuesta_grado_id: number;
   prop_id: number;
-  admision_id: number;
-  ENTE_id: number;
-  filesUp: any;
+  inscripcion_id: number;
+  persona_id: number;
+  filesUp9: any;
   FormatoProyecto: any;
 
   @Input(&#x27;propuesta_grado_id&#x27;)
@@ -1747,25 +2066,38 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.buscarID_prop();
   }
 
+  @Input(&#x27;persona_id&#x27;)
+  set info(persona_id: number) {
+    this.persona_id &#x3D; persona_id;
+  }
+
+  @Input(&#x27;inscripcion_id&#x27;)
+  set info2(inscripcion_id: number) {
+    this.inscripcion_id &#x3D; inscripcion_id;
+    console.info(&#x27;InscripcionPro: &#x27; + this.inscripcion_id);
+    this.loadPropuestaGrado();
+  }
+
   @Output() eventChange &#x3D; new EventEmitter();
   @Output(&#x27;result&#x27;) result: EventEmitter&lt;any&gt; &#x3D; new EventEmitter();
 
-  info_propuesta_grado: PropuestaGrado;
+  info_propuesta_grado: any;
   formPropuestaGrado: any;
   regPropuestaGrado: any;
   clean: boolean;
   loading: boolean;
   percentage: number;
+  grupoSeleccionado: any;
 
   constructor(
     private translate: TranslateService,
     private autenticationService: ImplicitAutenticationService,
     private documentoService: DocumentoService,
     private nuxeoService: NuxeoService,
-    private admisionesService: InscripcionService,
+    private inscripcionService: InscripcionService,
+    private coreService: CoreService,
     private store: Store&lt;IAppState&gt;,
     private listService: ListService,
-    private ente_id: UserService,
     private toasterService: ToasterService) {
     this.formPropuestaGrado &#x3D; FORM_PROPUESTA_GRADO;
     this.construirForm();
@@ -1774,7 +2106,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
     });
     this.listService.findGrupoInvestigacion();
     this.listService.findTipoProyecto();
-    this.listService.findLineaInvestigacion();
     this.loading &#x3D; false;
     this.loadLists();
   }
@@ -1802,36 +2133,42 @@ export class CrudPropuestaGradoComponent implements OnInit {
     return 0;
   }
 
-  public buscarID_prop(): void {
-    this.ENTE_id &#x3D; this.ente_id.getEnte();
-    this.admisionesService.get(&#x27;admision/?query&#x3D;Aspirante:&#x27; + this.ENTE_id +
-      &#x27;&amp;sortby&#x3D;Id&amp;order&#x3D;desc&#x27;)
-      .subscribe(res_ente &#x3D;&gt; {
-        console.info(JSON.stringify(res_ente));
-        this.admision_id &#x3D; res_ente[0].Id;
-        if (res_ente[0].Aspirante &#x3D;&#x3D;&#x3D; this.ente_id.getEnte()) {
-          this.admisionesService.get(&#x27;propuesta/?query&#x3D;Admision:&#x27; + this.admision_id)
-            .subscribe(res &#x3D;&gt; {
-              const tempo &#x3D; &lt;any&gt;res[0].Id
-              this.prop_id &#x3D; tempo;
-              this.loadPropuestaGrado();
-            },
-              (error: HttpErrorResponse) &#x3D;&gt; {
-                Swal({
-                  type: &#x27;error&#x27;,
-                  title: error.status + &#x27;&#x27;,
-                  text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
-                  footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
-                    this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;),
-                  confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+  getSeleccion(event) {
+    if (event.nombre &#x3D;&#x3D;&#x3D; &#x27;GrupoInvestigacion&#x27;) {
+      this.grupoSeleccionado &#x3D; event.valor;
+      this.loadOptionsLineaInvestigacion();
+    }
+  }
+
+  loadOptionsLineaInvestigacion(): void {
+    let consultaLineas: Array&lt;any&gt; &#x3D; [];
+    const lineas: Array&lt;any&gt; &#x3D; [];
+    this.coreService.get(&#x27;linea_investigacion_grupo_investigacion/?query&#x3D;GrupoInvestigacionId:&#x27; +
+      this.grupoSeleccionado.Id + &#x27;&amp;limit&#x3D;0&#x27;)
+      .subscribe(linea_grupo &#x3D;&gt; {
+        if (linea_grupo !&#x3D;&#x3D; null) {
+          consultaLineas &#x3D; &lt;Array&lt;any&gt;&gt;linea_grupo;
+          consultaLineas.forEach(element &#x3D;&gt; {
+            this.coreService.get(&#x27;linea_investigacion/&#x27; + element.LineaInvestigacionId)
+              .subscribe(linea &#x3D;&gt; {
+                if (linea !&#x3D;&#x3D; null) {
+                  element.LineaInvestigacion &#x3D; &lt;any&gt;linea;
+                  element.Nombre &#x3D; element.LineaInvestigacion.Nombre;
+                  lineas.push(element);
+                }
+                this.formPropuestaGrado.campos[this.getIndexForm(&#x27;LineaInvestigacion&#x27;)].opciones &#x3D; lineas;
+              },
+                (error: HttpErrorResponse) &#x3D;&gt; {
+                  Swal({
+                    type: &#x27;error&#x27;,
+                    title: error.status + &#x27;&#x27;,
+                    text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                    footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                      this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                      this.translate.instant(&#x27;GLOBAL.linea_investigacion&#x27;),
+                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                  });
                 });
-              });
-        } else {
-          Swal({
-            type: &#x27;warning&#x27;,
-            title: this.translate.instant(&#x27;GLOBAL.advertencia&#x27;),
-            text: this.translate.instant(&#x27;ERROR.carga_datos&#x27;),
-            confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
           });
         }
       },
@@ -1842,34 +2179,90 @@ export class CrudPropuestaGradoComponent implements OnInit {
             text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
             footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
               this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
-              this.translate.instant(&#x27;GLOBAL.admision&#x27;),
+              this.translate.instant(&#x27;GLOBAL.grupo_investigacion&#x27;) + &#x27;-&#x27; +
+              this.translate.instant(&#x27;GLOBAL.linea_investigacion&#x27;),
             confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
           });
         });
   }
 
-  public loadPropuestaGrado(): void {
+  public buscarID_prop(): void {
     this.loading &#x3D; true;
-    if (this.prop_id !&#x3D;&#x3D; undefined &amp;&amp; this.prop_id !&#x3D;&#x3D; 0 &amp;&amp;
-      this.prop_id.toString() !&#x3D;&#x3D; &#x27;&#x27;) {
-      this.admisionesService.get(&#x27;propuesta/?query&#x3D;id:&#x27; + this.prop_id)
+    if (this.propuesta_grado_id !&#x3D;&#x3D; undefined &amp;&amp; this.propuesta_grado_id !&#x3D;&#x3D; 0 &amp;&amp;
+      this.propuesta_grado_id.toString() !&#x3D;&#x3D; &#x27;&#x27;) {
+      this.inscripcionService.get(&#x27;propuesta/&#x27; + this.propuesta_grado_id)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             const temp &#x3D; &lt;PropuestaGrado&gt;res[0];
-            const files &#x3D; []
-            if (temp.FormatoProyecto + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
-              files.push({ Id: temp.FormatoProyecto, key: &#x27;FormatoProyecto&#x27; });
+            const files9 &#x3D; []
+            if (temp.DocumentoId + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
+              files9.push({ Id: temp.DocumentoId, key: &#x27;FormatoProyecto&#x27; });
             }
-            this.nuxeoService.getDocumentoById$(files, this.documentoService)
+            this.nuxeoService.getDocumentoById$(files9, this.documentoService)
               .subscribe(response_2 &#x3D;&gt; {
                 const filesResponse_2 &#x3D; &lt;any&gt;response_2;
+                console.info(JSON.stringify(filesResponse_2));
                 if ((Object.keys(filesResponse_2).length !&#x3D;&#x3D; 0) &amp;&amp; (filesResponse_2[&#x27;FormatoProyecto&#x27;] !&#x3D;&#x3D; undefined)) {
-                  this.info_propuesta_grado &#x3D; &lt;PropuestaGrado&gt;res[0];
-                  this.info_propuesta_grado.TipoProyecto &#x3D; temp.TipoProyecto;
-                  this.FormatoProyecto &#x3D; this.info_propuesta_grado.FormatoProyecto;
-                  this.info_propuesta_grado.LineaInvestigacion &#x3D; temp.LineaInvestigacion;
-                  this.info_propuesta_grado.FormatoProyecto &#x3D; filesResponse_2[&#x27;FormatoProyecto&#x27;] + &#x27;&#x27;;
-                  this.loading &#x3D; false;
+                  temp.FormatoProyecto &#x3D; filesResponse_2[&#x27;FormatoProyecto&#x27;] + &#x27;&#x27;;
+                  this.FormatoProyecto &#x3D; temp.DocumentoId;
+                  this.coreService.get(&#x27;linea_investigacion_grupo_investigacion/&#x27; + temp.GrupoInvestigacionLineaInvestigacionId)
+                    .subscribe(linea_grupo &#x3D;&gt; {
+                      if (linea_grupo !&#x3D;&#x3D; null) {
+                        temp.LineaInvestigacion &#x3D; &lt;any&gt;linea_grupo;
+                        this.coreService.get(&#x27;grupo_investigacion/&#x27; + temp.LineaInvestigacion.GrupoInvestigacionId)
+                        .subscribe(grupo &#x3D;&gt; {
+                          if (grupo !&#x3D;&#x3D; null) {
+                            temp.GrupoInvestigacion &#x3D; &lt;any&gt;grupo;
+                            this.coreService.get(&#x27;linea_investigacion/&#x27; + temp.LineaInvestigacion.LineaInvestigacionId)
+                              .subscribe(linea &#x3D;&gt; {
+                                if (linea !&#x3D;&#x3D; null) {
+                                  temp.LineaInvestigacion.LineaInvestigacion &#x3D; &lt;any&gt;linea;
+                                  console.info(JSON.stringify(temp.LineaInvestigacion));
+                                  temp.LineaInvestigacion.Nombre &#x3D; temp.LineaInvestigacion.LineaInvestigacion.Nombre;
+                                  this.formPropuestaGrado.campos[this.getIndexForm(&#x27;LineaInvestigacion&#x27;)].opciones.push(temp.LineaInvestigacion);
+                                  temp.TipoProyecto &#x3D; temp.TipoProyectoId;
+                                  this.info_propuesta_grado &#x3D; temp;
+                                  this.loading &#x3D; false;
+                                }
+                              },
+                                (error: HttpErrorResponse) &#x3D;&gt; {
+                                  Swal({
+                                    type: &#x27;error&#x27;,
+                                    title: error.status + &#x27;&#x27;,
+                                    text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                                    footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                                      this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                                      this.translate.instant(&#x27;GLOBAL.linea_investigacion&#x27;),
+                                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                                  });
+                                });
+                          }
+                        },
+                          (error: HttpErrorResponse) &#x3D;&gt; {
+                            Swal({
+                              type: &#x27;error&#x27;,
+                              title: error.status + &#x27;&#x27;,
+                              text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                              footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                                this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                                this.translate.instant(&#x27;GLOBAL.grupo_investigacion&#x27;),
+                              confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                            });
+                          });
+                      }
+                    },
+                      (error: HttpErrorResponse) &#x3D;&gt; {
+                        Swal({
+                          type: &#x27;error&#x27;,
+                          title: error.status + &#x27;&#x27;,
+                          text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                          footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                            this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                            this.translate.instant(&#x27;GLOBAL.grupo_investigacion&#x27;) + &#x27;-&#x27; +
+                            this.translate.instant(&#x27;GLOBAL.linea_investigacion&#x27;),
+                          confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                        });
+                      });
                 }
               },
                 (error: HttpErrorResponse) &#x3D;&gt; {
@@ -1883,6 +2276,117 @@ export class CrudPropuestaGradoComponent implements OnInit {
                     confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
                   });
                 });
+          } else {
+            this.loading &#x3D; false;
+          }
+        },
+          (error: HttpErrorResponse) &#x3D;&gt; {
+            Swal({
+              type: &#x27;error&#x27;,
+              title: error.status + &#x27;&#x27;,
+              text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+              footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;),
+              confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+            });
+          });
+    } else {
+      this.info_propuesta_grado &#x3D; undefined;
+      this.clean &#x3D; !this.clean;
+      this.loading &#x3D; false;
+    }
+  }
+
+  public loadPropuestaGrado(): void {
+    this.loading &#x3D; true;
+    if (this.inscripcion_id !&#x3D;&#x3D; undefined &amp;&amp; this.inscripcion_id !&#x3D;&#x3D; 0 &amp;&amp;
+      this.inscripcion_id.toString() !&#x3D;&#x3D; &#x27;&#x27;) {
+      this.inscripcionService.get(&#x27;propuesta/?query&#x3D;InscripcionId:&#x27; + this.inscripcion_id)
+        .subscribe(res &#x3D;&gt; {
+          if (res !&#x3D;&#x3D; null) {
+            const temp &#x3D; &lt;PropuestaGrado&gt;res[0];
+            const files9 &#x3D; []
+            if (temp.DocumentoId + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
+              files9.push({ Id: temp.DocumentoId, key: &#x27;FormatoProyecto&#x27; });
+            }
+            this.nuxeoService.getDocumentoById$(files9, this.documentoService)
+              .subscribe(response_2 &#x3D;&gt; {
+                const filesResponse_2 &#x3D; &lt;any&gt;response_2;
+                if ((Object.keys(filesResponse_2).length !&#x3D;&#x3D; 0) &amp;&amp; (filesResponse_2[&#x27;FormatoProyecto&#x27;] !&#x3D;&#x3D; undefined)) {
+                  temp.FormatoProyecto &#x3D; filesResponse_2[&#x27;FormatoProyecto&#x27;] + &#x27;&#x27;;
+                  this.FormatoProyecto &#x3D; temp.DocumentoId;
+                  this.coreService.get(&#x27;linea_investigacion_grupo_investigacion/&#x27; + temp.GrupoInvestigacionLineaInvestigacionId)
+                    .subscribe(linea_grupo &#x3D;&gt; {
+                      if (linea_grupo !&#x3D;&#x3D; null) {
+                        temp.LineaInvestigacion &#x3D; &lt;any&gt;linea_grupo;
+                        this.coreService.get(&#x27;grupo_investigacion/&#x27; + temp.LineaInvestigacion.GrupoInvestigacionId)
+                        .subscribe(grupo &#x3D;&gt; {
+                          if (grupo !&#x3D;&#x3D; null) {
+                            temp.GrupoInvestigacion &#x3D; &lt;any&gt;grupo;
+                            this.coreService.get(&#x27;linea_investigacion/&#x27; + temp.LineaInvestigacion.LineaInvestigacionId)
+                              .subscribe(linea &#x3D;&gt; {
+                                if (linea !&#x3D;&#x3D; null) {
+                                  temp.LineaInvestigacion.LineaInvestigacion &#x3D; &lt;any&gt;linea;
+                                  temp.LineaInvestigacion.Nombre &#x3D; temp.LineaInvestigacion.LineaInvestigacion.Nombre;
+                                  this.formPropuestaGrado.campos[this.getIndexForm(&#x27;LineaInvestigacion&#x27;)].opciones.push(temp.LineaInvestigacion);
+                                  temp.TipoProyecto &#x3D; temp.TipoProyectoId;
+                                  this.info_propuesta_grado &#x3D; temp;
+                                  this.loading &#x3D; false;
+                                }
+                              },
+                                (error: HttpErrorResponse) &#x3D;&gt; {
+                                  Swal({
+                                    type: &#x27;error&#x27;,
+                                    title: error.status + &#x27;&#x27;,
+                                    text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                                    footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                                      this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                                      this.translate.instant(&#x27;GLOBAL.linea_investigacion&#x27;),
+                                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                                  });
+                                });
+                          }
+                        },
+                          (error: HttpErrorResponse) &#x3D;&gt; {
+                            Swal({
+                              type: &#x27;error&#x27;,
+                              title: error.status + &#x27;&#x27;,
+                              text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                              footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                                this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                                this.translate.instant(&#x27;GLOBAL.grupo_investigacion&#x27;),
+                              confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                            });
+                          });
+                      }
+                    },
+                      (error: HttpErrorResponse) &#x3D;&gt; {
+                        Swal({
+                          type: &#x27;error&#x27;,
+                          title: error.status + &#x27;&#x27;,
+                          text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                          footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                            this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                            this.translate.instant(&#x27;GLOBAL.grupo_investigacion&#x27;) + &#x27;-&#x27; +
+                            this.translate.instant(&#x27;GLOBAL.linea_investigacion&#x27;),
+                          confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                        });
+                      });
+                }
+              },
+                (error: HttpErrorResponse) &#x3D;&gt; {
+                  Swal({
+                    type: &#x27;error&#x27;,
+                    title: error.status + &#x27;&#x27;,
+                    text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                    footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                      this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27;|&#x27; +
+                      this.translate.instant(&#x27;GLOBAL.soporte_documento&#x27;),
+                    confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                  });
+                });
+          } else {
+            this.loading &#x3D; false;
           }
         },
           (error: HttpErrorResponse) &#x3D;&gt; {
@@ -1919,26 +2423,31 @@ export class CrudPropuestaGradoComponent implements OnInit {
           this.loading &#x3D; true;
           this.info_propuesta_grado &#x3D; &lt;any&gt;propuestaGrado;
           const files &#x3D; [];
-          if (this.info_propuesta_grado.FormatoProyecto !&#x3D;&#x3D; undefined) {
-            files.push({ file: this.info_propuesta_grado.FormatoProyecto, documento: this.FormatoProyecto, key: &#x27;FormatoProyecto&#x27; });
+          if (this.info_propuesta_grado.FormatoProyecto.file !&#x3D;&#x3D; undefined) {
+            files.push({ file: this.info_propuesta_grado.FormatoProyecto.file, documento: this.FormatoProyecto, key: &#x27;FormatoProyecto&#x27; });
           }
           if (files.length !&#x3D;&#x3D; 0) {
             this.nuxeoService.updateDocument$(files, this.documentoService)
               .subscribe(response &#x3D;&gt; {
                 if (Object.keys(response).length &#x3D;&#x3D;&#x3D; files.length) {
                   const documentos_actualizados &#x3D; &lt;any&gt;response;
-                  this.info_propuesta_grado.FormatoProyecto &#x3D; this.FormatoProyecto;
-                  this.admisionesService.put(&#x27;propuesta&#x27;, this.info_propuesta_grado)
+                  this.info_propuesta_grado.TipoProyectoId &#x3D; this.info_propuesta_grado.TipoProyecto;
+                  this.info_propuesta_grado.GrupoInvestigacionLineaInvestigacionId &#x3D; this.info_propuesta_grado.LineaInvestigacion.Id;
+                  this.info_propuesta_grado.InscripcionId &#x3D; &lt;Inscripcion&gt;{Id: 1 * this.inscripcion_id};
+                  this.info_propuesta_grado.DocumentoId &#x3D; this.FormatoProyecto;
+                  this.inscripcionService.put(&#x27;propuesta&#x27;, this.info_propuesta_grado)
                     .subscribe(res &#x3D;&gt; {
-                      if (documentos_actualizados[&#x27;FormatoProyecto&#x27;] !&#x3D;&#x3D; undefined) {
-                        this.info_propuesta_grado.FormatoProyecto &#x3D; documentos_actualizados[&#x27;FormatoProyecto&#x27;].url + &#x27;&#x27;;
+                      if (res !&#x3D;&#x3D; null) {
+                        if (documentos_actualizados[&#x27;FormatoProyecto&#x27;] !&#x3D;&#x3D; undefined) {
+                          this.info_propuesta_grado.FormatoProyecto &#x3D; documentos_actualizados[&#x27;FormatoProyecto&#x27;].url + &#x27;&#x27;;
+                        }
+                        this.loading &#x3D; false;
+                        this.loadPropuestaGrado();
+                        this.eventChange.emit(true);
+                        this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.actualizar&#x27;),
+                          this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27; &#x27; +
+                          this.translate.instant(&#x27;GLOBAL.confirmarActualizar&#x27;));
                       }
-                      this.loading &#x3D; false;
-                      this.loadPropuestaGrado();
-                      this.eventChange.emit(true);
-                      this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.actualizar&#x27;),
-                        this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27; &#x27; +
-                        this.translate.instant(&#x27;GLOBAL.confirmarActualizar&#x27;));
                     },
                       (error: HttpErrorResponse) &#x3D;&gt; {
                         Swal({
@@ -1964,14 +2473,19 @@ export class CrudPropuestaGradoComponent implements OnInit {
                   });
                 });
           } else {
-            this.info_propuesta_grado.FormatoProyecto &#x3D; this.FormatoProyecto;
-            this.admisionesService.put(&#x27;propuesta&#x27;, this.info_propuesta_grado)
+            this.info_propuesta_grado.TipoProyectoId &#x3D; this.info_propuesta_grado.TipoProyecto;
+            this.info_propuesta_grado.GrupoInvestigacionLineaInvestigacionId &#x3D; this.info_propuesta_grado.LineaInvestigacion.Id;
+            this.info_propuesta_grado.InscripcionId &#x3D; &lt;Inscripcion&gt;{Id: 1 * this.inscripcion_id};
+            this.info_propuesta_grado.DocumentoId &#x3D; this.FormatoProyecto;
+            this.inscripcionService.put(&#x27;propuesta&#x27;, this.info_propuesta_grado)
               .subscribe(res &#x3D;&gt; {
-                this.eventChange.emit(true);
-                this.loadPropuestaGrado();
-                this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.actualizar&#x27;),
-                  this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27; &#x27; +
-                  this.translate.instant(&#x27;GLOBAL.confirmarActualizar&#x27;));
+                if (res !&#x3D;&#x3D; null) {
+                  this.eventChange.emit(true);
+                  this.loadPropuestaGrado();
+                  this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.actualizar&#x27;),
+                    this.translate.instant(&#x27;GLOBAL.propuesta_grado&#x27;) + &#x27; &#x27; +
+                    this.translate.instant(&#x27;GLOBAL.confirmarActualizar&#x27;));
+                }
               },
                 (error: HttpErrorResponse) &#x3D;&gt; {
                   Swal({
@@ -2005,22 +2519,27 @@ export class CrudPropuestaGradoComponent implements OnInit {
         if (willDelete.value) {
           const files &#x3D; []
           this.info_propuesta_grado &#x3D; &lt;PropuestaGrado&gt;propuestaGrado;
-          if (this.info_propuesta_grado.FormatoProyecto !&#x3D;&#x3D; undefined) {
+          if (this.info_propuesta_grado.FormatoProyecto.file !&#x3D;&#x3D; undefined) {
             files.push({
-              nombre: this.autenticationService.getPayload().sub, key: &#x27;FormatoProyecto&#x27;,
-              file: this.info_propuesta_grado.FormatoProyecto, IdDocumento: 5,
+              nombre: this.autenticationService.getPayload().sub,
+              name: this.autenticationService.getPayload().sub,
+              key: &#x27;FormatoProyecto&#x27;,
+              file: this.info_propuesta_grado.FormatoProyecto.file, IdDocumento: 5,
             });
           }
           this.nuxeoService.getDocumentos$(files, this.documentoService)
             .subscribe(response &#x3D;&gt; {
               if (Object.keys(response).length &#x3D;&#x3D;&#x3D; files.length) {
-                this.filesUp &#x3D; &lt;any&gt;response;
-                if (this.filesUp[&#x27;FormatoProyecto&#x27;] !&#x3D;&#x3D; undefined) {
-                  this.info_propuesta_grado.FormatoProyecto &#x3D; this.filesUp[&#x27;FormatoProyecto&#x27;].Id;
+                this.filesUp9 &#x3D; &lt;any&gt;response;
+                if (this.filesUp9[&#x27;FormatoProyecto&#x27;] !&#x3D;&#x3D; undefined) {
+                  this.info_propuesta_grado.DocumentoId &#x3D; this.filesUp9[&#x27;FormatoProyecto&#x27;].Id;
                 }
-                this.admisionesService.post(&#x27;propuesta&#x27;, this.info_propuesta_grado)
+                this.info_propuesta_grado.TipoProyectoId &#x3D; this.info_propuesta_grado.TipoProyecto;
+                this.info_propuesta_grado.GrupoInvestigacionLineaInvestigacionId &#x3D; this.info_propuesta_grado.LineaInvestigacion.Id;
+                this.info_propuesta_grado.InscripcionId &#x3D; &lt;Inscripcion&gt;{Id: 1 * this.inscripcion_id};
+                this.inscripcionService.post(&#x27;propuesta&#x27;, this.info_propuesta_grado)
                   .subscribe(res &#x3D;&gt; {
-                    const r &#x3D; &lt;any&gt;res
+                    const r &#x3D; &lt;any&gt;res;
                     if (r !&#x3D;&#x3D; null &amp;&amp; r.Type !&#x3D;&#x3D; &#x27;error&#x27;) {
                       this.info_propuesta_grado &#x3D; &lt;PropuestaGrado&gt;res;
                       this.loading &#x3D; false;
@@ -2061,26 +2580,14 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.buscarID_prop();
   }
 
   validarForm(event) {
-    const propuesta &#x3D; {
-      Nombre: event.data.PropuestaGrado.Nombre,
-      Resumen: event.data.PropuestaGrado.Resumen,
-      GrupoInvestigacion: event.data.PropuestaGrado.GrupoInvestigacion,
-      LineaInvestigacion: event.data.PropuestaGrado.LineaInvestigacion,
-      FormatoProyecto: event.data.PropuestaGrado.FormatoProyecto.file,
-      Admision: {
-        Id: this.admision_id,
-      },
-      TipoProyecto: event.data.PropuestaGrado.TipoProyecto,
-    }
     if (event.valid) {
       if (this.info_propuesta_grado &#x3D;&#x3D;&#x3D; undefined) {
-        this.createPropuestaGrado(propuesta);
+        this.createPropuestaGrado(event.data.PropuestaGrado);
       } else {
-        this.updatePropuestaGrado(propuesta);
+        this.updatePropuestaGrado(event.data.PropuestaGrado);
       }
     }
   }
@@ -2115,12 +2622,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
     this.store.select((state) &#x3D;&gt; state).subscribe(
       (list) &#x3D;&gt; {
         this.formPropuestaGrado.campos[this.getIndexForm(&#x27;GrupoInvestigacion&#x27;)].opciones &#x3D; list.listGrupoInvestigacion[0];
-        this.formPropuestaGrado.campos[this.getIndexForm(&#x27;LineaInvestigacion&#x27;)].opciones &#x3D; list.listLineaInvestigacion[0];
         this.formPropuestaGrado.campos[this.getIndexForm(&#x27;TipoProyecto&#x27;)].opciones &#x3D; list.listTipoProyecto[0];
       },
     );
   }
-
 }
 </code></pre>
     </div>
@@ -2129,7 +2634,8 @@ export class CrudPropuestaGradoComponent implements OnInit {
         <pre class="line-numbers"><code class="language-html">&lt;toaster-container [toasterconfig]&#x3D;&quot;config&quot;&gt;&lt;/toaster-container&gt;
 &lt;ngx-dinamicform [normalform]&#x3D;&quot;formPropuestaGrado&quot;
   [modeloData]&#x3D;&quot;info_propuesta_grado&quot; (result)&#x3D;&quot;validarForm($event)&quot;
-  [clean]&#x3D;&quot;clean&quot; (percentage)&#x3D;&quot;setPercentage($event)&quot;&gt;
+  [clean]&#x3D;&quot;clean&quot; (interlaced)&#x3D;&quot;getSeleccion($event)&quot; 
+  (percentage)&#x3D;&quot;setPercentage($event)&quot;&gt;
 &lt;/ngx-dinamicform&gt;
 &lt;ngx-loading [hidden]&#x3D;&quot;!loading&quot;&gt;&lt;/ngx-loading&gt;
 </code></pre>
@@ -2167,7 +2673,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><toaster-container [toasterconfig]="config"></toaster-container><ngx-dinamicform [normalform]="formPropuestaGrado"  [modeloData]="info_propuesta_grado" (result)="validarForm($event)"  [clean]="clean" (percentage)="setPercentage($event)"></ngx-dinamicform><ngx-loading [hidden]="!loading"></ngx-loading></div>'
+        var COMPONENT_TEMPLATE = '<div><toaster-container [toasterconfig]="config"></toaster-container><ngx-dinamicform [normalform]="formPropuestaGrado"  [modeloData]="info_propuesta_grado" (result)="validarForm($event)"  [clean]="clean" (interlaced)="getSeleccion($event)"   (percentage)="setPercentage($event)"></ngx-dinamicform><ngx-loading [hidden]="!loading"></ngx-loading></div>'
     var COMPONENTS = [{'name': 'AdmisionComponent', 'selector': 'ngx-admision-elements'},{'name': 'AppComponent', 'selector': 'ngx-app'},{'name': 'ArticuloComponent', 'selector': 'ngx-articulo-elements'},{'name': 'CarouselComponent', 'selector': 'ngx-carousel'},{'name': 'CrudArticuloComponent', 'selector': 'ngx-crud-articulo'},{'name': 'CrudDescuentoAcademicoComponent', 'selector': 'ngx-crud-descuento-academico'},{'name': 'CrudDescuentoMatriculaComponent', 'selector': 'ngx-crud-descuento-matricula'},{'name': 'CrudDocumentoProgramaComponent', 'selector': 'ngx-crud-documento-programa'},{'name': 'CrudExperienciaLaboralComponent', 'selector': 'ngx-crud-experiencia-laboral'},{'name': 'CrudFormacionAcademicaComponent', 'selector': 'ngx-crud-formacion-academica'},{'name': 'CrudIdiomasComponent', 'selector': 'ngx-crud-idiomas'},{'name': 'CrudInfoCaracteristicaComponent', 'selector': 'ngx-crud-info-caracteristica'},{'name': 'CrudInfoPersonaComponent', 'selector': 'ngx-crud-info-persona'},{'name': 'CrudInformacionContactoComponent', 'selector': 'ngx-crud-informacion-contacto'},{'name': 'CrudLibroComponent', 'selector': 'ngx-crud-libro'},{'name': 'CrudOtraPublicacionComponent', 'selector': 'ngx-crud-otra-publicacion'},{'name': 'CrudOtroDocumentoComponent', 'selector': 'ngx-crud-otro-documento'},{'name': 'CrudProduccionArtesArquDisenoComponent', 'selector': 'ngx-crud-produccion-artes-arqu-diseno'},{'name': 'CrudProduccionTecnicaComponent', 'selector': 'ngx-crud-produccion-tecnica'},{'name': 'CrudPropuestaGradoComponent', 'selector': 'ngx-crud-propuesta-grado'},{'name': 'CrudTraduccionComponent', 'selector': 'ngx-crud-traduccion'},{'name': 'DashboardComponent', 'selector': 'ngx-dashboard'},{'name': 'DescuentoAcademicoComponent', 'selector': 'ngx-descuento-academico-elements'},{'name': 'DescuentoMatriculaComponent', 'selector': 'ngx-descuento-matricula-elements'},{'name': 'DinamicformComponent', 'selector': 'ngx-dinamicform'},{'name': 'DocumentoProgramaComponent', 'selector': 'ngx-documento-programa-elements'},{'name': 'ElectricityChartComponent', 'selector': 'ngx-electricity-chart'},{'name': 'ElectricityComponent', 'selector': 'ngx-electricity'},{'name': 'ExperienciaLaboralComponent', 'selector': 'ngx-experiencia-laboral-elements'},{'name': 'FooterComponent', 'selector': 'ngx-footer'},{'name': 'FormacionAcademicaComponent', 'selector': 'ngx-formacion-academica-elements'},{'name': 'HeaderComponent', 'selector': 'ngx-header'},{'name': 'IdiomasComponent', 'selector': 'ngx-idiomas-elements'},{'name': 'InfoCaracteristicaComponent', 'selector': 'ngx-info-caracteristica-elements'},{'name': 'InfoPersonaComponent', 'selector': 'ngx-info-persona-elements'},{'name': 'InformacionContactoComponent', 'selector': 'ngx-informacion-contacto-elements'},{'name': 'InscripcionComponent', 'selector': 'ngx-inscripcion-elements'},{'name': 'KittenComponent', 'selector': 'ngx-kitten'},{'name': 'LayoutDirectionSwitcherComponent', 'selector': 'ngx-layout-direction-switcher'},{'name': 'LibroComponent', 'selector': 'ngx-libro-elements'},{'name': 'ListAdmisionComponent', 'selector': 'ngx-list-admision'},{'name': 'ListadoComponent', 'selector': 'ngx-listado'},{'name': 'ListArticuloComponent', 'selector': 'ngx-list-articulo'},{'name': 'ListDescuentoAcademicoComponent', 'selector': 'ngx-list-descuento-academico'},{'name': 'ListDescuentoMatriculaComponent', 'selector': 'ngx-list-descuento-matricula'},{'name': 'ListDocumentoProgramaComponent', 'selector': 'ngx-list-documento-programa'},{'name': 'ListExperienciaLaboralComponent', 'selector': 'ngx-list-experiencia-laboral'},{'name': 'ListFormacionAcademicaComponent', 'selector': 'ngx-list-formacion-academica'},{'name': 'ListIdiomasComponent', 'selector': 'ngx-list-idiomas'},{'name': 'ListInfoCaracteristicaComponent', 'selector': 'ngx-list-info-caracteristica'},{'name': 'ListInfoPersonaComponent', 'selector': 'ngx-list-info-persona'},{'name': 'ListInformacionContactoComponent', 'selector': 'ngx-list-informacion-contacto'},{'name': 'ListLibroComponent', 'selector': 'ngx-list-libro'},{'name': 'ListOtraPublicacionComponent', 'selector': 'ngx-list-otra-publicacion'},{'name': 'ListOtroDocumentoComponent', 'selector': 'ngx-list-otro-documento'},{'name': 'ListProduccionArtesArquDisenoComponent', 'selector': 'ngx-list-produccion-artes-arqu-diseno'},{'name': 'ListProduccionTecnicaComponent', 'selector': 'ngx-list-produccion-tecnica'},{'name': 'ListPropuestaGradoComponent', 'selector': 'ngx-list-propuesta-grado'},{'name': 'ListTraduccionComponent', 'selector': 'ngx-list-traduccion'},{'name': 'LoadingComponent', 'selector': 'ngx-loading'},{'name': 'MiscellaneousComponent', 'selector': 'ngx-miscellaneous'},{'name': 'NewsComponent', 'selector': 'ngx-news'},{'name': 'NotFoundComponent', 'selector': 'ngx-not-found'},{'name': 'NotificacionComponent', 'selector': 'ngx-notificacion'},{'name': 'NuxeoComponent', 'selector': 'ngx-nuxeo'},{'name': 'OneColumnLayoutComponent', 'selector': 'ngx-one-column-layout'},{'name': 'OtraPublicacionComponent', 'selector': 'ngx-otra-publicacion-elements'},{'name': 'OtroDocumentoComponent', 'selector': 'ngx-otro-documento-elements'},{'name': 'PagesComponent', 'selector': 'ngx-pages'},{'name': 'PagoComprobanteComponent', 'selector': 'ngx-pago-comprobante'},{'name': 'PagoInscripcionComponent', 'selector': 'ngx-pago-inscripcion'},{'name': 'PagoLineaComponent', 'selector': 'ngx-pago-linea-elements'},{'name': 'PerfilComponent', 'selector': 'ngx-perfil'},{'name': 'PosgradoComponent', 'selector': 'ngx-posgrado'},{'name': 'ProduccionArtesArquDisenoComponent', 'selector': 'ngx-produccion-artes-arqu-diseno-elements'},{'name': 'ProduccionTecnicaComponent', 'selector': 'ngx-produccion-tecnica-elements'},{'name': 'PropuestaGradoComponent', 'selector': 'ngx-propuesta-grado-elements'},{'name': 'SampleLayoutComponent', 'selector': 'ngx-sample-layout'},{'name': 'SearchInputComponent', 'selector': 'ngx-search-input'},{'name': 'SecurityCamerasComponent', 'selector': 'ngx-security-cameras'},{'name': 'SelectComponent', 'selector': 'ngx-select'},{'name': 'SolarComponent', 'selector': 'ngx-solar'},{'name': 'StatusCardComponent', 'selector': 'ngx-status-card'},{'name': 'SwitcherComponent', 'selector': 'ngx-switcher'},{'name': 'TeamComponent', 'selector': 'ngx-team'},{'name': 'TemperatureComponent', 'selector': 'ngx-temperature'},{'name': 'TemperatureDraggerComponent', 'selector': 'ngx-temperature-dragger'},{'name': 'ThemeSettingsComponent', 'selector': 'ngx-theme-settings'},{'name': 'ThemeSwitcherComponent', 'selector': 'ngx-theme-switcher'},{'name': 'ThemeSwitcherListComponent', 'selector': 'ngx-theme-switcher-list'},{'name': 'ThreeColumnsLayoutComponent', 'selector': 'ngx-three-columns-layout'},{'name': 'TinyMCEComponent', 'selector': 'ngx-tiny-mce'},{'name': 'TraduccionComponent', 'selector': 'ngx-traduccion-elements'},{'name': 'TrafficChartComponent', 'selector': 'ngx-traffic-chart'},{'name': 'TrafficComponent', 'selector': 'ngx-traffic'},{'name': 'TwoColumnsLayoutComponent', 'selector': 'ngx-two-columns-layout'},{'name': 'ViewArticuloComponent', 'selector': 'ngx-view-articulo'},{'name': 'ViewDescuentoAcademicoComponent', 'selector': 'ngx-view-descuento-academico'},{'name': 'ViewDescuentoMatriculaComponent', 'selector': 'ngx-view-descuento-matricula'},{'name': 'ViewDocumentoProgramaComponent', 'selector': 'ngx-view-documento-programa'},{'name': 'ViewExperienciaLaboralComponent', 'selector': 'ngx-view-experiencia-laboral'},{'name': 'ViewFormacionAcademicaComponent', 'selector': 'ngx-view-formacion-academica'},{'name': 'ViewIdiomasComponent', 'selector': 'ngx-view-idiomas'},{'name': 'ViewInfoCaracteristicaComponent', 'selector': 'ngx-view-info-caracteristica'},{'name': 'ViewInfoPersonaComponent', 'selector': 'ngx-view-info-persona'},{'name': 'ViewInformacionContactoComponent', 'selector': 'ngx-view-informacion-contacto'},{'name': 'ViewLibroComponent', 'selector': 'ngx-view-libro'},{'name': 'ViewOtraPublicacionComponent', 'selector': 'ngx-view-otra-publicacion'},{'name': 'ViewOtroDocumentoComponent', 'selector': 'ngx-view-otro-documento'},{'name': 'ViewProduccionArtesArquDisenoComponent', 'selector': 'ngx-view-produccion-artes-arqu-diseno'},{'name': 'ViewProduccionTecnicaComponent', 'selector': 'ngx-view-produccion-tecnica'},{'name': 'ViewPropuestaGradoComponent', 'selector': 'ngx-view-propuesta-grado'},{'name': 'ViewTraduccionComponent', 'selector': 'ngx-view-traduccion'},{'name': 'WeatherComponent', 'selector': 'ngx-weather'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'CrudPropuestaGradoComponent'};

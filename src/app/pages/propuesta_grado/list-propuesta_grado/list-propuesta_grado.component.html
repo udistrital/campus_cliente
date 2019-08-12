@@ -5,9 +5,8 @@
         <nb-tabset fullWidth (changeTab)="selectTab($event)">
             <nb-tab tabTitle="{{ 'GLOBAL.lista' | translate }}" [active]="!cambiotab">
               <br />
-                  <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDelete($event)" (rowSelect)="itemselec($event)" (edit)="onEdit($event)" (create)="onCreate($event)">
-                    </ng2-smart-table>
-              <!--button (click)="activetab()" >cambiar</button-->
+              <ng2-smart-table [settings]="settings" [source]="source" (delete)="onDelete($event)" (rowSelect)="itemselec($event)" (edit)="onEdit($event)" (create)="onCreate($event)">
+              </ng2-smart-table>
             </nb-tab>
             <nb-tab tabTitle="{{ 'GLOBAL.formulario' | translate }}" [active]="cambiotab">
               <ngx-crud-propuesta-grado [propuesta_grado_id]="uid" (eventChange)="onChange($event)"></ngx-crud-propuesta-grado>
@@ -17,8 +16,3 @@
     </nb-card-body>
   </nb-card>
 </div>
-
-
-
-
-

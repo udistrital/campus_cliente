@@ -15,7 +15,7 @@ import Swal from 'sweetalert2';
 })
 export class ViewDescuentoAcademicoComponent implements OnInit {
   persona: number;
-  admision: number;
+  inscripcion: number;
   periodo: number;
   programa: number;
   info_descuento: any;
@@ -31,7 +31,7 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
 
   @Input('inscripcion_id')
   set info2(info2: number) {
-    this.admision = info2;
+    this.inscripcion = info2;
     this.loadData();
   }
 
@@ -39,10 +39,9 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
 
   constructor(private translate: TranslateService,
     private descuento: DescuentoAcademicoService,
-    private admisiones: InscripcionService) {
+    private inscripciones: InscripcionService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       });
-      this.loadData();
   }
 
   useLanguage(language: string) {
@@ -50,11 +49,11 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
   }
 
   loadData(): void {
-    this.admisiones.get('admision/' + this.admision)
-      .subscribe(dato_admision => {
-        const admisiondata = <any>dato_admision;
-        this.programa = admisiondata.ProgramaAcademico;
-        this.periodo = admisiondata.Periodo.Id;
+    this.inscripciones.get('inscripcion/' + this.inscripcion)
+      .subscribe(dato_inscripcion => {
+        const inscripciondata = <any>dato_inscripcion;
+        this.programa = inscripciondata.ProgramaAcademicoId;
+        this.periodo = inscripciondata.PeriodoId;
         this.descuento.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
           ',PeriodoId:' + this.periodo + '&limit=0')
           .subscribe(descuentos => {

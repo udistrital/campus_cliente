@@ -72,6 +72,8 @@ export class PosgradoComponent implements OnInit, OnChanges {
   info_contacto: boolean;
   info_persona: boolean;
   info_caracteristica: boolean;
+  info_inscripcion: any;
+  loading: boolean;
   button_politica: boolean = true;
   programa_seleccionado: any;
   selectedValue: any;
@@ -150,7 +152,9 @@ export class PosgradoComponent implements OnInit, OnChanges {
     this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_docu)) / 4;
     this.percentage_total += Math.round(UtilidadesService.getSumArray(this.percentage_tab_proy)) / 4;
     if (this.percentage_total >= 100) {
-      this.total = false;
+      if (this.info_inscripcion.EstadoInscripcionId.Id === 1) {
+        this.total = false;
+      }
     }
   }
 
@@ -183,18 +187,23 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   getInfoInscripcion() {
+    this.loading = true;
     if (this.inscripcion_id !== undefined) {
       this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
         .subscribe(inscripcion => {
-          const info_inscripcion = <any>inscripcion;
-          if (inscripcion !== null  && info_inscripcion.Type !== 'error') {
-            this.programaService.get('dependencia/' + info_inscripcion.ProgramaAcademicoId)
+          this.info_inscripcion = <any>inscripcion;
+          if (inscripcion !== null  && this.info_inscripcion.Type !== 'error') {
+            if (this.info_inscripcion.EstadoInscripcionId.Id > 1) {
+              this.total = true;
+            }
+            this.programaService.get('dependencia/' + this.info_inscripcion.ProgramaAcademicoId)
               .subscribe(res_programa => {
                 const programa_admision = <any>res_programa;
                 if (res_programa !== null && programa_admision.Type !== 'error') {
                   this.selectedValue = programa_admision;
                   this.posgrados.push(programa_admision);
-                  this.info_ente_id = info_inscripcion.PersonaId;
+                  this.info_ente_id = this.info_inscripcion.PersonaId;
+                  this.loading = false;
                 }
               },
                 (error: HttpErrorResponse) => {
@@ -401,13 +410,12 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   datosMidPersona() {
-    this.captureScreen();
     this.campusMidService.get('persona/ConsultaPersona/?id=' + this.info_ente_id)
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
           this.datos_persona = r;
-          this.inscripcion.EstadoInscripcionId.Id = 2;
+          this.info_inscripcion.EstadoInscripcionId.Id = 2;
           this.updateEstadoAdmision();
         }
       },
@@ -424,26 +432,45 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   updateEstadoAdmision() {
-    this.inscripcionService.put('inscripcion', this.inscripcion)
-      .subscribe(res_ins => {
-        const r_ins = <any>res_ins;
-        if (res_ins !== null && r_ins.Type !== 'error') {
-          this.captureScreen();
+    const opt: any = {
+      title: this.translate.instant('GLOBAL.inscribirse'),
+      text: this.translate.instant('GLOBAL.inscribirse') + '?',
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true,
+      showCancelButton: true,
+      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+      cancelButtonText: this.translate.instant('GLOBAL.cancelar'),
+    };
+    Swal(opt)
+      .then((willDelete) => {
+        if (willDelete.value) {
+          this.loading = true;
+          this.inscripcionService.put('inscripcion', this.info_inscripcion)
+            .subscribe(res_ins => {
+              const r_ins = <any>res_ins;
+              if (res_ins !== null && r_ins.Type !== 'error') {
+                this.loading = false;
+                this.total = true;
+                this.captureScreen();
+              }
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                    this.translate.instant('GLOBAL.admision'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
         }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.actualizar') + '-' +
-              this.translate.instant('GLOBAL.admision'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        });
+      });
   }
 
   public captureScreen() {
+    this.loading = true;
     const data1 = document.getElementById('info_basica');
     const data2 = document.getElementById('formacion_academica');
     const data3 = document.getElementById('experiencia_laboral');
@@ -516,7 +543,10 @@ export class PosgradoComponent implements OnInit, OnChanges {
 
                   const nombre_archivo = `${this.datos_persona['PrimerNombre']}_${this.datos_persona['PrimerApellido']}_` +
                     `${this.datos_persona['NumeroDocumento']}`;
+
+                  this.loading = false;
                   pdf.save(`${nombre_archivo}.pdf`);
+                  this.eventChange.emit(true);
                 });
               });
             });
