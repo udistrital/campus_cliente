@@ -23,7 +23,7 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 })
 export class PagoInscripcionComponent implements OnInit {
 
-  @Input('admision_id')
+  @Input('inscripcion_id')
   set name(inscripcion_id: number) {
     this.inscripcion_id = inscripcion_id;
     if (this.inscripcion_id !== 0 && this.inscripcion_id !== undefined && this.inscripcion_id.toString() !== '') {
@@ -68,8 +68,6 @@ export class PagoInscripcionComponent implements OnInit {
       this.btnOficina = true;
       this.mostrarInfo = false;
       this.mostrarForm = false;
-
-      this.getInfoRecibo();
   }
 
   construirForm() {

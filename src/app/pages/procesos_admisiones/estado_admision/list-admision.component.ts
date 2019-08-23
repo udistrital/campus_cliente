@@ -16,7 +16,9 @@ import Swal from 'sweetalert2';
 })
 export class ListAdmisionComponent implements OnInit {
   uid: number;
+  uid2: number;
   cambiotab: boolean = false;
+  cambiotab2: boolean = false;
   settings: any;
   data: any;
   ente: number;
@@ -47,11 +49,14 @@ export class ListAdmisionComponent implements OnInit {
       edit: {
         editButtonContent: '<i class="nb-person"></i>',
       },
+      delete: {
+        deleteButtonContent: '<i class="nb-star"></i>',
+      },
       actions: {
         columnTitle: '',
         add: false,
         edit: true,
-        delete: false,
+        delete: true,
       },
       mode: 'external',
       columns: {
@@ -152,6 +157,11 @@ export class ListAdmisionComponent implements OnInit {
     this.activetab();
   }
 
+  onDelete(event): void {
+    this.uid2 = event.data.Id;
+    this.activetab2();
+  }
+
   onCreate(event): void {
     this.uid = 0;
     this.activetab();
@@ -164,8 +174,25 @@ export class ListAdmisionComponent implements OnInit {
   selectTab(event): void {
     if (event.tabTitle === this.translate.instant('GLOBAL.lista')) {
       this.cambiotab = false;
-    } else {
+      this.cambiotab2 = false;
+    } else if (event.tabTitle === this.translate.instant('GLOBAL.formulario')) {
       this.cambiotab = true;
+      this.cambiotab2 = false;
+    } else {
+      this.cambiotab = false;
+      this.cambiotab2 = true;
+    }
+  }
+
+  activetab2(): void {
+    this.cambiotab2 = !this.cambiotab2;
+  }
+
+  selectTab2(event): void {
+    if (event.tabTitle === this.translate.instant('GLOBAL.lista')) {
+      this.cambiotab2 = false;
+    } else {
+      this.cambiotab2 = true;
     }
   }
 
