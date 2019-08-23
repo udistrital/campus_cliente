@@ -8,6 +8,7 @@ import { ImplicitAutenticationService } from './../../@core/utils/implicit_auten
 import { InscripcionModule } from '../inscripcion/inscripcion.module';
 import { PosgradoComponent } from '../inscripcion/posgrado/posgrado.component';
 import { InscripcionService } from '../../@core/data/inscripcion.service';
+import { PagoLineaModule } from '../pago_linea/pago_linea.module';
 
 @NgModule({
   imports: [
@@ -17,6 +18,7 @@ import { InscripcionService } from '../../@core/data/inscripcion.service';
     ToasterModule,
     SharedModule,
     InscripcionModule,
+    PagoLineaModule,
   ],
   declarations: [
     ...routedComponents,
