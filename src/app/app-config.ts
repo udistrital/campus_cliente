@@ -87,12 +87,12 @@ export const Config = {
   // #revisar
   RECIBO_SERVICE: 'http://api.planestic.udistrital.edu.co:9017/v1/',
   TOKEN: {
-      AUTORIZATION_URL: 'https://autenticacion.udistrital.edu.co/oauth2/authorize',
+      AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
       CLIENTE_ID: '3r8DbyjNrVvcf5Z1CSsBGpGWzrwa',
       RESPONSE_TYPE: 'id_token token',
       SCOPE: 'openid email role documento',
       REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co/',
-      SIGN_OUT_URL: 'https://autenticacion.udistrital.edu.co/oidc/logout',
+      SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
       SIGN_OUT_REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co/',
     },
   },
