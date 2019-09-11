@@ -204,7 +204,6 @@ export class CrudInfoPersonaComponent implements OnInit {
             .subscribe(response => {
               if (Object.keys(response).length === files.length) {
                 this.filesUp = <any>response;
-                console.log(this.filesUp);
                 if (this.filesUp['Foto'] !== undefined) {
                   this.info_info_persona.Foto = this.filesUp['Foto'].Id;
                 }
