@@ -4,7 +4,7 @@ import { environment } from '../environments/environment';
 export const Config = {
   LOCAL: {
     NUXEO: {
-        PATH: 'https://documental.udistrital.edu.co/nuxeo/',
+        PATH: 'https://documental.portaloas.udistrital.edu.co/nuxeo/',
     },
     CAMPUS_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/campus_mid/v1/',
     CORE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/core_crud/v1/',
@@ -51,7 +51,7 @@ export const Config = {
 },
   PREPROD: {
     NUXEO: {
-      PATH: 'https://documental.udistrital.edu.co/nuxeo/',
+      PATH: 'https://documental.portaloas.udistrital.edu.co/nuxeo/',
   },
   CAMPUS_MID: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/campus_mid/v1/',
   CORE_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/core_crud/v1/',
@@ -98,7 +98,7 @@ export const Config = {
   },
   PROD: {
     NUXEO: {
-      PATH: 'https://documental.udistrital.edu.co/nuxeo/',
+      PATH: 'https://documental.portaloas.udistrital.edu.co/nuxeo/',
     },
     CAMPUS_MID: '',
     CORE_SERVICE: '',

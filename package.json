@@ -77,6 +77,7 @@
         "ngx-echarts": "2.0.1",
         "ngx-export-as": "^1.2.2",
         "ngx-qrcode2": "0.0.9",
+        "node-sass": "^4.12.0",
         "normalize.css": "6.0.0",
         "nuxeo": "^3.6.0",
         "pace-js": "1.0.2",
