@@ -88,7 +88,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     let consultaHijos: Array<any> = [];
     const departamentoNacimiento: Array<any> = [];
     if (this.paisSeleccionado) {
-      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.paisSeleccionado.Id + '&limit=0')
+      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.paisSeleccionado.Id + ',LugarHijo.Activo:true&limit=0')
         .subscribe(res => {
           if (res !== null) {
             consultaHijos = <Array<Lugar>>res;
@@ -116,7 +116,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     let consultaHijos: Array<any> = [];
     const ciudadNacimiento: Array<any> = [];
     if (this.departamentoSeleccionado) {
-      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.departamentoSeleccionado.Id + '&limit=0')
+      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.departamentoSeleccionado.Id + ',LugarHijo.Activo:true&limit=0')
         .subscribe(res => {
           if (res !== null) {
             consultaHijos = <Array<Lugar>>res;
@@ -155,8 +155,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     if (this.info_caracteristica_id !== undefined && this.info_caracteristica_id !== 0 &&
       this.info_caracteristica_id.toString() !== '') {
       this.denied_acces = false;
-      this.campusMidService.get('persona/DatosComplementarios/' + this.info_caracteristica_id +
-        '?query=TipoRelacionUbicacionEnte:1')
+      this.campusMidService.get('persona/consultar_complementarios/' + this.info_caracteristica_id)
         .subscribe(res => {
           if (res !== null) {
             this.datosGet = <InfoCaracteristicaGet>res;
@@ -165,10 +164,10 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
             this.info_info_caracteristica.GrupoSanguineo = <any>{ Id: this.info_info_caracteristica.GrupoSanguineo };
             this.info_info_caracteristica.Rh = <any>{ Id: this.info_info_caracteristica.Rh };
             this.info_info_caracteristica.TipoRelacionUbicacionEnte = 1;
-            this.info_info_caracteristica.IdLugarEnte = this.datosGet.Lugar[0].Id;
-            this.info_info_caracteristica.PaisNacimiento = this.datosGet.Lugar[0].Lugar.PAIS;
-            this.info_info_caracteristica.DepartamentoNacimiento = this.datosGet.Lugar[0].Lugar.DEPARTAMENTO;
-            this.info_info_caracteristica.Lugar = this.datosGet.Lugar[0].Lugar.CIUDAD;
+            this.info_info_caracteristica.IdLugarEnte = this.datosGet.Lugar.Id;
+            this.info_info_caracteristica.PaisNacimiento = this.datosGet.Lugar.Lugar.PAIS;
+            this.info_info_caracteristica.DepartamentoNacimiento = this.datosGet.Lugar.Lugar.DEPARTAMENTO;
+            this.info_info_caracteristica.Lugar = this.datosGet.Lugar.Lugar.CIUDAD;
             this.formInfoCaracteristica.campos[this.getIndexForm('DepartamentoNacimiento')].opciones[0] = this.info_info_caracteristica.DepartamentoNacimiento;
             this.formInfoCaracteristica.campos[this.getIndexForm('Lugar')].opciones[0] = this.info_info_caracteristica.Lugar;
             this.loading = false;
@@ -208,7 +207,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
         if (willDelete.value) {
           this.loading = true;
           this.info_info_caracteristica = <InfoCaracteristica>infoCaracteristica;
-          this.campusMidService.put('persona/DatosComplementarios', this.info_info_caracteristica)
+          this.campusMidService.put('persona/actualizar_complementarios', this.info_info_caracteristica)
             .subscribe(res => {
               this.loadInfoCaracteristica();
               this.loading = false;
@@ -247,17 +246,25 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
       .then((willDelete) => {
         this.loading = true;
         if (willDelete.value) {
-          this.info_info_caracteristica = <InfoCaracteristica>infoCaracteristica;
-          this.info_info_caracteristica.TipoRelacionUbicacionEnte = 1;
-          this.info_info_caracteristica.Ente = (1 * this.info_caracteristica_id);
-          this.campusMidService.post('persona/DatosComplementarios', this.info_info_caracteristica)
+          const info_info_caracteristica_post = <any>infoCaracteristica;
+          info_info_caracteristica_post.TipoRelacionUbicacionEnte = 1;
+          info_info_caracteristica_post.Ente = (1 * this.info_caracteristica_id);
+          info_info_caracteristica_post.Persona = (1 * this.info_caracteristica_id);
+          info_info_caracteristica_post.LugarAnt = info_info_caracteristica_post.Lugar;
+          info_info_caracteristica_post.Lugar = {
+            Lugar: info_info_caracteristica_post.LugarAnt,
+          };
+          console.info(JSON.stringify(info_info_caracteristica_post));
+          this.campusMidService.post('persona/guardar_complementarios', info_info_caracteristica_post)
             .subscribe(res => {
-              this.info_info_caracteristica = <InfoCaracteristica>res;
-              this.loading = false;
-              this.eventChange.emit(true);
-              this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                this.translate.instant('GLOBAL.info_caracteristica') + ' ' +
-                this.translate.instant('GLOBAL.confirmarCrear'));
+              if (res !== null) {
+                this.info_info_caracteristica = <InfoCaracteristica>infoCaracteristica;
+                this.loading = false;
+                this.eventChange.emit(true);
+                this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                  this.translate.instant('GLOBAL.info_caracteristica') + ' ' +
+                  this.translate.instant('GLOBAL.confirmarCrear'));
+              }
             },
               (error: HttpErrorResponse) => {
                 Swal({

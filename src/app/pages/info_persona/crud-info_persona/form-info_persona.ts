@@ -43,7 +43,6 @@ export let FORM_INFO_PERSONA = {
         },
         {
             etiqueta: 'select',
-            relacion: false,
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
             nombre: 'TipoIdentificacion',
             label_i18n: 'tipo_documento',
@@ -56,10 +55,10 @@ export let FORM_INFO_PERSONA = {
         {
             etiqueta: 'input',
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
-            nombre: 'NumeroDocumento',
+            nombre: 'NumeroIdentificacion',
             label_i18n: 'numero_documento',
             placeholder_i18n: 'numero_documento',
-            requerido: false,
+            requerido: true,
             tipo: 'text',
         },
         {
@@ -101,7 +100,6 @@ export let FORM_INFO_PERSONA = {
             nombre: 'SoporteDocumento',
             label_i18n: 'documento_identificacion',
             placeholder_i18n: 'documento_identificacion',
-            requerido: false,
             tipo: 'pdf',
             tipoDocumento: 2,
             formatos: 'pdf',
@@ -115,7 +113,6 @@ export let FORM_INFO_PERSONA = {
             nombre: 'Foto',
             label_i18n: 'foto',
             placeholder_i18n: 'foto',
-            requerido: false,
             tipo: 'image',
             tipoDocumento: 1,
             formatos: 'png/jpg/jpeg',

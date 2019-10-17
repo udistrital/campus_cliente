@@ -52,9 +52,6 @@ export class ListFormacionAcademicaComponent implements OnInit {
 
   cargarCampos() {
     this.settings = {
-      actions: {
-        columnTitle: '',
-      },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
         createButtonContent: '<i class="nb-checkmark"></i>',
@@ -68,6 +65,12 @@ export class ListFormacionAcademicaComponent implements OnInit {
       delete: {
         deleteButtonContent: '<i class="nb-trash"></i>',
         confirmDelete: true,
+      },
+      actions: {
+        columnTitle: '',
+        add: false,
+        edit: true,
+        delete: true,
       },
       mode: 'external',
       columns: {
@@ -137,12 +140,12 @@ export class ListFormacionAcademicaComponent implements OnInit {
                     element.Titulacion = programa_info;
                     element.Metodologia = programa_info.Metodologia;
                     element.NivelFormacion = programa_info.NivelFormacion;
-                    this.campusMidService.get('organizacion/identificacionente/?Ente=' + programa_info.Institucion)
+                    this.campusMidService.get('organizacion/' + programa_info.Institucion)
                       .subscribe(organizacion => {
                         if (organizacion !== null) {
                           const organizacion_info = <any>organizacion;
                           element.NombreUniversidad = organizacion_info.Nombre;
-                          this.ubicacionService.get('lugar/' + organizacion_info.Ubicacion[0].UbicacionEnte.Lugar)
+                          this.ubicacionService.get('lugar/' + organizacion_info.Ubicacion.UbicacionEnte.Lugar)
                             .subscribe(pais => {
                               if (pais !== null) {
                                 const pais_info = <any>pais;
@@ -254,7 +257,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          this.campusMidService.delete('formacion/formacionacademica/', event.data).subscribe(res => {
+          this.campusMidService.delete('formacionacademica', event.data).subscribe(res => {
             if (res !== null) {
               this.loadData();
               this.showToast('info', this.translate.instant('GLOBAL.eliminar'),

@@ -165,7 +165,7 @@
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_acad" *ngIf="info_ente_id">
+ <nb-card [hidden]="!show_acad" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -185,13 +185,13 @@
           <ngx-list-formacion-academica (result)="setPercentage_acad($event,0)"></ngx-list-formacion-academica>
         </nb-tab>
         <nb-tab tabTitle="{{ 'GLOBAL.idiomas' | translate }}">
-          <ngx-list-idiomas (result)="setPercentage_acad($event,1)"></ngx-list-idiomas>
+          <ngx-list-idiomas inscripcion_id={{this.inscripcion_id}} (result)="setPercentage_acad($event,1)"></ngx-list-idiomas>
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_expe" *ngIf="info_ente_id">
+  <!--<nb-card [hidden]="!show_expe" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -214,7 +214,7 @@
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
-  </nb-card>
+  </nb-card> -->
 <!--
   <nb-card [hidden]="!show_prod" *ngIf="info_ente_id">
     <nb-card-body>
@@ -256,7 +256,7 @@
     </nb-card-body>
   </nb-card>
 -->
-  <nb-card [hidden]="!show_docu" *ngIf="info_ente_id">
+<!--   <nb-card [hidden]="!show_docu" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -329,7 +329,7 @@
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
-  </nb-card>
+  </nb-card> -->
 
   <!--Vista de perfil------------------------------------------------------------->
 

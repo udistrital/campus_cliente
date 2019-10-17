@@ -114,7 +114,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.loading = true;
     if (this.info_persona_id !== undefined && this.info_persona_id !== 0 &&
       this.info_persona_id.toString() !== '') {
-      this.campusMidService.get('persona/ConsultaPersona/?id=' + this.info_persona_id)
+      this.campusMidService.get('persona/consultar_persona/' + this.info_persona_id)
         .subscribe(res => {
           if (res !== null) {
             const temp = <InfoPersona>res;
@@ -204,6 +204,7 @@ export class CrudInfoPersonaComponent implements OnInit {
             .subscribe(response => {
               if (Object.keys(response).length === files.length) {
                 this.filesUp = <any>response;
+
                 if (this.filesUp['Foto'] !== undefined) {
                   this.info_info_persona.Foto = this.filesUp['Foto'].Id;
                 }
@@ -211,11 +212,14 @@ export class CrudInfoPersonaComponent implements OnInit {
                   this.info_info_persona.SoporteDocumento = this.filesUp['SoporteDocumento'].Id;
                 }
                 this.info_info_persona.Usuario = this.autenticationService.getPayload().sub;
-                this.campusMidService.post('persona/GuardarPersona', this.info_info_persona)
+                console.info(JSON.stringify(this.info_info_persona));
+                this.campusMidService.post('persona/guardar_persona', this.info_info_persona)
                   .subscribe(res => {
                     const r = <any>res
+                    console.info(JSON.stringify(res));
                     if (r !== null && r.Type !== 'error') {
-                      this.info_persona_id = r.Body[5];
+
+                      this.info_persona_id = r.Id;
                       this.loadInfoPersona();
                       this.createInscripcion(this.info_persona_id);
                       this.loadInscripcion();
@@ -286,7 +290,7 @@ export class CrudInfoPersonaComponent implements OnInit {
                   const documentos_actualizados = <any>response;
                   this.info_info_persona.Foto = this.Foto;
                   this.info_info_persona.SoporteDocumento = this.SoporteDocumento;
-                  this.campusMidService.put('persona/ActualizarPersona', this.info_info_persona)
+                  this.campusMidService.put('persona/actualizar_persona', this.info_info_persona)
                     .subscribe(res => {
                       if (documentos_actualizados['Foto'] !== undefined) {
                         this.info_info_persona.Foto = documentos_actualizados['Foto'].url + '';
@@ -339,7 +343,7 @@ export class CrudInfoPersonaComponent implements OnInit {
           } else {
             this.info_info_persona.Foto = this.Foto;
             this.info_info_persona.SoporteDocumento = this.SoporteDocumento;
-            this.campusMidService.put('persona/ActualizarPersona', this.info_info_persona)
+            this.campusMidService.put('persona/actualizar_persona', this.info_info_persona)
               .subscribe(res => {
                 this.loadInfoPersona();
                 this.loading = false;
@@ -415,6 +419,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     this.inscripcionService.post('inscripcion', this.info_inscripcion)
       .subscribe(res => {
         this.info_inscripcion = <Inscripcion>res;
+        this.inscripcion_id = this.info_inscripcion.Id;
         this.eventChange.emit(true);
         Swal({
           type: 'info',

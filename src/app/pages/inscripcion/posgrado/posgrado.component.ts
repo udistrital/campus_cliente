@@ -95,7 +95,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
       this.getInfoInscripcion();
     } else {
       const ENTE = this.userService.getEnte();
-      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '') {
+      if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '' && ENTE.toString() !== 'NaN') {
         this.info_ente_id = <number>ENTE;
       } else {
         this.info_ente_id = undefined;
@@ -187,8 +187,8 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   getInfoInscripcion() {
-    this.loading = true;
     if (this.inscripcion_id !== undefined) {
+      this.loading = true;
       this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
         .subscribe(inscripcion => {
           this.info_inscripcion = <any>inscripcion;
@@ -237,6 +237,28 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   perfil_editar(event): void {
+    const ENTE = this.userService.getEnte();
+    if (ENTE !== 0 && ENTE !== undefined && ENTE.toString() !== '' && ENTE.toString() !== 'NaN' && this.info_ente_id === undefined) {
+      this.info_ente_id = <number>ENTE;
+      this.inscripcionService.get('inscripcion/?query=PersonaId:' + this.info_ente_id)
+        .subscribe(inscripcion => {
+          this.info_inscripcion = <any>inscripcion[0];
+          if (inscripcion !== null  && this.info_inscripcion.Type !== 'error') {
+            this.inscripcion_id = this.info_inscripcion.Id;
+            this.getInfoInscripcion();
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.admision'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+    }
     switch (event) {
       case 'info_contacto':
         this.show_info = true;
@@ -396,6 +418,28 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    if (this.info_ente_id !== 0 && this.info_ente_id !== undefined && this.info_ente_id.toString() !== '' &&
+      this.info_ente_id.toString() !== 'NaN') {
+      this.info_ente_id = <number>this.userService.getEnte();
+      this.inscripcionService.get('inscripcion/?query=PersonaId:' + this.info_ente_id)
+      .subscribe(inscripcion => {
+        this.info_inscripcion = <any>inscripcion[0];
+        if (inscripcion !== null  && this.info_inscripcion.Type !== 'error') {
+          this.inscripcion_id = this.info_inscripcion.Id;
+          this.getInfoInscripcion();
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.cargar') + '-' +
+              this.translate.instant('GLOBAL.admision'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
+        });
+    }
   }
 
   ngOnChanges() {
@@ -410,7 +454,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
   }
 
   datosMidPersona() {
-    this.campusMidService.get('persona/ConsultaPersona/?id=' + this.info_ente_id)
+    this.campusMidService.get('persona/consultar_persona/' + this.info_ente_id)
       .subscribe(res => {
         const r = <any>res;
         if (res !== null && r.Type !== 'error') {
@@ -522,8 +566,8 @@ export class PosgradoComponent implements OnInit, OnChanges {
 
                   pdf.text(`Nombres: ${this.datos_persona['PrimerNombre']} ${this.datos_persona['SegundoNombre']}`, 15, 68);
                   pdf.text(`Apellidos: ${this.datos_persona['PrimerApellido']} ${this.datos_persona['SegundoApellido']}`, 15, 75);
-                  pdf.text(
-                    `Documento de identificación: ${this.datos_persona['TipoIdentificacion']['CodigoAbreviacion']} ${this.datos_persona['NumeroDocumento']}`,
+                  pdf.text('Documento de identificación: ' + this.datos_persona['TipoIdentificacion']['CodigoAbreviacion'] + ' ' +
+                    this.datos_persona['NumeroIdentificacion'],
                     15, 82);
                   pdf.text(`Fecha de inscripción: ${formatDate(new Date(), 'yyyy-MM-dd', 'en')}`, 15, 89);
                   pdf.text(`Programa académico: ${this.selectedValue.Nombre}`, 15, 96);
@@ -542,7 +586,7 @@ export class PosgradoComponent implements OnInit, OnChanges {
                   pdf.text(`Teléfono (Colombia) : +57 3 323-9300`, 83, 267);
 
                   const nombre_archivo = `${this.datos_persona['PrimerNombre']}_${this.datos_persona['PrimerApellido']}_` +
-                    `${this.datos_persona['NumeroDocumento']}`;
+                    `${this.datos_persona['NumeroIdentificacion']}`;
 
                   this.loading = false;
                   pdf.save(`${nombre_archivo}.pdf`);

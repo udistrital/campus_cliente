@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { IdiomaService } from '../../../@core/data/idioma.service';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -15,10 +15,18 @@ import 'style-loader!angular2-toaster/toaster.css';
 })
 export class ListIdiomasComponent implements OnInit {
   uid: number;
+  inscripcion_id: number;
   cambiotab: boolean = false;
   config: ToasterConfig;
   settings: any;
   source: LocalDataSource = new LocalDataSource();
+
+  @Input('inscripcion_id')
+  set admision(inscripcion_id: number) {
+    if (inscripcion_id !== undefined && inscripcion_id !== 0 && inscripcion_id.toString() !== '') {
+      this.inscripcion_id = inscripcion_id;
+    }
+  }
 
   @Output() eventChange = new EventEmitter();
   @Output('result') result: EventEmitter<any> = new EventEmitter();
@@ -42,6 +50,9 @@ export class ListIdiomasComponent implements OnInit {
     this.settings = {
       actions: {
         columnTitle: '',
+        add: false,
+        edit: true,
+        delete: true,
       },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
@@ -104,10 +115,10 @@ export class ListIdiomasComponent implements OnInit {
 
   loadData(): void {
     this.loading = true;
-    this.idiomaService.get('conocimiento_idioma/?query=persona:' + this.userService.getEnte() +
+    this.idiomaService.get('conocimiento_idioma/?query=Persona:' + this.userService.getEnte() +
       '&limit=0')
       .subscribe(res => {
-        if (res !== null) {
+        if (res !== null && JSON.stringify(res[0]) !== '{}') {
           const data = <Array<any>>res;
             this.loading = false;
             this.getPercentage(1);

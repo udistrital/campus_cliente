@@ -89,7 +89,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
 
   loadOptionsPais(): void {
     let paisNacimiento: Array<any> = [];
-    this.ubicacionesService.get('lugar/?query=TipoLugar.Nombre:PAIS&limit=0')
+    this.ubicacionesService.get('lugar/?query=TipoLugar.Nombre:PAIS,Activo:true&limit=0')
       .subscribe(res => {
         if (res !== null) {
           paisNacimiento = <Array<Lugar>>res;
@@ -134,7 +134,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
     let consultaHijos: Array<any> = [];
     const ciudadUniversidad: Array<any> = [];
     if (this.paisSelecccionado) {
-      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.paisSelecccionado.Id)
+      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.paisSelecccionado.Id + ',LugarHijo.Activo:true&limit=0')
         .subscribe(res => {
           if (res !== null) {
             consultaHijos = <Array<Lugar>>res;
@@ -226,7 +226,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
 
   searchDoc(data) {
     const nit = typeof data === 'string' ? data : data.data.Nit;
-    this.campusMidService.get('organizacion/identificacion/?id=' + nit + '&tipoid=5')
+    this.campusMidService.get('organizacion/identificacion/?Id=' + nit + '&TipoId=5')
       .subscribe(res => {
         const init = this.getIndexForm('Nit');
         const inombre = this.getIndexForm('NombreEmpresa');
@@ -248,21 +248,42 @@ export class CrudFormacionAcademicaComponent implements OnInit {
               element.valor = null;
             });
         }
-        this.loadInfoPostgrados(this.organizacion.Ente.Id);
+        this.loadInfoPostgrados(this.organizacion.Ente);
         this.formInfoFormacionAcademica.campos[init].valor = this.organizacion.NumeroIdentificacion;
         this.formInfoFormacionAcademica.campos[inombre].valor = this.organizacion.Nombre;
         if (this.organizacion.Ubicacion) {
-          this.organizacion.Ubicacion.forEach(element => {
-            // identificadores del tipo de relacion y atributo para formulario
-            if (element.AtributoUbicacion.Id === 1 && element.UbicacionEnte.TipoRelacionUbicacionEnte.Id === 3) {
-              this.formInfoFormacionAcademica.campos[idir].valor = element.Valor;
-              this.formInfoFormacionAcademica.campos[ipais].opciones.forEach(e => {
-                if (e.Id === element.UbicacionEnte.Lugar) {
-                  this.formInfoFormacionAcademica.campos[ipais].valor = e;
-                }
-              });
+          // identificadores del tipo de relacion y atributo para formulario
+          if (this.organizacion.Ubicacion.AtributoUbicacion.Id === 1 && this.organizacion.Ubicacion.UbicacionEnte.TipoRelacionUbicacionEnte.Id === 3) {
+            this.formInfoFormacionAcademica.campos[idir].valor = this.organizacion.Ubicacion.Valor;
+            let existe = false;
+            this.formInfoFormacionAcademica.campos[ipais].opciones.forEach(e => {
+              if (e.Id === this.organizacion.Ubicacion.UbicacionEnte.Lugar) {
+                this.formInfoFormacionAcademica.campos[ipais].valor = e;
+                existe = true;
+              }
+            });
+            if (!existe) {
+              this.ubicacionesService.get('lugar/' + this.organizacion.Ubicacion.UbicacionEnte.Lugar)
+                .subscribe(reslugar => {
+                  if (reslugar !== null) {
+                    const lugar = <Lugar>reslugar;
+                    this.formInfoFormacionAcademica.campos[this.getIndexForm('Pais')].opciones.push(lugar);
+                    this.formInfoFormacionAcademica.campos[ipais].valor = lugar;
+                  }
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.formacion_academica') + '|' +
+                        this.translate.instant('GLOBAL.pais_universidad'),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
             }
-          });
+          }
         } else {
           this.formInfoFormacionAcademica.campos[idir].valor = null;
           this.formInfoFormacionAcademica.campos[ipais].valor = null;
@@ -311,8 +332,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
     if (this.info_formacion_academica_id !== undefined &&
       this.info_formacion_academica_id !== 0 &&
       this.info_formacion_academica_id.toString() !== '') {
-      this.campusMidService.get('formacion/formacionacademica/?id=' + this.users.getEnte() + '&idformacion=' +
-        this.info_formacion_academica_id)
+      this.campusMidService.get('formacion_academica/' + this.info_formacion_academica_id)
         .subscribe(res => {
           if (res !== null) {
             this.temp = <any>res;
@@ -324,11 +344,11 @@ export class CrudFormacionAcademicaComponent implements OnInit {
               .subscribe(response => {
                 const filesResponse = <any>response;
                 if (Object.keys(filesResponse).length === files.length) {
-                  this.programaService.get('programa_academico/?query=id:' + this.temp.Titulacion)
+                  this.programaService.get('programa_academico/?query=id:' + this.temp.Titulacion.Id)
                     .subscribe(programa => {
                       if (programa !== null) {
                         const programa_info = <ProgramaAcademico>programa[0];
-                        this.campusMidService.get('organizacion/identificacionente/?Ente=' + programa_info.Institucion)
+                        this.campusMidService.get('organizacion/' + programa_info.Institucion)
                           .subscribe(organizacion => {
                             if (organizacion !== null) {
                               const organizacion_info = <any>organizacion;
@@ -428,8 +448,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                   const documentos_actualizados = <any>response;
                   this.info_formacion_academica.Documento = this.SoporteDocumento;
                   this.info_formacion_academica.Id = this.info_formacion_academica_id;
-                  this.campusMidService.put('/formacion/formacionacademica/' +
-                    this.info_formacion_academica_id, this.info_formacion_academica)
+                  this.campusMidService.put2('formacion_academica', this.info_formacion_academica)
                     .subscribe(res => {
                       if (documentos_actualizados['Documento'] !== undefined) {
                         this.info_formacion_academica.Documento = documentos_actualizados['Documento'].url + '';
@@ -471,8 +490,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
           } else {
             this.info_formacion_academica.Documento = this.SoporteDocumento;
             this.info_formacion_academica.Id = this.info_formacion_academica_id;
-            this.campusMidService.put('/formacion/formacionacademica/' +
-              this.info_formacion_academica_id, this.info_formacion_academica)
+            this.campusMidService.put2('formacion_academica', this.info_formacion_academica)
               .subscribe(res => {
                 this.loading = false;
                 this.eventChange.emit(true);
@@ -530,7 +548,8 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                 if (this.filesUp['Documento'] !== undefined) {
                   this.info_formacion_academica.Documento = this.filesUp['Documento'].Id;
                 }
-                this.campusMidService.post('formacion/formacionacademica', this.info_formacion_academica)
+                console.info(JSON.stringify(this.info_formacion_academica));
+                this.campusMidService.post('formacion_academica/', this.info_formacion_academica)
                   .subscribe(res => {
                     const r = <any>res;
                     if (r !== null && r.Type !== 'error') {
@@ -586,8 +605,9 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   validarForm(event) {
     if (event.valid) {
       const formacion = {
-        Ente: { Id: this.ente },
-        ProgramaAcademico: event.data.InfoFormacionAcademica.ProgramaAcademico,
+        Ente: this.ente,
+        Persona: this.ente,
+        Titulacion: event.data.InfoFormacionAcademica.ProgramaAcademico,
         FechaInicio: event.data.InfoFormacionAcademica.FechaInicio,
         FechaFinalizacion: event.data.InfoFormacionAcademica.FechaFinalizacion,
         TituloTrabajoGrado: event.data.InfoFormacionAcademica.TituloTrabajoGrado,
@@ -595,7 +615,6 @@ export class CrudFormacionAcademicaComponent implements OnInit {
         Documento: event.data.InfoFormacionAcademica.Documento,
       }
       const organizacion = this.organizacion.Ente ? this.organizacion.Ente.Id : null;
-
       const org = {
         NumeroIdentificacion: event.data.InfoFormacionAcademica.Nit,
         Direccion: event.data.InfoFormacionAcademica.Direccion,
