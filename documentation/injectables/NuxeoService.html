@@ -991,7 +991,7 @@ export class NuxeoService {
                                                         documentoPost.TipoDocumento &#x3D; tipoDocumento;
                                                         documentoService.post(&#x27;documento&#x27;, documentoPost)
                                                             .subscribe(resuestaPost &#x3D;&gt; {
-                                                                nuxeoservice.documentos[file.key] &#x3D; resuestaPost.Body;
+                                                                nuxeoservice.documentos[file.key] &#x3D; resuestaPost;
                                                                 nuxeoservice.documentos$.next(nuxeoservice.documentos);
                                                             })
 

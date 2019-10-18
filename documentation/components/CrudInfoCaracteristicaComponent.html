@@ -517,7 +517,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="235" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:235</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="234" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:234</a></div>
                             </td>
                         </tr>
 
@@ -762,7 +762,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="315" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:315</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="322" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:322</a></div>
                             </td>
                         </tr>
 
@@ -876,7 +876,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="276" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:276</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="283" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:283</a></div>
                             </td>
                         </tr>
 
@@ -914,7 +914,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="290" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:290</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="297" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:297</a></div>
                             </td>
                         </tr>
 
@@ -981,7 +981,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="294" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:294</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="301" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:301</a></div>
                             </td>
                         </tr>
 
@@ -1074,7 +1074,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="195" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:195</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="194" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:194</a></div>
                             </td>
                         </tr>
 
@@ -1212,7 +1212,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="280" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:280</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="287" class="link-to-prism">src/app/pages/info_caracteristica/crud-info_caracteristica/crud-info_caracteristica.component.ts:287</a></div>
                             </td>
                         </tr>
 
@@ -1801,7 +1801,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     let consultaHijos: Array&lt;any&gt; &#x3D; [];
     const departamentoNacimiento: Array&lt;any&gt; &#x3D; [];
     if (this.paisSeleccionado) {
-      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.paisSeleccionado.Id + &#x27;&amp;limit&#x3D;0&#x27;)
+      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.paisSeleccionado.Id + &#x27;,LugarHijo.Activo:true&amp;limit&#x3D;0&#x27;)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             consultaHijos &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -1829,7 +1829,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     let consultaHijos: Array&lt;any&gt; &#x3D; [];
     const ciudadNacimiento: Array&lt;any&gt; &#x3D; [];
     if (this.departamentoSeleccionado) {
-      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.departamentoSeleccionado.Id + &#x27;&amp;limit&#x3D;0&#x27;)
+      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.departamentoSeleccionado.Id + &#x27;,LugarHijo.Activo:true&amp;limit&#x3D;0&#x27;)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             consultaHijos &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -1868,8 +1868,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
     if (this.info_caracteristica_id !&#x3D;&#x3D; undefined &amp;&amp; this.info_caracteristica_id !&#x3D;&#x3D; 0 &amp;&amp;
       this.info_caracteristica_id.toString() !&#x3D;&#x3D; &#x27;&#x27;) {
       this.denied_acces &#x3D; false;
-      this.campusMidService.get(&#x27;persona/DatosComplementarios/&#x27; + this.info_caracteristica_id +
-        &#x27;?query&#x3D;TipoRelacionUbicacionEnte:1&#x27;)
+      this.campusMidService.get(&#x27;persona/consultar_complementarios/&#x27; + this.info_caracteristica_id)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             this.datosGet &#x3D; &lt;InfoCaracteristicaGet&gt;res;
@@ -1878,10 +1877,10 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
             this.info_info_caracteristica.GrupoSanguineo &#x3D; &lt;any&gt;{ Id: this.info_info_caracteristica.GrupoSanguineo };
             this.info_info_caracteristica.Rh &#x3D; &lt;any&gt;{ Id: this.info_info_caracteristica.Rh };
             this.info_info_caracteristica.TipoRelacionUbicacionEnte &#x3D; 1;
-            this.info_info_caracteristica.IdLugarEnte &#x3D; this.datosGet.Lugar[0].Id;
-            this.info_info_caracteristica.PaisNacimiento &#x3D; this.datosGet.Lugar[0].Lugar.PAIS;
-            this.info_info_caracteristica.DepartamentoNacimiento &#x3D; this.datosGet.Lugar[0].Lugar.DEPARTAMENTO;
-            this.info_info_caracteristica.Lugar &#x3D; this.datosGet.Lugar[0].Lugar.CIUDAD;
+            this.info_info_caracteristica.IdLugarEnte &#x3D; this.datosGet.Lugar.Id;
+            this.info_info_caracteristica.PaisNacimiento &#x3D; this.datosGet.Lugar.Lugar.PAIS;
+            this.info_info_caracteristica.DepartamentoNacimiento &#x3D; this.datosGet.Lugar.Lugar.DEPARTAMENTO;
+            this.info_info_caracteristica.Lugar &#x3D; this.datosGet.Lugar.Lugar.CIUDAD;
             this.formInfoCaracteristica.campos[this.getIndexForm(&#x27;DepartamentoNacimiento&#x27;)].opciones[0] &#x3D; this.info_info_caracteristica.DepartamentoNacimiento;
             this.formInfoCaracteristica.campos[this.getIndexForm(&#x27;Lugar&#x27;)].opciones[0] &#x3D; this.info_info_caracteristica.Lugar;
             this.loading &#x3D; false;
@@ -1921,7 +1920,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
         if (willDelete.value) {
           this.loading &#x3D; true;
           this.info_info_caracteristica &#x3D; &lt;InfoCaracteristica&gt;infoCaracteristica;
-          this.campusMidService.put(&#x27;persona/DatosComplementarios&#x27;, this.info_info_caracteristica)
+          this.campusMidService.put(&#x27;persona/actualizar_complementarios&#x27;, this.info_info_caracteristica)
             .subscribe(res &#x3D;&gt; {
               this.loadInfoCaracteristica();
               this.loading &#x3D; false;
@@ -1960,17 +1959,25 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
       .then((willDelete) &#x3D;&gt; {
         this.loading &#x3D; true;
         if (willDelete.value) {
-          this.info_info_caracteristica &#x3D; &lt;InfoCaracteristica&gt;infoCaracteristica;
-          this.info_info_caracteristica.TipoRelacionUbicacionEnte &#x3D; 1;
-          this.info_info_caracteristica.Ente &#x3D; (1 * this.info_caracteristica_id);
-          this.campusMidService.post(&#x27;persona/DatosComplementarios&#x27;, this.info_info_caracteristica)
+          const info_info_caracteristica_post &#x3D; &lt;any&gt;infoCaracteristica;
+          info_info_caracteristica_post.TipoRelacionUbicacionEnte &#x3D; 1;
+          info_info_caracteristica_post.Ente &#x3D; (1 * this.info_caracteristica_id);
+          info_info_caracteristica_post.Persona &#x3D; (1 * this.info_caracteristica_id);
+          info_info_caracteristica_post.LugarAnt &#x3D; info_info_caracteristica_post.Lugar;
+          info_info_caracteristica_post.Lugar &#x3D; {
+            Lugar: info_info_caracteristica_post.LugarAnt,
+          };
+          console.info(JSON.stringify(info_info_caracteristica_post));
+          this.campusMidService.post(&#x27;persona/guardar_complementarios&#x27;, info_info_caracteristica_post)
             .subscribe(res &#x3D;&gt; {
-              this.info_info_caracteristica &#x3D; &lt;InfoCaracteristica&gt;res;
-              this.loading &#x3D; false;
-              this.eventChange.emit(true);
-              this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.crear&#x27;),
-                this.translate.instant(&#x27;GLOBAL.info_caracteristica&#x27;) + &#x27; &#x27; +
-                this.translate.instant(&#x27;GLOBAL.confirmarCrear&#x27;));
+              if (res !&#x3D;&#x3D; null) {
+                this.info_info_caracteristica &#x3D; &lt;InfoCaracteristica&gt;infoCaracteristica;
+                this.loading &#x3D; false;
+                this.eventChange.emit(true);
+                this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.crear&#x27;),
+                  this.translate.instant(&#x27;GLOBAL.info_caracteristica&#x27;) + &#x27; &#x27; +
+                  this.translate.instant(&#x27;GLOBAL.confirmarCrear&#x27;));
+              }
             },
               (error: HttpErrorResponse) &#x3D;&gt; {
                 Swal({

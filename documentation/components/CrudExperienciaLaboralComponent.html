@@ -556,7 +556,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="557" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:557</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="565" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:565</a></div>
                             </td>
                         </tr>
 
@@ -663,7 +663,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="486" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:486</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="494" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:494</a></div>
                             </td>
                         </tr>
 
@@ -732,7 +732,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="579" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:579</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="588" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:588</a></div>
                             </td>
                         </tr>
 
@@ -1112,7 +1112,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="614" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:614</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="624" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:624</a></div>
                             </td>
                         </tr>
 
@@ -1219,7 +1219,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="618" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:618</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="628" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:628</a></div>
                             </td>
                         </tr>
 
@@ -1286,7 +1286,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="680" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:680</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="690" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:690</a></div>
                             </td>
                         </tr>
 
@@ -1517,7 +1517,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="623" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:623</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="633" class="link-to-prism">src/app/pages/experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component.ts:633</a></div>
                             </td>
                         </tr>
 
@@ -2217,8 +2217,8 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           if (res !&#x3D;&#x3D; null) {
             this.temp &#x3D; &lt;any&gt;res;
             const files &#x3D; [];
-            if (this.temp.Soporte + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
-              files.push({ Id: this.temp.Soporte, key: &#x27;Soporte&#x27; });
+            if (this.temp.Documento + &#x27;&#x27; !&#x3D;&#x3D; &#x27;0&#x27;) {
+              files.push({ Id: this.temp.Documento, key: &#x27;Soporte&#x27; });
               this.nuxeoService.getDocumentoById$(files, this.documentoService)
                 .subscribe(response &#x3D;&gt; {
                   const filesResponse &#x3D; &lt;any&gt;response;
@@ -2324,7 +2324,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               .subscribe(response &#x3D;&gt; {
                 if (Object.keys(response).length &#x3D;&#x3D;&#x3D; files.length) {
                   const documentos_actualizados &#x3D; &lt;any&gt;response;
-                  this.info_experiencia_laboral.Soporte &#x3D; this.soporte;
+                  this.info_experiencia_laboral.Documento &#x3D; this.soporte;
                   this.experienciaService.put(&#x27;experiencia_laboral&#x27;, this.info_experiencia_laboral)
                     .subscribe(res &#x3D;&gt; {
                       if (documentos_actualizados[&#x27;Soporte&#x27;] !&#x3D;&#x3D; undefined) {
@@ -2506,7 +2506,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   searchOrganizacion(data: any): void {
     const nit &#x3D; typeof data &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? data : data.data.Nit;
     this.organizacion &#x3D; new Organizacion();
-    this.campusMidService.get(&#x27;organizacion/identificacion/?id&#x3D;&#x27; + nit + &#x27;&amp;tipoid&#x3D;5&#x27;)
+    this.campusMidService.get(&#x27;organizacion/identificacion/?Id&#x3D;&#x27; + nit + &#x27;&amp;TipoId&#x3D;5&#x27;)
       .subscribe(res &#x3D;&gt; {
         const init &#x3D; this.getIndexForm(&#x27;Nit&#x27;);
         const inombre &#x3D; this.getIndexForm(&#x27;NombreEmpresa&#x27;);
@@ -2538,17 +2538,16 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           }
         });
         if (this.organizacion.Ubicacion) {
-          this.organizacion.Ubicacion.forEach(element &#x3D;&gt; {
-            // identificadores del tipo de relacion y atributo para formulario
-            if (element.AtributoUbicacion.Id &#x3D;&#x3D;&#x3D; 1 &amp;&amp; element.UbicacionEnte.TipoRelacionUbicacionEnte.Id &#x3D;&#x3D;&#x3D; 3) {
-              this.formInfoExperienciaLaboral.campos[idir].valor &#x3D; element.Valor;
-              this.formInfoExperienciaLaboral.campos[ipais].opciones.forEach(e &#x3D;&gt; {
-                if (e.Id &#x3D;&#x3D;&#x3D; element.UbicacionEnte.Lugar) {
-                  this.formInfoExperienciaLaboral.campos[ipais].valor &#x3D; e;
-                }
-              });
-            }
-          });
+          // identificadores del tipo de relacion y atributo para formulario
+          if (this.organizacion.Ubicacion.AtributoUbicacion.Id &#x3D;&#x3D;&#x3D; 1 &amp;&amp;
+            this.organizacion.Ubicacion.UbicacionEnte.TipoRelacionUbicacionEnte.Id &#x3D;&#x3D;&#x3D; 3) {
+            this.formInfoExperienciaLaboral.campos[idir].valor &#x3D; this.organizacion.Ubicacion.Valor;
+            this.formInfoExperienciaLaboral.campos[ipais].opciones.forEach(e &#x3D;&gt; {
+              if (e.Id &#x3D;&#x3D;&#x3D; this.organizacion.Ubicacion.UbicacionEnte.Lugar) {
+                this.formInfoExperienciaLaboral.campos[ipais].valor &#x3D; e;
+              }
+            });
+          }
         } else {
           this.formInfoExperienciaLaboral.campos[idir].valor &#x3D; null;
           this.formInfoExperienciaLaboral.campos[ipais].valor &#x3D; null;
@@ -2586,6 +2585,15 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               this.translate.instant(&#x27;GLOBAL.nombre_empresa&#x27;),
             confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
           });
+          [this.formInfoExperienciaLaboral.campos[this.getIndexForm(&#x27;NombreEmpresa&#x27;)],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm(&#x27;TipoOrganizacion&#x27;)],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm(&#x27;Direccion&#x27;)],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm(&#x27;Correo&#x27;)],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm(&#x27;Pais&#x27;)],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm(&#x27;Telefono&#x27;)]]
+            .forEach(element &#x3D;&gt; {
+              element.deshabilitar &#x3D; element.valor ? true : false
+            });
         });
   }
 
@@ -2617,7 +2625,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               if (Object.keys(response).length &#x3D;&#x3D;&#x3D; files.length) {
                 const filesUp &#x3D; &lt;any&gt;response;
                 if (filesUp[&#x27;Soporte&#x27;] !&#x3D;&#x3D; undefined) {
-                  this.info_experiencia_laboral.Soporte &#x3D; filesUp[&#x27;Soporte&#x27;].Id;
+                  this.info_experiencia_laboral.Documento &#x3D; filesUp[&#x27;Soporte&#x27;].Id;
                 }
                 this.campusMidService.post(&#x27;experiencia_laboral/&#x27;, this.info_experiencia_laboral)
                   .subscribe(res &#x3D;&gt; {
@@ -2661,12 +2669,13 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   addUbicacionOrganizacion(ubicacion: any): void {
-    this.campusMidService.post(&#x27;persona/RegistrarUbicaciones&#x27;, ubicacion)
+    this.campusMidService.post(&#x27;organizacion/registar_ubicacion&#x27;, ubicacion)
       .subscribe(res &#x3D;&gt; {
         const r &#x3D; res as any;
         if (res !&#x3D;&#x3D; null &amp;&amp; r.Type &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) {
-          this.showToast(&#x27;error&#x27;, &#x27;error&#x27;,
-            &#x27;ocurrio un error agregando la ubicación&#x27;);
+          this.showToast(&#x27;info&#x27;, this.translate.instant(&#x27;GLOBAL.crear&#x27;),
+            this.translate.instant(&#x27;GLOBAL.nombre_empresa&#x27;) + &#x27; &#x27; +
+            this.translate.instant(&#x27;GLOBAL.confirmarCrear&#x27;));
         }
       },
         (error: HttpErrorResponse) &#x3D;&gt; {
@@ -2683,16 +2692,17 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   createOrganizacion(org: any, exp: any): void {
-    this.campusMidService.post(&#x27;organizacion&#x27;, org).subscribe(res &#x3D;&gt; {
+    console.info(JSON.stringify(org));
+    this.campusMidService.post(&#x27;organizacion/&#x27;, org).subscribe(res &#x3D;&gt; {
       const identificacion &#x3D; &lt;any&gt;res;
       if (identificacion !&#x3D;&#x3D; null &amp;&amp; identificacion.Type !&#x3D;&#x3D; &#x27;error&#x27;) {
-        exp.Organizacion &#x3D; identificacion.Body.Ente.Id;
+        exp.Organizacion &#x3D; identificacion.Ente ? identificacion.Id : null;
         const ubicacion &#x3D; {
-          Ente: identificacion.Body.Ente.Id,
+          Ente: identificacion.Ente ? identificacion.Id : null,
           Lugar: org.Pais,
           TipoRelacionUbicacionEnte: 3,
           Atributos: [{
-            AtributoUbicacion: 1,
+            AtributoUbicacion: {Id: 1},
             Valor: org.Direccion,
           }],
         };
@@ -2733,7 +2743,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
         Actividades: event.data.InfoExperienciaLaboral.Actividades,
         FechaInicio: event.data.InfoExperienciaLaboral.FechaInicio,
         FechaFinalizacion: event.data.InfoExperienciaLaboral.FechaFinalizacion,
-        Organizacion: this.organizacion.Ente ? this.organizacion.Ente.Id : null,
+        Organizacion: this.organizacion.Ente ? this.organizacion.Id : null,
         TipoDedicacion: event.data.InfoExperienciaLaboral.TipoDedicacion,
         Cargo: event.data.InfoExperienciaLaboral.Cargo,
         TipoVinculacion: event.data.InfoExperienciaLaboral.TipoVinculacion,

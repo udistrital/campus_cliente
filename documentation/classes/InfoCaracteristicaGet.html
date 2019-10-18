@@ -233,13 +233,13 @@
                 </tr>
                 <tr>
                     <td class="col-md-4">
-                        <code>Lugar:     <code>Array&lt;literal type&gt;</code>
+                        <code>Lugar:     <code>literal type</code>
 </code>
                     </td>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                            <i>Type : </i>    <code>Array&lt;literal type&gt;</code>
+                            <i>Type : </i>    <code>literal type</code>
 
                         </td>
                     </tr>
@@ -341,7 +341,7 @@ export class InfoCaracteristicaGet {
   Rh: string;
   GrupoEtnico: GrupoEtnico;
   TipoDiscapacidad: Array&lt;TipoDiscapacidad&gt;;
-  Lugar: Array&lt;{
+  Lugar: {
     Id: number;
     Lugar: {
       CIUDAD: Lugar;
@@ -351,7 +351,7 @@ export class InfoCaracteristicaGet {
     TipoRelacionUbicacionEnte: {
       Id: number;
     };
-  }&gt;;
+  };
   Ente: number;
 }
 </code></pre>

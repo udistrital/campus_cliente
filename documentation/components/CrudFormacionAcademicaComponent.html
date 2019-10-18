@@ -639,7 +639,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="503" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:503</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="521" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:521</a></div>
                             </td>
                         </tr>
 
@@ -925,7 +925,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="305" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:305</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="326" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:326</a></div>
                             </td>
                         </tr>
 
@@ -1104,7 +1104,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="577" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:577</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="596" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:596</a></div>
                             </td>
                         </tr>
 
@@ -1207,7 +1207,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="581" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:581</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="600" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:600</a></div>
                             </td>
                         </tr>
 
@@ -1274,7 +1274,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="642" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:642</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="661" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:661</a></div>
                             </td>
                         </tr>
 
@@ -1367,7 +1367,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="404" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:404</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="424" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:424</a></div>
                             </td>
                         </tr>
 
@@ -1505,7 +1505,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="586" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:586</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="605" class="link-to-prism">src/app/pages/formacion_academica/crud-formacion_academica/crud-formacion_academica.component.ts:605</a></div>
                             </td>
                         </tr>
 
@@ -2192,7 +2192,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
 
   loadOptionsPais(): void {
     let paisNacimiento: Array&lt;any&gt; &#x3D; [];
-    this.ubicacionesService.get(&#x27;lugar/?query&#x3D;TipoLugar.Nombre:PAIS&amp;limit&#x3D;0&#x27;)
+    this.ubicacionesService.get(&#x27;lugar/?query&#x3D;TipoLugar.Nombre:PAIS,Activo:true&amp;limit&#x3D;0&#x27;)
       .subscribe(res &#x3D;&gt; {
         if (res !&#x3D;&#x3D; null) {
           paisNacimiento &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -2237,7 +2237,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
     let consultaHijos: Array&lt;any&gt; &#x3D; [];
     const ciudadUniversidad: Array&lt;any&gt; &#x3D; [];
     if (this.paisSelecccionado) {
-      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.paisSelecccionado.Id)
+      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.paisSelecccionado.Id + &#x27;,LugarHijo.Activo:true&amp;limit&#x3D;0&#x27;)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             consultaHijos &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -2329,7 +2329,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
 
   searchDoc(data) {
     const nit &#x3D; typeof data &#x3D;&#x3D;&#x3D; &#x27;string&#x27; ? data : data.data.Nit;
-    this.campusMidService.get(&#x27;organizacion/identificacion/?id&#x3D;&#x27; + nit + &#x27;&amp;tipoid&#x3D;5&#x27;)
+    this.campusMidService.get(&#x27;organizacion/identificacion/?Id&#x3D;&#x27; + nit + &#x27;&amp;TipoId&#x3D;5&#x27;)
       .subscribe(res &#x3D;&gt; {
         const init &#x3D; this.getIndexForm(&#x27;Nit&#x27;);
         const inombre &#x3D; this.getIndexForm(&#x27;NombreEmpresa&#x27;);
@@ -2351,21 +2351,42 @@ export class CrudFormacionAcademicaComponent implements OnInit {
               element.valor &#x3D; null;
             });
         }
-        this.loadInfoPostgrados(this.organizacion.Ente.Id);
+        this.loadInfoPostgrados(this.organizacion.Ente);
         this.formInfoFormacionAcademica.campos[init].valor &#x3D; this.organizacion.NumeroIdentificacion;
         this.formInfoFormacionAcademica.campos[inombre].valor &#x3D; this.organizacion.Nombre;
         if (this.organizacion.Ubicacion) {
-          this.organizacion.Ubicacion.forEach(element &#x3D;&gt; {
-            // identificadores del tipo de relacion y atributo para formulario
-            if (element.AtributoUbicacion.Id &#x3D;&#x3D;&#x3D; 1 &amp;&amp; element.UbicacionEnte.TipoRelacionUbicacionEnte.Id &#x3D;&#x3D;&#x3D; 3) {
-              this.formInfoFormacionAcademica.campos[idir].valor &#x3D; element.Valor;
-              this.formInfoFormacionAcademica.campos[ipais].opciones.forEach(e &#x3D;&gt; {
-                if (e.Id &#x3D;&#x3D;&#x3D; element.UbicacionEnte.Lugar) {
-                  this.formInfoFormacionAcademica.campos[ipais].valor &#x3D; e;
-                }
-              });
+          // identificadores del tipo de relacion y atributo para formulario
+          if (this.organizacion.Ubicacion.AtributoUbicacion.Id &#x3D;&#x3D;&#x3D; 1 &amp;&amp; this.organizacion.Ubicacion.UbicacionEnte.TipoRelacionUbicacionEnte.Id &#x3D;&#x3D;&#x3D; 3) {
+            this.formInfoFormacionAcademica.campos[idir].valor &#x3D; this.organizacion.Ubicacion.Valor;
+            let existe &#x3D; false;
+            this.formInfoFormacionAcademica.campos[ipais].opciones.forEach(e &#x3D;&gt; {
+              if (e.Id &#x3D;&#x3D;&#x3D; this.organizacion.Ubicacion.UbicacionEnte.Lugar) {
+                this.formInfoFormacionAcademica.campos[ipais].valor &#x3D; e;
+                existe &#x3D; true;
+              }
+            });
+            if (!existe) {
+              this.ubicacionesService.get(&#x27;lugar/&#x27; + this.organizacion.Ubicacion.UbicacionEnte.Lugar)
+                .subscribe(reslugar &#x3D;&gt; {
+                  if (reslugar !&#x3D;&#x3D; null) {
+                    const lugar &#x3D; &lt;Lugar&gt;reslugar;
+                    this.formInfoFormacionAcademica.campos[this.getIndexForm(&#x27;Pais&#x27;)].opciones.push(lugar);
+                    this.formInfoFormacionAcademica.campos[ipais].valor &#x3D; lugar;
+                  }
+                },
+                  (error: HttpErrorResponse) &#x3D;&gt; {
+                    Swal({
+                      type: &#x27;error&#x27;,
+                      title: error.status + &#x27;&#x27;,
+                      text: this.translate.instant(&#x27;ERROR.&#x27; + error.status),
+                      footer: this.translate.instant(&#x27;GLOBAL.cargar&#x27;) + &#x27;-&#x27; +
+                        this.translate.instant(&#x27;GLOBAL.formacion_academica&#x27;) + &#x27;|&#x27; +
+                        this.translate.instant(&#x27;GLOBAL.pais_universidad&#x27;),
+                      confirmButtonText: this.translate.instant(&#x27;GLOBAL.aceptar&#x27;),
+                    });
+                  });
             }
-          });
+          }
         } else {
           this.formInfoFormacionAcademica.campos[idir].valor &#x3D; null;
           this.formInfoFormacionAcademica.campos[ipais].valor &#x3D; null;
@@ -2414,8 +2435,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
     if (this.info_formacion_academica_id !&#x3D;&#x3D; undefined &amp;&amp;
       this.info_formacion_academica_id !&#x3D;&#x3D; 0 &amp;&amp;
       this.info_formacion_academica_id.toString() !&#x3D;&#x3D; &#x27;&#x27;) {
-      this.campusMidService.get(&#x27;formacion/formacionacademica/?id&#x3D;&#x27; + this.users.getEnte() + &#x27;&amp;idformacion&#x3D;&#x27; +
-        this.info_formacion_academica_id)
+      this.campusMidService.get(&#x27;formacion_academica/&#x27; + this.info_formacion_academica_id)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             this.temp &#x3D; &lt;any&gt;res;
@@ -2427,11 +2447,11 @@ export class CrudFormacionAcademicaComponent implements OnInit {
               .subscribe(response &#x3D;&gt; {
                 const filesResponse &#x3D; &lt;any&gt;response;
                 if (Object.keys(filesResponse).length &#x3D;&#x3D;&#x3D; files.length) {
-                  this.programaService.get(&#x27;programa_academico/?query&#x3D;id:&#x27; + this.temp.Titulacion)
+                  this.programaService.get(&#x27;programa_academico/?query&#x3D;id:&#x27; + this.temp.Titulacion.Id)
                     .subscribe(programa &#x3D;&gt; {
                       if (programa !&#x3D;&#x3D; null) {
                         const programa_info &#x3D; &lt;ProgramaAcademico&gt;programa[0];
-                        this.campusMidService.get(&#x27;organizacion/identificacionente/?Ente&#x3D;&#x27; + programa_info.Institucion)
+                        this.campusMidService.get(&#x27;organizacion/&#x27; + programa_info.Institucion)
                           .subscribe(organizacion &#x3D;&gt; {
                             if (organizacion !&#x3D;&#x3D; null) {
                               const organizacion_info &#x3D; &lt;any&gt;organizacion;
@@ -2531,8 +2551,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                   const documentos_actualizados &#x3D; &lt;any&gt;response;
                   this.info_formacion_academica.Documento &#x3D; this.SoporteDocumento;
                   this.info_formacion_academica.Id &#x3D; this.info_formacion_academica_id;
-                  this.campusMidService.put(&#x27;/formacion/formacionacademica/&#x27; +
-                    this.info_formacion_academica_id, this.info_formacion_academica)
+                  this.campusMidService.put2(&#x27;formacion_academica&#x27;, this.info_formacion_academica)
                     .subscribe(res &#x3D;&gt; {
                       if (documentos_actualizados[&#x27;Documento&#x27;] !&#x3D;&#x3D; undefined) {
                         this.info_formacion_academica.Documento &#x3D; documentos_actualizados[&#x27;Documento&#x27;].url + &#x27;&#x27;;
@@ -2574,8 +2593,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
           } else {
             this.info_formacion_academica.Documento &#x3D; this.SoporteDocumento;
             this.info_formacion_academica.Id &#x3D; this.info_formacion_academica_id;
-            this.campusMidService.put(&#x27;/formacion/formacionacademica/&#x27; +
-              this.info_formacion_academica_id, this.info_formacion_academica)
+            this.campusMidService.put2(&#x27;formacion_academica&#x27;, this.info_formacion_academica)
               .subscribe(res &#x3D;&gt; {
                 this.loading &#x3D; false;
                 this.eventChange.emit(true);
@@ -2633,7 +2651,8 @@ export class CrudFormacionAcademicaComponent implements OnInit {
                 if (this.filesUp[&#x27;Documento&#x27;] !&#x3D;&#x3D; undefined) {
                   this.info_formacion_academica.Documento &#x3D; this.filesUp[&#x27;Documento&#x27;].Id;
                 }
-                this.campusMidService.post(&#x27;formacion/formacionacademica&#x27;, this.info_formacion_academica)
+                console.info(JSON.stringify(this.info_formacion_academica));
+                this.campusMidService.post(&#x27;formacion_academica/&#x27;, this.info_formacion_academica)
                   .subscribe(res &#x3D;&gt; {
                     const r &#x3D; &lt;any&gt;res;
                     if (r !&#x3D;&#x3D; null &amp;&amp; r.Type !&#x3D;&#x3D; &#x27;error&#x27;) {
@@ -2689,8 +2708,9 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   validarForm(event) {
     if (event.valid) {
       const formacion &#x3D; {
-        Ente: { Id: this.ente },
-        ProgramaAcademico: event.data.InfoFormacionAcademica.ProgramaAcademico,
+        Ente: this.ente,
+        Persona: this.ente,
+        Titulacion: event.data.InfoFormacionAcademica.ProgramaAcademico,
         FechaInicio: event.data.InfoFormacionAcademica.FechaInicio,
         FechaFinalizacion: event.data.InfoFormacionAcademica.FechaFinalizacion,
         TituloTrabajoGrado: event.data.InfoFormacionAcademica.TituloTrabajoGrado,
@@ -2698,7 +2718,6 @@ export class CrudFormacionAcademicaComponent implements OnInit {
         Documento: event.data.InfoFormacionAcademica.Documento,
       }
       const organizacion &#x3D; this.organizacion.Ente ? this.organizacion.Ente.Id : null;
-
       const org &#x3D; {
         NumeroIdentificacion: event.data.InfoFormacionAcademica.Nit,
         Direccion: event.data.InfoFormacionAcademica.Direccion,

@@ -26,8 +26,10 @@ export class ListExperienciaLaboralComponent implements OnInit {
 
   @Input('ente_id')
   set name(ente_id: number) {
-    this.eid = ente_id;
-    this.loadData();
+    if (ente_id !== undefined && ente_id !== null && ente_id.toString() !== '') {
+      this.eid = ente_id;
+      this.loadData();
+    }
   }
 
   @Output() eventChange = new EventEmitter();
@@ -38,7 +40,9 @@ export class ListExperienciaLaboralComponent implements OnInit {
 
   constructor(private translate: TranslateService, private toasterService: ToasterService,
     private experienciaService: ExperienciaService, private organizacionService: OrganizacionService) {
-    this.loadData();
+    if (this.eid !== undefined && this.eid !== null && this.eid.toString() !== '') {
+      this.loadData();
+    }
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
@@ -50,6 +54,9 @@ export class ListExperienciaLaboralComponent implements OnInit {
     this.settings = {
       actions: {
         columnTitle: '',
+        add: false,
+        edit: true,
+        delete: true,
       },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
@@ -106,7 +113,7 @@ export class ListExperienciaLaboralComponent implements OnInit {
   loadData(): void {
     this.loading = true;
     this.experienciaService.get('experiencia_laboral/?query=Persona:' + this.eid).subscribe(res => {
-      if (res !== null) {
+      if (res !== null && JSON.stringify(res[0]) !== '{}') {
         this.data = <Array<any>>res;
         this.data.forEach(element => {
           this.organizacionService.get('organizacion/?query=Ente:' + element.Organizacion).subscribe(r => {

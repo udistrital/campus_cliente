@@ -523,7 +523,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="288" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:288</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="294" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:294</a></div>
                             </td>
                         </tr>
 
@@ -768,7 +768,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="400" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:400</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="405" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:405</a></div>
                             </td>
                         </tr>
 
@@ -882,7 +882,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="361" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:361</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="366" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:366</a></div>
                             </td>
                         </tr>
 
@@ -920,7 +920,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="375" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:375</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="380" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:380</a></div>
                             </td>
                         </tr>
 
@@ -987,7 +987,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="379" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:379</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="384" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:384</a></div>
                             </td>
                         </tr>
 
@@ -1218,7 +1218,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="365" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:365</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="370" class="link-to-prism">src/app/pages/informacion_contacto/crud-informacion_contacto/crud-informacion_contacto.component.ts:370</a></div>
                             </td>
                         </tr>
 
@@ -1876,7 +1876,7 @@ export class CrudInformacionContactoComponent implements OnInit {
     let consultaHijos: Array&lt;any&gt; &#x3D; [];
     const departamentoResidencia: Array&lt;any&gt; &#x3D; [];
     if (this.paisSeleccionado) {
-      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.paisSeleccionado.Id + &#x27;&amp;limit&#x3D;0&#x27;)
+      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.paisSeleccionado.Id + &#x27;,LugarHijo.Activo:true&amp;limit&#x3D;0&#x27;)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             consultaHijos &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -1904,7 +1904,7 @@ export class CrudInformacionContactoComponent implements OnInit {
     let consultaHijos: Array&lt;any&gt; &#x3D; [];
     const ciudadResidencia: Array&lt;any&gt; &#x3D; [];
     if (this.departamentoSeleccionado) {
-      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.departamentoSeleccionado.Id + &#x27;&amp;limit&#x3D;0&#x27;)
+      this.ubicacionesService.get(&#x27;relacion_lugares/?query&#x3D;LugarPadre.Id:&#x27; + this.departamentoSeleccionado.Id + &#x27;,LugarHijo.Activo:true&amp;limit&#x3D;0&#x27;)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             consultaHijos &#x3D; &lt;Array&lt;Lugar&gt;&gt;res;
@@ -1943,41 +1943,41 @@ export class CrudInformacionContactoComponent implements OnInit {
     if (this.informacion_contacto_id !&#x3D;&#x3D; undefined &amp;&amp; this.informacion_contacto_id !&#x3D;&#x3D; 0 &amp;&amp;
       this.informacion_contacto_id.toString() !&#x3D;&#x3D; &#x27;&#x27;) {
       this.denied_acces &#x3D; false;
-      this.campusMidService.get(&#x27;persona/DatosContacto/&#x27; + this.informacion_contacto_id + &#x27;?query&#x3D;TipoRelacionUbicacionEnte:2&#x27;)
+      this.campusMidService.get(&#x27;persona/consultar_contacto/&#x27; + this.informacion_contacto_id)
         .subscribe(res &#x3D;&gt; {
           if (res !&#x3D;&#x3D; null) {
             this.datosGet &#x3D; &lt;InfoContactoGet&gt;res;
             this.info_informacion_contacto &#x3D; {
               Ente: (1 * this.informacion_contacto_id),
-              PaisResidencia: this.datosGet.UbicacionEnte[0].Lugar.PAIS,
-              DepartamentoResidencia: this.datosGet.UbicacionEnte[0].Lugar.DEPARTAMENTO,
-              CiudadResidencia: this.datosGet.UbicacionEnte[0].Lugar.CIUDAD,
-              IdLugarEnte: this.datosGet.UbicacionEnte[0].Id,
-              IdDireccionEnte: this.datosGet.UbicacionEnte[0].Atributos[1].Id,
-              DireccionResidencia: this.datosGet.UbicacionEnte[0].Atributos[1].Valor,
-              IdEstratoEnte: this.datosGet.UbicacionEnte[0].Atributos[0].Id,
-              EstratoResidencia: this.datosGet.UbicacionEnte[0].Atributos[0].Valor,
-              IdCodigoEnte: this.datosGet.UbicacionEnte[0].Atributos[2].Id,
-              CodigoPostal: &#x27;&#x27; + this.datosGet.UbicacionEnte[0].Atributos[2].Valor,
+              PaisResidencia: this.datosGet.UbicacionEnte.Lugar.PAIS,
+              DepartamentoResidencia: this.datosGet.UbicacionEnte.Lugar.DEPARTAMENTO,
+              CiudadResidencia: this.datosGet.UbicacionEnte.Lugar.CIUDAD,
+              IdLugarEnte: this.datosGet.UbicacionEnte.Id,
+              IdDireccionEnte: this.datosGet.UbicacionEnte.Atributos[1].Id,
+              DireccionResidencia: this.datosGet.UbicacionEnte.Atributos[1].Valor,
+              IdEstratoEnte: this.datosGet.UbicacionEnte.Atributos[0].Id,
+              EstratoResidencia: this.datosGet.UbicacionEnte.Atributos[0].Valor,
+              IdCodigoEnte: this.datosGet.UbicacionEnte.Atributos[2].Id,
+              CodigoPostal: &#x27;&#x27; + this.datosGet.UbicacionEnte.Atributos[2].Valor,
               IdTelefonoEnte: this.datosGet.ContactoEnte[0].Id,
               Telefono: &#x27;&#x27; + this.datosGet.ContactoEnte[0].Valor,
               IdTelefonoAlternoEnte: this.datosGet.ContactoEnte[1].Id,
               TelefonoAlterno: &#x27;&#x27; + this.datosGet.ContactoEnte[1].Valor,
             };
-            for (let i &#x3D; 0; i &lt; this.datosGet.UbicacionEnte[0].Atributos.length; i++) {
-              if (this.datosGet.UbicacionEnte[0].Atributos[i].AtributoUbicacion.Nombre &#x3D;&#x3D;&#x3D; &#x27;Dirección&#x27;) {
-                this.info_informacion_contacto.IdDireccionEnte &#x3D; this.datosGet.UbicacionEnte[0].Atributos[i].Id;
-                this.info_informacion_contacto.DireccionResidencia &#x3D; this.datosGet.UbicacionEnte[0].Atributos[i].Valor;
-              } else if (this.datosGet.UbicacionEnte[0].Atributos[i].AtributoUbicacion.Nombre &#x3D;&#x3D;&#x3D; &#x27;Estrato&#x27;) {
-                this.info_informacion_contacto.IdEstratoEnte &#x3D; this.datosGet.UbicacionEnte[0].Atributos[i].Id;
-                this.info_informacion_contacto.EstratoResidencia &#x3D; this.datosGet.UbicacionEnte[0].Atributos[i].Valor;
-              } else if (this.datosGet.UbicacionEnte[0].Atributos[i].AtributoUbicacion.Nombre &#x3D;&#x3D;&#x3D; &#x27;Código postal&#x27;) {
-                this.info_informacion_contacto.IdCodigoEnte &#x3D; this.datosGet.UbicacionEnte[0].Atributos[i].Id;
-                this.info_informacion_contacto.CodigoPostal &#x3D; this.datosGet.UbicacionEnte[0].Atributos[i].Valor;
+            for (let i &#x3D; 0; i &lt; this.datosGet.UbicacionEnte.Atributos.length; i++) {
+              if (this.datosGet.UbicacionEnte.Atributos[i].AtributoUbicacion.Nombre &#x3D;&#x3D;&#x3D; &#x27;Dirección&#x27;) {
+                this.info_informacion_contacto.IdDireccionEnte &#x3D; this.datosGet.UbicacionEnte.Atributos[i].Id;
+                this.info_informacion_contacto.DireccionResidencia &#x3D; this.datosGet.UbicacionEnte.Atributos[i].Valor;
+              } else if (this.datosGet.UbicacionEnte.Atributos[i].AtributoUbicacion.Nombre &#x3D;&#x3D;&#x3D; &#x27;Estrato&#x27;) {
+                this.info_informacion_contacto.IdEstratoEnte &#x3D; this.datosGet.UbicacionEnte.Atributos[i].Id;
+                this.info_informacion_contacto.EstratoResidencia &#x3D; this.datosGet.UbicacionEnte.Atributos[i].Valor;
+              } else if (this.datosGet.UbicacionEnte.Atributos[i].AtributoUbicacion.Nombre &#x3D;&#x3D;&#x3D; &#x27;Código postal&#x27;) {
+                this.info_informacion_contacto.IdCodigoEnte &#x3D; this.datosGet.UbicacionEnte.Atributos[i].Id;
+                this.info_informacion_contacto.CodigoPostal &#x3D; this.datosGet.UbicacionEnte.Atributos[i].Valor;
               }
             }
 
-            this.formInformacionContacto.campos[this.getIndexForm(&#x27;DepartamentoResidencia&#x27;)].opciones[0] &#x3D; this.datosGet.UbicacionEnte[0].Lugar.DEPARTAMENTO;
+            this.formInformacionContacto.campos[this.getIndexForm(&#x27;DepartamentoResidencia&#x27;)].opciones[0] &#x3D; this.datosGet.UbicacionEnte.Lugar.DEPARTAMENTO;
             this.formInformacionContacto.campos[this.getIndexForm(&#x27;CiudadResidencia&#x27;)].opciones[0] &#x3D; this.info_informacion_contacto.CiudadResidencia;
             this.loading &#x3D; false;
           }
@@ -2018,13 +2018,16 @@ export class CrudInformacionContactoComponent implements OnInit {
           this.info_informacion_contacto &#x3D; &lt;InformacionContacto&gt;informacionContacto;
           this.datosPut &#x3D; &lt;InfoContactoPut&gt;{
             Ente: (1 * this.info_informacion_contacto.Ente),
+            Persona: (1 * this.info_informacion_contacto.Ente),
             ContactoEnte: [
               {
                 Id: this.info_informacion_contacto.IdTelefonoEnte,
+                TipoContacto: {Id: 1},
                 Valor: &#x27;&#x27; + this.info_informacion_contacto.Telefono,
               },
               {
                 Id: this.info_informacion_contacto.IdTelefonoAlternoEnte,
+                TipoContacto: {Id: 2},
                 Valor: &#x27;&#x27; + this.info_informacion_contacto.TelefonoAlterno,
               },
             ],
@@ -2036,19 +2039,22 @@ export class CrudInformacionContactoComponent implements OnInit {
               Atributos: [
                 {
                   Id: this.info_informacion_contacto.IdDireccionEnte,
+                  AtributoUbicacion: {Id: 1},
                   Valor: this.info_informacion_contacto.DireccionResidencia,
                 },
                 {
                   Id: this.info_informacion_contacto.IdEstratoEnte,
+                  AtributoUbicacion: {Id: 2},
                   Valor: &#x27;&#x27; + this.info_informacion_contacto.EstratoResidencia,
                 }, {
                   Id: this.info_informacion_contacto.IdCodigoEnte,
+                  AtributoUbicacion: {Id: 3},
                   Valor: this.info_informacion_contacto.CodigoPostal,
                 },
               ],
             },
           };
-          this.campusMidService.put(&#x27;persona/DatosContacto&#x27;, this.datosPut)
+          this.campusMidService.put(&#x27;persona/actualizar_contacto&#x27;, this.datosPut)
             .subscribe(res &#x3D;&gt; {
               this.loadInformacionContacto();
               this.loading &#x3D; false;
@@ -2091,38 +2097,37 @@ export class CrudInformacionContactoComponent implements OnInit {
           this.info_informacion_contacto.Ente &#x3D; this.informacion_contacto_id;
           this.datosPost &#x3D; {
             &#x27;Ente&#x27;: (1 * this.info_informacion_contacto.Ente.valueOf()),
+            &#x27;Persona&#x27;: (1 * this.info_informacion_contacto.Ente.valueOf()),
             &#x27;ContactoEnte&#x27;: [
               {
-                &#x27;TipoContacto&#x27;: 1,
+                &#x27;TipoContacto&#x27;: {&#x27;Id&#x27;: 1},
                 &#x27;Valor&#x27;: &#x27;&#x27; + this.info_informacion_contacto.Telefono,
               },
               {
-                &#x27;TipoContacto&#x27;: 2,
+                &#x27;TipoContacto&#x27;: {&#x27;Id&#x27;: 2},
                 &#x27;Valor&#x27;: &#x27;&#x27; + this.info_informacion_contacto.TelefonoAlterno,
               },
             ],
             &#x27;UbicacionEnte&#x27;: {
-              &#x27;Lugar&#x27;: {
-                &#x27;Id&#x27;: this.info_informacion_contacto.CiudadResidencia.Id,
-              },
+              &#x27;Lugar&#x27;: this.info_informacion_contacto.CiudadResidencia,
               &#x27;TipoRelacionUbicacionEnte&#x27;: 2,
               &#x27;Atributos&#x27;: [
                 {
-                  &#x27;AtributoUbicacion&#x27;: 1,
+                  &#x27;AtributoUbicacion&#x27;: {&#x27;Id&#x27;: 1},
                   &#x27;Valor&#x27;: this.info_informacion_contacto.DireccionResidencia,
                 },
                 {
-                  &#x27;AtributoUbicacion&#x27;: 2,
+                  &#x27;AtributoUbicacion&#x27;: {&#x27;Id&#x27;: 2},
                   &#x27;Valor&#x27;: &#x27;&#x27; + this.info_informacion_contacto.EstratoResidencia,
                 },
                 {
-                  &#x27;AtributoUbicacion&#x27;: 3,
+                  &#x27;AtributoUbicacion&#x27;: {&#x27;Id&#x27;: 3},
                   &#x27;Valor&#x27;: this.info_informacion_contacto.CodigoPostal,
                 },
               ],
             },
           };
-          this.campusMidService.post(&#x27;persona/DatosContacto/&#x27;, this.datosPost)
+          this.campusMidService.post(&#x27;persona/guardar_contacto/&#x27;, this.datosPost)
             .subscribe(res &#x3D;&gt; {
               this.info_informacion_contacto &#x3D; &lt;InformacionContacto&gt;res;
               this.loading &#x3D; false;

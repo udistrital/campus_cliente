@@ -111,8 +111,8 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           if (res !== null) {
             this.temp = <any>res;
             const files = [];
-            if (this.temp.Soporte + '' !== '0') {
-              files.push({ Id: this.temp.Soporte, key: 'Soporte' });
+            if (this.temp.Documento + '' !== '0') {
+              files.push({ Id: this.temp.Documento, key: 'Soporte' });
               this.nuxeoService.getDocumentoById$(files, this.documentoService)
                 .subscribe(response => {
                   const filesResponse = <any>response;
@@ -218,7 +218,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               .subscribe(response => {
                 if (Object.keys(response).length === files.length) {
                   const documentos_actualizados = <any>response;
-                  this.info_experiencia_laboral.Soporte = this.soporte;
+                  this.info_experiencia_laboral.Documento = this.soporte;
                   this.experienciaService.put('experiencia_laboral', this.info_experiencia_laboral)
                     .subscribe(res => {
                       if (documentos_actualizados['Soporte'] !== undefined) {
@@ -400,7 +400,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   searchOrganizacion(data: any): void {
     const nit = typeof data === 'string' ? data : data.data.Nit;
     this.organizacion = new Organizacion();
-    this.campusMidService.get('organizacion/identificacion/?id=' + nit + '&tipoid=5')
+    this.campusMidService.get('organizacion/identificacion/?Id=' + nit + '&TipoId=5')
       .subscribe(res => {
         const init = this.getIndexForm('Nit');
         const inombre = this.getIndexForm('NombreEmpresa');
@@ -432,17 +432,16 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           }
         });
         if (this.organizacion.Ubicacion) {
-          this.organizacion.Ubicacion.forEach(element => {
-            // identificadores del tipo de relacion y atributo para formulario
-            if (element.AtributoUbicacion.Id === 1 && element.UbicacionEnte.TipoRelacionUbicacionEnte.Id === 3) {
-              this.formInfoExperienciaLaboral.campos[idir].valor = element.Valor;
-              this.formInfoExperienciaLaboral.campos[ipais].opciones.forEach(e => {
-                if (e.Id === element.UbicacionEnte.Lugar) {
-                  this.formInfoExperienciaLaboral.campos[ipais].valor = e;
-                }
-              });
-            }
-          });
+          // identificadores del tipo de relacion y atributo para formulario
+          if (this.organizacion.Ubicacion.AtributoUbicacion.Id === 1 &&
+            this.organizacion.Ubicacion.UbicacionEnte.TipoRelacionUbicacionEnte.Id === 3) {
+            this.formInfoExperienciaLaboral.campos[idir].valor = this.organizacion.Ubicacion.Valor;
+            this.formInfoExperienciaLaboral.campos[ipais].opciones.forEach(e => {
+              if (e.Id === this.organizacion.Ubicacion.UbicacionEnte.Lugar) {
+                this.formInfoExperienciaLaboral.campos[ipais].valor = e;
+              }
+            });
+          }
         } else {
           this.formInfoExperienciaLaboral.campos[idir].valor = null;
           this.formInfoExperienciaLaboral.campos[ipais].valor = null;
@@ -480,6 +479,15 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               this.translate.instant('GLOBAL.nombre_empresa'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
+          [this.formInfoExperienciaLaboral.campos[this.getIndexForm('NombreEmpresa')],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm('TipoOrganizacion')],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Direccion')],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Correo')],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Pais')],
+          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Telefono')]]
+            .forEach(element => {
+              element.deshabilitar = element.valor ? true : false
+            });
         });
   }
 
@@ -511,7 +519,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               if (Object.keys(response).length === files.length) {
                 const filesUp = <any>response;
                 if (filesUp['Soporte'] !== undefined) {
-                  this.info_experiencia_laboral.Soporte = filesUp['Soporte'].Id;
+                  this.info_experiencia_laboral.Documento = filesUp['Soporte'].Id;
                 }
                 this.campusMidService.post('experiencia_laboral/', this.info_experiencia_laboral)
                   .subscribe(res => {
@@ -555,12 +563,13 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   addUbicacionOrganizacion(ubicacion: any): void {
-    this.campusMidService.post('persona/RegistrarUbicaciones', ubicacion)
+    this.campusMidService.post('organizacion/registar_ubicacion', ubicacion)
       .subscribe(res => {
         const r = res as any;
         if (res !== null && r.Type === 'error') {
-          this.showToast('error', 'error',
-            'ocurrio un error agregando la ubicación');
+          this.showToast('info', this.translate.instant('GLOBAL.crear'),
+            this.translate.instant('GLOBAL.nombre_empresa') + ' ' +
+            this.translate.instant('GLOBAL.confirmarCrear'));
         }
       },
         (error: HttpErrorResponse) => {
@@ -577,16 +586,17 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   createOrganizacion(org: any, exp: any): void {
-    this.campusMidService.post('organizacion', org).subscribe(res => {
+    console.info(JSON.stringify(org));
+    this.campusMidService.post('organizacion/', org).subscribe(res => {
       const identificacion = <any>res;
       if (identificacion !== null && identificacion.Type !== 'error') {
-        exp.Organizacion = identificacion.Body.Ente.Id;
+        exp.Organizacion = identificacion.Ente ? identificacion.Id : null;
         const ubicacion = {
-          Ente: identificacion.Body.Ente.Id,
+          Ente: identificacion.Ente ? identificacion.Id : null,
           Lugar: org.Pais,
           TipoRelacionUbicacionEnte: 3,
           Atributos: [{
-            AtributoUbicacion: 1,
+            AtributoUbicacion: {Id: 1},
             Valor: org.Direccion,
           }],
         };
@@ -627,7 +637,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
         Actividades: event.data.InfoExperienciaLaboral.Actividades,
         FechaInicio: event.data.InfoExperienciaLaboral.FechaInicio,
         FechaFinalizacion: event.data.InfoExperienciaLaboral.FechaFinalizacion,
-        Organizacion: this.organizacion.Ente ? this.organizacion.Ente.Id : null,
+        Organizacion: this.organizacion.Ente ? this.organizacion.Id : null,
         TipoDedicacion: event.data.InfoExperienciaLaboral.TipoDedicacion,
         Cargo: event.data.InfoExperienciaLaboral.Cargo,
         TipoVinculacion: event.data.InfoExperienciaLaboral.TipoVinculacion,
