@@ -42,7 +42,10 @@ export class CrudDocumentoProgramaComponent implements OnInit {
   @Input('inscripcion_id')
   set info2(inscripcion_id: number) {
     this.inscripcion = inscripcion_id;
-    this.loadOptionsTipodocumentoprograma();
+    if (this.inscripcion !== undefined && this.inscripcion !== null && this.inscripcion !== 0 &&
+      this.inscripcion.toString() !== '') {
+        this.loadOptionsTipodocumentoprograma();
+    }
   }
 
   @Output() eventChange = new EventEmitter();
@@ -286,7 +289,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
                   const documentos_actualizados = <any>response;
                   this.info_documento_programa.DocumentoId = this.Documento;
                   this.info_documento_programa.Id = this.documento_programa_id;
-                  this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoPrograma;
+                  this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoProgramaId;
                   this.documentoProgramaService.put('soporte_documento_programa', this.info_documento_programa)
                     .subscribe(res => {
                       if (documentos_actualizados['SoporteDocumentoPrograma'] !== undefined) {
@@ -330,7 +333,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
             console.info(JSON.stringify(this.Documento));
             this.info_documento_programa.DocumentoId = this.Documento;
             this.info_documento_programa.Id = this.documento_programa_id;
-            this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoPrograma;
+            this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoProgramaId;
             this.documentoProgramaService.put('soporte_documento_programa', this.info_documento_programa)
               .subscribe(res => {
                 this.loading = false;
@@ -361,11 +364,11 @@ export class CrudDocumentoProgramaComponent implements OnInit {
 
   crearNuevoDocumentoPrograma(documentoPrograma: any): void {
     this.info_documento_programa = <SoporteDocumentoPrograma>documentoPrograma;
-    const documentoProgramaDocumento = this.info_documento_programa.DocumentoPrograma.Id;
+    const documentoProgramaDocumento = this.info_documento_programa.DocumentoProgramaId.Id;
     this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' + this.persona +
       '&limit=0')
       .subscribe(res => {
-        if (res !== null) {
+        if (res !== null && JSON.stringify(res[0]) !== '{}') {
           if (Object.keys(res).length !== 0) {
             this.valido = true;
             this.documentoTemp = <SoporteDocumentoPrograma>res;
@@ -424,7 +427,7 @@ export class CrudDocumentoProgramaComponent implements OnInit {
           const files = [];
           this.info_documento_programa = <SoporteDocumentoPrograma>documentoPrograma;
           this.info_documento_programa.PersonaId = 1 * this.persona;
-          this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoPrograma;
+          this.info_documento_programa.DocumentoProgramaId = this.info_documento_programa.DocumentoProgramaId;
           if (this.info_documento_programa.Documento.file !== undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: 'SoporteDocumentoPrograma',

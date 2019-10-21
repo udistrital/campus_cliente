@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { UbicacionService } from '../../../@core/data/ubicacion.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
-import { ProgramaAcademicoService } from '../../../@core/data/programa_academico.service';
 import { UserService } from '../../../@core/data/users.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -31,7 +30,6 @@ export class ViewFormacionAcademicaComponent implements OnInit {
     private translate: TranslateService,
     private ubicacionesService: UbicacionService,
     private campusMidService: CampusMidService,
-    private programaService: ProgramaAcademicoService,
     private users: UserService) {
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
     });
@@ -44,26 +42,18 @@ export class ViewFormacionAcademicaComponent implements OnInit {
   }
 
   loadData(): void {
-    this.campusMidService.get('formacion/formacionacademicaente/?Ente=' + this.ente)
+    this.campusMidService.get('formacion_academica/?Ente=' + this.ente)
       .subscribe(res => {
         if (res !== null) {
           const data = <Array<any>>res;
           const data_info = <Array<any>>[];
           data.forEach(element => {
-            if (element.Titulacion !== null && element.Titulacion !== undefined) {
-              this.programaService.get('programa_academico/?query=id:' + element.Titulacion)
-                .subscribe(programa => {
-                  if (programa !== null) {
-                    const programa_info = <any>programa[0];
-                    element.Titulacion = programa_info;
-                    element.Metodologia = programa_info.Metodologia;
-                    element.NivelFormacion = programa_info.NivelFormacion;
-                    this.campusMidService.get('organizacion/identificacionente/?Ente=' + programa_info.Institucion)
-                      .subscribe(organizacion => {
+            this.campusMidService.get('organizacion/' + element.Institucion.Id)
+              .subscribe(organizacion => {
                         if (organizacion !== null) {
                           const organizacion_info = <any>organizacion;
                           element.NombreUniversidad = organizacion_info.Nombre;
-                          this.ubicacionesService.get('lugar/' + organizacion_info.Ubicacion[0].UbicacionEnte.Lugar)
+                          this.ubicacionesService.get('lugar/' + organizacion_info.Ubicacion.UbicacionEnte.Lugar)
                             .subscribe(pais => {
                               if (pais !== null) {
                                 const pais_info = <any>pais;
@@ -84,32 +74,18 @@ export class ViewFormacionAcademicaComponent implements OnInit {
                                 });
                               });
                         }
-                      },
-                        (error: HttpErrorResponse) => {
-                          Swal({
-                            type: 'error',
-                            title: error.status + '',
-                            text: this.translate.instant('ERROR.' + error.status),
-                            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                              this.translate.instant('GLOBAL.formacion_academica') + '|' +
-                              this.translate.instant('GLOBAL.nombre_universidad'),
-                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                          });
-                        });
-                  }
-                },
-                  (error: HttpErrorResponse) => {
-                    Swal({
-                      type: 'error',
-                      title: error.status + '',
-                      text: this.translate.instant('ERROR.' + error.status),
-                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                        this.translate.instant('GLOBAL.formacion_academica') + '|' +
-                        this.translate.instant('GLOBAL.programa_academico'),
-                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                    });
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.formacion_academica') + '|' +
+                      this.translate.instant('GLOBAL.nombre_universidad'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                   });
-            }
+                });
           });
         }
       },

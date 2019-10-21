@@ -4,10 +4,11 @@
   <nb-card-body class="row container">
     <div class="col-md-12">
       <ul>
-        <li *ngFor="let lugar of info_info_caracteristica.Lugar">
+        <li *ngIf="info_info_caracteristica.Lugar">
           <label><strong>{{"GLOBAL.lugar_nacimiento" | translate}}: </strong></label>
-          {{lugar.Lugar.CIUDAD.Nombre}} / {{lugar.Lugar.DEPARTAMENTO.Nombre}} /
-          {{lugar.Lugar.PAIS.Nombre}}
+          {{info_info_caracteristica.Lugar.Lugar.PAIS.Nombre}} / 
+          {{info_info_caracteristica.Lugar.Lugar.DEPARTAMENTO.Nombre}} / 
+          {{info_info_caracteristica.Lugar.Lugar.CIUDAD.Nombre}}
         </li>
         <li><label><strong> {{"GLOBAL.grupo_sanguineo" | translate}}
               {{"GLOBAL.rh" | translate}}: </strong></label>

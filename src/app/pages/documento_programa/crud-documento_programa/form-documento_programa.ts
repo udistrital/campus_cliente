@@ -9,7 +9,7 @@ export let FORM_DOCUMENTO_PROGRAMA = {
     {
       etiqueta: 'select',
       claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
-      nombre: 'DocumentoPrograma',
+      nombre: 'DocumentoProgramaId',
       label_i18n: 'tipo_documento_programa',
       placeholder_i18n: 'tipo_documento_programa',
       requerido: true,

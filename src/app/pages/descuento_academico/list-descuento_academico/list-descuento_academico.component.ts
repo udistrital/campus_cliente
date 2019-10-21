@@ -36,7 +36,10 @@ export class ListDescuentoAcademicoComponent implements OnInit {
   @Input('inscripcion_id')
   set info2(info2: number) {
     this.inscripcion = info2;
-    this.loadData();
+    if (this.inscripcion !== undefined && this.inscripcion !== null && this.inscripcion !== 0 &&
+      this.inscripcion.toString() !== '') {
+      this.loadData();
+    }
   }
 
   @Output() eventChange = new EventEmitter();
@@ -61,6 +64,9 @@ export class ListDescuentoAcademicoComponent implements OnInit {
     this.settings = {
       actions: {
         columnTitle: '',
+        add: false,
+        edit: true,
+        delete: true,
       },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
@@ -78,11 +84,11 @@ export class ListDescuentoAcademicoComponent implements OnInit {
       },
       mode: 'external',
       columns: {
-        DescuentoDependencia: {
+        DescuentosDependenciaId: {
           title: this.translate.instant('GLOBAL.tipo_descuento_matricula'),
           width: '100%',
           valuePrepareFunction: (value) => {
-            return value.TipoDescuento.Nombre;
+            return value.TipoDescuentoId.Nombre;
           },
         },
       },
@@ -107,12 +113,13 @@ export class ListDescuentoAcademicoComponent implements OnInit {
             descuentosdependencia.forEach(element => {
               this.descuentoService.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element.Id + ',PersonaId:' + this.persona + '&limit=0')
                 .subscribe(solicitud => {
-                  if (solicitud !== null) {
+                  if (solicitud !== null && JSON.stringify(solicitud[0]) !== '{}') {
                     this.solicituddescuento = <any>solicitud[0];
                     if (this.solicituddescuento.Id !== undefined && this.solicituddescuento.Id !== null) {
                       const id_aux = this.solicituddescuento.Id;
-                      this.mid.get('descuentoacademico/descuentoacademico/?Id=' + this.persona + '&idsolicitud=' + id_aux)
+                      this.mid.get('descuento_academico/?PersonaId=' + this.persona + '&SolicitudId=' + id_aux)
                         .subscribe(res => {
+                          console.info(JSON.stringify(res))
                           if (res !== null) {
                             this.data.push(<SolicitudDescuento>res);
                             this.loading = false;
@@ -197,7 +204,7 @@ export class ListDescuentoAcademicoComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          this.mid.delete('descuentoacademico/descuentoacademico', event.data).subscribe(res => {
+          this.mid.delete('descuento_academico', event.data).subscribe(res => {
             if (res !== null) {
               this.loadData();
               this.showToast('info', this.translate.instant('GLOBAL.eliminar'),

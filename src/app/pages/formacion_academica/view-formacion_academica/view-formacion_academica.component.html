@@ -11,16 +11,16 @@
                                     - {{formacion.FechaFinalizacion |
                                     date:'dd/MM/yyyy'}} </b></p>
                             <p><b>{{formacion.PaisUniversidad}}</b></p>
-                            <p><b>{{formacion.NivelFormacion.Nombre}}</b></p>
-                            <p><b>{{formacion.Metodologia.Nombre}}</b></p>
+                            <p><b>{{formacion.Titulacion.NivelFormacion.Nombre}}</b></p>
+                            <p><b>{{formacion.Titulacion.Metodologia.Nombre}}</b></p>
                         </td>
                         <td>
                             <p>{{formacion.NombreUniversidad}}</p>
-                            <p>{{formacion.Titulacion.Titulacion.Nombre}}</p>
+                            <p>{{formacion.Titulacion.Nombre}}</p>
                             <p><b>{{"GLOBAL.titulo_trabajo_grado" | translate}}:
                                 </b>{{formacion.TituloTrabajoGrado}} -
                                 {{formacion.DescripcionTrabajoGrado}}</p>
-                            <p></p>
+                            <p>(<a [href]=formacion.Documento download="formacion.pdf">{{"GLOBAL.soporte_documento" | translate}}</a>)</p>
                         </td>
                     </tr>
                 </tbody>

@@ -33,7 +33,10 @@ export class CrudPropuestaGradoComponent implements OnInit {
   @Input('propuesta_grado_id')
   set name(propuesta_grado_id: number) {
     this.propuesta_grado_id = propuesta_grado_id;
-    this.buscarID_prop();
+    if (this.propuesta_grado_id !== undefined && this.propuesta_grado_id !== null && this.propuesta_grado_id !== 0 &&
+      this.propuesta_grado_id.toString() !== '') {
+      this.buscarID_prop();
+    }
   }
 
   @Input('persona_id')
@@ -44,8 +47,11 @@ export class CrudPropuestaGradoComponent implements OnInit {
   @Input('inscripcion_id')
   set info2(inscripcion_id: number) {
     this.inscripcion_id = inscripcion_id;
-    console.info('InscripcionPro: ' + this.inscripcion_id);
-    this.loadPropuestaGrado();
+    if (this.inscripcion_id !== undefined && this.inscripcion_id !== null && this.inscripcion_id !== 0 &&
+      this.inscripcion_id.toString() !== '') {
+      console.info('InscripcionPro: ' + this.inscripcion_id);
+      this.loadPropuestaGrado();
+    }
   }
 
   @Output() eventChange = new EventEmitter();
@@ -76,7 +82,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
     });
     this.listService.findGrupoInvestigacion();
     this.listService.findTipoProyecto();
-    this.loading = false;
     this.loadLists();
   }
 
@@ -162,7 +167,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
       this.propuesta_grado_id.toString() !== '') {
       this.inscripcionService.get('propuesta/' + this.propuesta_grado_id)
         .subscribe(res => {
-          if (res !== null) {
+          if (res !== null && JSON.stringify(res[0]) !== '{}') {
             const temp = <PropuestaGrado>res[0];
             const files9 = []
             if (temp.DocumentoId + '' !== '0') {
@@ -171,7 +176,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
             this.nuxeoService.getDocumentoById$(files9, this.documentoService)
               .subscribe(response_2 => {
                 const filesResponse_2 = <any>response_2;
-                console.info(JSON.stringify(filesResponse_2));
                 if ((Object.keys(filesResponse_2).length !== 0) && (filesResponse_2['FormatoProyecto'] !== undefined)) {
                   temp.FormatoProyecto = filesResponse_2['FormatoProyecto'] + '';
                   this.FormatoProyecto = temp.DocumentoId;
@@ -187,7 +191,6 @@ export class CrudPropuestaGradoComponent implements OnInit {
                               .subscribe(linea => {
                                 if (linea !== null) {
                                   temp.LineaInvestigacion.LineaInvestigacion = <any>linea;
-                                  console.info(JSON.stringify(temp.LineaInvestigacion));
                                   temp.LineaInvestigacion.Nombre = temp.LineaInvestigacion.LineaInvestigacion.Nombre;
                                   this.formPropuestaGrado.campos[this.getIndexForm('LineaInvestigacion')].opciones.push(temp.LineaInvestigacion);
                                   temp.TipoProyecto = temp.TipoProyectoId;
@@ -268,12 +271,12 @@ export class CrudPropuestaGradoComponent implements OnInit {
   }
 
   public loadPropuestaGrado(): void {
-    this.loading = true;
     if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 &&
       this.inscripcion_id.toString() !== '') {
+      this.loading = true;
       this.inscripcionService.get('propuesta/?query=InscripcionId:' + this.inscripcion_id)
         .subscribe(res => {
-          if (res !== null) {
+          if (res !== null && JSON.stringify(res[0]) !== '{}') {
             const temp = <PropuestaGrado>res[0];
             const files9 = []
             if (temp.DocumentoId + '' !== '0') {
@@ -507,7 +510,7 @@ export class CrudPropuestaGradoComponent implements OnInit {
                 this.info_propuesta_grado.TipoProyectoId = this.info_propuesta_grado.TipoProyecto;
                 this.info_propuesta_grado.GrupoInvestigacionLineaInvestigacionId = this.info_propuesta_grado.LineaInvestigacion.Id;
                 this.info_propuesta_grado.InscripcionId = <Inscripcion>{Id: 1 * this.inscripcion_id};
-                this.inscripcionService.post('propuesta', this.info_propuesta_grado)
+                this.inscripcionService.post('propuesta/', this.info_propuesta_grado)
                   .subscribe(res => {
                     const r = <any>res;
                     if (r !== null && r.Type !== 'error') {

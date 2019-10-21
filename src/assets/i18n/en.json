@@ -225,7 +225,8 @@
     "repetir_documentos": "You are trying to enter a document already selected",
     "carga_datos": "Recharge the page or close and open the window again to successfully load your data",
     "nativo_examen": "You cannot choose the native language for the exam",
-    "doble_examen": "You cannot choose two languages for the exam"
+    "doble_examen": "You cannot choose two languages for the exam",
+    "no_encontrado": "The organization is not found, please fill in the information to register it in the system"
   },
   "FOOTER": {
     "copyright": "© Copyright 2019. | Website created and managed by Planestic-UD | Academic Vice Rectory",

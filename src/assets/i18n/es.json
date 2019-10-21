@@ -225,7 +225,8 @@
     "repetir_documentos": "Intenta ingresar un documento ya seleccionado",
     "carga_datos": "Recargue la página o cierre y abra de nuevo la ventana para poder cargar exitosamente sus datos",
     "nativo_examen": "No puede elegir el idioma nativo para el examen",
-    "doble_examen": "No puede elegir dos idiomas para el examen"
+    "doble_examen": "No puede elegir dos idiomas para el examen",
+    "no_encontrado": "No se encuentra la organización, por favor diligencie los datos para registrarla en el sistema"
   },
   "FOOTER": {
     "copyright": "© Copyright 2019. | Sitio creado y administrado por Planestic-UD | Vicerrectoría Académica",

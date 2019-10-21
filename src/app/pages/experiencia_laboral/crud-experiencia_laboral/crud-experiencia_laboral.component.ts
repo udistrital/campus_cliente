@@ -470,26 +470,47 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           });
       },
         (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.experiencia_laboral') + '|' +
-              this.translate.instant('GLOBAL.nombre_empresa'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-          [this.formInfoExperienciaLaboral.campos[this.getIndexForm('NombreEmpresa')],
-          this.formInfoExperienciaLaboral.campos[this.getIndexForm('TipoOrganizacion')],
-          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Direccion')],
-          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Correo')],
-          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Pais')],
-          this.formInfoExperienciaLaboral.campos[this.getIndexForm('Telefono')]]
-            .forEach(element => {
-              element.deshabilitar = element.valor ? true : false
+          if (error.status === 200 || error.status.toString() === '200') {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.no_encontrado'),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.experiencia_laboral') + '|' +
+                this.translate.instant('GLOBAL.nombre_empresa'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
             });
+            [this.formInfoExperienciaLaboral.campos[this.getIndexForm('NombreEmpresa')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('TipoOrganizacion')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Direccion')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Correo')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Pais')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Telefono')]]
+              .forEach(element => {
+                element.deshabilitar = element.valor ? true : false
+              });
+          } else {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.experiencia_laboral') + '|' +
+                this.translate.instant('GLOBAL.nombre_empresa'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+            [this.formInfoExperienciaLaboral.campos[this.getIndexForm('NombreEmpresa')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('TipoOrganizacion')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Direccion')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Correo')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Pais')],
+            this.formInfoExperienciaLaboral.campos[this.getIndexForm('Telefono')]]
+              .forEach(element => {
+                element.deshabilitar = element.valor ? true : false
+              });
+          }
         });
-  }
+    }
 
   createInfoExperienciaLaboral(infoExperienciaLaboral: any): void {
     const opt: any = {

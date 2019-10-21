@@ -42,7 +42,7 @@ export class ViewInformacionContactoComponent implements OnInit {
   public loadInformacionContacto(): void {
     if (this.informacion_contacto_id !== undefined && this.informacion_contacto_id !== 0 &&
       this.informacion_contacto_id.toString() !== '') {
-      this.campusMidService.get('persona/DatosContacto/' + this.informacion_contacto_id + '/?query=TipoRelacionUbicacionEnte.CodigoAbreviacion:LR')
+      this.campusMidService.get('persona/consultar_contacto/' + this.informacion_contacto_id)
         .subscribe(res => {
           const r = <any>res;
           if (r !== null && r.Type !== 'error') {

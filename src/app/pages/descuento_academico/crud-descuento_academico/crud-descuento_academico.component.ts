@@ -46,8 +46,11 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
   @Input('inscripcion_id')
   set info2(inscripcion_id: number) {
     this.inscripcion = inscripcion_id;
-    console.info('InscripcionDes: ' + this.inscripcion);
-    this.loadOptionsTipoDescuento();
+    if (this.inscripcion !== undefined && this.inscripcion !== null && this.inscripcion !== 0 &&
+      this.inscripcion.toString() !== '') {
+        console.info('InscripcionDes: ' + this.inscripcion);
+        this.loadOptionsTipoDescuento();
+    }
   }
 
   @Output() eventChange = new EventEmitter();
@@ -171,21 +174,22 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
     if (this.descuento_academico_id !== undefined &&
       this.descuento_academico_id !== 0 &&
       this.descuento_academico_id.toString() !== '') {
-        this.mid.get('descuentoacademico/descuentoacademico/?Id=' + this.persona + '&idsolicitud=' + this.descuento_academico_id)
+        this.mid.get('descuento_academico/?PersonaId=' + this.persona + '&SolicitudId=' + this.descuento_academico_id)
           .subscribe(solicitud => {
             if (solicitud !== null) {
               this.temp = <SolicitudDescuento>solicitud;
               const files = [];
-              if (this.temp.Documento + '' !== '0') {
-                files.push({ Id: this.temp.Documento, key: 'SoporteDescuento' });
+              if (this.temp.DocumentoId + '' !== '0') {
+                files.push({ Id: this.temp.DocumentoId, key: 'SoporteDescuento' });
               }
               this.nuxeoService.getDocumentoById$(files, this.documentoService)
                 .subscribe(response => {
                   const filesResponse = <any>response;
                   if (Object.keys(filesResponse).length === files.length) {
-                    this.SoporteDescuento = this.temp.Documento;
+                    this.SoporteDescuento = this.temp.DocumentoId;
                     this.temp.Documento = filesResponse['SoporteDescuento'] + '';
                     this.info_descuento_academico = this.temp;
+                    this.info_descuento_academico.DescuentoDependencia = this.temp.DescuentosDependenciaId;
                     this.info_descuento_academico.Periodo = this.periodo;
                     this.info_descuento_academico.Documento = filesResponse['SoporteDescuento'] + '';
                     this.loading = false;
@@ -249,10 +253,12 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
               .subscribe(response => {
                 if (Object.keys(response).length === files.length) {
                   const documentos_actualizados = <any>response;
-                  this.info_descuento_academico.Documento = this.SoporteDescuento;
+                  this.info_descuento_academico.DocumentoId = this.SoporteDescuento;
                   this.info_descuento_academico.Id = this.descuento_academico_id;
-                  this.info_descuento_academico.Periodo = this.periodo;
-                  this.mid.put2('descuentoacademico/descuentoacademico', this.info_descuento_academico)
+                  this.info_descuento_academico.PeriodoId = this.periodo;
+                  this.info_descuento_academico.PersonaId = (1 * this.persona);
+                  this.info_descuento_academico.DescuentosDependenciaId = this.info_descuento_academico.DescuentoDependencia;
+                  this.mid.put2('descuento_academico', this.info_descuento_academico)
                     .subscribe(res => {
                       if (documentos_actualizados['SoporteDescuento'] !== undefined) {
                         this.info_descuento_academico.Documento = documentos_actualizados['SoporteDescuento'].url + '';
@@ -292,9 +298,13 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                   });
                 });
           } else {
-            this.info_descuento_academico.SoporteDescuento = this.SoporteDescuento;
+            this.info_descuento_academico.DocumentoId = this.SoporteDescuento;
             this.info_descuento_academico.Id = this.descuento_academico_id;
-            this.mid.put2('descuentoacademico/descuentoacademico', this.info_descuento_academico)
+            this.info_descuento_academico.PeriodoId = this.periodo;
+            this.info_descuento_academico.PersonaId = (1 * this.persona);
+            this.info_descuento_academico.DescuentosDependenciaId = this.info_descuento_academico.DescuentoDependencia;
+
+            this.mid.put2('descuento_academico', this.info_descuento_academico)
               .subscribe(res => {
                 this.loading = false;
                 this.eventChange.emit(true);
@@ -375,7 +385,6 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
                                       this.translate.instant('GLOBAL.descuento_matricula'),
                                     confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                                   });
-                                  this.eventChange.emit(true);
                                   this.clean = !this.clean;
                                 }
                           },
@@ -448,8 +457,9 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
         if (willDelete.value) {
           const files = [];
           this.info_descuento_academico = <SolicitudDescuento>DescuentoAcademico;
-          this.info_descuento_academico.Persona = 1 * this.persona;
-          this.info_descuento_academico.Periodo = this.periodo;
+          this.info_descuento_academico.PersonaId = 1 * this.persona;
+          this.info_descuento_academico.PeriodoId = this.periodo;
+          this.info_descuento_academico.DescuentosDependenciaId = this.info_descuento_academico.DescuentoDependencia;
           if (this.info_descuento_academico.Documento.file !== undefined) {
             files.push({
               nombre: this.autenticationService.getPayload().sub, key: 'SoporteDescuento',
@@ -461,9 +471,9 @@ export class CrudDescuentoAcademicoComponent implements OnInit {
               if (Object.keys(response).length === files.length) {
                 const filesUp = <any>response;
                 if (filesUp['SoporteDescuento'] !== undefined) {
-                  this.info_descuento_academico.Documento = filesUp['SoporteDescuento'].Id;
+                  this.info_descuento_academico.DocumentoId = filesUp['SoporteDescuento'].Id;
                 }
-                this.mid.post('descuentoacademico/descuentoacademico', this.info_descuento_academico)
+                this.mid.post('descuento_academico/', this.info_descuento_academico)
                   .subscribe(res => {
                     const r = <any>res
                     if (r !== null && r.Type !== 'error') {

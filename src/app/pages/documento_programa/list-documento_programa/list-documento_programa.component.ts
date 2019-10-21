@@ -37,9 +37,10 @@ export class ListDocumentoProgramaComponent implements OnInit {
   @Input('inscripcion_id')
   set info2(info2: number) {
     this.inscripcion = info2;
-    if (this.inscripcion !== null && this.inscripcion !== 0 && this.inscripcion.toString() !== '') {
-      this.getDocumentosPrograma();
-      this.loadData();
+    if (this.inscripcion !== undefined && this.inscripcion !== null && this.inscripcion !== 0 &&
+      this.inscripcion.toString() !== '') {
+        this.getDocumentosPrograma();
+        this.loadData();
     }
   }
 
@@ -64,6 +65,9 @@ export class ListDocumentoProgramaComponent implements OnInit {
     this.settings = {
       actions: {
         columnTitle: '',
+        add: false,
+        edit: true,
+        delete: true,
       },
       add: {
         addButtonContent: '<i class="nb-plus"></i>',
@@ -101,26 +105,28 @@ export class ListDocumentoProgramaComponent implements OnInit {
     this.inscripcionService.get('inscripcion/' + this.inscripcion)
       .subscribe(dato_inscripcion => {
         const inscripciondata = <any>dato_inscripcion;
-        const programa = inscripciondata.ProgramaAcademicoId;
-        const periodo = inscripciondata.PeriodoId;
-        this.documentoProgramaService.get('documento_programa/?query=ProgramaId:' + programa +
-          ',PeriodoId:' + periodo + '&limit=0')
-          .subscribe(documentoPrograma => {
-            if (documentoPrograma !== null) {
-              const docProgramas = <Array<any>>documentoPrograma;
-              this.contador = docProgramas.length;
-            }
-          },
-            (error: HttpErrorResponse) => {
-              Swal({
-                type: 'error',
-                title: error.status + '',
-                text: this.translate.instant('ERROR.' + error.status),
-                footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                  this.translate.instant('GLOBAL.documento_programa'),
-                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+        if (dato_inscripcion !== null && JSON.stringify(dato_inscripcion[0]) !== '{}') {
+          const programa = inscripciondata.ProgramaAcademicoId;
+          const periodo = inscripciondata.PeriodoId;
+          this.documentoProgramaService.get('documento_programa/?query=ProgramaId:' + programa +
+            ',PeriodoId:' + periodo + '&limit=0')
+            .subscribe(documentoPrograma => {
+              if (documentoPrograma !== null && JSON.stringify(documentoPrograma[0]) !== '{}') {
+                const docProgramas = <Array<any>>documentoPrograma;
+                this.contador = docProgramas.length;
+              }
+            },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                    this.translate.instant('GLOBAL.documento_programa'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
               });
-            });
+        }
       },
         (error: HttpErrorResponse) => {
           Swal({
@@ -145,19 +151,19 @@ export class ListDocumentoProgramaComponent implements OnInit {
         this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' +
           this.persona + '&limit=0')
           .subscribe(res => {
-            if (res !== null) {
+            if (res !== null && JSON.stringify(res[0]) !== '{}') {
               this.data = <Array<any>>res;
               this.data.forEach(element => {
                 this.documentoProgramaService.get('documento_programa/' + element.DocumentoProgramaId.Id)
                   .subscribe(documentoPrograma => {
-                    if (documentoPrograma !== null) {
+                    if (documentoPrograma !== null && JSON.stringify(documentoPrograma[0]) !== '{}') {
                       this.programaDocumento =  <Array<any>>documentoPrograma;
-                      if (this.programaDocumento.PeriodoId = this.periodo) {
+                      if (this.programaDocumento.PeriodoId === this.periodo) {
                         element.DocumentoPrograma = this.programaDocumento;
                         this.documentoProgramaService.get('tipo_documento_programa/' +
                           this.programaDocumento.TipoDocumentoProgramaId.Id)
                           .subscribe(tipoDocumentoPrograma => {
-                            if (tipoDocumentoPrograma !== null) {
+                            if (tipoDocumentoPrograma !== null && JSON.stringify(tipoDocumentoPrograma[0]) !== '{}') {
                               this.tipoProgramaDocumento =  <Array<any>>tipoDocumentoPrograma;
                               element.DocumentoPrograma.TipoDocumentoPrograma = this.tipoProgramaDocumento;
                               this.loading = false;
