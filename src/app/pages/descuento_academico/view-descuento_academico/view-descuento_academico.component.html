@@ -7,10 +7,11 @@
         <tbody *ngIf="info_descuento">
           <tr *ngFor="let descuento of info_descuento">
             <td>
-              <p>{{descuento.DescuentoDependencia.TipoDescuento.Nombre}}</p>
+              <p>{{descuento.DescuentosDependenciaId.TipoDescuentoId.Nombre}}</p>
             </td>
             <td>
-              <p>{{descuento.Documento}}</p>
+              <p>(<a [href]=descuento.DocumentoId download="{{descuento.DescuentosDependenciaId.TipoDescuentoId.Nombre}}.pdf">
+                {{"GLOBAL.soporte_documento" | translate}}</a>)</p>
             </td>
           </tr>
         </tbody>

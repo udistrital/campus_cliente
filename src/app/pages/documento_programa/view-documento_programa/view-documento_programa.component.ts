@@ -3,6 +3,9 @@ import { DocumentoProgramaService } from '../../../@core/data/documentos_program
 import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { UserService } from '../../../@core/data/users.service';
+import { NuxeoService } from '../../../@core/utils/nuxeo.service';
+import { DocumentoService } from '../../../@core/data/documento.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
@@ -18,17 +21,19 @@ export class ViewDocumentoProgramaComponent implements OnInit {
   info_documento_programa: any;
   programaDocumento: any;
   data: Array<any>;
+  documentosSoporte = [];
 
   @Input('persona_id')
   set info(info: number) {
     this.ente = info;
-    this.loadData();
   }
 
   @Input('inscripcion_id')
   set info2(info2: number) {
     this.inscripcion_id = info2;
-    this.loadData();
+    if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 && this.inscripcion_id.toString() !== '') {
+      this.loadData();
+    }
   }
 
   @Output('url_editar') url_editar: EventEmitter<boolean> = new EventEmitter();
@@ -36,6 +41,9 @@ export class ViewDocumentoProgramaComponent implements OnInit {
   constructor(private translate: TranslateService,
     private documentoProgramaService: DocumentoProgramaService,
     private inscripcionService: InscripcionService,
+    private documentoService: DocumentoService,
+    private nuxeoService: NuxeoService,
+    private sanitization: DomSanitizer,
     private users: UserService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       });
@@ -46,30 +54,65 @@ export class ViewDocumentoProgramaComponent implements OnInit {
     this.translate.use(language);
   }
 
+  public cleanURL(oldURL: string): SafeResourceUrl {
+    return this.sanitization.bypassSecurityTrustUrl(oldURL);
+  }
+
   loadData(): void {
     this.info_documento_programa = <any>[];
     this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
       .subscribe(dato_inscripcion => {
         const inscripciondata = <any>dato_inscripcion;
         this.periodo_id = inscripciondata.PeriodoId;
+        const programa = inscripciondata.ProgramaAcademicoId;
         this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' + this.ente +
+          ',DocumentoProgramaId.PeriodoId:' + this.periodo_id + ',DocumentoProgramaId.ProgramaId:' + programa +
           '&limit=0')
           .subscribe(res => {
             if (res !== null) {
               this.data = <Array<any>>res;
-              this.data.forEach(element => {
-              this.documentoProgramaService.get('documento_programa/' + element.DocumentoProgramaId.Id)
-                .subscribe(documentoPrograma => {
-                  if (documentoPrograma !== null) {
-                    this.programaDocumento =  <any>documentoPrograma;
-                    if (this.programaDocumento.PeriodoId === this.periodo_id) {
-                      element.DocumentoPrograma = this.programaDocumento;
-                      this.documentoProgramaService.get('tipo_documento_programa/' +
-                        this.programaDocumento.TipoDocumentoProgramaId.Id)
-                        .subscribe(tipoDocumentoPrograma => {
-                          if (tipoDocumentoPrograma !== null) {
-                            element.TipoDocumentoPrograma = <any>tipoDocumentoPrograma;
-                            this.info_documento_programa.push(element);
+              const soportes = [];
+
+              for (let i = 0; i < this.data.length; i++) {
+                if (this.data[i].DocumentoId + '' !== '0') {
+                  soportes.push({ Id: this.data[i].DocumentoId, key: 'DocumentoSop' + i });
+                }
+              }
+
+              this.nuxeoService.getDocumentoById$(soportes, this.documentoService)
+              .subscribe(response => {
+                this.documentosSoporte = <Array<any>>response;
+
+                if (Object.values(this.documentosSoporte).length === this.data.length) {
+                    let contador = 0;
+                    this.data.forEach(element => {
+                      this.documentoProgramaService.get('documento_programa/' + element.DocumentoProgramaId.Id)
+                        .subscribe(documentoPrograma => {
+                          if (documentoPrograma !== null) {
+                            this.programaDocumento =  <any>documentoPrograma;
+                            if (this.programaDocumento.PeriodoId === this.periodo_id) {
+                              element.DocumentoPrograma = this.programaDocumento;
+                              this.documentoProgramaService.get('tipo_documento_programa/' +
+                                this.programaDocumento.TipoDocumentoProgramaId.Id)
+                                .subscribe(tipoDocumentoPrograma => {
+                                  if (tipoDocumentoPrograma !== null) {
+                                    element.TipoDocumentoPrograma = <any>tipoDocumentoPrograma;
+                                    element.DocumentoId = this.cleanURL(this.documentosSoporte['DocumentoSop' + contador] + '');
+                                    contador++;
+                                    this.info_documento_programa.push(element);
+                                  }
+                                },
+                                  (error: HttpErrorResponse) => {
+                                    Swal({
+                                      type: 'error',
+                                      title: error.status + '',
+                                      text: this.translate.instant('ERROR.' + error.status),
+                                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                        this.translate.instant('GLOBAL.tipo_documento_programa'),
+                                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                    });
+                                  });
+                            }
                           }
                         },
                           (error: HttpErrorResponse) => {
@@ -78,24 +121,24 @@ export class ViewDocumentoProgramaComponent implements OnInit {
                               title: error.status + '',
                               text: this.translate.instant('ERROR.' + error.status),
                               footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                                this.translate.instant('GLOBAL.tipo_documento_programa'),
+                                this.translate.instant('GLOBAL.documento_programa'),
                               confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                             });
                           });
-                    }
+                    });
                   }
                 },
-                  (error: HttpErrorResponse) => {
-                    Swal({
-                      type: 'error',
-                      title: error.status + '',
-                      text: this.translate.instant('ERROR.' + error.status),
-                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                        this.translate.instant('GLOBAL.documento_programa'),
-                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                    });
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.documento_programa') + '|' +
+                      this.translate.instant('GLOBAL.soporte_documento'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                   });
-              });
+                });
             }
           },
             (error: HttpErrorResponse) => {

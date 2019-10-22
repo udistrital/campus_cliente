@@ -74,7 +74,6 @@ export class ViewInfoPersonaComponent implements OnInit {
               .subscribe(response => {
                 this.foto = this.cleanURL(response['Foto'] + '');
                 this.soporteDocumento = this.cleanURL(response['SoporteDocumento'] + '');
-                console.info(this.soporteDocumento);
               },
                 (error: HttpErrorResponse) => {
                   Swal({

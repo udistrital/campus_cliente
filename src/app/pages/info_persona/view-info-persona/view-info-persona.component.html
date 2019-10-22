@@ -22,7 +22,7 @@
           class="ion-edit"></i>{{"GLOBAL.actualizar" | translate}}</span>
     </div>
     <div class="col-md-6 col-sm-6 col-xs-12 pull-right">
-      <img class="user-picture img-tumbnail" [src]="foto">
+        <a [href]=foto download="{{info_info_persona.NumeroIdentificacion}}.jpg"><img class="user-picture img-tumbnail" [src]="foto"></a>
     </div>
   </nb-card-body>
 </nb-card>

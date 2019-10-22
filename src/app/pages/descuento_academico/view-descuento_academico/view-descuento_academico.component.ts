@@ -1,9 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DescuentoAcademicoService } from '../../../@core/data/descuento_academico.service';
 import { InscripcionService } from '../../../@core/data/inscripcion.service';
 import { SolicitudDescuento } from '../../../@core/data/models/solicitud_descuento';
-import { DescuentoDependencia } from '../../../@core/data/models/descuento_dependencia';
-import { TipoDescuento } from '../../../@core/data/models/tipo_descuento';
+import { NuxeoService } from '../../../@core/utils/nuxeo.service';
+import { DocumentoService } from '../../../@core/data/documento.service';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -22,26 +23,35 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
   info_temp: any;
   data: Array<any>;
   solicituddescuento: SolicitudDescuento;
+  documentosSoporte = [];
 
   @Input('persona_id')
   set info(info: number) {
     this.persona = info;
-    this.loadData();
   }
 
   @Input('inscripcion_id')
   set info2(info2: number) {
     this.inscripcion = info2;
-    this.loadData();
+    if (this.inscripcion !== undefined && this.inscripcion !== 0 && this.inscripcion.toString() !== '') {
+      this.loadData();
+    }
   }
 
   @Output('url_editar') url_editar: EventEmitter<boolean> = new EventEmitter();
 
   constructor(private translate: TranslateService,
-    private descuento: DescuentoAcademicoService,
+    private mid: CampusMidService,
+    private documentoService: DocumentoService,
+    private nuxeoService: NuxeoService,
+    private sanitization: DomSanitizer,
     private inscripciones: InscripcionService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       });
+  }
+
+  public cleanURL(oldURL: string): SafeResourceUrl {
+    return this.sanitization.bypassSecurityTrustUrl(oldURL);
   }
 
   useLanguage(language: string) {
@@ -54,35 +64,31 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
         const inscripciondata = <any>dato_inscripcion;
         this.programa = inscripciondata.ProgramaAcademicoId;
         this.periodo = inscripciondata.PeriodoId;
-        this.descuento.get('descuentos_dependencia/?query=DependenciaId:' + this.programa +
-          ',PeriodoId:' + this.periodo + '&limit=0')
+        this.mid.get('descuento_academico/descuentopersonaperiododependencia/?PersonaId=' + this.persona +
+          '&DependenciaId=' + this.programa + '&PeriodoId=' + this.periodo)
           .subscribe(descuentos => {
-            const descuentosdependencia = <Array<any>>descuentos;
-            this.data = [];
-            descuentosdependencia.forEach(element => {
-              this.descuento.get('solicitud_descuento/?query=DescuentosDependenciaId:' + element.Id)
-                .subscribe(solicitud => {
-                  this.solicituddescuento = <any>solicitud[0];
-                  if (this.solicituddescuento !== null) {
-                    const id_aux = this.solicituddescuento;
-                    this.descuento.get('tipo_descuento/' + element.TipoDescuentoId.Id)
-                      .subscribe(tipo => {
-                        this.info_temp = <SolicitudDescuento>this.solicituddescuento;
-                        this.info_temp = id_aux;
-                        this.info_temp.DescuentoDependencia = <DescuentoDependencia>element;
-                        this.info_temp.DescuentoDependencia.TipoDescuento = <TipoDescuento>tipo;
-                        this.data.push(this.info_temp);
-                        this.info_descuento = this.data;
-                      },
-                        (error: HttpErrorResponse) => {
-                          Swal({
-                            type: 'error',
-                            title: error.status + '',
-                            text: this.translate.instant('ERROR.' + error.status),
-                            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                              this.translate.instant('GLOBAL.tipo_descuento_matricula'),
-                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                        });
+            if (descuentos !== null) {
+              this.data = <Array<any>>descuentos;
+              const soportes = [];
+
+              for (let i = 0; i < this.data.length; i++) {
+                if (this.data[i].DocumentoId + '' !== '0') {
+                  soportes.push({ Id: this.data[i].DocumentoId, key: 'DocumentoDes' + i });
+                }
+              }
+
+              this.nuxeoService.getDocumentoById$(soportes, this.documentoService)
+                .subscribe(response => {
+                  this.documentosSoporte = <Array<any>>response;
+
+                  if (Object.values(this.documentosSoporte).length === this.data.length) {
+                    let contador = 0;
+                    this.info_descuento = <any>[];
+
+                    this.data.forEach(element => {
+                      element.DocumentoId = this.cleanURL(this.documentosSoporte['DocumentoDes' + contador] + '');
+                      contador++;
+                      this.info_descuento.push(element);
                     });
                   }
                 },
@@ -92,11 +98,11 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
                       title: error.status + '',
                       text: this.translate.instant('ERROR.' + error.status),
                       footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                        this.translate.instant('GLOBAL.descuento_matricula'),
+                        this.translate.instant('GLOBAL.documento_programa'),
                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                     });
-                });
-            });
+                  });
+            }
           },
             (error: HttpErrorResponse) => {
               Swal({
