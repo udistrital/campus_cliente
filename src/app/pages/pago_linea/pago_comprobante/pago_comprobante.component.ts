@@ -85,7 +85,7 @@ export class PagoComprobanteComponent implements OnInit {
     this.loading = true;
     this.recibos.get('pago_recibo/?query=ReciboId:' + this.recibo_id)
       .subscribe(res_pago => {
-        if (res_pago !== null) {
+        if (res_pago !== null && JSON.stringify(res_pago[0]).toString() !== '{}') {
           const pago = <any>res_pago[0];
           if (res_pago !== null && pago.Type !== 'error') {
             if (pago.Aprobado) {
@@ -95,14 +95,14 @@ export class PagoComprobanteComponent implements OnInit {
             }
             const files = []
             if (pago.Comprobante + '' !== '0') {
-              files.push({ Id: pago.Comprobante, key: 'SoporteDocumento' });
+              files.push({ Id: pago.Comprobante, key: 'SoportePago' });
             }
             this.nuxeoService.getDocumentoById$(files, this.documentoService)
               .subscribe(response => {
                 const filesResponse = <any>response;
                 if (Object.keys(filesResponse).length === files.length) {
                   this.SoporteDocumento = pago.Comprobante;
-                  pago.Comprobante = filesResponse['SoporteDocumento'] + '';
+                  pago.Comprobante = filesResponse['SoportePago'] + '';
                   this.info_comprobante = <any>pago;
                   this.loading = false;
                 }
@@ -154,7 +154,7 @@ export class PagoComprobanteComponent implements OnInit {
             files.push({
               nombre: this.autenticationService.getPayload().sub,
               name: this.autenticationService.getPayload().sub,
-              key: 'SoporteDocumento',
+              key: 'SoportePago',
               file: this.info_comprobante.Comprobante.file, IdDocumento: 8,
             });
           }
@@ -162,8 +162,8 @@ export class PagoComprobanteComponent implements OnInit {
             .subscribe(response => {
               if (Object.keys(response).length === files.length) {
                 this.filesUp = <any>response;
-                if (this.filesUp['SoporteDocumento'] !== undefined) {
-                  this.info_comprobante.Comprobante = this.filesUp['SoporteDocumento'].Id;
+                if (this.filesUp['SoportePago'] !== undefined) {
+                  this.info_comprobante.Comprobante = this.filesUp['SoportePago'].Id;
                 }
                 this.inscripcion.get('inscripcion/' + this.inscripcion_id)
                   .subscribe(res_inscripcion => {
@@ -179,8 +179,8 @@ export class PagoComprobanteComponent implements OnInit {
                       this.recibos.post('recibo', recibo).subscribe(res_recibo => {
                         const res_rec = <any>res_recibo;
                         if (res_recibo !== null && res_rec.Type !== 'error') {
-                          info_inscripcion.ReciboInscripcionId = res_rec.Body.Id;
-                          this.recibo_id = res_rec.Body.Id;
+                          info_inscripcion.ReciboInscripcionId = res_rec.Id;
+                          this.recibo_id = res_rec.Id;
                           this.inscripcion.put('inscripcion', info_inscripcion)
                             .subscribe(res => {
                               if (res !== null) {
@@ -280,7 +280,7 @@ export class PagoComprobanteComponent implements OnInit {
           this.info_comprobante = <any>infoPago;
           const files = [];
           if (this.info_comprobante.Comprobante.file !== undefined) {
-            files.push({ file: this.info_comprobante.Comprobante.file, documento: this.SoporteDocumento, key: 'SoporteDocumento' });
+            files.push({ file: this.info_comprobante.Comprobante.file, documento: this.SoporteDocumento, key: 'SoportePago' });
           }
           if (files.length !== 0) {
             this.nuxeoService.updateDocument$(files, this.documentoService)
@@ -291,8 +291,8 @@ export class PagoComprobanteComponent implements OnInit {
                   this.info_comprobante.FechaPago = new Date();
                   this.recibos.put('pago_recibo', this.info_comprobante)
                     .subscribe(res => {
-                      if (documentos_actualizados['SoporteDocumento'] !== undefined) {
-                        this.info_comprobante.Comprobante = documentos_actualizados['SoporteDocumento'].url + '';
+                      if (documentos_actualizados['SoportePago'] !== undefined) {
+                        this.info_comprobante.Comprobante = documentos_actualizados['SoportePago'].url + '';
                       }
                       this.loading = false;
                       this.eventChange.emit(true);

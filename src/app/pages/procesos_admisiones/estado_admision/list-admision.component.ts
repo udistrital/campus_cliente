@@ -36,7 +36,9 @@ export class ListAdmisionComponent implements OnInit {
     private userService: UserService,
     private programaService: ProgramaOikosService) {
     this.ente = this.userService.getEnte();
-    this.loadData();
+    if (this.ente !== 0 && this.ente !== undefined && this.ente.toString() !== '' && this.ente.toString() !== 'NaN') {
+      this.loadData();
+    }
     this.cargarCampos();
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       this.cargarCampos();
@@ -158,8 +160,10 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   onDelete(event): void {
-    this.uid2 = event.data.Id;
-    this.activetab2();
+    if (event.data.EstadoInscripcionId.Id === 2) {
+      this.uid2 = event.data.Id;
+      this.activetab2();
+    }
   }
 
   onCreate(event): void {

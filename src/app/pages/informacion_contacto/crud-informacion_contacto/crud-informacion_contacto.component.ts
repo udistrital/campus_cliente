@@ -27,7 +27,10 @@ export class CrudInformacionContactoComponent implements OnInit {
   @Input('informacion_contacto_id')
   set name(informacion_contacto_id: number) {
     this.informacion_contacto_id = informacion_contacto_id;
-    this.loadInformacionContacto();
+    if (this.informacion_contacto_id !== undefined && this.informacion_contacto_id !== 0 &&
+      this.informacion_contacto_id.toString() !== '') {
+      this.loadInformacionContacto();
+    }
   }
 
   @Output() eventChange = new EventEmitter();

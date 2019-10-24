@@ -9,13 +9,13 @@
             <td>
               <p>{{documento.TipoDocumentoPrograma.Nombre}}</p>
             </td>
-            <td>
+            <td *ngIf="documento.DocumentoId !== undefined">
               <p>(<a [href]=documento.DocumentoId download="{{documento.TipoDocumentoPrograma.Nombre}}.pdf">{{"GLOBAL.soporte_documento" | translate}}</a>)</p>
             </td>
           </tr>
         </tbody>
       </table>
-      <span *ngIf="url_editar" (click)="editar()" class="link">
+      <span *ngIf="url_editar && (estado_inscripcion < 2)" (click)="editar()" class="link">
         <i class="ion-edit"></i>{{"GLOBAL.actualizar" | translate}}</span>
     </div>
   </nb-card-body>

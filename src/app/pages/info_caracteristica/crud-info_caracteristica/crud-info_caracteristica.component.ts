@@ -26,7 +26,10 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
   @Input('info_caracteristica_id')
   set name(info_caracteristica_id: number) {
     this.info_caracteristica_id = info_caracteristica_id;
-    this.loadInfoCaracteristica();
+    if (this.info_caracteristica_id !== undefined && this.info_caracteristica_id !== 0 &&
+      this.info_caracteristica_id.toString() !== '') {
+      this.loadInfoCaracteristica();
+    }
   }
 
   @Output() eventChange = new EventEmitter();

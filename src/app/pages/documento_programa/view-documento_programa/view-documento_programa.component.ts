@@ -18,10 +18,11 @@ export class ViewDocumentoProgramaComponent implements OnInit {
   ente: number;
   inscripcion_id: number;
   periodo_id: number;
+  estado_inscripcion: number;
   info_documento_programa: any;
   programaDocumento: any;
-  data: Array<any>;
-  documentosSoporte = [];
+  dataSop: Array<any>;
+  docSoporte = [];
 
   @Input('persona_id')
   set info(info: number) {
@@ -41,8 +42,8 @@ export class ViewDocumentoProgramaComponent implements OnInit {
   constructor(private translate: TranslateService,
     private documentoProgramaService: DocumentoProgramaService,
     private inscripcionService: InscripcionService,
-    private documentoService: DocumentoService,
-    private nuxeoService: NuxeoService,
+    private docService: DocumentoService,
+    private nuxeo: NuxeoService,
     private sanitization: DomSanitizer,
     private users: UserService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -65,41 +66,43 @@ export class ViewDocumentoProgramaComponent implements OnInit {
         const inscripciondata = <any>dato_inscripcion;
         this.periodo_id = inscripciondata.PeriodoId;
         const programa = inscripciondata.ProgramaAcademicoId;
+        this.estado_inscripcion = inscripciondata.EstadoInscripcionId.Id;
         this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' + this.ente +
           ',DocumentoProgramaId.PeriodoId:' + this.periodo_id + ',DocumentoProgramaId.ProgramaId:' + programa +
           '&limit=0')
           .subscribe(res => {
             if (res !== null) {
-              this.data = <Array<any>>res;
-              const soportes = [];
-
-              for (let i = 0; i < this.data.length; i++) {
-                if (this.data[i].DocumentoId + '' !== '0') {
-                  soportes.push({ Id: this.data[i].DocumentoId, key: 'DocumentoSop' + i });
+              this.dataSop = <Array<any>>res;
+              const soportesSop = [];
+              let archivos = 0;
+              for (let i = 0; i < this.dataSop.length; i++) {
+                if (this.dataSop[i].DocumentoId + '' !== '0') {
+                  soportesSop.push({ Id: this.dataSop[i].DocumentoId, key: 'DocumentoSop' + i });
+                  archivos = i;
                 }
               }
 
-              this.nuxeoService.getDocumentoById$(soportes, this.documentoService)
-              .subscribe(response => {
-                this.documentosSoporte = <Array<any>>response;
-
-                if (Object.values(this.documentosSoporte).length === this.data.length) {
-                    let contador = 0;
-                    this.data.forEach(element => {
-                      this.documentoProgramaService.get('documento_programa/' + element.DocumentoProgramaId.Id)
+              this.nuxeo.getDocumentoById$(soportesSop, this.docService)
+              .subscribe(response2 => {
+                this.docSoporte = <Array<any>>response2;
+                if (Object.values(this.docSoporte).length > this.dataSop.length && this.docSoporte['DocumentoSop' + archivos] !== undefined &&
+                  this.dataSop[archivos].DocumentoId > 0) {
+                    let contadorSop = 0;
+                    this.dataSop.forEach(elementSop => {
+                      this.documentoProgramaService.get('documento_programa/' + elementSop.DocumentoProgramaId.Id)
                         .subscribe(documentoPrograma => {
                           if (documentoPrograma !== null) {
                             this.programaDocumento =  <any>documentoPrograma;
                             if (this.programaDocumento.PeriodoId === this.periodo_id) {
-                              element.DocumentoPrograma = this.programaDocumento;
+                              elementSop.DocumentoPrograma = this.programaDocumento;
                               this.documentoProgramaService.get('tipo_documento_programa/' +
                                 this.programaDocumento.TipoDocumentoProgramaId.Id)
                                 .subscribe(tipoDocumentoPrograma => {
                                   if (tipoDocumentoPrograma !== null) {
-                                    element.TipoDocumentoPrograma = <any>tipoDocumentoPrograma;
-                                    element.DocumentoId = this.cleanURL(this.documentosSoporte['DocumentoSop' + contador] + '');
-                                    contador++;
-                                    this.info_documento_programa.push(element);
+                                    elementSop.TipoDocumentoPrograma = <any>tipoDocumentoPrograma;
+                                    elementSop.DocumentoId = this.cleanURL(this.docSoporte['DocumentoSop' + contadorSop] + '');
+                                    contadorSop++;
+                                    this.info_documento_programa.push(elementSop);
                                   }
                                 },
                                   (error: HttpErrorResponse) => {

@@ -165,7 +165,7 @@
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_acad" *ngIf="info_ente_id">
+  <!--<nb-card [hidden]="!show_acad" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -216,7 +216,7 @@
     </nb-card-body>
   </nb-card>
 
-  <!-- <nb-card [hidden]="!show_prod" *ngIf="info_ente_id">
+  <nb-card [hidden]="!show_prod" *ngIf="info_ente_id">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -231,32 +231,16 @@
         </div>
       </div>
       <nb-tabset fullWidth (changeTab)="selectTab($event)">
-        <nb-tab tabTitle="{{ 'GLOBAL.libros' | translate }}">
-          <ngx-list-libro (result)="setPercentage_prod($event,0)"></ngx-list-libro>
-        </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.articulos' | translate }}">
-          <ngx-list-articulo (result)="setPercentage_prod($event,1)"></ngx-list-articulo>
-        </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.traducciones' | translate }}">
-          <ngx-list-traduccion (result)="setPercentage_prod($event,2)"></ngx-list-traduccion>
-        </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.otra_publicacion' | translate }}">
-          <ngx-list-otra-publicacion (result)="setPercentage_prod($event,3)"></ngx-list-otra-publicacion>
-        </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.otro_documento' | translate }}">
-          <ngx-list-otro-documento (result)="setPercentage_prod($event,4)"></ngx-list-otro-documento>
-        </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.produccion_tecnica' | translate }}">
-          <ngx-list-produccion-tecnica (result)="setPercentage_prod($event,5)"></ngx-list-produccion-tecnica>
-        </nb-tab>
-        <nb-tab tabTitle="{{ 'GLOBAL.produccion_artes_arqu_diseno' | translate }}">
-          <ngx-list-produccion-artes-arqu-diseno (result)="setPercentage_prod($event,6)"></ngx-list-produccion-artes-arqu-diseno>
+        <nb-tab tabTitle="{{ 'GLOBAL.produccion_academica' | translate }}">
+          <ngx-list-produccion-academica ente_id="{{info_ente_id}}"
+            (result)="setPercentage_prod($event,0)">
+          </ngx-list-produccion-academica>
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
   </nb-card>-->
 
-  <nb-card [hidden]="!show_docu" *ngIf="info_ente_id">
+  <!--<nb-card [hidden]="!show_docu" *ngIf="info_ente_id && (estado_inscripcion < 2)">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -281,7 +265,7 @@
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_desc" *ngIf="info_ente_id">
+  <nb-card [hidden]="!show_desc" *ngIf="info_ente_id && (estado_inscripcion < 2)">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -306,7 +290,7 @@
     </nb-card-body>
   </nb-card>
 
-  <nb-card [hidden]="!show_proy" *ngIf="info_ente_id">
+  <nb-card [hidden]="!show_proy" *ngIf="info_ente_id && (estado_inscripcion < 2)">
     <nb-card-body>
       <div class="row">
         <div class="col-md-11">
@@ -329,7 +313,7 @@
         </nb-tab>
       </nb-tabset>
     </nb-card-body>
-  </nb-card>
+  </nb-card>-->
 
   <!--Vista de perfil------------------------------------------------------------->
 

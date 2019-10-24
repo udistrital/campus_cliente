@@ -13,7 +13,6 @@ import 'style-loader!angular2-toaster/toaster.css';
 import { HttpErrorResponse } from '@angular/common/http';
 import { PeriodoAcademico } from './../../../@core/data/models/periodo_academico';
 import { InscripcionService } from '../../../@core/data/inscripcion.service';
-import { CoreService } from '../../../@core/data/core.service';
 
 @Component({
   selector: 'ngx-crud-idiomas',
@@ -36,6 +35,7 @@ export class CrudIdiomasComponent implements OnInit {
     if (inscripcion_id !== undefined && inscripcion_id !== 0 && inscripcion_id.toString() !== '') {
       this.inscripcion_id = inscripcion_id;
       console.info('Idioma inscripcion: ' + this.inscripcion_id);
+      this.cargarIdiomaExamen();
     }
   }
 
@@ -58,7 +58,6 @@ export class CrudIdiomasComponent implements OnInit {
     private users: UserService,
     private idiomaService: IdiomaService,
     private inscripcionService: InscripcionService,
-    private coreService: CoreService,
     private toasterService: ToasterService) {
     this.formInfoIdioma = FORM_IDIOMAS;
     this.construirForm();
@@ -69,7 +68,6 @@ export class CrudIdiomasComponent implements OnInit {
     this.loadOptionsNiveles()
     this.loadOptionsClasificacion()
     this.ente = this.users.getEnte();
-    this.cargarPeriodo();
     this.loading = false;
   }
 
@@ -418,26 +416,27 @@ export class CrudIdiomasComponent implements OnInit {
     }
   }
 
-  cargarPeriodo(): void {
-    this.coreService.get('periodo/?query=Activo:true&sortby=Id&order=desc&limit=1')
-      .subscribe(res => {
-        const r = <any>res;
-        if (res !== null && r.Type !== 'error') {
-          this.periodo = <PeriodoAcademico>res[0]; // se carga el periodo academico activo mas reciente
-          console.info(JSON.stringify(this.periodo));
-        }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.idiomas') + '|' +
-              this.translate.instant('GLOBAL.periodo_academico'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+  cargarIdiomaExamen(): void {
+    if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 && this.inscripcion_id.toString() !== '') {
+      this.inscripcionService.get('inscripcion_posgrado/?query=InscripcionId:' + this.inscripcion_id)
+        .subscribe(res => {
+          const r = <any>res[0];
+          if (res !== null && r.Type !== 'error' && JSON.stringify(res[0]).toString() !== '{}') {
+            this.idioma_examen = r.Idioma;
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.idiomas') + '|' +
+                this.translate.instant('GLOBAL.idioma_examen'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
+    }
   }
 
   private showToast(type: string, title: string, body: string) {

@@ -19,6 +19,7 @@ export class ViewPropuestaGradoComponent implements OnInit {
   info_propuesta_grado: PropuestaGrado;
   ente: number;
   inscripcion_id: number;
+  estado_inscripcion: number;
 
   @Input('persona_id')
   set info(info: number) {
@@ -62,6 +63,7 @@ export class ViewPropuestaGradoComponent implements OnInit {
       .subscribe(res => {
         if (res !== null) {
           const propuesta = <any>res[0];
+          this.estado_inscripcion = res[0].InscripcionId.EstadoInscripcionId.Id;
           this.info_propuesta_grado = propuesta;
           this.coreService.get('linea_investigacion_grupo_investigacion/' +
             propuesta.GrupoInvestigacionLineaInvestigacionId)

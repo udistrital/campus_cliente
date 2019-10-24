@@ -31,28 +31,9 @@ import { CrudIdiomasComponent } from '../idiomas/crud-idiomas/crud-idiomas.compo
 import { ExperienciaLaboralModule } from '../experiencia_laboral/experiencia_laboral.module';
 import { ListExperienciaLaboralComponent } from '../experiencia_laboral/list-experiencia_laboral/list-experiencia_laboral.component';
 import { CrudExperienciaLaboralComponent } from '../experiencia_laboral/crud-experiencia_laboral/crud-experiencia_laboral.component';
-import { LibroModule } from '../libro/libro.module';
-import { ListLibroComponent } from '../libro/list-libro/list-libro.component';
-import { CrudLibroComponent } from '../libro/crud-libro/crud-libro.component';
-import { ArticuloModule } from '../articulo/articulo.module';
-import { ListArticuloComponent } from '../articulo/list-articulo/list-articulo.component';
-import { CrudArticuloComponent } from '../articulo/crud-articulo/crud-articulo.component';
-import { TraduccionModule } from '../traduccion/traduccion.module';
-import { ListTraduccionComponent } from '../traduccion/list-traduccion/list-traduccion.component';
-import { CrudTraduccionComponent } from '../traduccion/crud-traduccion/crud-traduccion.component';
-import { OtroDocumentoModule } from '../otro_documento/otro_documento.module';
-import { ListOtroDocumentoComponent } from '../otro_documento/list-otro_documento/list-otro_documento.component';
-import { CrudOtroDocumentoComponent } from '../otro_documento/crud-otro_documento/crud-otro_documento.component';
-import { OtraPublicacionModule } from '../otra_publicacion/otra_publicacion.module';
-import { ListOtraPublicacionComponent } from '../otra_publicacion/list-otra_publicacion/list-otra_publicacion.component';
-import { CrudOtraPublicacionComponent } from '../otra_publicacion/crud-otra_publicacion/crud-otra_publicacion.component';
-import { ProduccionTecnicaModule } from '../produccion_tecnica/produccion_tecnica.module';
-import { ListProduccionTecnicaComponent } from '../produccion_tecnica/list-produccion_tecnica/list-produccion_tecnica.component';
-import { CrudProduccionTecnicaComponent } from '../produccion_tecnica/crud-produccion_tecnica/crud-produccion_tecnica.component';
-import { ProduccionArtesArquDisenoModule } from '../produccion_artes_arqu_diseno/produccion_artes_arqu_diseno.module';
 // tslint:disable-next-line:max-line-length
-import { ListProduccionArtesArquDisenoComponent } from '../produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno.component';
-import { CrudProduccionArtesArquDisenoComponent } from '../produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno.component';
+import { ProduccionAcademicaModule } from '../produccion_academica/produccion_academica.module';
+import { ListProduccionAcademicaComponent } from '../produccion_academica/list-produccion_academica/list-produccion_academica.component';
 import { DocumentoProgramaModule } from '../documento_programa/documento_programa.module';
 // tslint:enable:max-line-length
 import { ListDocumentoProgramaComponent } from '../documento_programa/list-documento_programa/list-documento_programa.component';
@@ -76,13 +57,7 @@ import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_g
     FormacionAcademicaModule,
     IdiomasModule,
     ExperienciaLaboralModule,
-    LibroModule,
-    ArticuloModule,
-    TraduccionModule,
-    OtroDocumentoModule,
-    OtraPublicacionModule,
-    ProduccionTecnicaModule,
-    ProduccionArtesArquDisenoModule,
+    ProduccionAcademicaModule,
     DocumentoProgramaModule,
     DescuentoAcademicoModule,
     PropuestaGradoModule,
@@ -113,20 +88,7 @@ import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_g
     CrudIdiomasComponent,
     ListExperienciaLaboralComponent,
     CrudExperienciaLaboralComponent,
-    ListLibroComponent,
-    CrudLibroComponent,
-    ListArticuloComponent,
-    CrudArticuloComponent,
-    ListTraduccionComponent,
-    CrudTraduccionComponent,
-    ListOtraPublicacionComponent,
-    CrudOtraPublicacionComponent,
-    ListOtroDocumentoComponent,
-    CrudOtroDocumentoComponent,
-    ListProduccionTecnicaComponent,
-    CrudProduccionTecnicaComponent,
-    ListProduccionArtesArquDisenoComponent,
-    CrudProduccionArtesArquDisenoComponent,
+    ListProduccionAcademicaComponent,
     ListDocumentoProgramaComponent,
     CrudDocumentoProgramaComponent,
     ListDescuentoAcademicoComponent,

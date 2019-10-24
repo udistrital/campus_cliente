@@ -41,7 +41,8 @@ export class CrudInfoPersonaComponent implements OnInit {
   @Input('inscripcion_id')
   set admision(inscripcion_id: number) {
     this.inscripcion_id = inscripcion_id;
-    if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 && this.inscripcion_id.toString() !== '') {
+    if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 && this.inscripcion_id.toString() !== ''
+      && this.inscripcion_id.toString() !== '0') {
       this.loadInscripcion();
       console.info('inscripcionId: ' + inscripcion_id);
     }
@@ -218,7 +219,7 @@ export class CrudInfoPersonaComponent implements OnInit {
                     const r = <any>res
                     console.info(JSON.stringify(res));
                     if (r !== null && r.Type !== 'error') {
-
+                      window.localStorage.setItem('ente', r.Id);
                       this.info_persona_id = r.Id;
                       this.loadInfoPersona();
                       this.createInscripcion(this.info_persona_id);
@@ -380,24 +381,27 @@ export class CrudInfoPersonaComponent implements OnInit {
   }
 
   public loadInscripcion(): void {
-    this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
-      .subscribe(res => {
-        if (res !== null) {
-          this.info_inscripcion = <Inscripcion>res;
-          this.aceptaTerminos = true;
-        }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.info_persona') + '|' +
-              this.translate.instant('GLOBAL.admision'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    if (this.inscripcion_id !== undefined && this.inscripcion_id !== 0 && this.inscripcion_id.toString() !== ''
+      && this.inscripcion_id.toString() !== '0') {
+      this.inscripcionService.get('inscripcion/' + this.inscripcion_id)
+        .subscribe(res => {
+          if (res !== null) {
+            this.info_inscripcion = <Inscripcion>res;
+            this.aceptaTerminos = true;
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.info_persona') + '|' +
+                this.translate.instant('GLOBAL.admision'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
+    }
   }
 
   createInscripcion(ente_id): void {

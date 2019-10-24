@@ -17,13 +17,14 @@ import Swal from 'sweetalert2';
 export class ViewDescuentoAcademicoComponent implements OnInit {
   persona: number;
   inscripcion: number;
+  estado_inscripcion: number;
   periodo: number;
   programa: number;
   info_descuento: any;
   info_temp: any;
-  data: Array<any>;
+  dataDes: Array<any>;
   solicituddescuento: SolicitudDescuento;
-  documentosSoporte = [];
+  docDesSoporte = [];
 
   @Input('persona_id')
   set info(info: number) {
@@ -42,8 +43,8 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
 
   constructor(private translate: TranslateService,
     private mid: CampusMidService,
-    private documentoService: DocumentoService,
-    private nuxeoService: NuxeoService,
+    private docdesService: DocumentoService,
+    private nuxeoDes: NuxeoService,
     private sanitization: DomSanitizer,
     private inscripciones: InscripcionService) {
       this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
@@ -64,31 +65,35 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
         const inscripciondata = <any>dato_inscripcion;
         this.programa = inscripciondata.ProgramaAcademicoId;
         this.periodo = inscripciondata.PeriodoId;
+        this.estado_inscripcion = inscripciondata.EstadoInscripcionId.Id;
         this.mid.get('descuento_academico/descuentopersonaperiododependencia/?PersonaId=' + this.persona +
           '&DependenciaId=' + this.programa + '&PeriodoId=' + this.periodo)
           .subscribe(descuentos => {
             if (descuentos !== null) {
-              this.data = <Array<any>>descuentos;
-              const soportes = [];
+              this.dataDes = <Array<any>>descuentos;
+              const soportesDes = [];
+              let archivosDes = 0;
 
-              for (let i = 0; i < this.data.length; i++) {
-                if (this.data[i].DocumentoId + '' !== '0') {
-                  soportes.push({ Id: this.data[i].DocumentoId, key: 'DocumentoDes' + i });
+              for (let i = 0; i < this.dataDes.length; i++) {
+                if (this.dataDes[i].DocumentoId + '' !== '0') {
+                  soportesDes.push({ Id: this.dataDes[i].DocumentoId, key: 'DocumentoDes' + i });
+                  archivosDes = i;
                 }
               }
 
-              this.nuxeoService.getDocumentoById$(soportes, this.documentoService)
-                .subscribe(response => {
-                  this.documentosSoporte = <Array<any>>response;
+              this.nuxeoDes.getDocumentoById$(soportesDes, this.docdesService)
+                .subscribe(responseDes => {
+                  this.docDesSoporte = <Array<any>>responseDes;
 
-                  if (Object.values(this.documentosSoporte).length === this.data.length) {
-                    let contador = 0;
+                  if (Object.values(this.docDesSoporte).length > this.dataDes.length && this.docDesSoporte['DocumentoDes' + archivosDes] !== undefined &&
+                    this.dataDes[archivosDes].DocumentoId > 0) {
+                    let contadorDes = 0;
                     this.info_descuento = <any>[];
 
-                    this.data.forEach(element => {
-                      element.DocumentoId = this.cleanURL(this.documentosSoporte['DocumentoDes' + contador] + '');
-                      contador++;
-                      this.info_descuento.push(element);
+                    this.dataDes.forEach(elementDes => {
+                      elementDes.DocumentoId = this.cleanURL(this.docDesSoporte['DocumentoDes' + contadorDes] + '');
+                      contadorDes++;
+                      this.info_descuento.push(elementDes);
                     });
                   }
                 },
