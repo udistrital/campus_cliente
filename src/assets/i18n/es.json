@@ -434,6 +434,8 @@
     "placeholder_departamento_residencia": "Ej: Departamento o estado de residencia",
     "ciudad_residencia": "Ciudad, municipio o provincia de residencia",
     "placeholder_ciudad_residencia": "Ej: Ciudad, municipio o provincia de residencia",
+    "localidad_residencia": "Localidad de residencia",
+    "placeholder_localidad_residencia": "Ej: Localidad de residencia",
     "direccion_residencia": "Dirección de residencia",
     "placeholder_direccion_residencia": "Ej: Calle 123 # 123 - 123",
     "estrato_residencia": "Estrato de la residencia",

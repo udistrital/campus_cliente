@@ -43,6 +43,7 @@ export class CrudInformacionContactoComponent implements OnInit {
   denied_acces: boolean = false;
   paisSeleccionado: any;
   departamentoSeleccionado: any;
+  ciudadSeleccionada: any;
   datosPost: any;
   datosGet: any;
   datosPut: any;
@@ -85,6 +86,52 @@ export class CrudInformacionContactoComponent implements OnInit {
     } else if (event.nombre === 'DepartamentoResidencia') {
       this.departamentoSeleccionado = event.valor;
       this.loadOptionsCiudadResidencia();
+      if (this.paisSeleccionado.Nombre.toString().toLowerCase() === 'colombia' &&
+        (event.valor.Nombre.toString().toLowerCase() === 'cundinamarca' ||
+          event.valor.Nombre.toString().toLowerCase() === 'cundinamarca')) {
+        this.formInformacionContacto.campos[this.getIndexForm('CiudadResidencia')].entrelazado = true;
+      } else {
+        if (this.formInformacionContacto.campos[this.getIndexForm('LocalidadResidencia')].nombre === 'LocalidadResidencia') {
+          this.formInformacionContacto.campos[this.getIndexForm('DireccionResidencia')].claseGrid = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+          const direccion_aux = this.formInformacionContacto.campos.pop();
+          this.formInformacionContacto.campos.pop();
+          this.formInformacionContacto.campos.push(direccion_aux);
+          this.construirForm();
+        }
+      }
+    } else if (event.nombre === 'CiudadResidencia') {
+      this.ciudadSeleccionada = event.valor;
+      if (this.paisSeleccionado.Nombre.toString().toLowerCase() === 'colombia' &&
+        (event.valor.Nombre.toString().toLowerCase() === 'bogotá' ||
+          event.valor.Nombre.toString().toLowerCase() === 'bogota')) {
+        if (this.formInformacionContacto.campos[this.getIndexForm('LocalidadResidencia')].nombre !== 'LocalidadResidencia') {
+          this.formInformacionContacto.campos[this.getIndexForm('DireccionResidencia')].claseGrid = 'col-lg-12 col-md-12 col-sm-12 col-xs-12';
+          const direccion = this.formInformacionContacto.campos.pop();
+          this.formInformacionContacto.campos.push({
+            etiqueta: 'select',
+            claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
+            nombre: 'LocalidadResidencia',
+            label_i18n: 'localidad_residencia',
+            placeholder_i18n: 'localidad_residencia',
+            requerido: true,
+            tipo: 'Lugar',
+            key: 'Nombre',
+            opciones: [],
+          });
+          this.formInformacionContacto.campos.push(direccion);
+        }
+        this.construirForm();
+        this.loadOptionsLocalidadResidencia();
+      } else {
+        this.formInformacionContacto.campos[this.getIndexForm('CiudadResidencia')].entrelazado = false;
+        if (this.formInformacionContacto.campos[this.getIndexForm('LocalidadResidencia')].nombre === 'LocalidadResidencia') {
+          this.formInformacionContacto.campos[this.getIndexForm('DireccionResidencia')].claseGrid = 'col-lg-6 col-md-6 col-sm-12 col-xs-12';
+          const direccion_aux = this.formInformacionContacto.campos.pop();
+          this.formInformacionContacto.campos.pop();
+          this.formInformacionContacto.campos.push(direccion_aux);
+          this.construirForm();
+        }
+      }
     }
   }
 
@@ -144,6 +191,34 @@ export class CrudInformacionContactoComponent implements OnInit {
     }
   }
 
+  loadOptionsLocalidadResidencia(): void {
+    let consultaHijos: Array<any> = [];
+    const localidadResidencia: Array<any> = [];
+    if (this.departamentoSeleccionado) {
+      this.ubicacionesService.get('relacion_lugares/?query=LugarPadre.Id:' + this.ciudadSeleccionada.Id + ',LugarHijo.Activo:true&limit=0')
+        .subscribe(res => {
+          if (res !== null) {
+            consultaHijos = <Array<Lugar>>res;
+            for (let i = 0; i < consultaHijos.length; i++) {
+              localidadResidencia.push(consultaHijos[i].LugarHijo);
+            }
+          }
+          this.formInformacionContacto.campos[this.getIndexForm('LocalidadResidencia')].opciones = localidadResidencia;
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.informacion_contacto') + '|' +
+                this.translate.instant('GLOBAL.localidad_residencia'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+    }
+  }
+
   getIndexForm(nombre: String): number {
     for (let index = 0; index < this.formInformacionContacto.campos.length; index++) {
       const element = this.formInformacionContacto.campos[index];
@@ -163,7 +238,7 @@ export class CrudInformacionContactoComponent implements OnInit {
         .subscribe(res => {
           if (res !== null) {
             this.datosGet = <InfoContactoGet>res;
-            this.info_informacion_contacto = {
+            this.info_informacion_contacto = <any>{
               Ente: (1 * this.informacion_contacto_id),
               PaisResidencia: this.datosGet.UbicacionEnte.Lugar.PAIS,
               DepartamentoResidencia: this.datosGet.UbicacionEnte.Lugar.DEPARTAMENTO,
@@ -180,6 +255,16 @@ export class CrudInformacionContactoComponent implements OnInit {
               IdTelefonoAlternoEnte: this.datosGet.ContactoEnte[1].Id,
               TelefonoAlterno: '' + this.datosGet.ContactoEnte[1].Valor,
             };
+
+            this.paisSeleccionado = this.info_informacion_contacto.PaisResidencia;
+            this.ciudadSeleccionada = this.info_informacion_contacto.CiudadResidencia;
+
+            if (this.paisSeleccionado.Nombre.toString().toLowerCase() === 'colombia' &&
+              (this.ciudadSeleccionada.Nombre.toString().toLowerCase() === 'bogotá' ||
+                this.ciudadSeleccionada.Nombre.toString().toLowerCase() === 'bogota')) {
+              this.info_informacion_contacto.LocalidadResidencia = this.datosGet.UbicacionEnte.Lugar.LOCALIDAD;
+            }
+
             for (let i = 0; i < this.datosGet.UbicacionEnte.Atributos.length; i++) {
               if (this.datosGet.UbicacionEnte.Atributos[i].AtributoUbicacion.Nombre === 'Dirección') {
                 this.info_informacion_contacto.IdDireccionEnte = this.datosGet.UbicacionEnte.Atributos[i].Id;
@@ -195,18 +280,28 @@ export class CrudInformacionContactoComponent implements OnInit {
 
             this.formInformacionContacto.campos[this.getIndexForm('DepartamentoResidencia')].opciones[0] = this.datosGet.UbicacionEnte.Lugar.DEPARTAMENTO;
             this.formInformacionContacto.campos[this.getIndexForm('CiudadResidencia')].opciones[0] = this.info_informacion_contacto.CiudadResidencia;
+            if (this.paisSeleccionado.Nombre.toString().toLowerCase() === 'colombia' &&
+              (this.ciudadSeleccionada.Nombre.toString().toLowerCase() === 'bogotá' ||
+                this.ciudadSeleccionada.Nombre.toString().toLowerCase() === 'bogota')) {
+                if (this.formInformacionContacto.campos[this.getIndexForm('LocalidadResidencia')].nombre === 'LocalidadResidencia') {
+                  this.formInformacionContacto.campos[this.getIndexForm('LocalidadResidencia')]
+                    .opciones[0] = this.info_informacion_contacto.LocalidadResidencia;
+                }
+            }
             this.loading = false;
           }
         },
           (error: HttpErrorResponse) => {
-            Swal({
-              type: 'error',
-              title: error.status + '',
-              text: this.translate.instant('ERROR.' + error.status),
-              footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                this.translate.instant('GLOBAL.informacion_contacto'),
-              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-            });
+            if (error.status.toString() !== '200') {
+              Swal({
+                type: 'error',
+                title: error.status + '',
+                text: this.translate.instant('ERROR.' + error.status),
+                footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                  this.translate.instant('GLOBAL.informacion_contacto'),
+                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+              });
+            }
           });
     } else {
       this.info_informacion_contacto = undefined;
@@ -232,6 +327,13 @@ export class CrudInformacionContactoComponent implements OnInit {
         if (willDelete.value) {
           this.loading = true;
           this.info_informacion_contacto = <InformacionContacto>informacionContacto;
+          if (this.info_informacion_contacto.PaisResidencia.Nombre.toString().toLowerCase() !== 'colombia' ||
+          (this.info_informacion_contacto.CiudadResidencia.Nombre.toString().toLowerCase() !== 'bogotá' &&
+            this.info_informacion_contacto.CiudadResidencia.Nombre.toString().toLowerCase() !== 'bogota')) {
+              this.info_informacion_contacto.LocalidadResidencia = null;
+          }
+          const loc = this.info_informacion_contacto.LocalidadResidencia;
+
           this.datosPut = <InfoContactoPut>{
             Ente: (1 * this.info_informacion_contacto.Ente),
             Persona: (1 * this.info_informacion_contacto.Ente),
@@ -270,6 +372,10 @@ export class CrudInformacionContactoComponent implements OnInit {
               ],
             },
           };
+          if (loc !== null) {
+            this.datosPut.UbicacionEnte.Lugar.Id = this.info_informacion_contacto.LocalidadResidencia;
+          }
+
           this.campusMidService.put('persona/actualizar_contacto', this.datosPut)
             .subscribe(res => {
               this.loadInformacionContacto();
@@ -311,9 +417,16 @@ export class CrudInformacionContactoComponent implements OnInit {
         if (willDelete.value) {
           this.info_informacion_contacto = <InformacionContacto>informacionContacto;
           this.info_informacion_contacto.Ente = this.informacion_contacto_id;
+          if (this.info_informacion_contacto.PaisResidencia.Nombre.toString().toLowerCase() !== 'colombia' ||
+          (this.info_informacion_contacto.CiudadResidencia.Nombre.toString().toLowerCase() !== 'bogotá' &&
+            this.info_informacion_contacto.CiudadResidencia.Nombre.toString().toLowerCase() !== 'bogota')) {
+              this.info_informacion_contacto.LocalidadResidencia = null;
+          }
+          const loc = this.info_informacion_contacto.LocalidadResidencia;
+
           this.datosPost = {
-            'Ente': (1 * this.info_informacion_contacto.Ente.valueOf()),
-            'Persona': (1 * this.info_informacion_contacto.Ente.valueOf()),
+            'Ente': (1 * this.info_informacion_contacto.Ente),
+            'Persona': (1 * this.info_informacion_contacto.Ente),
             'ContactoEnte': [
               {
                 'TipoContacto': {'Id': 1},
@@ -343,14 +456,21 @@ export class CrudInformacionContactoComponent implements OnInit {
               ],
             },
           };
+
+          if (loc !== null) {
+            this.datosPost.UbicacionEnte.Lugar = <Lugar>{Id: this.info_informacion_contacto.LocalidadResidencia};
+          }
+
           this.campusMidService.post('persona/guardar_contacto/', this.datosPost)
             .subscribe(res => {
-              this.info_informacion_contacto = <InformacionContacto>res;
-              this.loading = false;
-              this.eventChange.emit(true);
-              this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                this.translate.instant('GLOBAL.informacion_contacto') + ' ' +
-                this.translate.instant('GLOBAL.confirmarCrear'));
+              if (res !== null) {
+                // this.info_informacion_contacto = <InformacionContacto>res;
+                this.loading = false;
+                this.eventChange.emit(true);
+                this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                  this.translate.instant('GLOBAL.informacion_contacto') + ' ' +
+                  this.translate.instant('GLOBAL.confirmarCrear'));
+              }
             },
               (error: HttpErrorResponse) => {
                 Swal({

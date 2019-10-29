@@ -69,7 +69,7 @@ export class ViewDocumentoProgramaComponent implements OnInit {
         this.estado_inscripcion = inscripciondata.EstadoInscripcionId.Id;
         this.documentoProgramaService.get('soporte_documento_programa/?query=PersonaId:' + this.ente +
           ',DocumentoProgramaId.PeriodoId:' + this.periodo_id + ',DocumentoProgramaId.ProgramaId:' + programa +
-          '&limit=0')
+          '&sortby=Id&order=asc&limit=0')
           .subscribe(res => {
             if (res !== null) {
               this.dataSop = <Array<any>>res;

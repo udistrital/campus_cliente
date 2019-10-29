@@ -434,6 +434,8 @@
     "placeholder_departamento_residencia": "E.g.: Department or state of residence",
     "ciudad_residencia": "City, municipality or province of residence",
     "placeholder_ciudad_residencia": "E.g.: City, municipality or province of residence",
+    "localidad_residencia": "Location of residence",
+    "placeholder_localidad_residencia": "E.g.: Localidad of residence",
     "direccion_residenidiomacia": "Residence address",
     "placeholder_direccion_residencia": "E.g.: Street 123 # 123 - 123",
     "estrato_residencia": "Residence stratum",

@@ -11,7 +11,10 @@
           <label><strong>{{"GLOBAL.lugar_residencia" | translate}}:
             </strong>{{info_informacion_contacto.UbicacionEnte.Lugar.PAIS.Nombre}} /
             {{info_informacion_contacto.UbicacionEnte.Lugar.DEPARTAMENTO.Nombre}} /
-            {{info_informacion_contacto.UbicacionEnte.Lugar.CIUDAD.Nombre}} </label>
+            {{info_informacion_contacto.UbicacionEnte.Lugar.CIUDAD.Nombre}} </label><br>
+          <label *ngIf="info_informacion_contacto.UbicacionEnte.Lugar.LOCALIDAD">
+            <strong>{{"GLOBAL.localidad_residencia" | translate}}:
+            </strong>{{info_informacion_contacto.UbicacionEnte.Lugar.LOCALIDAD.Nombre}} </label>
           <ul *ngIf="info_informacion_contacto.UbicacionEnte.Atributos; else elseTemplate">
             <li *ngFor="let lugar of info_informacion_contacto.UbicacionEnte.Atributos">
               <label><strong>{{lugar.AtributoUbicacion.Nombre}}: </strong></label>

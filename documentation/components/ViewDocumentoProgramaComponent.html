@@ -1133,7 +1133,7 @@ export class ViewDocumentoProgramaComponent implements OnInit {
         this.estado_inscripcion &#x3D; inscripciondata.EstadoInscripcionId.Id;
         this.documentoProgramaService.get(&#x27;soporte_documento_programa/?query&#x3D;PersonaId:&#x27; + this.ente +
           &#x27;,DocumentoProgramaId.PeriodoId:&#x27; + this.periodo_id + &#x27;,DocumentoProgramaId.ProgramaId:&#x27; + programa +
-          &#x27;&amp;limit&#x3D;0&#x27;)
+          &#x27;&amp;sortby&#x3D;Id&amp;order&#x3D;asc&amp;limit&#x3D;0&#x27;)
           .subscribe(res &#x3D;&gt; {
             if (res !&#x3D;&#x3D; null) {
               this.dataSop &#x3D; &lt;Array&lt;any&gt;&gt;res;
