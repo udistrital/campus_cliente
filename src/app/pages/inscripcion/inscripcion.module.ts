@@ -43,32 +43,6 @@ import { ListDescuentoAcademicoComponent } from '../descuento_academico/list-des
 import { CrudDescuentoAcademicoComponent } from '../descuento_academico/crud-descuento_academico/crud-descuento_academico.component';
 import { PropuestaGradoModule } from '../propuesta_grado/propuesta_grado.module';
 import { CrudPropuestaGradoComponent } from '../propuesta_grado/crud-propuesta_grado/crud-propuesta_grado.component';
-<<<<<<< HEAD
-import { LibroModule } from '../libro/libro.module';
-import { ListLibroComponent } from '../libro/list-libro/list-libro.component';
-import { CrudLibroComponent } from '../libro/crud-libro/crud-libro.component';
-import { ArticuloModule } from '../articulo/articulo.module';
-import { ListArticuloComponent } from '../articulo/list-articulo/list-articulo.component';
-import { CrudArticuloComponent } from '../articulo/crud-articulo/crud-articulo.component';
-import { TraduccionModule } from '../traduccion/traduccion.module';
-import { ListTraduccionComponent } from '../traduccion/list-traduccion/list-traduccion.component';
-import { CrudTraduccionComponent } from '../traduccion/crud-traduccion/crud-traduccion.component';
-import { OtroDocumentoModule } from '../otro_documento/otro_documento.module';
-import { ListOtroDocumentoComponent } from '../otro_documento/list-otro_documento/list-otro_documento.component';
-import { CrudOtroDocumentoComponent } from '../otro_documento/crud-otro_documento/crud-otro_documento.component';
-import { OtraPublicacionModule } from '../otra_publicacion/otra_publicacion.module';
-// import { ListOtraPublicacionComponent } from '../otra_publicacion/list-otra_publicacion/list-otra_publicacion.component';
-// import { CrudOtraPublicacionComponent } from '../otra_publicacion/crud-otra_publicacion/crud-otra_publicacion.component';
-import { ProduccionTecnicaModule } from '../produccion_tecnica/produccion_tecnica.module';
-import { ListProduccionTecnicaComponent } from '../produccion_tecnica/list-produccion_tecnica/list-produccion_tecnica.component';
-import { CrudProduccionTecnicaComponent } from '../produccion_tecnica/crud-produccion_tecnica/crud-produccion_tecnica.component';
-import { ProduccionArtesArquDisenoModule } from '../produccion_artes_arqu_diseno/produccion_artes_arqu_diseno.module';
-// tslint:disable-next-line:max-line-length
-import { ListProduccionArtesArquDisenoComponent } from '../produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno/list-produccion_artes_arqu_diseno.component';
-import { CrudProduccionArtesArquDisenoComponent } from '../produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno/crud-produccion_artes_arqu_diseno.component';
-=======
-
->>>>>>> 3bdb100385149f9d2af94002b6760f5b105b9a73
 @NgModule({
   imports: [
     ThemeModule,
