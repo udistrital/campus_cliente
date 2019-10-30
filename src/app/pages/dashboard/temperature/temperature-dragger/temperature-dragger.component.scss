@@ -78,7 +78,7 @@
       text-shadow: none;
     }
   }
-
+  
   @include nb-for-theme(cosmic) {
     .circle {
       fill: nb-theme(color-fg-heading);

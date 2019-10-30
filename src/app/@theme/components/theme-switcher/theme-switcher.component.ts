@@ -1,8 +1,8 @@
 import { Component, Input, ViewChild } from '@angular/core';
 import { NbPopoverDirective } from '@nebular/theme';
 import { NbJSThemeOptions } from '@nebular/theme/services/js-themes/theme.options';
-
 import { ThemeSwitcherListComponent } from './themes-switcher-list/themes-switcher-list.component';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'ngx-theme-switcher',
@@ -16,4 +16,12 @@ export class ThemeSwitcherComponent {
 
   switcherListComponent = ThemeSwitcherListComponent;
   theme: NbJSThemeOptions;
+
+  constructor(public translate: TranslateService) {
+    this.translate = translate;
+  }
+
+  useLanguage(language: string) {
+    this.translate.use(language);
+  }
 }

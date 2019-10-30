@@ -63,11 +63,20 @@ pipeline:
       {{#success build.status}}
         <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
+        <code>Por:{{commit.author}}</code>
       {{else}}
         <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">FAILURE</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
+        <code>Por:{{commit.author}}</code>
       {{/success}}
+<<<<<<< HEAD
     when:
       status: [success, failure]
       branch: [master, test]
       event: [push, pull_request]
+=======
+  when:
+   status:
+   - failure
+   - success
+>>>>>>> 3bdb100385149f9d2af94002b6760f5b105b9a73

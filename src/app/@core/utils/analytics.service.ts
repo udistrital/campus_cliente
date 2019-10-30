@@ -19,7 +19,7 @@ export class AnalyticsService {
         filter((event) => event instanceof NavigationEnd),
       )
         .subscribe(() => {
-          ga('send', {hitType: 'pageview', page: this.location.path()});
+          ga('send', { hitType: 'pageview', page: this.location.path() });
         });
     }
   }

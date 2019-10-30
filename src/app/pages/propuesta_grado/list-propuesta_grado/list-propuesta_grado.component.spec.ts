@@ -11,9 +11,9 @@ describe('ListPropuestaGradoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListPropuestaGradoComponent ],
+      declarations: [ListPropuestaGradoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -9,10 +9,16 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 export class PerfilComponent implements OnInit {
 
   info_persona_id: number;
+  info_inscripcion_id: number;
 
   @Input('info_persona_id')
   set name(info_persona_id: number) {
     this.info_persona_id = info_persona_id;
+  }
+
+  @Input('inscripcion_id')
+  set dato(info_inscripcion_id: number) {
+    this.info_inscripcion_id = info_inscripcion_id;
   }
 
   @Output('url_editar') url_editar: EventEmitter<boolean> = new EventEmitter();

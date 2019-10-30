@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-
+import { TranslateService } from '@ngx-translate/core';
 import { StateService } from '../../../@core/data/state.service';
 
 @Component({
   selector: 'ngx-theme-settings',
   styleUrls: ['./theme-settings.component.scss'],
   template: `
-    <h6>LAYOUTS</h6>
+    <!--<h6>LAYOUTS</h6>
     <div class="settings-row">
       <a *ngFor="let layout of layouts"
          href="#"
@@ -15,8 +15,8 @@ import { StateService } from '../../../@core/data/state.service';
          (click)="layoutSelect(layout)">
         <i [attr.class]="layout.icon"></i>
       </a>
-    </div>
-    <h6>SIDEBAR</h6>
+    </div>-->
+    <h6>{{ 'HOME.SIDEBAR' | translate }}</h6>
     <div class="settings-row">
       <a *ngFor="let sidebar of sidebars"
          href="#"
@@ -36,12 +36,14 @@ export class ThemeSettingsComponent {
   layouts = [];
   sidebars = [];
 
-  constructor(protected stateService: StateService) {
+  constructor(protected stateService: StateService, public translate: TranslateService) {
     this.stateService.getLayoutStates()
       .subscribe((layouts: any[]) => this.layouts = layouts);
 
     this.stateService.getSidebarStates()
       .subscribe((sidebars: any[]) => this.sidebars = sidebars);
+
+    this.translate = translate;
   }
 
   layoutSelect(layout: any): boolean {

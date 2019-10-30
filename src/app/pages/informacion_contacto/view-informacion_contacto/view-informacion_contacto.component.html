@@ -4,13 +4,21 @@
     <div class="col-md-12">
       <ul>
         <li *ngFor="let contacto of info_informacion_contacto.ContactoEnte">
-          <label><strong>{{contacto.TipoContacto.Nombre}}: </strong></label> {{contacto.Valor}}
+          <label><strong>{{contacto.TipoContacto.Nombre}}: </strong></label>
+          {{contacto.Valor}}
         </li>
-        <li *ngFor="let ubicacion of info_informacion_contacto.UbicacionEnte">
-          <label><strong>{{ubicacion.TipoRelacionUbicacionEnte.Nombre}}: </strong> {{ubicacion.Lugar.CIUDAD.Nombre}} / {{ubicacion.Lugar.DEPARTAMENTO.Nombre}} / {{ubicacion.Lugar.PAIS.Nombre}} </label>
-          <ul *ngIf="ubicacion.Lugar; else elseTemplate">
-            <li *ngFor="let lugar of ubicacion.Atributos">
-              <label><strong>{{lugar.AtributoUbicacion.Nombre}}: </strong></label> {{lugar.Valor}}
+        <li *ngIf="info_informacion_contacto.UbicacionEnte">
+          <label><strong>{{"GLOBAL.lugar_residencia" | translate}}:
+            </strong>{{info_informacion_contacto.UbicacionEnte.Lugar.PAIS.Nombre}} /
+            {{info_informacion_contacto.UbicacionEnte.Lugar.DEPARTAMENTO.Nombre}} /
+            {{info_informacion_contacto.UbicacionEnte.Lugar.CIUDAD.Nombre}} </label><br>
+          <label *ngIf="info_informacion_contacto.UbicacionEnte.Lugar.LOCALIDAD">
+            <strong>{{"GLOBAL.localidad_residencia" | translate}}:
+            </strong>{{info_informacion_contacto.UbicacionEnte.Lugar.LOCALIDAD.Nombre}} </label>
+          <ul *ngIf="info_informacion_contacto.UbicacionEnte.Atributos; else elseTemplate">
+            <li *ngFor="let lugar of info_informacion_contacto.UbicacionEnte.Atributos">
+              <label><strong>{{lugar.AtributoUbicacion.Nombre}}: </strong></label>
+              {{lugar.Valor}}
             </li>
           </ul>
           <ng-template #elseTemplate>
@@ -18,7 +26,8 @@
           </ng-template>
         </li>
       </ul>
-      <span  *ngIf="url_editar"  (click)="editar()" class="link"><i class="ion-edit"></i>{{"GLOBAL.actualizar" | translate}}</span>
+      <span *ngIf="url_editar" (click)="editar()" class="link"><i
+          class="ion-edit"></i>{{"GLOBAL.actualizar" | translate}}</span>
     </div>
   </nb-card-body>
 </nb-card>

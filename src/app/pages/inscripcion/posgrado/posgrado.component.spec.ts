@@ -7,9 +7,9 @@ describe('PosgradoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PosgradoComponent ],
+      declarations: [PosgradoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,3 @@
-
 export class GrupoInvestigacion {
   Id: number;
   Nombre: string;

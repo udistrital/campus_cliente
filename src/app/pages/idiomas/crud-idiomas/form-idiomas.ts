@@ -7,7 +7,7 @@ export let FORM_IDIOMAS = {
   campos: [
     {
       etiqueta: 'select',
-      claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
+      claseGrid: 'col-lg-12 col-md-12 col-sm-12 col-xs-12',
       nombre: 'Idioma',
       label_i18n: 'idioma',
       placeholder_i18n: 'idioma',
@@ -18,10 +18,21 @@ export let FORM_IDIOMAS = {
     },
     {
       etiqueta: 'checkbox',
-      claseGrid: 'col-6',
+      claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
       nombre: 'Nativo',
       label_i18n: 'idioma_nativo_pregunta',
       placeholder_i18n: 'nativo',
+      requerido: true,
+      valor: false,
+      tipo: 'checkbox',
+    },
+    {
+      etiqueta: 'checkbox',
+      claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
+      nombre: 'SeleccionExamen',
+      label_i18n: 'idioma_examen_pregunta',
+      placeholder_i18n: 'idioma_examen',
+      valor: false,
       requerido: true,
       tipo: 'checkbox',
     },

@@ -1,0 +1,1783 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>ngx-admin documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">ngx-admin documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li>Injectables</li>
+  <li>ListService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/@core/store/services/list.service.ts</code>
+        </p>
+
+
+
+            <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addList">addList</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findCiudad">findCiudad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findClasificacionNivelIdioma">findClasificacionNivelIdioma</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findEstadoCivil">findEstadoCivil</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findEstadoInscripcion">findEstadoInscripcion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findGenero">findGenero</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findGrupoEtnico">findGrupoEtnico</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findGrupoInvestigacion">findGrupoInvestigacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findIdioma">findIdioma</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findLineaInvestigacion">findLineaInvestigacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findLugar">findLugar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findMetodologia">findMetodologia</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findNivelFormacion">findNivelFormacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findNivelIdioma">findNivelIdioma</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findPais">findPais</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findPeriodoAcademico">findPeriodoAcademico</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findProgramaAcademico">findProgramaAcademico</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findTipoContacto">findTipoContacto</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findTipoDiscapacidad">findTipoDiscapacidad</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findTipoIdentificacion">findTipoIdentificacion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findTipoLugar">findTipoLugar</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findTipoProyecto">findTipoProyecto</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#findTitulacion">findTitulacion</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(personaService: <a href="../injectables/PersonaService.html">PersonaService</a>, inscripcionService: <a href="../injectables/InscripcionService.html">InscripcionService</a>, idiomaService: <a href="../injectables/IdiomaService.html">IdiomaService</a>, coreService: <a href="../injectables/CoreService.html">CoreService</a>, ubicacionService: <a href="../injectables/UbicacionService.html">UbicacionService</a>, programaAcademicoService: <a href="../injectables/ProgramaAcademicoService.html">ProgramaAcademicoService</a>, enteService: <a href="../injectables/EnteService.html">EnteService</a>, store: <a href="../interfaces/IAppState.html">Store<IAppState></a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/@core/store/services/list.service.ts:13</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>personaService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/PersonaService.html" target="_self" >PersonaService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>inscripcionService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/InscripcionService.html" target="_self" >InscripcionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>idiomaService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/IdiomaService.html" target="_self" >IdiomaService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>coreService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/CoreService.html" target="_self" >CoreService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>ubicacionService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/UbicacionService.html" target="_self" >UbicacionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>programaAcademicoService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ProgramaAcademicoService.html" target="_self" >ProgramaAcademicoService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>enteService</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/EnteService.html" target="_self" >EnteService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>store</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../interfaces/IAppState.html" target="_self" >Store&lt;IAppState&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="addList"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Private</span>
+                            addList
+                            </b>
+                            <a href="#addList"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>addList(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, object: Array<any>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="425" class="link-to-prism">src/app/@core/store/services/list.service.ts:425</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>type</td>
+                                                        <td>
+                                                                    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>object</td>
+                                                        <td>
+                                                                    <code>Array&lt;any&gt;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findCiudad"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findCiudad
+                            </b>
+                            <a href="#findCiudad"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findCiudad()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="173" class="link-to-prism">src/app/@core/store/services/list.service.ts:173</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findClasificacionNivelIdioma"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findClasificacionNivelIdioma
+                            </b>
+                            <a href="#findClasificacionNivelIdioma"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findClasificacionNivelIdioma()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="47" class="link-to-prism">src/app/@core/store/services/list.service.ts:47</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findEstadoCivil"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findEstadoCivil
+                            </b>
+                            <a href="#findEstadoCivil"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findEstadoCivil()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/@core/store/services/list.service.ts:83</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findEstadoInscripcion"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findEstadoInscripcion
+                            </b>
+                            <a href="#findEstadoInscripcion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findEstadoInscripcion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/@core/store/services/list.service.ts:65</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findGenero"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findGenero
+                            </b>
+                            <a href="#findGenero"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findGenero()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/@core/store/services/list.service.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findGrupoEtnico"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findGrupoEtnico
+                            </b>
+                            <a href="#findGrupoEtnico"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findGrupoEtnico()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/@core/store/services/list.service.ts:101</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findGrupoInvestigacion"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findGrupoInvestigacion
+                            </b>
+                            <a href="#findGrupoInvestigacion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findGrupoInvestigacion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="389" class="link-to-prism">src/app/@core/store/services/list.service.ts:389</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findIdioma"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findIdioma
+                            </b>
+                            <a href="#findIdioma"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findIdioma()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/@core/store/services/list.service.ts:119</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findLineaInvestigacion"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findLineaInvestigacion
+                            </b>
+                            <a href="#findLineaInvestigacion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findLineaInvestigacion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="137" class="link-to-prism">src/app/@core/store/services/list.service.ts:137</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findLugar"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findLugar
+                            </b>
+                            <a href="#findLugar"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findLugar()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="191" class="link-to-prism">src/app/@core/store/services/list.service.ts:191</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findMetodologia"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findMetodologia
+                            </b>
+                            <a href="#findMetodologia"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findMetodologia()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="209" class="link-to-prism">src/app/@core/store/services/list.service.ts:209</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findNivelFormacion"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findNivelFormacion
+                            </b>
+                            <a href="#findNivelFormacion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findNivelFormacion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="227" class="link-to-prism">src/app/@core/store/services/list.service.ts:227</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findNivelIdioma"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findNivelIdioma
+                            </b>
+                            <a href="#findNivelIdioma"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findNivelIdioma()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="245" class="link-to-prism">src/app/@core/store/services/list.service.ts:245</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findPais"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findPais
+                            </b>
+                            <a href="#findPais"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findPais()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/@core/store/services/list.service.ts:155</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findPeriodoAcademico"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findPeriodoAcademico
+                            </b>
+                            <a href="#findPeriodoAcademico"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findPeriodoAcademico()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="407" class="link-to-prism">src/app/@core/store/services/list.service.ts:407</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findProgramaAcademico"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findProgramaAcademico
+                            </b>
+                            <a href="#findProgramaAcademico"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findProgramaAcademico()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="263" class="link-to-prism">src/app/@core/store/services/list.service.ts:263</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findTipoContacto"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findTipoContacto
+                            </b>
+                            <a href="#findTipoContacto"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findTipoContacto()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="281" class="link-to-prism">src/app/@core/store/services/list.service.ts:281</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findTipoDiscapacidad"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findTipoDiscapacidad
+                            </b>
+                            <a href="#findTipoDiscapacidad"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findTipoDiscapacidad()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="299" class="link-to-prism">src/app/@core/store/services/list.service.ts:299</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findTipoIdentificacion"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findTipoIdentificacion
+                            </b>
+                            <a href="#findTipoIdentificacion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findTipoIdentificacion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="353" class="link-to-prism">src/app/@core/store/services/list.service.ts:353</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findTipoLugar"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findTipoLugar
+                            </b>
+                            <a href="#findTipoLugar"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findTipoLugar()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="317" class="link-to-prism">src/app/@core/store/services/list.service.ts:317</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findTipoProyecto"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findTipoProyecto
+                            </b>
+                            <a href="#findTipoProyecto"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findTipoProyecto()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="371" class="link-to-prism">src/app/@core/store/services/list.service.ts:371</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="findTitulacion"></a>
+                        <span class="name">
+                            <b>
+                                <span class="modifier">Public</span>
+                            findTitulacion
+                            </b>
+                            <a href="#findTitulacion"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                            <span class="modifier-icon icon ion-ios-reset"></span>
+                        <code>findTitulacion()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="335" class="link-to-prism">src/app/@core/store/services/list.service.ts:335</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { PersonaService } from &#x27;../../data/persona.service&#x27;;
+import { Injectable } from &#x27;@angular/core&#x27;;
+import { IAppState } from &#x27;../app.state&#x27;;
+import { Store } from &#x27;@ngrx/store&#x27;;
+import { REDUCER_LIST } from &#x27;../reducer.constants&#x27;;
+import { InscripcionService } from &#x27;../../data/inscripcion.service&#x27;;
+import { CoreService } from &#x27;../../data/core.service&#x27;;
+import { IdiomaService } from &#x27;../../data/idioma.service&#x27;;
+import { UbicacionService } from &#x27;../../data/ubicacion.service&#x27;;
+import { ProgramaAcademicoService } from &#x27;../../data/programa_academico.service&#x27;;
+import { EnteService } from &#x27;../../data/ente.service&#x27;;
+@Injectable()
+export class ListService {
+
+  constructor(
+    private personaService: PersonaService,
+    private inscripcionService: InscripcionService,
+    private idiomaService: IdiomaService,
+    private coreService: CoreService,
+    private ubicacionService: UbicacionService,
+    private programaAcademicoService: ProgramaAcademicoService,
+    // private producccionAcademicaService: ProduccionAcademicaService,
+    private enteService: EnteService,
+    private store: Store&lt;IAppState&gt;) {
+
+  }
+
+
+  public findGenero() {
+    this.store.select(REDUCER_LIST.Genero).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.personaService.get(&#x27;genero/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Genero, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Genero, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findClasificacionNivelIdioma() {
+    this.store.select(REDUCER_LIST.ClasificacionNivelIdioma).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.idiomaService.get(&#x27;clasificacion_nivel_idioma/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.ClasificacionNivelIdioma, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.ClasificacionNivelIdioma, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findEstadoInscripcion() {
+    this.store.select(REDUCER_LIST.EstadoInscripcion).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.inscripcionService.get(&#x27;estado_inscripcion/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.EstadoInscripcion, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.EstadoInscripcion, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findEstadoCivil() {
+    this.store.select(REDUCER_LIST.EstadoCivil).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.personaService.get(&#x27;estado_civil/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.EstadoCivil, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.EstadoCivil, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findGrupoEtnico() {
+    this.store.select(REDUCER_LIST.GrupoEtnico).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.personaService.get(&#x27;grupo_etnico/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.GrupoEtnico, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.GrupoEtnico, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findIdioma() {
+    this.store.select(REDUCER_LIST.Idioma).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.idiomaService.get(&#x27;idioma/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Idioma, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Idioma, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findLineaInvestigacion() {
+    this.store.select(REDUCER_LIST.LineaInvestigacion).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.coreService.get(&#x27;linea_investigacion/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.LineaInvestigacion, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.LineaInvestigacion, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findPais() {
+    this.store.select(REDUCER_LIST.Pais).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.ubicacionService.get(&#x27;lugar/?query&#x3D;TipoLugar.Nombre:PAIS,Activo:true&amp;limit&#x3D;0&#x27;) // TODO: filtrar pais
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Pais, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Pais, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findCiudad() {
+    this.store.select(REDUCER_LIST.Ciudad).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.ubicacionService.get(&#x27;lugar/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;) // TODO: filtrar ciudad
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Ciudad, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Ciudad, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findLugar() {
+    this.store.select(REDUCER_LIST.Lugar).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.ubicacionService.get(&#x27;lugar/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Lugar, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Lugar, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findMetodologia() {
+    this.store.select(REDUCER_LIST.Metodologia).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.programaAcademicoService.get(&#x27;metodologia/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Metodologia, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Metodologia, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findNivelFormacion() {
+    this.store.select(REDUCER_LIST.NivelFormacion).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.programaAcademicoService.get(&#x27;nivel_formacion/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.NivelFormacion, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.NivelFormacion, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findNivelIdioma() {
+    this.store.select(REDUCER_LIST.NivelIdioma).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.idiomaService.get(&#x27;valor_nivel_idioma/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.NivelIdioma, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.NivelIdioma, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findProgramaAcademico() {
+    this.store.select(REDUCER_LIST.ProgramaAcademico).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.programaAcademicoService.get(&#x27;programa_academico/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.ProgramaAcademico, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.ProgramaAcademico, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findTipoContacto() {
+    this.store.select(REDUCER_LIST.TipoContacto).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.enteService.get(&#x27;tipo_contacto/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoContacto, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoContacto, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findTipoDiscapacidad() {
+    this.store.select(REDUCER_LIST.TipoDiscapacidad).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.personaService.get(&#x27;tipo_discapacidad/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoDiscapacidad, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoDiscapacidad, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findTipoLugar() {
+    this.store.select(REDUCER_LIST.TipoLugar).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.ubicacionService.get(&#x27;tipo_lugar/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoLugar, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoLugar, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findTitulacion() {
+    this.store.select(REDUCER_LIST.Titulacion).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.programaAcademicoService.get(&#x27;titulacion/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Titulacion, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.Titulacion, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findTipoIdentificacion() {
+    this.store.select(REDUCER_LIST.TipoIdentificacion).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.enteService.get(&#x27;tipo_identificacion/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoIdentificacion, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoIdentificacion, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findTipoProyecto() {
+    this.store.select(REDUCER_LIST.TipoProyecto).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.inscripcionService.get(&#x27;tipo_proyecto/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoProyecto, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.TipoProyecto, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findGrupoInvestigacion() {
+    this.store.select(REDUCER_LIST.GrupoInvestigacion).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.coreService.get(&#x27;grupo_investigacion/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.GrupoInvestigacion, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.GrupoInvestigacion, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  public findPeriodoAcademico() {
+    this.store.select(REDUCER_LIST.PeriodoAcademico).subscribe(
+      (list: any) &#x3D;&gt; {
+        if (!list || list.length &#x3D;&#x3D;&#x3D; 0) {
+          this.coreService.get(&#x27;periodo/?query&#x3D;Activo:true&amp;limit&#x3D;0&#x27;)
+            .subscribe(
+              (result: any[]) &#x3D;&gt; {
+                this.addList(REDUCER_LIST.PeriodoAcademico, result);
+              },
+              error &#x3D;&gt; {
+                this.addList(REDUCER_LIST.PeriodoAcademico, []);
+              },
+            );
+        }
+      },
+    );
+  }
+
+  private addList(type: string, object: Array&lt;any&gt;) {
+    this.store.dispatch({
+      type: type,
+      payload: object,
+    });
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'ListService.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
