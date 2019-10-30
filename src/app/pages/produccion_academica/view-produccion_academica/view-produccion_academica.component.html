@@ -1,0 +1,25 @@
+<nb-card>
+  <nb-card-header>{{"GLOBAL.produccion_tecnica" | translate}}
+  </nb-card-header>
+  <nb-card-body class="row container">
+    <div class="col-md-12">
+      <table class="table-responsive">
+        <tbody *ngIf="info_produccion_tecnica">
+          <tr *ngFor="let produccion_tec of info_produccion_tecnica">
+            <td>
+              <p><b>{{produccion_tec.Mes}}/{{produccion_tec.Ano}}</b></p>
+              <p>{{produccion_tec.TipoProduccionTecnica.Nombre}}</p>
+              <p>{{produccion_tec.Ubicacion.Nombre}}</p>
+            </td>
+            <td>
+              <p>{{produccion_tec.Nombre}}</p>
+              <p>{{produccion_tec.Descripcion}}</p>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <span *ngIf="url_editar" (click)="editar()" class="link">
+        <i class="ion-edit"></i>{{"GLOBAL.actualizar" | translate}}</span>
+    </div>
+  </nb-card-body>
+</nb-card>

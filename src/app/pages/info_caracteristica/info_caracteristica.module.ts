@@ -1,4 +1,4 @@
-import { UbicacionesService } from './../../@core/data/ubicaciones.service';
+import { UbicacionService } from './../../@core/data/ubicacion.service';
 import { InfoCaracteristicaRoutingModule, routedComponents } from './info_caracteristica-routing.module';
 import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
@@ -19,10 +19,10 @@ import { ViewInfoCaracteristicaComponent } from './view-info_caracteristica/view
   ],
   declarations: [
     ...routedComponents,
-],
+  ],
   providers: [
     PersonaService,
-    UbicacionesService,
+    UbicacionService,
   ],
   exports: [
     CrudInfoCaracteristicaComponent,

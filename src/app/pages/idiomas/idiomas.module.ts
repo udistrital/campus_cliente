@@ -7,6 +7,7 @@ import { ToasterModule } from 'angular2-toaster';
 import { SharedModule } from '../../shared/shared.module';
 import { CrudIdiomasComponent } from './crud-idiomas/crud-idiomas.component';
 import { ListIdiomasComponent } from './list-idiomas/list-idiomas.component';
+import { ViewIdiomasComponent } from './view-idiomas/view-idiomas.component';
 import { UserService } from '../../@core/data/users.service';
 
 @NgModule({
@@ -27,6 +28,7 @@ import { UserService } from '../../@core/data/users.service';
   exports: [
     CrudIdiomasComponent,
     ListIdiomasComponent,
+    ViewIdiomasComponent,
   ],
 })
 export class IdiomasModule { }

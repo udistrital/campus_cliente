@@ -1,7 +1,7 @@
 export const REDUCER_LIST = {
     Genero: 'listGenero',
     ClasificacionNivelIdioma: 'listClasificacionNivelIdioma',
-    EstadoAdmision: 'listEstadoAdmision',
+    EstadoInscripcion: 'listEstadoInscripcion',
     EstadoCivil: 'listEstadoCivil',
     GrupoEtnico: 'listGrupoEtnico',
     Idioma: 'listIdioma',
@@ -20,5 +20,6 @@ export const REDUCER_LIST = {
     TipoIdentificacion: 'listTipoIdentificacion',
     TipoProyecto: 'listReducerTipoProyecto',
     GrupoInvestigacion: 'listReducerGrupoInvestigacion',
+    PeriodoAcademico: 'ListReducerPeriodoAcademico',
     // TipoPublicacionLibro: 'listReducerTipoPublicacionLibro',
 };

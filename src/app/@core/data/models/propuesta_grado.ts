@@ -1,5 +1,5 @@
 import { TipoProyecto } from './tipo_proyecto';
-import { LineaInvestigacion } from './linea_investigacion';
+import { Inscripcion } from './inscripcion';
 import { GrupoInvestigacion } from './grupo_investigacion';
 
 export class PropuestaGrado {
@@ -7,8 +7,11 @@ export class PropuestaGrado {
   Nombre: string;
   Resumen: string;
   GrupoInvestigacion: GrupoInvestigacion;
-  LineaInvestigacion: LineaInvestigacion;
+  LineaInvestigacion: any;
   FormatoProyecto: string;
-  Admision: number;
+  DocumentoId: number;
+  GrupoInvestigacionLineaInvestigacionId: number;
+  InscripcionId: Inscripcion;
   TipoProyecto: TipoProyecto;
+  TipoProyectoId: TipoProyecto;
 }

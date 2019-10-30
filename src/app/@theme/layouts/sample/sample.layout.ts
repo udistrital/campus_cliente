@@ -26,7 +26,6 @@ import { StateService } from '../../../@core/data/state.service';
                    responsive
                    [end]="sidebar.id === 'end'">
         <ng-content select="nb-menu"></ng-content>
-        <img src='../../../../assets/images/logoUDfullv.png' width="100%" class="logoud" >
       </nb-sidebar>
 
       <nb-layout-column class="main-content">

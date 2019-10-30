@@ -11,9 +11,9 @@ describe('ViewInfoCaracteristicaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewInfoCaracteristicaComponent ],
+      declarations: [ViewInfoCaracteristicaComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

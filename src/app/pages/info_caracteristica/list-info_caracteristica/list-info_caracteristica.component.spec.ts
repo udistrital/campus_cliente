@@ -10,9 +10,9 @@ describe('ListInfoCaracteristicaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListInfoCaracteristicaComponent ],
+      declarations: [ListInfoCaracteristicaComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

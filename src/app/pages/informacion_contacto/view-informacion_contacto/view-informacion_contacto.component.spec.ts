@@ -10,9 +10,9 @@ describe('ViewInformacionContactoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewInformacionContactoComponent ],
+      declarations: [ViewInformacionContactoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

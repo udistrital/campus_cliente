@@ -87,7 +87,7 @@ export class NuxeoService {
                                                         documentoPost.TipoDocumento = tipoDocumento;
                                                         documentoService.post('documento', documentoPost)
                                                             .subscribe(resuestaPost => {
-                                                                nuxeoservice.documentos[file.key] = resuestaPost.Body;
+                                                                nuxeoservice.documentos[file.key] = resuestaPost;
                                                                 nuxeoservice.documentos$.next(nuxeoservice.documentos);
                                                             })
 

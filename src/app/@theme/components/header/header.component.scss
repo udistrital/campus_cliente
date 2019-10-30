@@ -22,6 +22,12 @@
     display: flex;
     align-items: center;
     width: calc(#{nb-theme(sidebar-width)} - #{nb-theme(header-padding)});
+    @include nb-for-theme(cosmic) {
+      display: contents;
+    }
+    @include nb-for-theme(corporate) {
+      display: contents;
+    }
   }
 
   .control-item {
@@ -53,6 +59,14 @@
       @include nb-rtl(border-right, 1px solid nb-theme(separator));
       white-space: nowrap;
 
+      @include nb-for-theme(ud) {
+        img {
+          display: none;
+        }
+        content: url('../../../../assets/images/logonuevo.png');
+        height: 75px;
+      }
+
       span {
         font-weight: nb-theme(font-weight-normal);
       }
@@ -75,6 +89,10 @@
       height: 32px;
       width: 32px;
       font-size: 1.85rem;
+    }
+
+    .escudo {
+      height: 75px;
     }
 
     .login {

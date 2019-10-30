@@ -4,12 +4,12 @@ import { Titulacion } from './titulacion';
 
 export class ProgramaAcademico {
   Id: number;
-  CodigoSnies: number;
+  Codigo: number;
   Nombre: string;
   Institucion: number;
   Metodologia: Metodologia;
   NivelFormacion: NivelFormacion;
   Titulacion: Titulacion;
   Duracion: number;
-  UnidadTiempo: Array<string>;
+  UnidadTiempo: number;
 }

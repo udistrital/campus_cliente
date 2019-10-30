@@ -7,7 +7,7 @@ export class InfoCaracteristicaGet {
   Rh: string;
   GrupoEtnico: GrupoEtnico;
   TipoDiscapacidad: Array<TipoDiscapacidad>;
-  Lugar: Array<{
+  Lugar: {
     Id: number;
     Lugar: {
       CIUDAD: Lugar;
@@ -17,6 +17,6 @@ export class InfoCaracteristicaGet {
     TipoRelacionUbicacionEnte: {
       Id: number;
     };
-  }>;
+  };
   Ente: number;
 }

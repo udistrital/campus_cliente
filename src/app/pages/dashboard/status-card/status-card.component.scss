@@ -139,7 +139,7 @@
       color: nb-theme(card-fg);
     }
   }
-
+  
   @include nb-for-theme(cosmic) {
     nb-card {
       &.off .icon-container {

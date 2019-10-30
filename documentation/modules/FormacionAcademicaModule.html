@@ -8,1490 +8,25 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
-	    <link rel="stylesheet" href="../styles/style.css">
+	      <link rel="stylesheet" href="../styles/style.css">
     </head>
     <body>
 
         <div class="navbar navbar-default navbar-fixed-top visible-xs">
             <a href="../" class="navbar-brand">ngx-admin documentation</a>
-            <button type="button" class="btn btn-default btn-menu fa fa-bars" id="btn-menu"></button>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
         </div>
 
         <div class="xs-menu menu" id="mobile-menu">
-            <div id="book-search-input" role="search">
-                <input type="text" placeholder="Type to search">
-            </div>
-            <nav>
-            
-                <ul class="list">
-            
-                    <li class="title">
-                        <a href="../index.html">ngx-admin documentation</a>
-                    </li>
-            
-                    <li class="divider"></li>
-            
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="../index.html"><span class="fa fa-home"></span>Getting started</a>
-                        <ul class="links">
-                                <li class="link">
-                                    <a 
-                                        
-                                         href="../overview.html" 
-                                         href="../overview.html" 
-                                        >
-                                        <span class="fa fa-th"></span>Overview
-                                    </a>
-                                </li>
-                                <li class="link">
-                                  <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
-                                </li>
-                                <li class="link">
-                                    <a href="./changelog.html"
-                                        >
-                                        <span class="fa fa-file-text-o"></span>CHANGELOG
-                                    </a>
-                                </li>
-                                <li class="link">
-                                    <a href="./contributing.html"
-                                        >
-                                        <span class="fa fa-file-text-o"></span>CONTRIBUTING
-                                    </a>
-                                </li>
-                                <li class="link">
-                                    <a href="./license.html"
-                                        >
-                                        <span class="fa fa-file-text-o"></span>LICENSE
-                                    </a>
-                                </li>
-                        </ul>
-                    </li>
-            
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="../modules.html" >
-                            <div class="menu-toggler linked" data-toggle="collapse"
-                                    data-target="#xs-modules-links"
-                            >
-                                <span class="fa fa-archive"></span>
-                                <span class="link-name">Modules</span>
-                                <span class="fa fa-angle-down"></span>
-                            </div>
-                        </a>
-                        <ul class="links collapse "
-                                id="xs-modules-links"
-                            >
-                                <li class="link">
-                                    <a href="../modules/AppModule.html" >AppModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/AppRoutingModule.html" >AppRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/CoreModule.html" >CoreModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/DashboardModule.html" >DashboardModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/DataModule.html" >DataModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/EstadoCivilModule.html" >EstadoCivilModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/EstadoCivilRoutingModule.html" >EstadoCivilRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/ExperienciaLaboralModule.html" >ExperienciaLaboralModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/ExperienciaLaboralRoutingModule.html" >ExperienciaLaboralRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/FormacionAcademicaModule.html"  data-type="entity-link" class="active" >FormacionAcademicaModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/FormacionAcademicaRoutingModule.html" >FormacionAcademicaRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/GeneroModule.html" >GeneroModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/GeneroRoutingModule.html" >GeneroRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/GrupoEtnicoModule.html" >GrupoEtnicoModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/GrupoEtnicoRoutingModule.html" >GrupoEtnicoRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/IdiomasModule.html" >IdiomasModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/IdiomasRoutingModule.html" >IdiomasRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InfoCaracteristicaModule.html" >InfoCaracteristicaModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InfoCaracteristicaRoutingModule.html" >InfoCaracteristicaRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InfoPersonaModule.html" >InfoPersonaModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InfoPersonaRoutingModule.html" >InfoPersonaRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InformacionContactoModule.html" >InformacionContactoModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InformacionContactoRoutingModule.html" >InformacionContactoRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InscripcionModule.html" >InscripcionModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/InscripcionRoutingModule.html" >InscripcionRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/LugarModule.html" >LugarModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/LugarRoutingModule.html" >LugarRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/LugarUbicacionModule.html" >LugarUbicacionModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/LugarUbicacionRoutingModule.html" >LugarUbicacionRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/MiscellaneousModule.html" >MiscellaneousModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/MiscellaneousRoutingModule.html" >MiscellaneousRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/PagesModule.html" >PagesModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/PagesRoutingModule.html" >PagesRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/PersonaModule.html" >PersonaModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/PersonaRoutingModule.html" >PersonaRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/SharedModule.html" >SharedModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/ThemeModule.html" >ThemeModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/TipoContactoModule.html" >TipoContactoModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/TipoContactoRoutingModule.html" >TipoContactoRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/TipoDiscapacidadModule.html" >TipoDiscapacidadModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/TipoDiscapacidadRoutingModule.html" >TipoDiscapacidadRoutingModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/TipoLugarModule.html" >TipoLugarModule</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../modules/TipoLugarRoutingModule.html" >TipoLugarRoutingModule</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse"
-                                data-target="#xs-components-links"
-                            >
-                            <span class="fa fa-cogs"></span>
-                            <span>Components</span>
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                        <ul class="links collapse "
-                                id="xs-components-links"
-                            >
-                                <li class="link">
-                                    <a href="../components/AppComponent.html" >AppComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CarouselComponent.html" >CarouselComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudEstadoCivilComponent.html" >CrudEstadoCivilComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudExperienciaLaboralComponent.html" >CrudExperienciaLaboralComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudFormacionAcademicaComponent.html" >CrudFormacionAcademicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudGeneroComponent.html" >CrudGeneroComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudGrupoEtnicoComponent.html" >CrudGrupoEtnicoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudIdiomasComponent.html" >CrudIdiomasComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudInfoCaracteristicaComponent.html" >CrudInfoCaracteristicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudInfoPersonaComponent.html" >CrudInfoPersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudInformacionContactoComponent.html" >CrudInformacionContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudLugarComponent.html" >CrudLugarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudLugarUbicacionComponent.html" >CrudLugarUbicacionComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudPersonaComponent.html" >CrudPersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudTipoContactoComponent.html" >CrudTipoContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudTipoDiscapacidadComponent.html" >CrudTipoDiscapacidadComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/CrudTipoLugarComponent.html" >CrudTipoLugarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/DashboardComponent.html" >DashboardComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/DinamicformComponent.html" >DinamicformComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ElectricityChartComponent.html" >ElectricityChartComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ElectricityComponent.html" >ElectricityComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/EstadoCivilComponent.html" >EstadoCivilComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ExperienciaLaboralComponent.html" >ExperienciaLaboralComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/FooterComponent.html" >FooterComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/FormacionAcademicaComponent.html" >FormacionAcademicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/GeneroComponent.html" >GeneroComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/GrupoEtnicoComponent.html" >GrupoEtnicoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/HeaderComponent.html" >HeaderComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/IdiomasComponent.html" >IdiomasComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/InfoCaracteristicaComponent.html" >InfoCaracteristicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/InfoPersonaComponent.html" >InfoPersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/InformacionContactoComponent.html" >InformacionContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/InscripcionComponent.html" >InscripcionComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/KittenComponent.html" >KittenComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/LayoutDirectionSwitcherComponent.html" >LayoutDirectionSwitcherComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListEstadoCivilComponent.html" >ListEstadoCivilComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListExperienciaLaboralComponent.html" >ListExperienciaLaboralComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListFormacionAcademicaComponent.html" >ListFormacionAcademicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListGeneroComponent.html" >ListGeneroComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListGrupoEtnicoComponent.html" >ListGrupoEtnicoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListIdiomasComponent.html" >ListIdiomasComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListInfoCaracteristicaComponent.html" >ListInfoCaracteristicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListInfoPersonaComponent.html" >ListInfoPersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListInformacionContactoComponent.html" >ListInformacionContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListLugarComponent.html" >ListLugarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListLugarUbicacionComponent.html" >ListLugarUbicacionComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListPersonaComponent.html" >ListPersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListTipoContactoComponent.html" >ListTipoContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListTipoDiscapacidadComponent.html" >ListTipoDiscapacidadComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ListTipoLugarComponent.html" >ListTipoLugarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/LoadingComponent.html" >LoadingComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/LugarComponent.html" >LugarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/LugarUbicacionComponent.html" >LugarUbicacionComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/MiscellaneousComponent.html" >MiscellaneousComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/NewsComponent.html" >NewsComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/NotFoundComponent.html" >NotFoundComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/NuxeoComponent.html" >NuxeoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/OneColumnLayoutComponent.html" >OneColumnLayoutComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/PagesComponent.html" >PagesComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/PerfilComponent.html" >PerfilComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/PersonaComponent.html" >PersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/PosgradoComponent.html" >PosgradoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SampleLayoutComponent.html" >SampleLayoutComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SearchInputComponent.html" >SearchInputComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SecurityCamerasComponent.html" >SecurityCamerasComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SelectComponent.html" >SelectComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SolarComponent.html" >SolarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/StatusCardComponent.html" >StatusCardComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/SwitcherComponent.html" >SwitcherComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TeamComponent.html" >TeamComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TemperatureComponent.html" >TemperatureComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TemperatureDraggerComponent.html" >TemperatureDraggerComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ThemeSettingsComponent.html" >ThemeSettingsComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ThemeSwitcherComponent.html" >ThemeSwitcherComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ThemeSwitcherListComponent.html" >ThemeSwitcherListComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ThreeColumnsLayoutComponent.html" >ThreeColumnsLayoutComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TinyMCEComponent.html" >TinyMCEComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TipoContactoComponent.html" >TipoContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TipoDiscapacidadComponent.html" >TipoDiscapacidadComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TipoLugarComponent.html" >TipoLugarComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TrafficChartComponent.html" >TrafficChartComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TrafficComponent.html" >TrafficComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/TwoColumnsLayoutComponent.html" >TwoColumnsLayoutComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ViewInfoCaracteristicaComponent.html" >ViewInfoCaracteristicaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ViewInfoPersonaComponent.html" >ViewInfoPersonaComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/ViewInformacionContactoComponent.html" >ViewInformacionContactoComponent</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../components/WeatherComponent.html" >WeatherComponent</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-            
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse"
-                                data-target="#xs-classes-links"
-                            >
-                            <span class="fa fa-file-code-o"></span>
-                            <span>Classes</span>
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                        <ul class="links collapse "
-                                id="xs-classes-links"
-                            >
-                                <li class="link">
-                                    <a href="../classes/AtributoUbicacion.html" >AtributoUbicacion</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/AtributosEnte.html" >AtributosEnte</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/ContactoEnte.html" >ContactoEnte</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Documento.html" >Documento</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/EstadoCivil.html" >EstadoCivil</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Genero.html" >Genero</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/GrupoEtnico.html" >GrupoEtnico</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Idioma.html" >Idioma</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoCaracteristica.html" >InfoCaracteristica</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoCaracteristicaGet.html" >InfoCaracteristicaGet</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoContactoGet.html" >InfoContactoGet</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoContactoPut.html" >InfoContactoPut</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoExperienciaLaboral.html" >InfoExperienciaLaboral</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoFormacionAcademica.html" >InfoFormacionAcademica</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoIdioma.html" >InfoIdioma</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InfoPersona.html" >InfoPersona</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/InformacionContacto.html" >InformacionContacto</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Lugar.html" >Lugar</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/LugarEnte.html" >LugarEnte</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/LugarPut.html" >LugarPut</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/LugarUbicacion.html" >LugarUbicacion</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/MenuItem.html" >MenuItem</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/NbSimpleRoleProvider.html" >NbSimpleRoleProvider</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Organizacion.html" >Organizacion</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Persona.html" >Persona</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/TipoContacto.html" >TipoContacto</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/TipoDiscapacidad.html" >TipoDiscapacidad</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/TipoDocumento.html" >TipoDocumento</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/TipoIdentificacion.html" >TipoIdentificacion</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/TipoLugar.html" >TipoLugar</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/TipoRelacionUbicacionEnte.html" >TipoRelacionUbicacionEnte</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/Track.html" >Track</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/UbicacionEnte.html" >UbicacionEnte</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../classes/UbicacionEntePut.html" >UbicacionEntePut</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse"
-                                data-target="#xs-injectables-links"
-                            >
-                            <span class="fa fa-long-arrow-down"></span>
-                            <span>Injectables</span>
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                        <ul class="links collapse "
-                                id="xs-injectables-links"
-                            >
-                                <li class="link">
-                                    <a href="../injectables/AnalyticsService.html" >AnalyticsService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/AutenticationService.html" >AutenticationService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/CampusMidService.html" >CampusMidService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/DocumentoService.html" >DocumentoService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/ElectricityService.html" >ElectricityService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/EnteService.html" >EnteService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/ExperienciaService.html" >ExperienciaService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/ImplicitAutenticationService.html" >ImplicitAutenticationService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/MenuService.html" >MenuService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/NuxeoService.html" >NuxeoService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/OrganizacionService.html" >OrganizacionService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/PersonaService.html" >PersonaService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/PlayerService.html" >PlayerService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/StateService.html" >StateService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/UbicacionesService.html" >UbicacionesService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/UserService.html" >UserService</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../injectables/UtilidadesService.html" >UtilidadesService</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse"
-                                data-target="#xs-interfaces-links"
-                            >
-                            <span class="fa fa-info"></span>
-                            <span>Interfaces</span>
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                        <ul class="links collapse "
-                                id="xs-interfaces-links"
-                            >
-                                <li class="link">
-                                    <a href="../interfaces/CardSettings.html" >CardSettings</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse"
-                                data-target="#xs-pipes-links"
-                            >
-                            <span class="fa fa-plus"></span>
-                            <span>Pipes</span>
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                        <ul class="links collapse "
-                                id="xs-pipes-links"
-                            >
-                                <li class="link">
-                                    <a href="../pipes/CapitalizePipe.html" >CapitalizePipe</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../pipes/PluralPipe.html" >PluralPipe</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../pipes/RoundPipe.html" >RoundPipe</a>
-                                </li>
-                                <li class="link">
-                                    <a href="../pipes/TimingPipe.html" >TimingPipe</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <div class="simple menu-toggler" data-toggle="collapse"
-                                data-target="#xs-miscellaneous-links"
-                            >
-                            <span class="fa fa-cubes"></span>
-                            <span>Miscellaneous</span>
-                            <span class="fa fa-angle-down"></span>
-                        </div>
-                        <ul class="links collapse "
-                                id="xs-miscellaneous-links"
-                            >
-                                <li class="link">
-                                  <a href="../miscellaneous/functions.html" data-type="entity-link" >Functions</a>
-                                </li>
-                                <li class="link">
-                                  <a href="../miscellaneous/variables.html" data-type="entity-link" >Variables</a>
-                                </li>
-                        </ul>
-                    </li>
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
-                    </li>
-            
-                    <li class="chapter">
-                        <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
-                    </li>
-            
-                    <li class="divider"></li>
-                    <li class="copyright">
-                            Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
-                                        <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
-                            </a>
-                    </li>
-            
-                </ul>
-            
-            </nav>
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
         </div>
 
         <div class="container-fluid main">
            <div class="row main">
                <div class="hidden-xs menu">
-                   <nav>
-                   
-                       <ul class="list">
-                   
-                           <li class="title">
-                               <a href="../index.html">ngx-admin documentation</a>
-                           </li>
-                   
-                           <li class="divider"></li>
-                   
-                               <div id="book-search-input" role="search">
-                                   <input type="text" placeholder="Type to search">
-                               </div>
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="../index.html"><span class="fa fa-home"></span>Getting started</a>
-                               <ul class="links">
-                                       <li class="link">
-                                           <a 
-                                               
-                                                href="../overview.html" 
-                                                href="../overview.html" 
-                                               >
-                                               <span class="fa fa-th"></span>Overview
-                                           </a>
-                                       </li>
-                                       <li class="link">
-                                         <a href="../index.html" ><span class="fa fa-file-text-o"></span>README</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="./changelog.html"
-                                               >
-                                               <span class="fa fa-file-text-o"></span>CHANGELOG
-                                           </a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="./contributing.html"
-                                               >
-                                               <span class="fa fa-file-text-o"></span>CONTRIBUTING
-                                           </a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="./license.html"
-                                               >
-                                               <span class="fa fa-file-text-o"></span>LICENSE
-                                           </a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="../modules.html" >
-                                   <div class="menu-toggler linked" data-toggle="collapse"
-                                           data-target="#modules-links"
-                                   >
-                                       <span class="fa fa-archive"></span>
-                                       <span class="link-name">Modules</span>
-                                       <span class="fa fa-angle-down"></span>
-                                   </div>
-                               </a>
-                               <ul class="links collapse "
-                                       id="modules-links"
-                   >
-                                       <li class="link">
-                                           <a href="../modules/AppModule.html" >AppModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/AppRoutingModule.html" >AppRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/CoreModule.html" >CoreModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/DashboardModule.html" >DashboardModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/DataModule.html" >DataModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/EstadoCivilModule.html" >EstadoCivilModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/EstadoCivilRoutingModule.html" >EstadoCivilRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/ExperienciaLaboralModule.html" >ExperienciaLaboralModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/ExperienciaLaboralRoutingModule.html" >ExperienciaLaboralRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/FormacionAcademicaModule.html"  data-type="entity-link" class="active" >FormacionAcademicaModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/FormacionAcademicaRoutingModule.html" >FormacionAcademicaRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/GeneroModule.html" >GeneroModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/GeneroRoutingModule.html" >GeneroRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/GrupoEtnicoModule.html" >GrupoEtnicoModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/GrupoEtnicoRoutingModule.html" >GrupoEtnicoRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/IdiomasModule.html" >IdiomasModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/IdiomasRoutingModule.html" >IdiomasRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InfoCaracteristicaModule.html" >InfoCaracteristicaModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InfoCaracteristicaRoutingModule.html" >InfoCaracteristicaRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InfoPersonaModule.html" >InfoPersonaModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InfoPersonaRoutingModule.html" >InfoPersonaRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InformacionContactoModule.html" >InformacionContactoModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InformacionContactoRoutingModule.html" >InformacionContactoRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InscripcionModule.html" >InscripcionModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/InscripcionRoutingModule.html" >InscripcionRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/LugarModule.html" >LugarModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/LugarRoutingModule.html" >LugarRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/LugarUbicacionModule.html" >LugarUbicacionModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/LugarUbicacionRoutingModule.html" >LugarUbicacionRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/MiscellaneousModule.html" >MiscellaneousModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/MiscellaneousRoutingModule.html" >MiscellaneousRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/PagesModule.html" >PagesModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/PagesRoutingModule.html" >PagesRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/PersonaModule.html" >PersonaModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/PersonaRoutingModule.html" >PersonaRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/SharedModule.html" >SharedModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/ThemeModule.html" >ThemeModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/TipoContactoModule.html" >TipoContactoModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/TipoContactoRoutingModule.html" >TipoContactoRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/TipoDiscapacidadModule.html" >TipoDiscapacidadModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/TipoDiscapacidadRoutingModule.html" >TipoDiscapacidadRoutingModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/TipoLugarModule.html" >TipoLugarModule</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../modules/TipoLugarRoutingModule.html" >TipoLugarRoutingModule</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <div class="simple menu-toggler" data-toggle="collapse"
-                                       data-target="#components-links"
-                   >
-                                   <span class="fa fa-cogs"></span>
-                                   <span>Components</span>
-                                   <span class="fa fa-angle-down"></span>
-                               </div>
-                               <ul class="links collapse "
-                                       id="components-links"
-                   >
-                                       <li class="link">
-                                           <a href="../components/AppComponent.html" >AppComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CarouselComponent.html" >CarouselComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudEstadoCivilComponent.html" >CrudEstadoCivilComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudExperienciaLaboralComponent.html" >CrudExperienciaLaboralComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudFormacionAcademicaComponent.html" >CrudFormacionAcademicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudGeneroComponent.html" >CrudGeneroComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudGrupoEtnicoComponent.html" >CrudGrupoEtnicoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudIdiomasComponent.html" >CrudIdiomasComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudInfoCaracteristicaComponent.html" >CrudInfoCaracteristicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudInfoPersonaComponent.html" >CrudInfoPersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudInformacionContactoComponent.html" >CrudInformacionContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudLugarComponent.html" >CrudLugarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudLugarUbicacionComponent.html" >CrudLugarUbicacionComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudPersonaComponent.html" >CrudPersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudTipoContactoComponent.html" >CrudTipoContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudTipoDiscapacidadComponent.html" >CrudTipoDiscapacidadComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/CrudTipoLugarComponent.html" >CrudTipoLugarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/DashboardComponent.html" >DashboardComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/DinamicformComponent.html" >DinamicformComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ElectricityChartComponent.html" >ElectricityChartComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ElectricityComponent.html" >ElectricityComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/EstadoCivilComponent.html" >EstadoCivilComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ExperienciaLaboralComponent.html" >ExperienciaLaboralComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/FooterComponent.html" >FooterComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/FormacionAcademicaComponent.html" >FormacionAcademicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/GeneroComponent.html" >GeneroComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/GrupoEtnicoComponent.html" >GrupoEtnicoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/HeaderComponent.html" >HeaderComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/IdiomasComponent.html" >IdiomasComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/InfoCaracteristicaComponent.html" >InfoCaracteristicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/InfoPersonaComponent.html" >InfoPersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/InformacionContactoComponent.html" >InformacionContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/InscripcionComponent.html" >InscripcionComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/KittenComponent.html" >KittenComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/LayoutDirectionSwitcherComponent.html" >LayoutDirectionSwitcherComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListEstadoCivilComponent.html" >ListEstadoCivilComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListExperienciaLaboralComponent.html" >ListExperienciaLaboralComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListFormacionAcademicaComponent.html" >ListFormacionAcademicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListGeneroComponent.html" >ListGeneroComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListGrupoEtnicoComponent.html" >ListGrupoEtnicoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListIdiomasComponent.html" >ListIdiomasComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListInfoCaracteristicaComponent.html" >ListInfoCaracteristicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListInfoPersonaComponent.html" >ListInfoPersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListInformacionContactoComponent.html" >ListInformacionContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListLugarComponent.html" >ListLugarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListLugarUbicacionComponent.html" >ListLugarUbicacionComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListPersonaComponent.html" >ListPersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListTipoContactoComponent.html" >ListTipoContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListTipoDiscapacidadComponent.html" >ListTipoDiscapacidadComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ListTipoLugarComponent.html" >ListTipoLugarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/LoadingComponent.html" >LoadingComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/LugarComponent.html" >LugarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/LugarUbicacionComponent.html" >LugarUbicacionComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/MiscellaneousComponent.html" >MiscellaneousComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/NewsComponent.html" >NewsComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/NotFoundComponent.html" >NotFoundComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/NuxeoComponent.html" >NuxeoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/OneColumnLayoutComponent.html" >OneColumnLayoutComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/PagesComponent.html" >PagesComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/PerfilComponent.html" >PerfilComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/PersonaComponent.html" >PersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/PosgradoComponent.html" >PosgradoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SampleLayoutComponent.html" >SampleLayoutComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SearchInputComponent.html" >SearchInputComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SecurityCamerasComponent.html" >SecurityCamerasComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SelectComponent.html" >SelectComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SolarComponent.html" >SolarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/StatusCardComponent.html" >StatusCardComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/SwitcherComponent.html" >SwitcherComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TeamComponent.html" >TeamComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TemperatureComponent.html" >TemperatureComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TemperatureDraggerComponent.html" >TemperatureDraggerComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ThemeSettingsComponent.html" >ThemeSettingsComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ThemeSwitcherComponent.html" >ThemeSwitcherComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ThemeSwitcherListComponent.html" >ThemeSwitcherListComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ThreeColumnsLayoutComponent.html" >ThreeColumnsLayoutComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TinyMCEComponent.html" >TinyMCEComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TipoContactoComponent.html" >TipoContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TipoDiscapacidadComponent.html" >TipoDiscapacidadComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TipoLugarComponent.html" >TipoLugarComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TrafficChartComponent.html" >TrafficChartComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TrafficComponent.html" >TrafficComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/TwoColumnsLayoutComponent.html" >TwoColumnsLayoutComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ViewInfoCaracteristicaComponent.html" >ViewInfoCaracteristicaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ViewInfoPersonaComponent.html" >ViewInfoPersonaComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/ViewInformacionContactoComponent.html" >ViewInformacionContactoComponent</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../components/WeatherComponent.html" >WeatherComponent</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                   
-                           <li class="chapter">
-                               <div class="simple menu-toggler" data-toggle="collapse"
-                                       data-target="#classes-links"
-                   >
-                                   <span class="fa fa-file-code-o"></span>
-                                   <span>Classes</span>
-                                   <span class="fa fa-angle-down"></span>
-                               </div>
-                               <ul class="links collapse "
-                                       id="classes-links"
-                   >
-                                       <li class="link">
-                                           <a href="../classes/AtributoUbicacion.html" >AtributoUbicacion</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/AtributosEnte.html" >AtributosEnte</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/ContactoEnte.html" >ContactoEnte</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Documento.html" >Documento</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/EstadoCivil.html" >EstadoCivil</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Genero.html" >Genero</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/GrupoEtnico.html" >GrupoEtnico</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Idioma.html" >Idioma</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoCaracteristica.html" >InfoCaracteristica</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoCaracteristicaGet.html" >InfoCaracteristicaGet</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoContactoGet.html" >InfoContactoGet</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoContactoPut.html" >InfoContactoPut</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoExperienciaLaboral.html" >InfoExperienciaLaboral</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoFormacionAcademica.html" >InfoFormacionAcademica</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoIdioma.html" >InfoIdioma</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InfoPersona.html" >InfoPersona</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/InformacionContacto.html" >InformacionContacto</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Lugar.html" >Lugar</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/LugarEnte.html" >LugarEnte</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/LugarPut.html" >LugarPut</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/LugarUbicacion.html" >LugarUbicacion</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/MenuItem.html" >MenuItem</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/NbSimpleRoleProvider.html" >NbSimpleRoleProvider</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Organizacion.html" >Organizacion</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Persona.html" >Persona</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/TipoContacto.html" >TipoContacto</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/TipoDiscapacidad.html" >TipoDiscapacidad</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/TipoDocumento.html" >TipoDocumento</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/TipoIdentificacion.html" >TipoIdentificacion</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/TipoLugar.html" >TipoLugar</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/TipoRelacionUbicacionEnte.html" >TipoRelacionUbicacionEnte</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/Track.html" >Track</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/UbicacionEnte.html" >UbicacionEnte</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../classes/UbicacionEntePut.html" >UbicacionEntePut</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <div class="simple menu-toggler" data-toggle="collapse"
-                                       data-target="#injectables-links"
-                   >
-                                   <span class="fa fa-long-arrow-down"></span>
-                                   <span>Injectables</span>
-                                   <span class="fa fa-angle-down"></span>
-                               </div>
-                               <ul class="links collapse "
-                                       id="injectables-links"
-                   >
-                                       <li class="link">
-                                           <a href="../injectables/AnalyticsService.html" >AnalyticsService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/AutenticationService.html" >AutenticationService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/CampusMidService.html" >CampusMidService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/DocumentoService.html" >DocumentoService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/ElectricityService.html" >ElectricityService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/EnteService.html" >EnteService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/ExperienciaService.html" >ExperienciaService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/ImplicitAutenticationService.html" >ImplicitAutenticationService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/MenuService.html" >MenuService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/NuxeoService.html" >NuxeoService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/OrganizacionService.html" >OrganizacionService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/PersonaService.html" >PersonaService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/PlayerService.html" >PlayerService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/StateService.html" >StateService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/UbicacionesService.html" >UbicacionesService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/UserService.html" >UserService</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../injectables/UtilidadesService.html" >UtilidadesService</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <div class="simple menu-toggler" data-toggle="collapse"
-                                       data-target="#interfaces-links"
-                   >
-                                   <span class="fa fa-info"></span>
-                                   <span>Interfaces</span>
-                                   <span class="fa fa-angle-down"></span>
-                               </div>
-                               <ul class="links collapse "
-                                       id="interfaces-links"
-                   >
-                                       <li class="link">
-                                           <a href="../interfaces/CardSettings.html" >CardSettings</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <div class="simple menu-toggler" data-toggle="collapse"
-                                       data-target="#pipes-links"
-                   >
-                                   <span class="fa fa-plus"></span>
-                                   <span>Pipes</span>
-                                   <span class="fa fa-angle-down"></span>
-                               </div>
-                               <ul class="links collapse "
-                                       id="pipes-links"
-                   >
-                                       <li class="link">
-                                           <a href="../pipes/CapitalizePipe.html" >CapitalizePipe</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../pipes/PluralPipe.html" >PluralPipe</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../pipes/RoundPipe.html" >RoundPipe</a>
-                                       </li>
-                                       <li class="link">
-                                           <a href="../pipes/TimingPipe.html" >TimingPipe</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <div class="simple menu-toggler" data-toggle="collapse"
-                                       data-target="#miscellaneous-links"
-                   >
-                                   <span class="fa fa-cubes"></span>
-                                   <span>Miscellaneous</span>
-                                   <span class="fa fa-angle-down"></span>
-                               </div>
-                               <ul class="links collapse "
-                                       id="miscellaneous-links"
-                   >
-                                       <li class="link">
-                                         <a href="../miscellaneous/functions.html" data-type="entity-link" >Functions</a>
-                                       </li>
-                                       <li class="link">
-                                         <a href="../miscellaneous/variables.html" data-type="entity-link" >Variables</a>
-                                       </li>
-                               </ul>
-                           </li>
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="../routes.html" ><span class="fa fa-code-fork"></span>Routes</a>
-                           </li>
-                   
-                           <li class="chapter">
-                               <a data-type="chapter-link" href="../coverage.html" ><span class="fa fa-tasks"></span>Documentation coverage</a>
-                           </li>
-                   
-                           <li class="divider"></li>
-                           <li class="copyright">
-                                   Documentation generated using <a href="https://compodoc.github.io/website/" target="_blank">
-                                               <img src="..//images/compodoc-vectorise.svg" class="img-responsive">
-                                   </a>
-                           </li>
-                   
-                       </ul>
-                   
-                   </nav>
+                   <compodoc-menu mode="normal"></compodoc-menu>
                </div>
+               <!-- START CONTENT -->
                <div class="content module">
                    <div class="content-data">
 
@@ -1502,7 +37,7 @@
   <li>FormacionAcademicaModule</li>
 </ol>
 
-      <div class="text-center">
+      <div class="text-center module-graph-container">
           <div id="module-graph-svg">
               <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
@@ -1510,120 +45,209 @@
 <!-- Generated by graphviz version 2.40.1 (20161225.0304)
  -->
 <!-- Title: dependencies Pages: 1 -->
-<svg width="716pt" height="284pt"
- viewBox="0.00 0.00 716.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg width="2092pt" height="284pt"
+ viewBox="0.00 0.00 2092.00 284.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 280)">
 <title>dependencies</title>
-<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-280 712,-280 712,4 -4,4"/>
-<text text-anchor="start" x="333.0091" y="-42.4" font-family="sans-serif" font-weight="bold" font-size="14.00" fill="#000000">Legend</text>
-<polygon fill="#ffffb3" stroke="transparent" points="120,-10 120,-30 140,-30 140,-10 120,-10"/>
-<text text-anchor="start" x="143.629" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Declarations</text>
-<polygon fill="#8dd3c7" stroke="transparent" points="233,-10 233,-30 253,-30 253,-10 233,-10"/>
-<text text-anchor="start" x="256.7251" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Module</text>
-<polygon fill="#80b1d3" stroke="transparent" points="319,-10 319,-30 339,-30 339,-10 319,-10"/>
-<text text-anchor="start" x="342.7812" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Bootstrap</text>
-<polygon fill="#fdb462" stroke="transparent" points="416,-10 416,-30 436,-30 436,-10 416,-10"/>
-<text text-anchor="start" x="439.6732" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Providers</text>
-<polygon fill="#fb8072" stroke="transparent" points="512,-10 512,-30 532,-30 532,-10 512,-10"/>
-<text text-anchor="start" x="535.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
+<polygon fill="#ffffff" stroke="transparent" points="-4,4 -4,-280 2088,-280 2088,4 -4,4"/>
+<text text-anchor="start" x="1021.0091" y="-42.4" font-family="sans-serif" font-weight="bold" font-size="14.00" fill="#000000">Legend</text>
+<polygon fill="#ffffb3" stroke="transparent" points="808,-10 808,-30 828,-30 828,-10 808,-10"/>
+<text text-anchor="start" x="831.629" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Declarations</text>
+<polygon fill="#8dd3c7" stroke="transparent" points="921,-10 921,-30 941,-30 941,-10 921,-10"/>
+<text text-anchor="start" x="944.7251" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Module</text>
+<polygon fill="#80b1d3" stroke="transparent" points="1007,-10 1007,-30 1027,-30 1027,-10 1007,-10"/>
+<text text-anchor="start" x="1030.7812" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Bootstrap</text>
+<polygon fill="#fdb462" stroke="transparent" points="1104,-10 1104,-30 1124,-30 1124,-10 1104,-10"/>
+<text text-anchor="start" x="1127.6732" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Providers</text>
+<polygon fill="#fb8072" stroke="transparent" points="1200,-10 1200,-30 1220,-30 1220,-10 1200,-10"/>
+<text text-anchor="start" x="1223.7258" y="-15.4" font-family="sans-serif" font-size="14.00" fill="#000000"> &#160;Exports</text>
 <g id="clust1" class="cluster">
 <title>cluster_FormacionAcademicaModule</title>
-<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="8,-70 8,-268 700,-268 700,-70 8,-70"/>
+<polygon fill="none" stroke="#000000" stroke-dasharray="1,5" points="8,-70 8,-268 2076,-268 2076,-70 8,-70"/>
 </g>
-<g id="clust3" class="cluster">
+<g id="clust2" class="cluster">
+<title>cluster_FormacionAcademicaModule_declarations</title>
+<polygon fill="none" stroke="#000000" points="1102,-78 1102,-130 2068,-130 2068,-78 1102,-78"/>
+</g>
+<g id="clust7" class="cluster">
 <title>cluster_FormacionAcademicaModule_imports</title>
-<polygon fill="none" stroke="#000000" points="216,-78 216,-130 692,-130 692,-78 216,-78"/>
+<polygon fill="none" stroke="#000000" points="618,-78 618,-130 1094,-130 1094,-78 618,-78"/>
 </g>
-<g id="clust4" class="cluster">
+<g id="clust8" class="cluster">
 <title>cluster_FormacionAcademicaModule_exports</title>
-<polygon fill="none" stroke="#000000" points="94,-208 94,-260 594,-260 594,-208 94,-208"/>
+<polygon fill="none" stroke="#000000" points="502,-208 502,-260 1258,-260 1258,-208 502,-208"/>
 </g>
-<g id="clust6" class="cluster">
+<g id="clust10" class="cluster">
 <title>cluster_FormacionAcademicaModule_providers</title>
-<polygon fill="none" stroke="#000000" points="16,-78 16,-130 208,-130 208,-78 16,-78"/>
+<polygon fill="none" stroke="#000000" points="16,-78 16,-130 610,-130 610,-78 16,-78"/>
 </g>
-<!-- ThemeModule -->
+<!-- CrudDescuentoAcademicoComponent -->
 <g id="node1" class="node">
-<title>ThemeModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="684.4231,-122 681.4231,-126 660.4231,-126 657.4231,-122 585.5769,-122 585.5769,-86 684.4231,-86 684.4231,-122"/>
-<text text-anchor="middle" x="635" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ThemeModule</text>
+<title>CrudDescuentoAcademicoComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="2060.1615,-122 1827.8385,-122 1827.8385,-86 2060.1615,-86 2060.1615,-122"/>
+<text text-anchor="middle" x="1944" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CrudDescuentoAcademicoComponent</text>
 </g>
 <!-- FormacionAcademicaModule -->
-<g id="node4" class="node">
+<g id="node5" class="node">
 <title>FormacionAcademicaModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="385.6643,-187 382.6643,-191 361.6643,-191 358.6643,-187 202.3357,-187 202.3357,-151 385.6643,-151 385.6643,-187"/>
-<text text-anchor="middle" x="294" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormacionAcademicaModule</text>
+<polygon fill="#8dd3c7" stroke="#000000" points="972.6643,-187 969.6643,-191 948.6643,-191 945.6643,-187 789.3357,-187 789.3357,-151 972.6643,-151 972.6643,-187"/>
+<text text-anchor="middle" x="881" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormacionAcademicaModule</text>
 </g>
-<!-- ThemeModule&#45;&gt;FormacionAcademicaModule -->
+<!-- CrudDescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule -->
 <g id="edge1" class="edge">
-<title>ThemeModule&#45;&gt;FormacionAcademicaModule</title>
-<path fill="none" stroke="#000000" d="M635.2166,-122.1061C635.2166,-141.3391 635.2166,-169 635.2166,-169 635.2166,-169 395.8886,-169 395.8886,-169"/>
-<polygon fill="#000000" stroke="#000000" points="395.8887,-165.5001 385.8886,-169 395.8886,-172.5001 395.8887,-165.5001"/>
+<title>CrudDescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M1944,-122.2843C1944,-143.3211 1944,-175 1944,-175 1944,-175 983.0123,-175 983.0123,-175"/>
+<polygon fill="#000000" stroke="#000000" points="983.0123,-171.5001 973.0123,-175 983.0122,-178.5001 983.0123,-171.5001"/>
 </g>
-<!-- FormacionAcademicaRoutingModule -->
+<!-- DescuentoAcademicoComponent -->
 <g id="node2" class="node">
-<title>FormacionAcademicaRoutingModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="568.2822,-122 565.2822,-126 544.2822,-126 541.2822,-122 339.7178,-122 339.7178,-86 568.2822,-86 568.2822,-122"/>
-<text text-anchor="middle" x="454" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormacionAcademicaRoutingModule</text>
+<title>DescuentoAcademicoComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1810.1643,-122 1605.8357,-122 1605.8357,-86 1810.1643,-86 1810.1643,-122"/>
+<text text-anchor="middle" x="1708" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">DescuentoAcademicoComponent</text>
 </g>
-<!-- FormacionAcademicaRoutingModule&#45;&gt;FormacionAcademicaModule -->
+<!-- DescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule -->
 <g id="edge2" class="edge">
-<title>FormacionAcademicaRoutingModule&#45;&gt;FormacionAcademicaModule</title>
-<path fill="none" stroke="#000000" d="M362.7206,-122.1061C362.7206,-122.1061 362.7206,-140.991 362.7206,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="359.2206,-140.9909 362.7206,-150.991 366.2206,-140.991 359.2206,-140.9909"/>
+<title>DescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M1708,-122.1061C1708,-141.3391 1708,-169 1708,-169 1708,-169 982.6633,-169 982.6633,-169"/>
+<polygon fill="#000000" stroke="#000000" points="982.6633,-165.5001 972.6633,-169 982.6632,-172.5001 982.6633,-165.5001"/>
 </g>
-<!-- SharedModule -->
+<!-- ListDescuentoAcademicoComponent -->
 <g id="node3" class="node">
-<title>SharedModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="322.4231,-122 319.4231,-126 298.4231,-126 295.4231,-122 223.5769,-122 223.5769,-86 322.4231,-86 322.4231,-122"/>
-<text text-anchor="middle" x="273" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SharedModule</text>
+<title>ListDescuentoAcademicoComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1587.9426,-122 1362.0574,-122 1362.0574,-86 1587.9426,-86 1587.9426,-122"/>
+<text text-anchor="middle" x="1475" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ListDescuentoAcademicoComponent</text>
 </g>
-<!-- SharedModule&#45;&gt;FormacionAcademicaModule -->
+<!-- ListDescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule -->
 <g id="edge3" class="edge">
-<title>SharedModule&#45;&gt;FormacionAcademicaModule</title>
-<path fill="none" stroke="#000000" d="M273,-122.1061C273,-122.1061 273,-140.991 273,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="269.5001,-140.9909 273,-150.991 276.5001,-140.991 269.5001,-140.9909"/>
+<title>ListDescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M1475,-122.0225C1475,-139.3734 1475,-163 1475,-163 1475,-163 982.8355,-163 982.8355,-163"/>
+<polygon fill="#000000" stroke="#000000" points="982.8356,-159.5001 972.8355,-163 982.8355,-166.5001 982.8356,-159.5001"/>
+</g>
+<!-- ViewDescuentoAcademicoComponent -->
+<g id="node4" class="node">
+<title>ViewDescuentoAcademicoComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1344.4831,-122 1109.5169,-122 1109.5169,-86 1344.4831,-86 1344.4831,-122"/>
+<text text-anchor="middle" x="1227" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ViewDescuentoAcademicoComponent</text>
+</g>
+<!-- ViewDescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule -->
+<g id="edge4" class="edge">
+<title>ViewDescuentoAcademicoComponent&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M1179.9904,-122.2396C1179.9904,-137.5706 1179.9904,-157 1179.9904,-157 1179.9904,-157 982.7389,-157 982.7389,-157"/>
+<polygon fill="#000000" stroke="#000000" points="982.7389,-153.5001 972.7389,-157 982.7388,-160.5001 982.7389,-153.5001"/>
 </g>
 <!-- CrudFormacionAcademicaComponent  -->
-<g id="node5" class="node">
+<g id="node9" class="node">
 <title>CrudFormacionAcademicaComponent </title>
-<polygon fill="#fb8072" stroke="#000000" points="586.4444,-252 349.5556,-252 349.5556,-216 586.4444,-216 586.4444,-252"/>
-<text text-anchor="middle" x="468" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">CrudFormacionAcademicaComponent </text>
+<polygon fill="#fb8072" stroke="#000000" points="1250.4444,-252 1013.5556,-252 1013.5556,-216 1250.4444,-216 1250.4444,-252"/>
+<text text-anchor="middle" x="1132" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">CrudFormacionAcademicaComponent </text>
 </g>
 <!-- FormacionAcademicaModule&#45;&gt;CrudFormacionAcademicaComponent  -->
-<g id="edge4" class="edge">
+<g id="edge8" class="edge">
 <title>FormacionAcademicaModule&#45;&gt;CrudFormacionAcademicaComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M367.6801,-187.1061C367.6801,-187.1061 367.6801,-205.991 367.6801,-205.991"/>
-<polygon fill="#000000" stroke="#000000" points="364.1801,-205.9909 367.6801,-215.991 371.1801,-205.991 364.1801,-205.9909"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M972.8962,-181C1012.5246,-181 1049.9595,-181 1049.9595,-181 1049.9595,-181 1049.9595,-205.7604 1049.9595,-205.7604"/>
+<polygon fill="#000000" stroke="#000000" points="1046.4596,-205.7604 1049.9595,-215.7604 1053.4596,-205.7604 1046.4596,-205.7604"/>
 </g>
 <!-- ListFormacionAcademicaComponent  -->
-<g id="node6" class="node">
+<g id="node10" class="node">
 <title>ListFormacionAcademicaComponent </title>
-<polygon fill="#fb8072" stroke="#000000" points="332.2253,-252 101.7747,-252 101.7747,-216 332.2253,-216 332.2253,-252"/>
-<text text-anchor="middle" x="217" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">ListFormacionAcademicaComponent </text>
+<polygon fill="#fb8072" stroke="#000000" points="996.2253,-252 765.7747,-252 765.7747,-216 996.2253,-216 996.2253,-252"/>
+<text text-anchor="middle" x="881" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">ListFormacionAcademicaComponent </text>
 </g>
 <!-- FormacionAcademicaModule&#45;&gt;ListFormacionAcademicaComponent  -->
-<g id="edge5" class="edge">
+<g id="edge9" class="edge">
 <title>FormacionAcademicaModule&#45;&gt;ListFormacionAcademicaComponent </title>
-<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M267.2653,-187.1061C267.2653,-187.1061 267.2653,-205.991 267.2653,-205.991"/>
-<polygon fill="#000000" stroke="#000000" points="263.7653,-205.9909 267.2653,-215.991 270.7653,-205.991 263.7653,-205.9909"/>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M881,-187.1061C881,-187.1061 881,-205.991 881,-205.991"/>
+<polygon fill="#000000" stroke="#000000" points="877.5001,-205.9909 881,-215.991 884.5001,-205.991 877.5001,-205.9909"/>
+</g>
+<!-- ViewFormacionAcademicaComponent  -->
+<g id="node11" class="node">
+<title>ViewFormacionAcademicaComponent </title>
+<polygon fill="#fb8072" stroke="#000000" points="748.2653,-252 509.7347,-252 509.7347,-216 748.2653,-216 748.2653,-252"/>
+<text text-anchor="middle" x="629" y="-229.8" font-family="Times,serif" font-size="14.00" fill="#000000">ViewFormacionAcademicaComponent </text>
+</g>
+<!-- FormacionAcademicaModule&#45;&gt;ViewFormacionAcademicaComponent  -->
+<g id="edge10" class="edge">
+<title>FormacionAcademicaModule&#45;&gt;ViewFormacionAcademicaComponent </title>
+<path fill="none" stroke="#000000" stroke-dasharray="5,2" d="M789.3747,-181C759.0975,-181 733,-181 733,-181 733,-181 733,-205.7604 733,-205.7604"/>
+<polygon fill="#000000" stroke="#000000" points="729.5001,-205.7604 733,-215.7604 736.5001,-205.7604 729.5001,-205.7604"/>
+</g>
+<!-- FormacionAcademicaRoutingModule -->
+<g id="node6" class="node">
+<title>FormacionAcademicaRoutingModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="1086.2822,-122 1083.2822,-126 1062.2822,-126 1059.2822,-122 857.7178,-122 857.7178,-86 1086.2822,-86 1086.2822,-122"/>
+<text text-anchor="middle" x="972" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormacionAcademicaRoutingModule</text>
+</g>
+<!-- FormacionAcademicaRoutingModule&#45;&gt;FormacionAcademicaModule -->
+<g id="edge5" class="edge">
+<title>FormacionAcademicaRoutingModule&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M915.2206,-122.1061C915.2206,-122.1061 915.2206,-140.991 915.2206,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="911.7206,-140.9909 915.2206,-150.991 918.7206,-140.991 911.7206,-140.9909"/>
+</g>
+<!-- SharedModule -->
+<g id="node7" class="node">
+<title>SharedModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="840.4231,-122 837.4231,-126 816.4231,-126 813.4231,-122 741.5769,-122 741.5769,-86 840.4231,-86 840.4231,-122"/>
+<text text-anchor="middle" x="791" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SharedModule</text>
+</g>
+<!-- SharedModule&#45;&gt;FormacionAcademicaModule -->
+<g id="edge6" class="edge">
+<title>SharedModule&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M814.8145,-122.1061C814.8145,-122.1061 814.8145,-140.991 814.8145,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="811.3146,-140.9909 814.8145,-150.991 818.3146,-140.991 811.3146,-140.9909"/>
+</g>
+<!-- ThemeModule -->
+<g id="node8" class="node">
+<title>ThemeModule</title>
+<polygon fill="#8dd3c7" stroke="#000000" points="724.4231,-122 721.4231,-126 700.4231,-126 697.4231,-122 625.5769,-122 625.5769,-86 724.4231,-86 724.4231,-122"/>
+<text text-anchor="middle" x="675" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ThemeModule</text>
+</g>
+<!-- ThemeModule&#45;&gt;FormacionAcademicaModule -->
+<g id="edge7" class="edge">
+<title>ThemeModule&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M675,-122.2396C675,-137.5706 675,-157 675,-157 675,-157 779.1456,-157 779.1456,-157"/>
+<polygon fill="#000000" stroke="#000000" points="779.1456,-160.5001 789.1456,-157 779.1456,-153.5001 779.1456,-160.5001"/>
 </g>
 <!-- CampusMidService -->
-<g id="node7" class="node">
+<g id="node12" class="node">
 <title>CampusMidService</title>
-<ellipse fill="#fdb462" stroke="#000000" cx="112" cy="-104" rx="87.98" ry="18"/>
-<text text-anchor="middle" x="112" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CampusMidService</text>
+<ellipse fill="#fdb462" stroke="#000000" cx="514" cy="-104" rx="87.98" ry="18"/>
+<text text-anchor="middle" x="514" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CampusMidService</text>
 </g>
 <!-- CampusMidService&#45;&gt;FormacionAcademicaModule -->
-<g id="edge6" class="edge">
+<g id="edge11" class="edge">
 <title>CampusMidService&#45;&gt;FormacionAcademicaModule</title>
-<path fill="none" stroke="#000000" d="M199.8859,-104C207.9137,-104 213.1034,-104 213.1034,-104 213.1034,-104 213.1034,-140.8939 213.1034,-140.8939"/>
-<polygon fill="#000000" stroke="#000000" points="209.6035,-140.8938 213.1034,-150.8939 216.6035,-140.8939 209.6035,-140.8938"/>
+<path fill="none" stroke="#000000" d="M555.6785,-120.122C555.6785,-137.5908 555.6785,-163 555.6785,-163 555.6785,-163 779.0804,-163 779.0804,-163"/>
+<polygon fill="#000000" stroke="#000000" points="779.0804,-166.5001 789.0804,-163 779.0804,-159.5001 779.0804,-166.5001"/>
+</g>
+<!-- FormacionAcademicaService -->
+<g id="node13" class="node">
+<title>FormacionAcademicaService</title>
+<ellipse fill="#fdb462" stroke="#000000" cx="283" cy="-104" rx="125.0182" ry="18"/>
+<text text-anchor="middle" x="283" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">FormacionAcademicaService</text>
+</g>
+<!-- FormacionAcademicaService&#45;&gt;FormacionAcademicaModule -->
+<g id="edge12" class="edge">
+<title>FormacionAcademicaService&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M283,-122.1061C283,-141.3391 283,-169 283,-169 283,-169 779.1996,-169 779.1996,-169"/>
+<polygon fill="#000000" stroke="#000000" points="779.1996,-172.5001 789.1996,-169 779.1996,-165.5001 779.1996,-172.5001"/>
+</g>
+<!-- UserService -->
+<g id="node14" class="node">
+<title>UserService</title>
+<ellipse fill="#fdb462" stroke="#000000" cx="82" cy="-104" rx="58.4415" ry="18"/>
+<text text-anchor="middle" x="82" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">UserService</text>
+</g>
+<!-- UserService&#45;&gt;FormacionAcademicaModule -->
+<g id="edge13" class="edge">
+<title>UserService&#45;&gt;FormacionAcademicaModule</title>
+<path fill="none" stroke="#000000" d="M82,-122.2843C82,-143.3211 82,-175 82,-175 82,-175 779.3445,-175 779.3445,-175"/>
+<polygon fill="#000000" stroke="#000000" points="779.3446,-178.5001 789.3445,-175 779.3445,-171.5001 779.3446,-178.5001"/>
 </g>
 </g>
 </svg>
 
           </div>
+          <i id="fullscreen" class="icon ion-ios-resize module-graph-fullscreen-btn" aria-hidden="true"></i>
           <div class="btn-group">
               <button id="zoom-in" class="btn btn-default btn-sm">Zoom in</button>
               <button id="reset" class="btn btn-default btn-sm">Reset</button>
@@ -1634,18 +258,16 @@
       <script src="../js/svg-pan-zoom.controls.js"></script>
 
 <ul class="nav nav-tabs" role="tablist">
-    <li class="active">
-        <a href="#info" id="info-tab" role="tab" data-toggle="tab" data-link="info">Info</a>
-    </li>
-
-
-    <li>
-        <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
-    </li>
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
 </ul>
 
 <div class="tab-content">
-    <div class="tab-pane fade active in" id="info">
+    <div class="tab-pane fade active in" id="c-info">
 
         <p class="comment">
             <h3>File</h3>
@@ -1655,38 +277,66 @@
         </p>
 
 
+        
+
         <div class="container-fluid module">
             <div class="row">
                 <div class="col-sm-3">
-                    <h3>Providers<a href="https://angular.io/api/core/NgModule#providers" target="_blank" title="Official documentation about module providers"><span class="fa fa-info-circle"></a></h3>
+                    <h3>Declarations<a href="https://angular.io/api/core/NgModule#declarations" target="_blank" title="Official documentation about module declarations"><span class="icon ion-ios-information-circle-outline"></span></a></h3>
                     <ul class="list-group">
                             <li class="list-group-item">
-                                <a href="../injectables/CampusMidService.html" >CampusMidService</a>
+                                <a href="../components/CrudDescuentoAcademicoComponent.html">CrudDescuentoAcademicoComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/DescuentoAcademicoComponent.html">DescuentoAcademicoComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ListDescuentoAcademicoComponent.html">ListDescuentoAcademicoComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="../components/ViewDescuentoAcademicoComponent.html">ViewDescuentoAcademicoComponent</a>
                             </li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span class="fa fa-info-circle"></a></h3>
+                    <h3>Providers<a href="https://angular.io/api/core/NgModule#providers" target="_blank" title="Official documentation about module providers"><span class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
                             <li class="list-group-item">
-                                    <a href="../modules/ThemeModule.html" >ThemeModule</a>
+                                     <a href="../injectables/CampusMidService.html" >CampusMidService</a>
                             </li>
+                            <li class="list-group-item">
+                                     <a href="../injectables/FormacionAcademicaService.html" >FormacionAcademicaService</a>
+                            </li>
+                            <li class="list-group-item">
+                                     <a href="../injectables/UserService.html" >UserService</a>
+                            </li>
+                    </ul>
+                </div>
+                <div class="col-sm-3">
+                    <h3>Imports<a href="https://angular.io/api/core/NgModule#imports" target="_blank" title="Official documentation about module imports"><span class="icon ion-ios-information-circle-outline"></a></h3>
+                    <ul class="list-group">
                             <li class="list-group-item">
                                     <a href="../modules/FormacionAcademicaRoutingModule.html" >FormacionAcademicaRoutingModule</a>
                             </li>
                             <li class="list-group-item">
                                     <a href="../modules/SharedModule.html" >SharedModule</a>
                             </li>
+                            <li class="list-group-item">
+                                    <a href="../modules/ThemeModule.html" >ThemeModule</a>
+                            </li>
                     </ul>
                 </div>
                 <div class="col-sm-3">
-                    <h3>Exports<a href="https://angular.io/api/core/NgModule#exports" target="_blank" title="Official documentation about module exports"><span class="fa fa-info-circle"></a></h3>
+                    <h3>Exports<a href="https://angular.io/api/core/NgModule#exports" target="_blank" title="Official documentation about module exports"><span class="icon ion-ios-information-circle-outline"></a></h3>
                     <ul class="list-group">
                             <li class="list-group-item">
                                     <a href="../components/CrudFormacionAcademicaComponent.html" >CrudFormacionAcademicaComponent</a>
                             </li>
                             <li class="list-group-item">
                                     <a href="../components/ListFormacionAcademicaComponent.html" >ListFormacionAcademicaComponent</a>
+                            </li>
+                            <li class="list-group-item">
+                                    <a href="../components/ViewFormacionAcademicaComponent.html" >ViewFormacionAcademicaComponent</a>
                             </li>
                     </ul>
                 </div>
@@ -1695,8 +345,8 @@
     </div>
 
 
-    <div class="tab-pane fade tab-source-code" id="source">
-        <pre class="line-numbers"><code class="language-typescript">import { FormacionAcademicaRoutingModule, routedComponents } from &#x27;./formacion_academica-routing.module&#x27;;
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { FormacionAcademicaRoutingModule, routedComponents } from &#x27;./formacion_academica-routing.module&#x27;;
 import { NgModule } from &#x27;@angular/core&#x27;;
 import { ThemeModule } from &#x27;../../@theme/theme.module&#x27;;
 import { CampusMidService } from &#x27;../../@core/data/campus_mid.service&#x27;;
@@ -1705,6 +355,9 @@ import { ToasterModule } from &#x27;angular2-toaster&#x27;;
 import { SharedModule } from &#x27;../../shared/shared.module&#x27;;
 import { CrudFormacionAcademicaComponent } from &#x27;./crud-formacion_academica/crud-formacion_academica.component&#x27;;
 import { ListFormacionAcademicaComponent } from &#x27;./list-formacion_academica/list-formacion_academica.component&#x27;;
+import { ViewFormacionAcademicaComponent } from &#x27;./view-formacion_academica/view-formacion_academica.component&#x27;;
+import { UserService } from &#x27;../../@core/data/users.service&#x27;;
+import { FormacionAcademicaService } from &#x27;../../@core/data/formacion_academica.service&#x27;;
 
 @NgModule({
   imports: [
@@ -1719,10 +372,13 @@ import { ListFormacionAcademicaComponent } from &#x27;./list-formacion_academica
   ],
   providers: [
     CampusMidService,
+    UserService,
+    FormacionAcademicaService,
   ],
   exports: [
     CrudFormacionAcademicaComponent,
     ListFormacionAcademicaComponent,
+    ViewFormacionAcademicaComponent,
   ],
 })
 export class FormacionAcademicaModule { }
@@ -1739,9 +395,14 @@ export class FormacionAcademicaModule { }
 
 
 
+
+
+
+
+
                    </div><div class="search-results">
     <div class="has-results">
-        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
         <ul class="search-results-list"></ul>
     </div>
     <div class="no-results">
@@ -1749,8 +410,21 @@ export class FormacionAcademicaModule { }
     </div>
 </div>
 </div>
+               <!-- END CONTENT -->
            </div>
        </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'module';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormacionAcademicaModule.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <!-- Required to polyfill modern browsers as code is ES5 for IE... -->
+       <script src="../js/libs/custom-elements-es5-adapter.js" charset="utf-8" defer></script>
+       <script src="../js/menu-wc.js" defer></script>
 
        <script src="../js/libs/bootstrap-native.js"></script>
 
@@ -1761,17 +435,17 @@ export class FormacionAcademicaModule { }
 
        <script src="../js/compodoc.js"></script>
 
-       <script>var COMPODOC_CURRENT_PAGE_DEPTH = 1;</script>
-
-       <script src="../js/search/search.js"></script>
-       <script src="../js/search/lunr.min.js"></script>
-       <script src="../js/search/search-lunr.js"></script>
-
        <script src="../js/tabs.js"></script>
        <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
        <script src="../js/libs/prism.js"></script>
        <script src="../js/sourceCode.js"></script>
-       <script src="../js/search/search_index.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
 
     </body>
 </html>

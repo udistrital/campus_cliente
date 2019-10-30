@@ -139,7 +139,8 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
-import { NotificacionesService } from '../@core/utils/notificaciones.service';
+import { UD_THEME } from './styles/theme.ud';
+// import { NotificacionesService } from '../@core/utils/notificaciones.service';
 import { ConfiguracionService } from '../@core/data/configuracion.service';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
@@ -195,9 +196,10 @@ const PIPES = [
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'default',
+      // name: 'default',
+      name: 'ud',
     },
-    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
+    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, UD_THEME ],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
@@ -216,7 +218,7 @@ export class ThemeModule {
       ngModule: ThemeModule,
       providers: [...NB_THEME_PROVIDERS,
         ImplicitAutenticationService,
-        NotificacionesService,
+        // NotificacionesService,
         ConfiguracionService,
         DocumentoService],
     };

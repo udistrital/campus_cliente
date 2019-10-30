@@ -10,9 +10,9 @@ describe('CrudIdiomasComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudIdiomasComponent ],
+      declarations: [CrudIdiomasComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

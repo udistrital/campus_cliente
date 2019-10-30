@@ -10,9 +10,9 @@ describe('CrudInfoPersonaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudInfoPersonaComponent ],
+      declarations: [CrudInfoPersonaComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

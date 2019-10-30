@@ -3,6 +3,7 @@ import { ContactoEnte } from './contacto_ente';
 
 export class Organizacion {
   Ente: any;
+  Id: number;
   Nombre: string;
   Contacto: Array<ContactoEnte>;
   FechaExpedicion: Date;

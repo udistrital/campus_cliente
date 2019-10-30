@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-
 import { NbMenuService, NbSidebarService } from '@nebular/theme';
 import { AnalyticsService } from '../../../@core/utils/analytics.service';
 // import { AutenticationService } from '../../../@core/utils/autentication.service';
@@ -7,8 +6,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ImplicitAutenticationService } from '../../../@core/utils/implicit_autentication.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+// import { NotificacionesService } from '../../../@core/utils/notificaciones.service';
 
 @Component({
   selector: 'ngx-header',
@@ -29,7 +27,7 @@ export class HeaderComponent implements OnInit {
     private menuService: NbMenuService,
     private analyticsService: AnalyticsService,
     private autenticacion: ImplicitAutenticationService,
-    private notificacionService: NotificacionesService,
+    // private notificacionService: NotificacionesService,
     private router: Router,
     public translate: TranslateService) {
     this.translate = translate;
@@ -38,28 +36,23 @@ export class HeaderComponent implements OnInit {
         this.onContecxtItemSelection(event.item.title);
       });
 
-    this.notificacionService.getMessages()
-      .pipe(debounceTime(700), distinctUntilChanged())
-      .subscribe((notification: any) => {
-        const temp = notification.map((notify: any) => {
-          return { title: notify.Content.Message, icon: 'fa fa-commenting-o' }
-        });
-        this.userMenu = [...temp.slice(0, 7), ...[{ title: 'ver todas', icon: 'fa fa-list' }]];
-      });
-
-    this.notificacionService.noNotify$
-      .subscribe((numero: any) => {
-        if (typeof numero !== typeof {}) {
-          this.noNotify = numero + '';
-        }
-      });
+      /** this.notificacionService.arrayMessages$
+        .subscribe((notification: any) => {
+          const temp = notification.map((notify: any) => {
+            return { title: notify.Content.Message, icon: 'fa fa-commenting-o' }
+          });
+          this.userMenu = [...temp.slice(0, 7), ...[{ title: 'ver todas', icon: 'fa fa-list' }]];
+        });**/
   }
+
   useLanguage(language: string) {
     this.translate.use(language);
   }
+
   ngOnInit() {
     this.autenticacion.init();
   }
+
   liveToken() {
     if (this.autenticacion.live()) {
       this.username = (this.autenticacion.getPayload()).sub;

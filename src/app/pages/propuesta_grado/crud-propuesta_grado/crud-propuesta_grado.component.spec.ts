@@ -11,9 +11,9 @@ describe('CrudPropuestaGradoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudPropuestaGradoComponent ],
+      declarations: [CrudPropuestaGradoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

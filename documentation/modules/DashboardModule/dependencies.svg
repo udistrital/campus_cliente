@@ -32,191 +32,191 @@
 <title>cluster_DashboardModule_imports</title>
 <polygon fill="none" stroke="#000000" points="16,-78 16,-130 130,-130 130,-78 16,-78"/>
 </g>
-<!-- DashboardComponent -->
+<!-- CarouselComponent -->
 <g id="node1" class="node">
-<title>DashboardComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2506.9734,-122 2365.0266,-122 2365.0266,-86 2506.9734,-86 2506.9734,-122"/>
-<text text-anchor="middle" x="2436" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">DashboardComponent</text>
+<title>CarouselComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="2506.594,-122 2375.406,-122 2375.406,-86 2506.594,-86 2506.594,-122"/>
+<text text-anchor="middle" x="2441" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CarouselComponent</text>
 </g>
 <!-- DashboardModule -->
 <g id="node16" class="node">
 <title>DashboardModule</title>
-<polygon fill="#8dd3c7" stroke="#000000" points="1264.191,-187 1261.191,-191 1240.191,-191 1237.191,-187 1143.809,-187 1143.809,-151 1264.191,-151 1264.191,-187"/>
-<text text-anchor="middle" x="1204" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">DashboardModule</text>
+<polygon fill="#8dd3c7" stroke="#000000" points="1322.191,-187 1319.191,-191 1298.191,-191 1295.191,-187 1201.809,-187 1201.809,-151 1322.191,-151 1322.191,-187"/>
+<text text-anchor="middle" x="1262" y="-164.8" font-family="Times,serif" font-size="14.00" fill="#000000">DashboardModule</text>
+</g>
+<!-- CarouselComponent&#45;&gt;DashboardModule -->
+<g id="edge1" class="edge">
+<title>CarouselComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M2441,-122.3228C2441,-145.6602 2441,-183 2441,-183 2441,-183 1332.496,-183 1332.496,-183"/>
+<polygon fill="#000000" stroke="#000000" points="1332.496,-179.5001 1322.496,-183 1332.4959,-186.5001 1332.496,-179.5001"/>
+</g>
+<!-- DashboardComponent -->
+<g id="node2" class="node">
+<title>DashboardComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="2356.9734,-122 2215.0266,-122 2215.0266,-86 2356.9734,-86 2356.9734,-122"/>
+<text text-anchor="middle" x="2286" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">DashboardComponent</text>
 </g>
 <!-- DashboardComponent&#45;&gt;DashboardModule -->
-<g id="edge1" class="edge">
-<title>DashboardComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M2436,-122.3228C2436,-145.6602 2436,-183 2436,-183 2436,-183 1274.2559,-183 1274.2559,-183"/>
-<polygon fill="#000000" stroke="#000000" points="1274.2559,-179.5001 1264.2559,-183 1274.2559,-186.5001 1274.2559,-179.5001"/>
-</g>
-<!-- StatusCardComponent -->
-<g id="node2" class="node">
-<title>StatusCardComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2347.2674,-122 2204.7326,-122 2204.7326,-86 2347.2674,-86 2347.2674,-122"/>
-<text text-anchor="middle" x="2276" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">StatusCardComponent</text>
-</g>
-<!-- StatusCardComponent&#45;&gt;DashboardModule -->
 <g id="edge2" class="edge">
-<title>StatusCardComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M2276,-122.2921C2276,-144.2057 2276,-178 2276,-178 2276,-178 1274.3191,-178 1274.3191,-178"/>
-<polygon fill="#000000" stroke="#000000" points="1274.3191,-174.5001 1264.3191,-178 1274.3191,-181.5001 1274.3191,-174.5001"/>
+<title>DashboardComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M2286,-122.2921C2286,-144.2057 2286,-178 2286,-178 2286,-178 1332.2329,-178 1332.2329,-178"/>
+<polygon fill="#000000" stroke="#000000" points="1332.2329,-174.5001 1322.2329,-178 1332.2329,-181.5001 1332.2329,-174.5001"/>
 </g>
-<!-- TemperatureDraggerComponent -->
+<!-- ElectricityChartComponent -->
 <g id="node3" class="node">
-<title>TemperatureDraggerComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="2186.203,-122 1987.797,-122 1987.797,-86 2186.203,-86 2186.203,-122"/>
-<text text-anchor="middle" x="2087" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TemperatureDraggerComponent</text>
+<title>ElectricityChartComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="2197.245,-122 2026.755,-122 2026.755,-86 2197.245,-86 2197.245,-122"/>
+<text text-anchor="middle" x="2112" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ElectricityChartComponent</text>
 </g>
-<!-- TemperatureDraggerComponent&#45;&gt;DashboardModule -->
+<!-- ElectricityChartComponent&#45;&gt;DashboardModule -->
 <g id="edge3" class="edge">
-<title>TemperatureDraggerComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M2087,-122.0267C2087,-142.7672 2087,-174 2087,-174 2087,-174 1274.3446,-174 1274.3446,-174"/>
-<polygon fill="#000000" stroke="#000000" points="1274.3447,-170.5001 1264.3446,-174 1274.3446,-177.5001 1274.3447,-170.5001"/>
+<title>ElectricityChartComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M2112,-122.0267C2112,-142.7672 2112,-174 2112,-174 2112,-174 1332.109,-174 1332.109,-174"/>
+<polygon fill="#000000" stroke="#000000" points="1332.109,-170.5001 1322.109,-174 1332.109,-177.5001 1332.109,-170.5001"/>
 </g>
-<!-- TemperatureComponent -->
+<!-- ElectricityComponent -->
 <g id="node4" class="node">
-<title>TemperatureComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1969.3459,-122 1816.6541,-122 1816.6541,-86 1969.3459,-86 1969.3459,-122"/>
-<text text-anchor="middle" x="1893" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TemperatureComponent</text>
+<title>ElectricityComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="2008.6429,-122 1869.3571,-122 1869.3571,-86 2008.6429,-86 2008.6429,-122"/>
+<text text-anchor="middle" x="1939" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ElectricityComponent</text>
 </g>
-<!-- TemperatureComponent&#45;&gt;DashboardModule -->
+<!-- ElectricityComponent&#45;&gt;DashboardModule -->
 <g id="edge4" class="edge">
-<title>TemperatureComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1893,-122.1061C1893,-141.3391 1893,-169 1893,-169 1893,-169 1274.2393,-169 1274.2393,-169"/>
-<polygon fill="#000000" stroke="#000000" points="1274.2393,-165.5001 1264.2393,-169 1274.2393,-172.5001 1274.2393,-165.5001"/>
-</g>
-<!-- TeamComponent -->
-<g id="node5" class="node">
-<title>TeamComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1798.705,-122 1685.295,-122 1685.295,-86 1798.705,-86 1798.705,-122"/>
-<text text-anchor="middle" x="1742" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TeamComponent</text>
-</g>
-<!-- TeamComponent&#45;&gt;DashboardModule -->
-<g id="edge5" class="edge">
-<title>TeamComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1742,-122.302C1742,-140.2699 1742,-165 1742,-165 1742,-165 1274.1494,-165 1274.1494,-165"/>
-<polygon fill="#000000" stroke="#000000" points="1274.1495,-161.5001 1264.1494,-165 1274.1494,-168.5001 1274.1495,-161.5001"/>
+<title>ElectricityComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M1939,-122.1061C1939,-141.3391 1939,-169 1939,-169 1939,-169 1332.3768,-169 1332.3768,-169"/>
+<polygon fill="#000000" stroke="#000000" points="1332.3769,-165.5001 1322.3768,-169 1332.3768,-172.5001 1332.3769,-165.5001"/>
 </g>
 <!-- KittenComponent -->
-<g id="node6" class="node">
+<g id="node5" class="node">
 <title>KittenComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1667.3259,-122 1550.6741,-122 1550.6741,-86 1667.3259,-86 1667.3259,-122"/>
-<text text-anchor="middle" x="1609" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">KittenComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="1851.3259,-122 1734.6741,-122 1734.6741,-86 1851.3259,-86 1851.3259,-122"/>
+<text text-anchor="middle" x="1793" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">KittenComponent</text>
 </g>
 <!-- KittenComponent&#45;&gt;DashboardModule -->
-<g id="edge6" class="edge">
+<g id="edge5" class="edge">
 <title>KittenComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1609,-122.027C1609,-138.3976 1609,-160 1609,-160 1609,-160 1274.1953,-160 1274.1953,-160"/>
-<polygon fill="#000000" stroke="#000000" points="1274.1953,-156.5001 1264.1953,-160 1274.1952,-163.5001 1274.1953,-156.5001"/>
+<path fill="none" stroke="#000000" d="M1793,-122.302C1793,-140.2699 1793,-165 1793,-165 1793,-165 1332.1376,-165 1332.1376,-165"/>
+<polygon fill="#000000" stroke="#000000" points="1332.1377,-161.5001 1322.1376,-165 1332.1376,-168.5001 1332.1377,-161.5001"/>
+</g>
+<!-- NewsComponent -->
+<g id="node6" class="node">
+<title>NewsComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1716.705,-122 1603.295,-122 1603.295,-86 1716.705,-86 1716.705,-122"/>
+<text text-anchor="middle" x="1660" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">NewsComponent</text>
+</g>
+<!-- NewsComponent&#45;&gt;DashboardModule -->
+<g id="edge6" class="edge">
+<title>NewsComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M1660,-122.027C1660,-138.3976 1660,-160 1660,-160 1660,-160 1332.4476,-160 1332.4476,-160"/>
+<polygon fill="#000000" stroke="#000000" points="1332.4477,-156.5001 1322.4476,-160 1332.4476,-163.5001 1332.4477,-156.5001"/>
 </g>
 <!-- SecurityCamerasComponent -->
 <g id="node7" class="node">
 <title>SecurityCamerasComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1532.4622,-122 1355.5378,-122 1355.5378,-86 1532.4622,-86 1532.4622,-122"/>
-<text text-anchor="middle" x="1444" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SecurityCamerasComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="1585.4622,-122 1408.5378,-122 1408.5378,-86 1585.4622,-86 1585.4622,-122"/>
+<text text-anchor="middle" x="1497" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SecurityCamerasComponent</text>
 </g>
 <!-- SecurityCamerasComponent&#45;&gt;DashboardModule -->
 <g id="edge7" class="edge">
 <title>SecurityCamerasComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1444,-122.1871C1444,-137.1824 1444,-156 1444,-156 1444,-156 1274.2523,-156 1274.2523,-156"/>
-<polygon fill="#000000" stroke="#000000" points="1274.2524,-152.5001 1264.2523,-156 1274.2523,-159.5001 1274.2524,-152.5001"/>
-</g>
-<!-- WeatherComponent -->
-<g id="node8" class="node">
-<title>WeatherComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1337.2423,-122 1208.7577,-122 1208.7577,-86 1337.2423,-86 1337.2423,-122"/>
-<text text-anchor="middle" x="1273" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">WeatherComponent</text>
-</g>
-<!-- WeatherComponent&#45;&gt;DashboardModule -->
-<g id="edge8" class="edge">
-<title>WeatherComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1236.3622,-122.1061C1236.3622,-122.1061 1236.3622,-140.991 1236.3622,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="1232.8623,-140.9909 1236.3622,-150.991 1239.8623,-140.991 1232.8623,-140.9909"/>
+<path fill="none" stroke="#000000" d="M1497,-122.1871C1497,-137.1824 1497,-156 1497,-156 1497,-156 1332.2132,-156 1332.2132,-156"/>
+<polygon fill="#000000" stroke="#000000" points="1332.2132,-152.5001 1322.2132,-156 1332.2131,-159.5001 1332.2132,-152.5001"/>
 </g>
 <!-- SolarComponent -->
-<g id="node9" class="node">
+<g id="node8" class="node">
 <title>SolarComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1190.3809,-122 1079.6191,-122 1079.6191,-86 1190.3809,-86 1190.3809,-122"/>
-<text text-anchor="middle" x="1135" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SolarComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="1390.3809,-122 1279.6191,-122 1279.6191,-86 1390.3809,-86 1390.3809,-122"/>
+<text text-anchor="middle" x="1335" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">SolarComponent</text>
 </g>
 <!-- SolarComponent&#45;&gt;DashboardModule -->
-<g id="edge9" class="edge">
+<g id="edge8" class="edge">
 <title>SolarComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1167.1725,-122.1061C1167.1725,-122.1061 1167.1725,-140.991 1167.1725,-140.991"/>
-<polygon fill="#000000" stroke="#000000" points="1163.6726,-140.9909 1167.1725,-150.991 1170.6726,-140.991 1163.6726,-140.9909"/>
+<path fill="none" stroke="#000000" d="M1300.8275,-122.1061C1300.8275,-122.1061 1300.8275,-140.991 1300.8275,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="1297.3276,-140.9909 1300.8275,-150.991 1304.3276,-140.991 1297.3276,-140.9909"/>
 </g>
-<!-- TrafficComponent -->
+<!-- StatusCardComponent -->
+<g id="node9" class="node">
+<title>StatusCardComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1261.2674,-122 1118.7326,-122 1118.7326,-86 1261.2674,-86 1261.2674,-122"/>
+<text text-anchor="middle" x="1190" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">StatusCardComponent</text>
+</g>
+<!-- StatusCardComponent&#45;&gt;DashboardModule -->
+<g id="edge9" class="edge">
+<title>StatusCardComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M1231.6441,-122.1061C1231.6441,-122.1061 1231.6441,-140.991 1231.6441,-140.991"/>
+<polygon fill="#000000" stroke="#000000" points="1228.1442,-140.9909 1231.6441,-150.991 1235.1442,-140.991 1228.1442,-140.9909"/>
+</g>
+<!-- TeamComponent -->
 <g id="node10" class="node">
-<title>TrafficComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="1061.1867,-122 940.8133,-122 940.8133,-86 1061.1867,-86 1061.1867,-122"/>
-<text text-anchor="middle" x="1001" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TrafficComponent</text>
+<title>TeamComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="1100.705,-122 987.295,-122 987.295,-86 1100.705,-86 1100.705,-122"/>
+<text text-anchor="middle" x="1044" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TeamComponent</text>
 </g>
-<!-- TrafficComponent&#45;&gt;DashboardModule -->
+<!-- TeamComponent&#45;&gt;DashboardModule -->
 <g id="edge10" class="edge">
-<title>TrafficComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M1001,-122.1871C1001,-137.1824 1001,-156 1001,-156 1001,-156 1133.6429,-156 1133.6429,-156"/>
-<polygon fill="#000000" stroke="#000000" points="1133.643,-159.5001 1143.6429,-156 1133.6429,-152.5001 1133.643,-159.5001"/>
+<title>TeamComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M1044,-122.1871C1044,-137.1824 1044,-156 1044,-156 1044,-156 1191.8535,-156 1191.8535,-156"/>
+<polygon fill="#000000" stroke="#000000" points="1191.8535,-159.5001 1201.8535,-156 1191.8534,-152.5001 1191.8535,-159.5001"/>
+</g>
+<!-- TemperatureComponent -->
+<g id="node11" class="node">
+<title>TemperatureComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="969.3459,-122 816.6541,-122 816.6541,-86 969.3459,-86 969.3459,-122"/>
+<text text-anchor="middle" x="893" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TemperatureComponent</text>
+</g>
+<!-- TemperatureComponent&#45;&gt;DashboardModule -->
+<g id="edge11" class="edge">
+<title>TemperatureComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M893,-122.027C893,-138.3976 893,-160 893,-160 893,-160 1191.8925,-160 1191.8925,-160"/>
+<polygon fill="#000000" stroke="#000000" points="1191.8926,-163.5001 1201.8925,-160 1191.8925,-156.5001 1191.8926,-163.5001"/>
+</g>
+<!-- TemperatureDraggerComponent -->
+<g id="node12" class="node">
+<title>TemperatureDraggerComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="798.203,-122 599.797,-122 599.797,-86 798.203,-86 798.203,-122"/>
+<text text-anchor="middle" x="699" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TemperatureDraggerComponent</text>
+</g>
+<!-- TemperatureDraggerComponent&#45;&gt;DashboardModule -->
+<g id="edge12" class="edge">
+<title>TemperatureDraggerComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M699,-122.302C699,-140.2699 699,-165 699,-165 699,-165 1191.7491,-165 1191.7491,-165"/>
+<polygon fill="#000000" stroke="#000000" points="1191.7492,-168.5001 1201.7491,-165 1191.7491,-161.5001 1191.7492,-168.5001"/>
 </g>
 <!-- TrafficChartComponent -->
-<g id="node11" class="node">
+<g id="node13" class="node">
 <title>TrafficChartComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="922.7893,-122 771.2107,-122 771.2107,-86 922.7893,-86 922.7893,-122"/>
-<text text-anchor="middle" x="847" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TrafficChartComponent</text>
+<polygon fill="#ffffb3" stroke="#000000" points="581.7893,-122 430.2107,-122 430.2107,-86 581.7893,-86 581.7893,-122"/>
+<text text-anchor="middle" x="506" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TrafficChartComponent</text>
 </g>
 <!-- TrafficChartComponent&#45;&gt;DashboardModule -->
-<g id="edge11" class="edge">
-<title>TrafficChartComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M847,-122.027C847,-138.3976 847,-160 847,-160 847,-160 1133.8435,-160 1133.8435,-160"/>
-<polygon fill="#000000" stroke="#000000" points="1133.8435,-163.5001 1143.8435,-160 1133.8435,-156.5001 1133.8435,-163.5001"/>
-</g>
-<!-- CarouselComponent -->
-<g id="node12" class="node">
-<title>CarouselComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="753.594,-122 622.406,-122 622.406,-86 753.594,-86 753.594,-122"/>
-<text text-anchor="middle" x="688" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">CarouselComponent</text>
-</g>
-<!-- CarouselComponent&#45;&gt;DashboardModule -->
-<g id="edge12" class="edge">
-<title>CarouselComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M688,-122.302C688,-140.2699 688,-165 688,-165 688,-165 1133.7984,-165 1133.7984,-165"/>
-<polygon fill="#000000" stroke="#000000" points="1133.7984,-168.5001 1143.7984,-165 1133.7983,-161.5001 1133.7984,-168.5001"/>
-</g>
-<!-- NewsComponent -->
-<g id="node13" class="node">
-<title>NewsComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="604.705,-122 491.295,-122 491.295,-86 604.705,-86 604.705,-122"/>
-<text text-anchor="middle" x="548" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">NewsComponent</text>
-</g>
-<!-- NewsComponent&#45;&gt;DashboardModule -->
 <g id="edge13" class="edge">
-<title>NewsComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M548,-122.1061C548,-141.3391 548,-169 548,-169 548,-169 1133.7534,-169 1133.7534,-169"/>
-<polygon fill="#000000" stroke="#000000" points="1133.7535,-172.5001 1143.7534,-169 1133.7534,-165.5001 1133.7535,-172.5001"/>
+<title>TrafficChartComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M506,-122.1061C506,-141.3391 506,-169 506,-169 506,-169 1191.729,-169 1191.729,-169"/>
+<polygon fill="#000000" stroke="#000000" points="1191.7291,-172.5001 1201.729,-169 1191.729,-165.5001 1191.7291,-172.5001"/>
 </g>
-<!-- ElectricityComponent -->
+<!-- TrafficComponent -->
 <g id="node14" class="node">
-<title>ElectricityComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="473.6429,-122 334.3571,-122 334.3571,-86 473.6429,-86 473.6429,-122"/>
-<text text-anchor="middle" x="404" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ElectricityComponent</text>
+<title>TrafficComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="412.1867,-122 291.8133,-122 291.8133,-86 412.1867,-86 412.1867,-122"/>
+<text text-anchor="middle" x="352" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">TrafficComponent</text>
 </g>
-<!-- ElectricityComponent&#45;&gt;DashboardModule -->
+<!-- TrafficComponent&#45;&gt;DashboardModule -->
 <g id="edge14" class="edge">
-<title>ElectricityComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M404,-122.0267C404,-142.7672 404,-174 404,-174 404,-174 1133.87,-174 1133.87,-174"/>
-<polygon fill="#000000" stroke="#000000" points="1133.87,-177.5001 1143.87,-174 1133.8699,-170.5001 1133.87,-177.5001"/>
+<title>TrafficComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M352,-122.0267C352,-142.7672 352,-174 352,-174 352,-174 1191.5876,-174 1191.5876,-174"/>
+<polygon fill="#000000" stroke="#000000" points="1191.5877,-177.5001 1201.5876,-174 1191.5876,-170.5001 1191.5877,-177.5001"/>
 </g>
-<!-- ElectricityChartComponent -->
+<!-- WeatherComponent -->
 <g id="node15" class="node">
-<title>ElectricityChartComponent</title>
-<polygon fill="#ffffb3" stroke="#000000" points="316.245,-122 145.755,-122 145.755,-86 316.245,-86 316.245,-122"/>
-<text text-anchor="middle" x="231" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">ElectricityChartComponent</text>
+<title>WeatherComponent</title>
+<polygon fill="#ffffb3" stroke="#000000" points="274.2423,-122 145.7577,-122 145.7577,-86 274.2423,-86 274.2423,-122"/>
+<text text-anchor="middle" x="210" y="-99.8" font-family="Times,serif" font-size="14.00" fill="#000000">WeatherComponent</text>
 </g>
-<!-- ElectricityChartComponent&#45;&gt;DashboardModule -->
+<!-- WeatherComponent&#45;&gt;DashboardModule -->
 <g id="edge15" class="edge">
-<title>ElectricityChartComponent&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M231,-122.2921C231,-144.2057 231,-178 231,-178 231,-178 1133.8688,-178 1133.8688,-178"/>
-<polygon fill="#000000" stroke="#000000" points="1133.8688,-181.5001 1143.8688,-178 1133.8687,-174.5001 1133.8688,-181.5001"/>
+<title>WeatherComponent&#45;&gt;DashboardModule</title>
+<path fill="none" stroke="#000000" d="M210,-122.2921C210,-144.2057 210,-178 210,-178 210,-178 1191.6615,-178 1191.6615,-178"/>
+<polygon fill="#000000" stroke="#000000" points="1191.6615,-181.5001 1201.6615,-178 1191.6614,-174.5001 1191.6615,-181.5001"/>
 </g>
 <!-- ThemeModule -->
 <g id="node17" class="node">
@@ -227,8 +227,8 @@
 <!-- ThemeModule&#45;&gt;DashboardModule -->
 <g id="edge16" class="edge">
 <title>ThemeModule&#45;&gt;DashboardModule</title>
-<path fill="none" stroke="#000000" d="M73,-122.3228C73,-145.6602 73,-183 73,-183 73,-183 1133.5924,-183 1133.5924,-183"/>
-<polygon fill="#000000" stroke="#000000" points="1133.5924,-186.5001 1143.5924,-183 1133.5923,-179.5001 1133.5924,-186.5001"/>
+<path fill="none" stroke="#000000" d="M73,-122.3228C73,-145.6602 73,-183 73,-183 73,-183 1191.8132,-183 1191.8132,-183"/>
+<polygon fill="#000000" stroke="#000000" points="1191.8132,-186.5001 1201.8132,-183 1191.8132,-179.5001 1191.8132,-186.5001"/>
 </g>
 </g>
 </svg>
