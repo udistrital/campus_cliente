@@ -9,11 +9,15 @@ pipeline:
 
   # build and test the go program
   nodejs:
-    image: node:12.6.0
+    image: node
     commands:
-     - node --version
+     - apt-get update -y
+     - apt-get install -y zip
+     - rm -rf node_modules
      - npm i
-     - npm run build:test
+     - npm install node-sass
+     - npm run lint
+     - npm run build --build-optimizer=false
     when:
       branch: [test]
       event: [push, pull_request]
@@ -63,20 +67,11 @@ pipeline:
       {{#success build.status}}
         <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">SUCCESS</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
-        <code>Por:{{commit.author}}</code>
       {{else}}
         <code>{{repo.owner}}/{{repo.name}}</code> <a href="{{build.link}}">FAILURE</a>
         <code>{{commit.branch}}</code>@<a href="{{commit.link}}">{{truncate commit.sha 7}}</a>
-        <code>Por:{{commit.author}}</code>
       {{/success}}
-<<<<<<< HEAD
     when:
       status: [success, failure]
-      branch: [master, test]
+      branch: [master]
       event: [push, pull_request]
-=======
-  when:
-   status:
-   - failure
-   - success
->>>>>>> 3bdb100385149f9d2af94002b6760f5b105b9a73
