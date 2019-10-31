@@ -81,7 +81,7 @@
         <br>
         <!-- Botones de form con acción de botones -->
         <div align="center">
-            <button class="btn btn-success btn-tiny" (click)="validForm()" [hidden]="!normalform.btn">{{normalform.btn}}</button>
+            <button class="btn btn-success btn-tiny" (click)="validForm()" [hidden]="!normalform.btn || !normalform.btnOculto">{{normalform.btn}}</button>
             <button class="btn btn-primary btn-tiny" (click)="clearForm()" [hidden]="!normalform.btnLimpiar">{{normalform.btnLimpiar}}</button>
 
         </div>
@@ -164,7 +164,7 @@
         </fieldset>
         <br>
         <div align="center">
-            <button class="btn btn-success btn-tiny" (click)="validForm()" [hidden]="!normalform.btn">{{normalform.btn}}</button>
+            <button class="btn btn-success btn-tiny" (click)="validForm()" [hidden]="!normalform.btn || !normalform.btnOculto">{{normalform.btn}}</button>
             <button class="btn btn-primary btn-tiny" (click)="clearForm()" [hidden]="!normalform.btnLimpiar">{{normalform.btnLimpiar}}</button>
         </div>
         <br>
@@ -252,7 +252,7 @@
         <br>
         <!-- Botones de form con accaión de botones -->
         <div align="center">
-            <button class="btn btn-success btn-tiny" (click)="validForm()" [hidden]="!normalform.btn">{{normalform.btn}}</button>
+            <button class="btn btn-success btn-tiny" (click)="validForm()" [hidden]="!normalform.btn || !normalform.btnOculto">{{normalform.btn}}</button>
             <button class="btn btn-primary btn-tiny" (click)="clearForm()" [hidden]="!normalform.btnLimpiar">{{normalform.btnLimpiar}}</button>
         </div>
         <br>
@@ -385,7 +385,7 @@
             </div>
             <div align="right" class="form-group">
                 <button class="btn btn-primary btn-sm" (click)="clearForm()" [hidden]="!normalform.btnLimpiar">{{normalform.btnLimpiar}}</button>
-                <button class="btn btn-success btn-sm" (click)="validForm()" [hidden]="!normalform.btn">{{normalform.btn}}</button>
+                <button class="btn btn-success btn-sm" (click)="validForm()" [hidden]="!normalform.btn || !normalform.btnOculto">{{normalform.btn}}</button>
             </div>
 
         </fieldset>

@@ -152,6 +152,10 @@ export class ListAdmisionComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.ente = this.userService.getEnte();
+    if (this.ente !== 0 && this.ente !== undefined && this.ente.toString() !== '' && this.ente.toString() !== 'NaN') {
+      this.loadData();
+    }
   }
 
   onEdit(event): void {

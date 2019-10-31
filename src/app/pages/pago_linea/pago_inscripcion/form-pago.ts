@@ -1,7 +1,9 @@
 export let FORM_PAGO = {
   titulo: 'PagoInscripcion',
   tipo_formulario: 'mini',
-  alertas: true,
+  btn: '-',
+  btnOculto: false,
+  alertas: false,
   modelo: 'PagoInscripcion',
   campos: [
     {

@@ -498,7 +498,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="810" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:810</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="813" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:813</a></div>
                             </td>
                         </tr>
 
@@ -574,7 +574,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="640" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:640</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="643" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:643</a></div>
                             </td>
                         </tr>
 
@@ -681,7 +681,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="381" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:381</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="384" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:384</a></div>
                             </td>
                         </tr>
 
@@ -800,7 +800,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="806" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:806</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="809" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:809</a></div>
                             </td>
                         </tr>
 
@@ -838,7 +838,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="814" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:814</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="817" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:817</a></div>
                             </td>
                         </tr>
 
@@ -876,7 +876,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="817" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:817</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="820" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:820</a></div>
                             </td>
                         </tr>
 
@@ -981,7 +981,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="823" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:823</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="826" class="link-to-prism">src/app/pages/pago_linea/pago_inscripcion/pago_inscripcion.component.ts:826</a></div>
                             </td>
                         </tr>
 
@@ -1900,6 +1900,9 @@ export class PagoInscripcionComponent implements OnInit {
                                 if (res_persona !&#x3D;&#x3D; null &amp;&amp; info_persona.Type !&#x3D;&#x3D; &#x27;error&#x27;) {
                                   const id_token &#x3D; window.localStorage.getItem(&#x27;id_token&#x27;).split(&#x27;.&#x27;);
                                   const payload &#x3D; JSON.parse(atob(id_token[1]));
+                                  console.info(atob(id_token[0]));
+                                  console.info(atob(id_token[1]));
+
                                   this.btnPagar &#x3D; false;
                                   this.btnCargar &#x3D; true;
                                   this.btnRecibo &#x3D; false;
@@ -2304,7 +2307,7 @@ export class PagoInscripcionComponent implements OnInit {
                                         this.recibos.post(&#x27;recibo&#x27;, recibo).subscribe(res_recibo &#x3D;&gt; {
                                           const res_rec &#x3D; &lt;any&gt;res_recibo;
                                           if (res_recibo !&#x3D;&#x3D; null &amp;&amp; res_rec.Type !&#x3D;&#x3D; &#x27;error&#x27;) {
-                                            info_inscripcion.ReciboInscripcionId &#x3D; res_rec.Body.Id;
+                                            info_inscripcion.ReciboInscripcionId &#x3D; res_rec.Id;
                                             this.inscripciones.put(&#x27;inscripcion&#x27;, info_inscripcion)
                                               .subscribe(res &#x3D;&gt; {
                                                 if (res !&#x3D;&#x3D; null) {
