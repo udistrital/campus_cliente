@@ -12,6 +12,10 @@ const routes: Routes = [{
       component: DashboardComponent,
     },
     {
+      path: 'programas_virtuales',
+      loadChildren: './programas_virtuales/programas_virtuales.module#ProgramasVirtualesModule',
+    },
+    {
       path: 'inscripcion',
       loadChildren: './inscripcion/inscripcion.module#InscripcionModule',
     },
