@@ -3,6 +3,7 @@ export let FORM_COMPROBANTE = {
   tipo_formulario: 'mini',
   alertas: true,
   btn: 'Guardar',
+  btnOculto: true,
   modelo: 'PagoComprobante',
   campos: [
     {

@@ -3,6 +3,7 @@ export let FORM_IDIOMAS = {
   tipo_formulario: 'mini',
   alertas: true,
   btn: 'Guardar',
+  btnOculto: true,
   modelo: 'InfoIdioma',
   campos: [
     {

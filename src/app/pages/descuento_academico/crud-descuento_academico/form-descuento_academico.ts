@@ -3,6 +3,7 @@ export let FORM_DESCUENTO = {
   tipo_formulario: 'mini',
   btn: 'Guardar',
   btnLimpiar: 'Limpiar',
+  btnOculto: true,
   alertas: true,
   modelo: 'SolicitudDescuento',
   campos: [

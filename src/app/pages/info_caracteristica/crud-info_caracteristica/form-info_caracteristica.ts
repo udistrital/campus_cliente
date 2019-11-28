@@ -2,6 +2,7 @@ export let FORM_INFO_CARACTERISTICA = {
     // titulo: 'InfoCaracteristica',
     tipo_formulario: 'mini',
     btn: 'Guardar',
+    btnOculto: true,
     alertas: true,
     modelo: 'InfoCaracteristica',
     campos: [

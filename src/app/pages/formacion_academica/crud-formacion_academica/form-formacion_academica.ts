@@ -4,6 +4,7 @@ export let FORM_FORMACION_ACADEMICA = {
   alertas: true,
   btn: 'Guardar',
   btnLimpiar: 'Limpiar',
+  btnOculto: true,
   modelo: 'InfoFormacionAcademica',
   campos: [
     {

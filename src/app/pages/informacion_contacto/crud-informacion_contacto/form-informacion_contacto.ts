@@ -2,6 +2,7 @@ export let FORM_INFORMACION_CONTACTO = {
     // titulo: 'InformacionContacto',
     tipo_formulario: 'mini',
     btn: 'Guardar',
+    btnOculto: true,
     alertas: true,
     modelo: 'InformacionContacto',
     campos: [
