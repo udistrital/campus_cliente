@@ -1,0 +1,40 @@
+nb-card-header {
+  text-align: center;
+}
+
+img {
+  width: 60%;
+}
+
+div {
+  text-align: justify;
+  font-size: 14px;
+  p {
+    margin-right: 10px;
+  }
+}
+
+.btn-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+     -moz-transition: all 0.3s;
+          transition: all 0.3s;
+}
+
+.btn-outlined.btn-success {
+  background: none;
+  border: 3px solid #0db88d;
+  color: #0db88d;
+}
+
+.btn-outlined.btn-success:hover {
+  color: #ffffff;
+  background: #0db88d;
+  border-color: #0db88d;
+}
+
+dd {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}

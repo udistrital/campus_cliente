@@ -101,7 +101,7 @@
                 </tr>
                         <tr>
                             <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="9" class="link-to-prism">src/app/@core/_Interceptor/auth.Interceptor.ts:9</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="7" class="link-to-prism">src/app/@core/_Interceptor/auth.Interceptor.ts:7</a></div>
                             </td>
                         </tr>
 
@@ -166,7 +166,7 @@
 
                         <tr>
                             <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/@core/_Interceptor/auth.Interceptor.ts:13</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/@core/_Interceptor/auth.Interceptor.ts:11</a></div>
                             </td>
                         </tr>
 
@@ -233,11 +233,9 @@
 
     <div class="tab-pane fade  tab-source-code" id="c-source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;;
-import {HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse} from &#x27;@angular/common/http&#x27;;
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
 import { Router } from &#x27;@angular/router&#x27;;
-
-import {  tap } from &#x27;rxjs/operators&#x27;;
-
+import { tap } from &#x27;rxjs/operators&#x27;;
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -249,14 +247,15 @@ export class AuthInterceptor implements HttpInterceptor {
     const acces_token &#x3D; window.localStorage.getItem(&#x27;access_token&#x27;);
 
     if (acces_token) {
-    // Clone the request and replace the original headers with
-    // cloned headers, updated with the authorization.
-    const authToken &#x3D; &#x27;Bearer &#x27; + acces_token;
-    const authReq &#x3D; req.clone({
-      headers: req.headers.set(&#x27;Authorization&#x27;, authToken),
-    });
-    // send cloned request with header to the next handler.
-    return next.handle(authReq).pipe(
+      // Clone the request and replace the original headers with
+      // cloned headers, updated with the authorization.
+      const authToken &#x3D; &#x27;Bearer &#x27; + acces_token;
+      const authReq &#x3D; req.clone({
+        headers: req.headers.set(&#x27;Authorization&#x27;, authToken),
+      });
+
+      // send cloned request with header to the next handler.
+      return next.handle(authReq).pipe(
         tap(event &#x3D;&gt; {
           // There may be other events besides the response.
           if (event instanceof HttpErrorResponse) {
@@ -264,10 +263,10 @@ export class AuthInterceptor implements HttpInterceptor {
             this.router.navigate([&#x27;/&#x27;]);
           }
         },
-        (error: any) &#x3D;&gt; {
-            console.info(error);
-        },
-      ));
+          (error: any) &#x3D;&gt; {
+              console.info(error);
+          },
+        ));
     } else {
       return next.handle(req);
     }

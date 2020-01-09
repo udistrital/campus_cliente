@@ -2,11 +2,11 @@ import {Component, OnDestroy} from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 import { takeWhile } from 'rxjs/operators/takeWhile' ;
 
-interface CardSettings {
+/* interface CardSettings {
   title: string;
   iconClass: string;
   type: string;
-}
+} */
 
 @Component({
   selector: 'ngx-dashboard',
@@ -17,7 +17,7 @@ export class DashboardComponent implements OnDestroy {
 
   private alive = true;
 
-  lightCard: CardSettings = {
+  /* lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
     type: 'primary',
@@ -74,17 +74,17 @@ export class DashboardComponent implements OnDestroy {
         type: 'secondary',
       },
     ],
-  };
+  }; */
 
   constructor(private themeService: NbThemeService) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
       .subscribe(theme => {
-        this.statusCards = this.statusCardsByThemes[theme.name];
+        // this.statusCards = this.statusCardsByThemes[theme.name];
     });
   }
 
   ngOnDestroy() {
-    this.alive = false;
+    // this.alive = false;
   }
 }

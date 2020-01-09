@@ -1,46 +1,55 @@
 import { Component } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
-
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 @Component({
-    selector: 'ngx-news',
-    styleUrls: ['./news.component.scss'],
-    templateUrl: './news.component.html',
+  selector: 'ngx-news',
+  styleUrls: ['./news.component.scss'],
+  templateUrl: './news.component.html',
 })
 
 export class NewsComponent {
+  currentTheme: string;
+  themeSubscription: any;
+  news: any;
 
-    currentTheme: string;
-    themeSubscription: any;
-    news: any;
+  constructor(private themeService: NbThemeService,
+    private router: Router,
+    private translate: TranslateService) {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+    });
+    this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
+      this.currentTheme = theme.name;
+      });
 
-    constructor(private themeService: NbThemeService) {
-        this.themeSubscription = this.themeService.getJsTheme().subscribe(theme => {
-            this.currentTheme = theme.name;
-        });
-        this.news = [{
-            img: 'https://campusvirtual.udistrital.edu.co/images/programas/MaestriaTelecomunicaciones%20190x120.jpg',
-            url: 'https://campusvirtual.udistrital.edu.co/index.php?option=com_content&view=article&id=6&Itemid=194',
-            title: 'Maestría en Telecomunicaciones Móviles',
-            description: 'Hace parte de los planes de mejoramiento y desarrollo del' +
-            'programa de la Especialización en Telecomunicaciones Móviles.',
+      this.news = [{
+        img: 'assets/images/Logo-MET.png',
+        url: '/pages/programas_virtuales/met',
+        title: 'met',
+        height: 215,
+        width: 253,
+      }, {
+        img: 'assets/images/Logo-MTM-cab.png',
+        url: '/pages/programas_virtuales/mtm',
+        title: 'mtm',
+        height: 195,
+        width: 300,
+      }, {
+        img: 'assets/images/Logo-EET.png',
+        url: '/pages/programas_virtuales/eet',
+        title: 'eet',
+        height: 215,
+        width: 253,
+      }];
+  }
 
-        }, {
-            img: 'https://campusvirtual.udistrital.edu.co/images/programas/macarena2.jpg',
-            url: 'https://campusvirtual.udistrital.edu.co/index.php/programas/' +
-            'ciencias-y-educacion/postgrados-ciencias/maestria-educacion.html',
-            title: 'Maestría en Educación en Tecnología',
-            description: 'La Maestría en Educación en Tecnología busca formar docentes que' +
-            'sean agentes de cambio en la construcción de conocimiento en el área.',
+  useLanguage(language: string) {
+    this.translate.use(language);
+  }
 
-        }, {
-            img: 'https://campusvirtual.udistrital.edu.co/images/teclado.jpg',
-            url: 'https://campusvirtual.udistrital.edu.co/index.php?option=com_content&view=article&layout=edit&id=36',
-            title: 'Resultados proceso de selección',
-            description: 'Nos permitimos informar que los resultados del proceso de admisión a las Maestrías en ' +
-            'Telecomunicaciones Móviles y la Maestría en Educación en Tecnología, serán publicados el próximo' +
-            ' Lunes 29 de Febrero. ',
-
-        }];
-    }
+  enviar_programa(url: string) {
+    console.info(url);
+    this.router.navigate([url]);
+  }
 }

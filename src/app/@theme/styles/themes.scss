@@ -18,12 +18,14 @@ $nb-themes: nb-register-theme((
   footer-fg: #fff,
   footer-bg: #252525,
   footer-height: auto,
+
  // app wise variables for each theme
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
   font-main: Roboto,
   font-secondary: Exo,
+
   //smart-table
   smart-table-border-radius: 0.1rem	,
   smart-table-header-font-size: 0.8rem,
@@ -32,11 +34,13 @@ $nb-themes: nb-register-theme((
   smart-table-padding: 0.275rem 0.725rem,
   smart-table-paging-border-width: 0.5,
   smart-table-filter-padding: 0.1rem 0.1rem,
+
   //form-control
   form-control-placeholder-font-size: 0.8rem,
   form-control-font-size: 0.8rem,
   form-control-border-width: 1px,
   form-control-border-radius: 0.1rem,
+
   //fonts
   font-weight-thin: 100,
   font-weight-light: 200,
@@ -44,30 +48,27 @@ $nb-themes: nb-register-theme((
   font-weight-bolder: 400,
   font-weight-bold: 500,
   font-weight-ultra-bold: 600,
+
   //general
   padding: 1rem,
   font-size: 0.9rem,
   margin: 1rem,
-  layout-padding: 2rem 0.2rem 3rem,
-
+  layout-padding: 1rem 1rem 2rem 1rem,
   sidebar-bg: #212121,
   sidebar-fg: $secundary-color-theme,
   sidebar-shadow: none,
   sidebar-padding: 0.3rem,
   sidebar-margin-top: 0,
   tabs-fg: gray,
-
   color-fg: #777777,
   menu-icon-color: $secundary-color-theme,
   card-shadow: 0 2px 8px 0 rgba(43, 43, 43, 0.494),
-
   menu-bg: #212121,
   menu-fg: $secundary-color-theme,
   menu-active-bg: #f2f2f2,
   menu-active-fg: #212121,
   menu-font-size: 0.8rem,
   menu-item-separator: #212121,
-
   menu-submenu-bg: #24292e,
   menu-submenu-fg: $secundary-color-theme,
   menu-submenu-active-bg: #24292e,
@@ -81,7 +82,6 @@ $nb-themes: nb-register-theme((
   scrollbar-fg: #212121,
   scrollbar-bg: #24292e,
 
-
   //header
   header-font-family: 'sans-serif',
   header-font-size: 0.7rem,
@@ -90,10 +90,7 @@ $nb-themes: nb-register-theme((
   header-fg: $secundary-color-theme,
   header-bg: $primary-color-theme,
   header-shadow: none,
-
   footer-shadow: none,
-
-
   switcher-background: $primary-color-theme,
   switcher-background-percentage: 14%,
   drops-icon-line-gadient: -webkit-linear-gradient(#01dbb5, #0bbb79),
@@ -102,12 +99,15 @@ $nb-themes: nb-register-theme((
 $nb-themes: nb-register-theme((
   //footer
   footer-height: auto,
+  layout-padding: 1rem 1rem 2rem 1rem,
+
   // app wise variables for each theme
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
   font-main: Roboto,
   font-secondary: Exo,
+
   //smart-table
   smart-table-border-radius: 0.1rem	,
   smart-table-header-font-size: 0.8rem,
@@ -116,12 +116,12 @@ $nb-themes: nb-register-theme((
   smart-table-padding: 0.275rem 0.725rem,
   smart-table-paging-border-width: 0.5,
   smart-table-filter-padding: 0.1rem 0.1rem,
+
   //form-control
   form-control-placeholder-font-size: 0.8rem,
   form-control-font-size: 0.8rem,
   form-control-border-width: 1px,
   form-control-border-radius: 0.1rem,
-
   header-height: 5.5rem,
 
   //fonts
@@ -131,29 +131,29 @@ $nb-themes: nb-register-theme((
   font-weight-bolder: 400,
   font-weight-bold: 500,
   font-weight-ultra-bold: 600,
+
   //general
   padding: 1rem,
   font-size: 0.9rem,
   margin: 1rem,
-
   switcher-background: #554db3,
   switcher-background-percentage: 14%,
   drops-icon-line-gadient: -webkit-linear-gradient(#a258fe, #7958fa),
 ), cosmic, cosmic);
 
 $nb-themes: nb-register-theme((
-    // footer
-    footer-fg: #fff,
-    footer-bg: #252525,
-    footer-height: auto,
+  // footer
+  footer-fg: #fff,
+  footer-bg: #252525,
+  footer-height: auto,
+  layout-padding: 1rem 1rem 2rem 1rem,
+
   // app wise variables for each theme
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
-
   font-main: Roboto,
   font-secondary: Exo,
-
   switcher-background: #000,
   switcher-background-percentage: 14%,
   drops-icon-line-gadient: -webkit-linear-gradient(#e9e8eb, #a7a2be),
@@ -163,20 +163,16 @@ $nb-themes: nb-register-theme((
   sidebar-padding: 0.3rem,
   sidebar-margin-top: 0,
   tabs-fg: gray,
-
   color-fg: #777777,
   menu-icon-color: $secundary-color-theme,
   card-shadow: 0 2px 8px 0 rgba(43, 43, 43, 0.494),
-
   header-height: 5.5rem,
-
   menu-bg: #000,
   menu-fg: $secundary-color-theme,
   menu-active-bg: #f2f2f2,
   menu-active-fg: #212121,
   menu-font-size: 0.8rem,
   menu-item-separator: #212121,
-
   menu-submenu-bg: #000,
   menu-submenu-fg: $secundary-color-theme,
   menu-submenu-active-bg: #f2f2f2,
@@ -196,12 +192,14 @@ $nb-themes: nb-register-theme((
   footer-fg: #000000,
   footer-bg: #ffffff,
   footer-height: auto,
+
  // app wise variables for each theme
   sidebar-header-gap: 2rem,
   sidebar-header-height: initial,
   layout-content-width: 1400px,
   font-main: Roboto,
   font-secondary: Exo,
+
   //smart-table
   smart-table-border-radius: 0.1rem	,
   smart-table-header-font-size: 0.8rem,
@@ -210,11 +208,13 @@ $nb-themes: nb-register-theme((
   smart-table-padding: 0.275rem 0.725rem,
   smart-table-paging-border-width: 0.5,
   smart-table-filter-padding: 0.1rem 0.1rem,
+
   //form-control
   form-control-placeholder-font-size: 0.8rem,
   form-control-font-size: 0.8rem,
   form-control-border-width: 1px,
   form-control-border-radius: 0.1rem,
+
   //fonts
   font-weight-thin: 100,
   font-weight-light: 200,
@@ -222,30 +222,27 @@ $nb-themes: nb-register-theme((
   font-weight-bolder: 400,
   font-weight-bold: 500,
   font-weight-ultra-bold: 600,
+
   //general
   padding: 1rem,
   font-size: 0.9rem,
   margin: 1rem,
-  layout-padding: 2rem 0.2rem 3rem,
-
+  layout-padding: 1rem 1rem 2rem 1rem,
   sidebar-bg: transparent,//#ffffff,
   sidebar-fg: #000000,
   sidebar-shadow: none,
   sidebar-padding: 0.3rem,
   sidebar-margin-top: 0,
   tabs-fg: #000000,
-
   color-fg: #000000,
   menu-icon-color: #000000,
   card-shadow: 0 2px 5px 0 rgba(238, 255, 0, 0.494),
-
   menu-bg: #ffffff,
   menu-fg: #000000,
   menu-active-bg: #ffffff,
   menu-active-fg: #000000,
   menu-font-size: 0.8rem,
   menu-item-separator: rgba(255, 0, 0, 0.301),
-
   menu-submenu-bg: #ffffff,
   menu-submenu-fg: #000000,
   menu-submenu-active-bg:  #ffffff,
@@ -259,7 +256,6 @@ $nb-themes: nb-register-theme((
   scrollbar-fg: #ce0000,
   scrollbar-bg: transparent,
 
-
   //header
   header-font-family: 'sans-serif',
   header-font-size: 0.7rem,
@@ -268,9 +264,7 @@ $nb-themes: nb-register-theme((
   header-fg: #000000,
   header-bg: #ffffff,
   header-shadow: none,
-
   footer-shadow: none,
-
   switcher-background: #ffffff,
   switcher-background-percentage: 14%,
   drops-icon-line-gadient: -webkit-linear-gradient(#db3401, #bb0b0b),

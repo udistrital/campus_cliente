@@ -2,6 +2,7 @@ export let FORM_PROPUESTA_GRADO = {
   // titulo: 'PropuestaGrado',
   tipo_formulario: 'mini',
   btn: 'Guardar',
+  btnOculto: true,
   alertas: true,
   modelo: 'PropuestaGrado',
   campos: [

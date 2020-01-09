@@ -3,6 +3,7 @@ export let FORM_INFO_PERSONA = {
     tipo_formulario: 'mini',
     alertas: true,
     btn: 'Guardar',
+    btnOculto: true,
     modelo: 'InfoPersona',
     campos: [
         {
