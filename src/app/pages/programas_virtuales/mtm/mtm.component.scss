@@ -1,0 +1,52 @@
+nb-card-header {
+  text-align: center;
+}
+
+img {
+  width: 30%;
+}
+
+div {
+  text-align: justify;
+  font-size: 14px;
+  p {
+    margin-right: 10px;
+  }
+}
+
+.btn-outlined {
+  border-radius: 0;
+  -webkit-transition: all 0.3s;
+     -moz-transition: all 0.3s;
+          transition: all 0.3s;
+}
+
+.btn-outlined.btn-warning {
+  background: none;
+  border: 3px solid #e09018;
+  color: #e09018;
+}
+
+.btn-outlined.btn-warning:hover {
+  color: #ffffff;
+  background: #e09018;
+  border-color: #e09018;
+}
+
+dd {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.redes {
+  font-size: 2rem;
+}
+
+.p1 {
+  padding-left: 15px;
+}
+
+.u1 {
+  padding-left: 2.25rem !important;
+}

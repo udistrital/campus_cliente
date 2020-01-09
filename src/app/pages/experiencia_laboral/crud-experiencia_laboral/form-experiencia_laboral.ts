@@ -3,6 +3,7 @@ export let FORM_EXPERIENCIA_LABORAL = {
   alertas: true,
   btn: 'Guardar',
   btnLimpiar: 'Limpiar',
+  btnOculto: true,
   modelo: 'InfoExperienciaLaboral',
   campos: [
     {

@@ -292,6 +292,9 @@ export class PagoInscripcionComponent implements OnInit {
                                 if (res_persona !== null && info_persona.Type !== 'error') {
                                   const id_token = window.localStorage.getItem('id_token').split('.');
                                   const payload = JSON.parse(atob(id_token[1]));
+                                  console.info(atob(id_token[0]));
+                                  console.info(atob(id_token[1]));
+
                                   this.btnPagar = false;
                                   this.btnCargar = true;
                                   this.btnRecibo = false;
@@ -696,7 +699,7 @@ export class PagoInscripcionComponent implements OnInit {
                                         this.recibos.post('recibo', recibo).subscribe(res_recibo => {
                                           const res_rec = <any>res_recibo;
                                           if (res_recibo !== null && res_rec.Type !== 'error') {
-                                            info_inscripcion.ReciboInscripcionId = res_rec.Body.Id;
+                                            info_inscripcion.ReciboInscripcionId = res_rec.Id;
                                             this.inscripciones.put('inscripcion', info_inscripcion)
                                               .subscribe(res => {
                                                 if (res !== null) {

@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { GENERAL } from './../../app-config';
 import { throwError } from 'rxjs';
-import { HttpErrorResponse } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 
 const path = GENERAL.ENTORNO.PAGO_SERVICE;
