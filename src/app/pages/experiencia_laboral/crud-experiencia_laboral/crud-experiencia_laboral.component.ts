@@ -118,7 +118,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                   const filesResponse = <any>response;
                   if (Object.keys(filesResponse).length === files.length) {
                     this.info_experiencia_laboral = <any>res;
-                    this.soporte = this.info_experiencia_laboral.Soporte;
+                    this.soporte = this.info_experiencia_laboral.Documento;
                     this.info_experiencia_laboral.Soporte = filesResponse['Soporte'] + '';
                     this.enteService.get('identificacion/?query=Ente.Id:' +
                       this.info_experiencia_laboral.Organizacion + ',TipoIdentificacion.Id:5').subscribe(r => {
@@ -219,7 +219,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                 if (Object.keys(response).length === files.length) {
                   const documentos_actualizados = <any>response;
                   this.info_experiencia_laboral.Documento = this.soporte;
-                  this.experienciaService.put('experiencia_laboral', this.info_experiencia_laboral)
+                  this.campusMidService.put2('experiencia_laboral', this.info_experiencia_laboral)
                     .subscribe(res => {
                       if (documentos_actualizados['Soporte'] !== undefined) {
                         this.info_experiencia_laboral.Soporte = documentos_actualizados['Soporte'].url + '';
@@ -259,7 +259,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
                   });
                 });
           } else {
-            this.experienciaService.put('experiencia_laboral', this.info_experiencia_laboral)
+            this.campusMidService.put2('experiencia_laboral', this.info_experiencia_laboral)
               .subscribe(res => {
                 this.loading = false;
                 this.eventChange.emit(true);
@@ -303,7 +303,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
             text: this.translate.instant('ERROR.' + error.status),
             footer: this.translate.instant('GLOBAL.cargar') + '-' +
               this.translate.instant('GLOBAL.experiencia_laboral') + '|' +
-              this.translate.instant('GLOBAL.tipo_empresa'),
+              this.translate.instant('GLOBAL.tipo_organizacion'),
             confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
           });
         });
@@ -400,7 +400,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   searchOrganizacion(data: any): void {
     const nit = typeof data === 'string' ? data : data.data.Nit;
     this.organizacion = new Organizacion();
-    this.campusMidService.get('organizacion/identificacion/?Id=' + nit + '&TipoId=5')
+    this.campusMidService.get('organizacion/identificacion?Id=' + nit + '&TipoId=5')
       .subscribe(res => {
         const init = this.getIndexForm('Nit');
         const inombre = this.getIndexForm('NombreEmpresa');
@@ -436,11 +436,34 @@ export class CrudExperienciaLaboralComponent implements OnInit {
           if (this.organizacion.Ubicacion.AtributoUbicacion.Id === 1 &&
             this.organizacion.Ubicacion.UbicacionEnte.TipoRelacionUbicacionEnte.Id === 3) {
             this.formInfoExperienciaLaboral.campos[idir].valor = this.organizacion.Ubicacion.Valor;
+            let existe = false;
             this.formInfoExperienciaLaboral.campos[ipais].opciones.forEach(e => {
               if (e.Id === this.organizacion.Ubicacion.UbicacionEnte.Lugar) {
                 this.formInfoExperienciaLaboral.campos[ipais].valor = e;
+                existe = true;
               }
             });
+            if (!existe) {
+              this.ubicacionesService.get('lugar/' + this.organizacion.Ubicacion.UbicacionEnte.Lugar)
+                .subscribe(reslugar => {
+                  if (reslugar !== null) {
+                    const lugar = <Lugar>reslugar;
+                    this.formInfoExperienciaLaboral.campos[this.getIndexForm('Pais')].opciones.push(lugar);
+                    this.formInfoExperienciaLaboral.campos[ipais].valor = lugar;
+                  }
+                },
+                  (error: HttpErrorResponse) => {
+                    Swal({
+                      type: 'error',
+                      title: error.status + '',
+                      text: this.translate.instant('ERROR.' + error.status),
+                      footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                        this.translate.instant('GLOBAL.experiencia_laboral') + '|' +
+                        this.translate.instant('GLOBAL.pais_empresa'),
+                      confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                    });
+                  });
+            }
           }
         } else {
           this.formInfoExperienciaLaboral.campos[idir].valor = null;
@@ -510,7 +533,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
               });
           }
         });
-    }
+  }
 
   createInfoExperienciaLaboral(infoExperienciaLaboral: any): void {
     const opt: any = {
@@ -607,7 +630,6 @@ export class CrudExperienciaLaboralComponent implements OnInit {
   }
 
   createOrganizacion(org: any, exp: any): void {
-    console.info(JSON.stringify(org));
     this.campusMidService.post('organizacion/', org).subscribe(res => {
       const identificacion = <any>res;
       if (identificacion !== null && identificacion.Type !== 'error') {
@@ -663,6 +685,7 @@ export class CrudExperienciaLaboralComponent implements OnInit {
         Cargo: event.data.InfoExperienciaLaboral.Cargo,
         TipoVinculacion: event.data.InfoExperienciaLaboral.TipoVinculacion,
         Soporte: event.data.InfoExperienciaLaboral.Soporte,
+        Documento: event.data.InfoExperienciaLaboral.Documento,
       }
       const org = {
         NumeroIdentificacion: event.data.InfoExperienciaLaboral.Nit,

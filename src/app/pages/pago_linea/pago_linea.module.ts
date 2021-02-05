@@ -12,6 +12,7 @@ import { ProgramaOikosService } from '../../@core/data/programa_oikos.service';
 import { PersonaService } from '../../@core/data/persona.service';
 import { CoreService } from '../../@core/data/core.service';
 import { InscripcionService } from '../../@core/data/inscripcion.service';
+import { EventoService } from '../../@core/data/evento.service';
 import { CampusMidService } from '../../@core/data/campus_mid.service';
 import { PagoService } from '../../@core/data/pago.service';
 import { ReciboService } from '../../@core/data/recibo.service';
@@ -28,6 +29,7 @@ import { ReciboService } from '../../@core/data/recibo.service';
     ...routedComponents,
   ],
   providers: [
+    EventoService,
     ImplicitAutenticationService,
     NuxeoService,
     ProgramaOikosService,

@@ -7,8 +7,6 @@ import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
   templateUrl: './dinamicform.component.html',
   styleUrls: ['./dinamicform.component.scss'],
 })
-
-
 export class DinamicformComponent implements OnInit, OnChanges {
 
   @Input('normalform') normalform: any;
@@ -143,14 +141,14 @@ export class DinamicformComponent implements OnInit, OnChanges {
 
   validCampo(c): boolean {
     if (c.etiqueta === 'file') {
-      if (c.valor === null) {
+      if (c.valor === undefined && c.urlTemp !== undefined) {
         c.valor = '';
       }
       console.info((c.etiqueta === 'file' && c.valor.name === undefined));
     }
     if (c.requerido && ((c.valor === '' && c.etiqueta !== 'file') || c.valor === null || c.valor === undefined ||
       (JSON.stringify(c.valor) === '{}' && c.etiqueta !== 'file') || JSON.stringify(c.valor) === '[]')
-      || ((c.etiqueta === 'file' && c.valor.name === undefined) && (c.etiqueta === 'file' && c.urlTemp === undefined))) {
+      || ((c.etiqueta === 'file' && c.valor.name === undefined) || (c.etiqueta === 'file' && c.urlTemp === undefined))) {
       c.alerta = '** Debe llenar este campo';
       c.clase = 'form-control form-control-danger';
       return false;
@@ -205,6 +203,10 @@ export class DinamicformComponent implements OnInit, OnChanges {
   clearForm() {
     this.normalform.campos.forEach(d => {
       d.valor = null;
+      if (d.etiqueta === 'file') {
+        d.File = null;
+        d.urlTemp = null;
+      }
     });
   }
 

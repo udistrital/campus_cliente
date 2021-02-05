@@ -5,6 +5,7 @@ import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-t
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import Swal from 'sweetalert2';
 import 'style-loader!angular2-toaster/toaster.css';
+import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { ExperienciaService } from '../../../@core/data/experiencia.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { formatDate } from '@angular/common';
@@ -38,8 +39,11 @@ export class ListExperienciaLaboralComponent implements OnInit {
   loading: boolean;
   percentage: number;
 
-  constructor(private translate: TranslateService, private toasterService: ToasterService,
-    private experienciaService: ExperienciaService, private organizacionService: OrganizacionService) {
+  constructor(private translate: TranslateService,
+    private toasterService: ToasterService,
+    private campusMidService: CampusMidService,
+    private experienciaService: ExperienciaService,
+    private organizacionService: OrganizacionService) {
     if (this.eid !== undefined && this.eid !== null && this.eid.toString() !== '') {
       this.loadData();
     }
@@ -201,7 +205,7 @@ export class ListExperienciaLaboralComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          this.experienciaService.delete('experiencia_laboral', event.data).subscribe(res => {
+          this.campusMidService.delete('experiencia_laboral', event.data).subscribe(res => {
             if (res !== null) {
               this.loadData();
               this.showToast('info', this.translate.instant('GLOBAL.eliminar'),
