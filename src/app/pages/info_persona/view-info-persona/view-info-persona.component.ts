@@ -20,6 +20,7 @@ export class ViewInfoPersonaComponent implements OnInit {
   info_info_persona: InfoPersona;
   info_persona_user: string;
   foto: any;
+  soporteDocumento: any;
 
   @Input('info_persona_id')
   set name(info_persona_id: number) {
@@ -57,29 +58,48 @@ export class ViewInfoPersonaComponent implements OnInit {
   public loadInfoPersona(): void {
     const id = this.info_persona_id ? this.info_persona_id : this.info_persona_user ? this.info_persona_user : undefined;
     if (id !== undefined && id !== 0 && id.toString() !== '') {
-      this.campusMidService.get('persona/ConsultaPersona/?id=' + id)
+      this.campusMidService.get('persona/consultar_persona/' + id)
         .subscribe(res => {
           const r = <any>res;
           if (r !== null && r.Type !== 'error') {
             this.info_info_persona = <InfoPersona>res;
             const foto = [];
-            foto.push({Id: this.info_info_persona.Foto, key: 'Foto'});
+            if (this.info_info_persona.Foto + '' !== '0') {
+              foto.push({ Id: this.info_info_persona.Foto, key: 'Foto' });
+            }
+            if (this.info_info_persona.SoporteDocumento + '' !== '0') {
+              foto.push({ Id: this.info_info_persona.SoporteDocumento, key: 'SoporteDocumento' });
+            }
             this.nuxeoService.getDocumentoById$(foto, this.documentoService)
               .subscribe(response => {
                 this.foto = this.cleanURL(response['Foto'] + '');
-              });
+                this.soporteDocumento = this.cleanURL(response['SoporteDocumento'] + '');
+              },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                      this.translate.instant('GLOBAL.info_persona') + '|' +
+                      this.translate.instant('GLOBAL.soporte_documento'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
           } else {
             this.info_info_persona = undefined;
           }
         },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.info_persona'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
           });
-        });
     } else {
       this.info_info_persona = undefined
     }

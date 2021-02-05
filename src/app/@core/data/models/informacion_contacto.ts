@@ -16,4 +16,5 @@ export class InformacionContacto {
   IdCodigoEnte: number;
   IdTelefonoEnte: number;
   IdTelefonoAlternoEnte: number;
+  LocalidadResidencia: any;
 }

@@ -7,9 +7,9 @@ describe('ViewInfoPersonaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ViewInfoPersonaComponent ],
+      declarations: [ViewInfoPersonaComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

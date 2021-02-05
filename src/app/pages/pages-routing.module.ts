@@ -8,21 +8,33 @@ const routes: Routes = [{
   component: PagesComponent,
   children: [
     {
-    path: 'dashboard',
-    component: DashboardComponent,
+      path: 'dashboard',
+      component: DashboardComponent,
     },
     {
-    path: 'inscripcion',
-    loadChildren: './inscripcion/inscripcion.module#InscripcionModule',
+      path: 'programas_virtuales',
+      loadChildren: './programas_virtuales/programas_virtuales.module#ProgramasVirtualesModule',
     },
     {
-    path: 'admision',
-    loadChildren: './admision/admision.module#AdmisionModule',
+      path: 'inscripcion',
+      loadChildren: './inscripcion/inscripcion.module#InscripcionModule',
     },
     {
-    path: '',
-    redirectTo: 'dashboard',
-    pathMatch: 'full',
+      path: 'procesos_admisiones',
+      loadChildren: './procesos_admisiones/admision.module#AdmisionModule',
+    },
+    {
+      path: 'notificacion',
+      loadChildren: './notificacion/notificacion.module#NotificacionModule',
+    },
+    {
+      path: 'pago_linea',
+      loadChildren: './pago_linea/pago_linea.module#PagoLineaModule',
+    },
+    {
+      path: '',
+      redirectTo: 'dashboard',
+      pathMatch: 'full',
     },
   ],
 }];
@@ -33,4 +45,3 @@ const routes: Routes = [{
 })
 export class PagesRoutingModule {
 }
-

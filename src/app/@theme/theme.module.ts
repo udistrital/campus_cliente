@@ -5,12 +5,94 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 // import { AutenticationService } from '../@core/utils/autentication.service';
 import { ImplicitAutenticationService } from '../@core/utils/implicit_autentication.service';
 import { SharedModule } from '../shared/shared.module';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatFormFieldModule, MatNativeDateModule} from '@angular/material';
-import { MatInputModule, MatSelectModule } from '@angular/material';
-import {MatCheckboxModule} from '@angular/material/checkbox';
 import { DocumentoService } from '../@core/data/documento.service';
+import {CdkTableModule} from '@angular/cdk/table';
+import {CdkTreeModule} from '@angular/cdk/tree';
 
+import {
+  MatAutocompleteModule,
+  MatBadgeModule,
+  MatBottomSheetModule,
+  MatButtonModule,
+  MatButtonToggleModule,
+  MatCardModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatDividerModule,
+  MatExpansionModule,
+  MatGridListModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatProgressBarModule,
+  MatProgressSpinnerModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSidenavModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatSortModule,
+  MatStepperModule,
+  MatTableModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatTreeModule,
+} from '@angular/material';
+
+const MAT_MODULES = [
+    CdkTableModule,
+    CdkTreeModule,
+    MatAutocompleteModule,
+    MatBadgeModule,
+    MatBottomSheetModule,
+    MatButtonModule,
+    MatButtonToggleModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatChipsModule,
+    MatStepperModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatExpansionModule,
+    MatGridListModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatPaginatorModule,
+    MatProgressBarModule,
+    MatProgressSpinnerModule,
+    MatRadioModule,
+    MatRippleModule,
+    MatSelectModule,
+    MatSidenavModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatSortModule,
+    MatTableModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatTreeModule,
+  ];
+
+export class DemoMaterialModule {}
+
+
+/**  Copyright 2018 Google Inc. All Rights Reserved.
+    Use of this source code is governed by an MIT-style license that
+    can be found in the LICENSE file at http://angular.io/license */
 import {
   NbActionsModule,
   NbCardModule,
@@ -57,6 +139,9 @@ import {
 import { DEFAULT_THEME } from './styles/theme.default';
 import { COSMIC_THEME } from './styles/theme.cosmic';
 import { CORPORATE_THEME } from './styles/theme.corporate';
+import { UD_THEME } from './styles/theme.ud';
+// import { NotificacionesService } from '../@core/utils/notificaciones.service';
+import { ConfiguracionService } from '../@core/data/configuracion.service';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -76,15 +161,6 @@ const NB_MODULES = [
   NgbModule,
   NbSecurityModule, // *nbIsGranted directive
 ];
-
-const MAT_MODULES = [
-  MatDatepickerModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatSelectModule,
-  MatCheckboxModule,
-  MatNativeDateModule,
-]
 
 const COMPONENTS = [
   SwitcherComponent,
@@ -120,9 +196,10 @@ const PIPES = [
 const NB_THEME_PROVIDERS = [
   ...NbThemeModule.forRoot(
     {
-      name: 'default',
+      // name: 'default',
+      name: 'ud',
     },
-    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME ],
+    [ DEFAULT_THEME, COSMIC_THEME, CORPORATE_THEME, UD_THEME ],
   ).providers,
   ...NbSidebarModule.forRoot().providers,
   ...NbMenuModule.forRoot().providers,
@@ -141,6 +218,8 @@ export class ThemeModule {
       ngModule: ThemeModule,
       providers: [...NB_THEME_PROVIDERS,
         ImplicitAutenticationService,
+        // NotificacionesService,
+        ConfiguracionService,
         DocumentoService],
     };
   }

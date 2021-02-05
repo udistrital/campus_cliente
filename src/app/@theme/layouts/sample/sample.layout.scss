@@ -51,6 +51,10 @@
       margin-top: 0;
     }
 
+    @include nb-for-theme(ud) {
+      margin-top: -4px;
+    }
+
     /deep/ .main-container {
       height:
         calc(#{nb-theme(sidebar-height)} - #{nb-theme(header-height)} - #{nb-theme(sidebar-header-gap)}) !important;

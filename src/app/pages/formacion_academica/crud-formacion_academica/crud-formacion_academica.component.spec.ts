@@ -10,9 +10,9 @@ describe('CrudFormacionAcademicaComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudFormacionAcademicaComponent ],
+      declarations: [CrudFormacionAcademicaComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

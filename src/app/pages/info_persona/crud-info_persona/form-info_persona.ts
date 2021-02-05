@@ -3,6 +3,7 @@ export let FORM_INFO_PERSONA = {
     tipo_formulario: 'mini',
     alertas: true,
     btn: 'Guardar',
+    btnOculto: true,
     modelo: 'InfoPersona',
     campos: [
         {
@@ -20,7 +21,7 @@ export let FORM_INFO_PERSONA = {
             nombre: 'SegundoNombre',
             label_i18n: 'segundo_nombre',
             placeholder_i18n: 'segundo_nombre',
-            requerido: true,
+            requerido: false,
             tipo: 'text',
         },
         {
@@ -38,12 +39,11 @@ export let FORM_INFO_PERSONA = {
             nombre: 'SegundoApellido',
             label_i18n: 'segundo_apellido',
             placeholder_i18n: 'segundo_apellido',
-            requerido: true,
+            requerido: false,
             tipo: 'text',
         },
         {
             etiqueta: 'select',
-            relacion: false,
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
             nombre: 'TipoIdentificacion',
             label_i18n: 'tipo_documento',
@@ -56,10 +56,10 @@ export let FORM_INFO_PERSONA = {
         {
             etiqueta: 'input',
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
-            nombre: 'NumeroDocumento',
+            nombre: 'NumeroIdentificacion',
             label_i18n: 'numero_documento',
             placeholder_i18n: 'numero_documento',
-            requerido: false,
+            requerido: true,
             tipo: 'text',
         },
         {
@@ -99,9 +99,8 @@ export let FORM_INFO_PERSONA = {
             claseGrid: 'col-lg-6 col-md-6 col-sm-12 col-xs-12',
             clase: 'form-control',
             nombre: 'SoporteDocumento',
-            label_i18n: 'soporte_documento',
-            placeholder_i18n: 'soporte_documento',
-            requerido: false,
+            label_i18n: 'documento_identificacion',
+            placeholder_i18n: 'documento_identificacion',
             tipo: 'pdf',
             tipoDocumento: 2,
             formatos: 'pdf',
@@ -115,7 +114,6 @@ export let FORM_INFO_PERSONA = {
             nombre: 'Foto',
             label_i18n: 'foto',
             placeholder_i18n: 'foto',
-            requerido: false,
             tipo: 'image',
             tipoDocumento: 1,
             formatos: 'png/jpg/jpeg',

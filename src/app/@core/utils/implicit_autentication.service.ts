@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+import { Observable, Subject } from 'rxjs/Rx';
 import { GENERAL } from './../../app-config';
 import { Md5 } from 'ts-md5/dist/md5';
 
@@ -11,6 +11,9 @@ export class ImplicitAutenticationService {
     init(): void {
         this.clearUrl();
     }
+
+    private isAutenticatedSubject = new Subject();
+    public isAutenticated$ = this.isAutenticatedSubject.asObservable();
 
     private params: any;
     public session = null;
@@ -64,8 +67,10 @@ export class ImplicitAutenticationService {
                 }),
             }
             this.setExpiresAt();
+            this.isAutenticatedSubject.next(true);
             return true;
         } else {
+            this.isAutenticatedSubject.next(true);
             return false;
         }
     }
@@ -111,13 +116,14 @@ export class ImplicitAutenticationService {
     }
 
     timer() {
-        Observable.interval(5000).subscribe(x => {
+        this.isAutenticatedSubject.next(false);
+        Observable.interval(5000).subscribe(() => {
             if (window.localStorage.getItem('expires_at') !== null) {
                 if (this.expired()) {
+                    this.isAutenticatedSubject.next(false);
                     window.localStorage.clear();
                 }
             }
         });
     }
-
 }

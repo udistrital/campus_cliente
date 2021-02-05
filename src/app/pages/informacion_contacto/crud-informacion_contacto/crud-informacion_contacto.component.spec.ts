@@ -10,9 +10,9 @@ describe('CrudInformacionContactoComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CrudInformacionContactoComponent ],
+      declarations: [CrudInformacionContactoComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

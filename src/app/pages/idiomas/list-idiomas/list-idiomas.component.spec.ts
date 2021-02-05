@@ -10,9 +10,9 @@ describe('ListIdiomasComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListIdiomasComponent ],
+      declarations: [ListIdiomasComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

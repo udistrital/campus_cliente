@@ -10,9 +10,9 @@ describe('ListExperienciaLaboralComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListExperienciaLaboralComponent ],
+      declarations: [ListExperienciaLaboralComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
