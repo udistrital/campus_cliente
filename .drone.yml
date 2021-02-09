@@ -2,41 +2,41 @@ kind: pipeline
 name: oas_cliente_ci
 
 steps:
-- name: check_readme
-  image: jjvargass/qa_develoment:latest
-  commands:
-  - python /app/check_readme.py
-  when:
-    branch:
-    - develop
-    - feature/*
-    - release
-    event:
-    - push
+#- name: check_readme
+#  image: jjvargass/qa_develoment:latest
+#  commands:
+#  - python /app/check_readme.py
+#  when:
+#    branch:
+#   - develop
+#    - feature/*
+#    - release
+#    event:
+#   - push
 
-- name: check_branch
-  image: jjvargass/qa_develoment:latest
-  commands:
-  - python /app/check_branch.py -H ${DRONE_GIT_HTTP_URL}
-  when:
-    branch:
-    - develop
-    - feature/*
-    - release
-    event:
-    - push
+#- name: check_branch
+#  image: jjvargass/qa_develoment:latest
+#  commands:
+#  - python /app/check_branch.py -H ${DRONE_GIT_HTTP_URL}
+#  when:
+#    branch:
+#    - develop
+#   - feature/*
+#   - release
+#    event:
+#   - push
 
-- name: check_commits
-  image: jjvargass/qa_develoment:latest
-  commands:
-  - python /app/check_commits.py
-  when:
-    branch:
-    - develop
-    - feature/*
-    - release
-    event:
-    - push
+#- name: check_commits
+#  image: jjvargass/qa_develoment:latest
+# commands:
+# - python /app/check_commits.py
+#  when:
+#   branch:
+#    - develop
+#   - feature/*
+#   - release
+#   event:
+#   - push
 
 - name: prueba-unitarias
   image: node:10.15.3
@@ -163,31 +163,31 @@ steps:
     - failure
     - success
 
-- name: notify_slack
-  image: plugins/slack
-  settings:
-    webhook:
-      from_secret: slack_webhook
-    channel: deploy
-    template: >
-      {{#success build.status}}
-        :heavy_check_mark:  <{{ build.link }}|SUCCESS> Build #{{build.number}}
-        type: {{ build.event }} - Repo: {{repo.name}}
-        Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-        Branch: {{build.branch}} - Autor: {{build.author}}  :sunglasses:
-      {{else}}
-        :x: <{{ build.link }}|FAILURE> Build #{{build.number}}
-        type: {{ build.event }} - Repo: {{repo.name}}
-        Branch: {{build.branch}} - Autor: {{build.author}} :weary:
-        Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
-      {{/success}}
-  when:
-    branch:
-    - develop
-    - release
-    - master
-    event:
-    - push
-    status:
-    - failure
-    - success
+#- name: notify_slack
+#  image: plugins/slack
+#  settings:
+#    webhook:
+#      from_secret: slack_webhook
+#    channel: deploy
+#    template: >
+#      {{#success build.status}}
+#       :heavy_check_mark:  <{{ build.link }}|SUCCESS> Build #{{build.number}}
+#        type: {{ build.event }} - Repo: {{repo.name}}
+#       Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+#       Branch: {{build.branch}} - Autor: {{build.author}}  :sunglasses:
+#     {{else}}
+#       :x: <{{ build.link }}|FAILURE> Build #{{build.number}}
+#        type: {{ build.event }} - Repo: {{repo.name}}
+#        Branch: {{build.branch}} - Autor: {{build.author}} :weary:
+#        Commit: <https://github.com/{{ repo.owner }}/{{ repo.name }}/commit/{{ build.commit }}|{{ truncate build.commit 8 }}>
+#      {{/success}}
+#  when:
+#    branch:
+#    - develop
+#    - release
+#    - master
+#    event:
+#   - push
+#    status:
+#    - failure
+#    - success
