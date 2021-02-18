@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { ThemeModule } from '../../@theme/theme.module';
 import { PersonaService } from '../../@core/data/persona.service';
 import { EnteService } from '../../@core/data/ente.service';
+import { EventoService } from '../../@core/data/evento.service';
 import { InscripcionService } from '../../@core/data/inscripcion.service';
 import { CampusMidService } from '../../@core/data/campus_mid.service';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
@@ -25,6 +26,7 @@ import { ViewInfoPersonaComponent } from './view-info-persona/view-info-persona.
   providers: [
     PersonaService,
     EnteService,
+    EventoService,
     CampusMidService,
     InscripcionService,
   ],

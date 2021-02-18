@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Input, Output, EventEmitter } from '@angular/core';
 import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { InscripcionService } from '../../../@core/data/inscripcion.service';
+import { EventoService } from '../../../@core/data/evento.service';
 import { ProgramaOikosService } from '../../../@core/data/programa_oikos.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { CoreService } from '../../../@core/data/core.service';
@@ -54,6 +55,7 @@ export class PagoInscripcionComponent implements OnInit {
     private programa: ProgramaOikosService,
     private coreService: CoreService,
     private mid: CampusMidService,
+    private evento: EventoService,
     private pagos: PagoService,
     private recibos: ReciboService,
     private toasterService: ToasterService) {
@@ -132,7 +134,7 @@ export class PagoInscripcionComponent implements OnInit {
                               if (consulta_dato.estado === 'PAGO') {
                                 const info_comprobante = <any>{
                                   ReciboId: {Id: 1 * this.recibo_id},
-                                  TipoPagoId: {Id: 1},
+                                  TipoPagoId: {Id: 2},
                                   Aprobado: true,
                                   FechaPago: new Date(),
                                 };
@@ -288,17 +290,26 @@ export class PagoInscripcionComponent implements OnInit {
                             this.mid.get('persona/consultar_persona/' + info_inscripcion.PersonaId)
                               .subscribe(res_persona => {
                                 const info_persona = <any>res_persona;
+                                this.evento.get('calendario_evento?query=TipoEventoId.Nombre:Pago inscripción,TipoEventoId.DependenciaId:' +
+                                info_programa.Id + ',PeriodoId:' + info_periodo.Id).subscribe(res_eve => {
+                                  if (res_eve !== null && JSON.stringify(res_eve).toString() !== '[{}]') {
+                                    const evepag = <any>res_eve[0];
                                 this.loading = false;
                                 if (res_persona !== null && info_persona.Type !== 'error') {
                                   const id_token = window.localStorage.getItem('id_token').split('.');
                                   const payload = JSON.parse(atob(id_token[1]));
-                                  console.info(atob(id_token[0]));
-                                  console.info(atob(id_token[1]));
 
-                                  this.btnPagar = false;
-                                  this.btnCargar = true;
-                                  this.btnRecibo = false;
-                                  this.btnOficina = true;
+                                  if (formatDate(evepag.FechaFin, 'dd/MM/yyyy', 'en') >= formatDate(new Date(), 'dd/MM/yyyy', 'en')) {
+                                    this.btnPagar = false;
+                                    this.btnCargar = true;
+                                    this.btnRecibo = false;
+                                    this.btnOficina = true;
+                                  } else {
+                                    this.btnPagar = false;
+                                    this.btnCargar = false;
+                                    this.btnRecibo = false;
+                                    this.btnOficina = false;
+                                  }
                                   this.recibo_id = info_recibo.Id;
 
                                   this.info_pago = <Pago>{
@@ -320,6 +331,18 @@ export class PagoInscripcionComponent implements OnInit {
                                     Secuencia: info_recibo.Referencia,
                                   };
                                 }
+                                }
+                              },
+                                (error: HttpErrorResponse) => {
+                                  Swal({
+                                    type: 'error',
+                                    title: error.status + '',
+                                    text: this.translate.instant('ERROR.' + error.status),
+                                    footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                      this.translate.instant('GLOBAL.valor_pago'),
+                                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                  });
+                                });
                               },
                                 (error: HttpErrorResponse) => {
                                   Swal({
@@ -423,7 +446,11 @@ export class PagoInscripcionComponent implements OnInit {
                                               this.pagos.get('consulta.php?' + strcon)
                                                 .subscribe(consulta => {
                                                   const consulta_dato = <any>consulta;
-                                                  if (consulta_dato.estado === 'PAGO' && info_recibo.EstadoReciboId.Id < 3) {
+                                                  this.evento.get('calendario_evento?query=TipoEventoId.Nombre:Pago inscripción,TipoEventoId.DependenciaId:' +
+                                                  info_programa.Id + ',PeriodoId:' + info_periodo.Id).subscribe(res_even => {
+                                                    if (res_even !== null && JSON.stringify(res_even).toString() !== '[{}]') {
+                                                      const evenpag = <any>res_even[0];
+                                                    if (consulta_dato.estado === 'PAGO' && info_recibo.EstadoReciboId.Id < 3) {
                                                     const info_comprobante = <any>{
                                                       ReciboId: {Id: 1 * info_recibo.Id},
                                                       TipoPagoId: {Id: 1},
@@ -444,10 +471,18 @@ export class PagoInscripcionComponent implements OnInit {
                                                                   if (res_ins !== null) {
                                                                     const id_token = window.localStorage.getItem('id_token').split('.');
                                                                     const payload = JSON.parse(atob(id_token[1]));
-                                                                    this.btnPagar = false;
-                                                                    this.btnCargar = false;
-                                                                    this.btnRecibo = false;
-                                                                    this.btnOficina = false;
+                                                                    const hoy = formatDate(new Date(), 'dd/MM/yyyy', 'en');
+                                                                    if (formatDate(evenpag.FechaFin, 'dd/MM/yyyy', 'en') >= hoy) {
+                                                                      this.btnPagar = false;
+                                                                      this.btnCargar = false;
+                                                                      this.btnRecibo = false;
+                                                                      this.btnOficina = false;
+                                                                    } else {
+                                                                      this.btnPagar = false;
+                                                                      this.btnCargar = false;
+                                                                      this.btnRecibo = false;
+                                                                      this.btnOficina = false;
+                                                                    }
                                                                     this.loading = false;
 
                                                                     this.info_pago = <Pago>{
@@ -507,10 +542,17 @@ export class PagoInscripcionComponent implements OnInit {
                                                   } else if (consulta_dato.estado === 'NO PAGO' || consulta_dato.estado === 'PAGO') {
                                                     const id_token = window.localStorage.getItem('id_token').split('.');
                                                     const payload = JSON.parse(atob(id_token[1]));
-                                                    this.btnPagar = true;
-                                                    this.btnCargar = false;
-                                                    this.btnRecibo = false;
-                                                    this.btnOficina = false;
+                                                    if (formatDate(evenpag.FechaFin, 'dd/MM/yyyy', 'en') >= formatDate(new Date(), 'dd/MM/yyyy', 'en')) {
+                                                      this.btnPagar = true;
+                                                      this.btnCargar = false;
+                                                      this.btnRecibo = false;
+                                                      this.btnOficina = false;
+                                                    } else {
+                                                      this.btnPagar = false;
+                                                      this.btnCargar = false;
+                                                      this.btnRecibo = false;
+                                                      this.btnOficina = false;
+                                                    }
                                                     this.loading = false;
 
                                                     this.info_pago = <Pago>{
@@ -541,6 +583,18 @@ export class PagoInscripcionComponent implements OnInit {
                                                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                                                     });
                                                   }
+                                                    }
+                                                  },
+                                                    (error: HttpErrorResponse) => {
+                                                      Swal({
+                                                        type: 'error',
+                                                        title: error.status + '',
+                                                        text: this.translate.instant('ERROR.' + error.status),
+                                                        footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                                          this.translate.instant('GLOBAL.valor_pago'),
+                                                        confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                                      });
+                                                    });
                                                 },
                                                   (error: HttpErrorResponse) => {
                                                     Swal({
@@ -674,40 +728,59 @@ export class PagoInscripcionComponent implements OnInit {
                                   if (res_persona !== null && info_persona.Type !== 'error') {
                                     const id_token = window.localStorage.getItem('id_token').split('.');
                                     const payload = JSON.parse(atob(id_token[1]));
-                                    const strpago = 'periodo=' + info_periodo.Nombre.split('-')[1] +
-                                      '&anio=' + info_periodo.Nombre.split('-')[0] +
-                                      '&programa=' + info_programa.Id +
-                                      '&tipoIdentificacion=' + info_persona.TipoIdentificacion.CodigoAbreviacion +
-                                      '&numeroIdentificacion=' + info_persona.NumeroIdentificacion +
-                                      '&nombre=' + info_persona.PrimerNombre + ' ' + info_persona.SegundoNombre +
-                                      '&apellido=' + info_persona.PrimerApellido + ' ' + info_persona.SegundoApellido +
-                                      '&fecha=' + formatDate(new Date(), 'dd/MM/yyyy', 'en') +
-                                      '&valor=' + 1000 +
-                                      '&correo=' + payload.emailaddress +
-                                      '&nombreRecibo=' + 'Inscripción virtual' +
-                                      '&tipoRecibo=' + 15;
-                                    this.pagos.get('recibo.php?' + strpago).subscribe(res_pago => {
-                                      const pago_dato = <any>res_pago;
-                                      if (pago_dato.estado === 'OK') {
-                                        const recibo = <Recibo>{
-                                          Referencia: 1 * pago_dato.referencia,
-                                          ValorOrdinario: 1000,
-                                          FechaOrdinaria: new Date(),
-                                          TipoReciboId: {Id: 15},
-                                          EstadoReciboId: {Id: 1},
-                                        };
-                                        this.recibos.post('recibo', recibo).subscribe(res_recibo => {
-                                          const res_rec = <any>res_recibo;
-                                          if (res_recibo !== null && res_rec.Type !== 'error') {
-                                            info_inscripcion.ReciboInscripcionId = res_rec.Id;
-                                            this.inscripciones.put('inscripcion', info_inscripcion)
-                                              .subscribe(res => {
-                                                if (res !== null) {
-                                                  this.loading = false;
-                                                  this.showToast('info', this.translate.instant('GLOBAL.crear'),
-                                                    this.translate.instant('GLOBAL.recibo') + ' ' +
-                                                    this.translate.instant('GLOBAL.confirmarCrear'));
-                                                  this.getInfoRecibo();
+                                    this.evento.get('calendario_evento?query=TipoEventoId.Nombre:Pago inscripción,TipoEventoId.DependenciaId:' +
+                                    info_programa.Id + ',PeriodoId:' + info_periodo.Id).subscribe(res_evento => {
+                                      if (res_evento !== null && JSON.stringify(res_evento).toString() !== '[{}]') {
+                                        const eventpag = <any>res_evento[0];
+
+                                        if (formatDate(eventpag.FechaFin, 'dd/MM/yyyy', 'en') >= formatDate(new Date(), 'dd/MM/yyyy', 'en')) {
+                                        const strpago = 'periodo=' + info_periodo.Nombre.split('-')[1] +
+                                        '&anio=' + info_periodo.Nombre.split('-')[0] +
+                                        '&programa=' + info_programa.Id +
+                                        '&tipoIdentificacion=' + info_persona.TipoIdentificacion.CodigoAbreviacion +
+                                        '&numeroIdentificacion=' + info_persona.NumeroIdentificacion +
+                                        '&nombre=' + info_persona.PrimerNombre + ' ' + info_persona.SegundoNombre +
+                                        '&apellido=' + info_persona.PrimerApellido + ' ' + info_persona.SegundoApellido +
+                                        '&fecha=' + formatDate(eventpag.FechaFin, 'dd/MM/yyyy', 'en') +
+                                        '&valor=' + eventpag.Descripcion +
+                                        '&correo=' + payload.email +
+                                        '&nombreRecibo=' + 'Inscripción virtual' +
+                                        '&tipoRecibo=' + 15;
+
+                                        this.pagos.get('recibo.php?' + strpago).subscribe(res_pago => {
+                                        const pago_dato = <any>res_pago;
+                                            if (pago_dato.estado === 'OK') {
+                                              const recibo = <Recibo>{
+                                                Referencia: 1 * pago_dato.referencia,
+                                                ValorOrdinario: 1 * eventpag.Descripcion,
+                                                FechaOrdinaria: eventpag.FechaFin,
+                                                TipoReciboId: {Id: 15},
+                                                EstadoReciboId: {Id: 1},
+                                              };
+                                              this.recibos.post('recibo', recibo).subscribe(res_recibo => {
+                                                const res_rec = <any>res_recibo;
+                                                if (res_recibo !== null && res_rec.Type !== 'error') {
+                                                  info_inscripcion.ReciboInscripcionId = res_rec.Id;
+                                                  this.inscripciones.put('inscripcion', info_inscripcion)
+                                                    .subscribe(res => {
+                                                      if (res !== null) {
+                                                        this.loading = false;
+                                                        this.showToast('info', this.translate.instant('GLOBAL.crear'),
+                                                          this.translate.instant('GLOBAL.recibo') + ' ' +
+                                                          this.translate.instant('GLOBAL.confirmarCrear'));
+                                                        this.getInfoRecibo();
+                                                      }
+                                                    },
+                                                      (error: HttpErrorResponse) => {
+                                                        Swal({
+                                                          type: 'error',
+                                                          title: error.status + '',
+                                                          text: this.translate.instant('ERROR.' + error.status),
+                                                          footer: this.translate.instant('GLOBAL.actualizar') + '-' +
+                                                            this.translate.instant('GLOBAL.admision'),
+                                                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                                        });
+                                                      });
                                                 }
                                               },
                                                 (error: HttpErrorResponse) => {
@@ -715,32 +788,43 @@ export class PagoInscripcionComponent implements OnInit {
                                                     type: 'error',
                                                     title: error.status + '',
                                                     text: this.translate.instant('ERROR.' + error.status),
-                                                    footer: this.translate.instant('GLOBAL.actualizar') + '-' +
-                                                      this.translate.instant('GLOBAL.admision'),
+                                                    footer: this.translate.instant('GLOBAL.crear') + '-' +
+                                                      this.translate.instant('GLOBAL.recibo'),
                                                     confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                                                   });
                                                 });
-                                          }
-                                        },
-                                          (error: HttpErrorResponse) => {
-                                            Swal({
-                                              type: 'error',
-                                              title: error.status + '',
-                                              text: this.translate.instant('ERROR.' + error.status),
-                                              footer: this.translate.instant('GLOBAL.crear') + '-' +
-                                                this.translate.instant('GLOBAL.recibo'),
-                                              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                            } else {
+                                              Swal({
+                                                type: 'error',
+                                                title: this.translate.instant('GLOBAL.error'),
+                                                text: this.translate.instant('ERROR.' + pago_dato.estado),
+                                                footer: this.translate.instant('GLOBAL.crear') + '-' +
+                                                  this.translate.instant('GLOBAL.recibo'),
+                                                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                              });
+                                            }
+                                          },
+                                            (error: HttpErrorResponse) => {
+                                              Swal({
+                                                type: 'error',
+                                                title: error.status + '',
+                                                text: this.translate.instant('ERROR.' + error.status),
+                                                footer: this.translate.instant('GLOBAL.crear') + '-' +
+                                                  this.translate.instant('GLOBAL.recibo'),
+                                                confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                                              });
                                             });
+                                        } else {
+                                          Swal({
+                                            type: 'error',
+                                            title: this.translate.instant('GLOBAL.fecha_pago'),
+                                            text: this.translate.instant('GLOBAL.fecha_pago') +
+                                              ' = ' + formatDate(eventpag.FechaFin, 'dd/MM/yyyy', 'en'),
+                                            footer: this.translate.instant('GLOBAL.crear') + '-' +
+                                              this.translate.instant('GLOBAL.recibo'),
+                                            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                                           });
-                                      } else {
-                                        Swal({
-                                          type: 'error',
-                                          title: this.translate.instant('GLOBAL.error'),
-                                          text: this.translate.instant('ERROR.' + pago_dato.estado),
-                                          footer: this.translate.instant('GLOBAL.crear') + '-' +
-                                            this.translate.instant('GLOBAL.recibo'),
-                                          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-                                        });
+                                        }
                                       }
                                     },
                                       (error: HttpErrorResponse) => {
@@ -748,8 +832,8 @@ export class PagoInscripcionComponent implements OnInit {
                                           type: 'error',
                                           title: error.status + '',
                                           text: this.translate.instant('ERROR.' + error.status),
-                                          footer: this.translate.instant('GLOBAL.crear') + '-' +
-                                            this.translate.instant('GLOBAL.recibo'),
+                                          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                                            this.translate.instant('GLOBAL.valor_pago'),
                                           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                                         });
                                       });
@@ -761,7 +845,7 @@ export class PagoInscripcionComponent implements OnInit {
                                       title: error.status + '',
                                       text: this.translate.instant('ERROR.' + error.status),
                                       footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                                        this.translate.instant('GLOBAL.infp_persona'),
+                                        this.translate.instant('GLOBAL.info_persona'),
                                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                                     });
                                   });
@@ -773,7 +857,7 @@ export class PagoInscripcionComponent implements OnInit {
                                 title: error.status + '',
                                 text: this.translate.instant('ERROR.' + error.status),
                                 footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                                  this.translate.instant('GLOBAL.periodo_academico'),
+                                  this.translate.instant('GLOBAL.periodo'),
                                 confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                               });
                             });

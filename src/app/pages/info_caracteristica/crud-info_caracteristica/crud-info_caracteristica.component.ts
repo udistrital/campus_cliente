@@ -160,7 +160,7 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
       this.denied_acces = false;
       this.campusMidService.get('persona/consultar_complementarios/' + this.info_caracteristica_id)
         .subscribe(res => {
-          if (res !== null) {
+          if (res !== null && JSON.stringify(res) !== '[{}]') {
             this.datosGet = <InfoCaracteristicaGet>res;
             this.info_info_caracteristica = <InfoCaracteristica>res;
             this.info_info_caracteristica.Ente = (1 * this.info_caracteristica_id);
@@ -257,7 +257,6 @@ export class CrudInfoCaracteristicaComponent implements OnInit {
           info_info_caracteristica_post.Lugar = {
             Lugar: info_info_caracteristica_post.LugarAnt,
           };
-          console.info(JSON.stringify(info_info_caracteristica_post));
           this.campusMidService.post('persona/guardar_complementarios', info_info_caracteristica_post)
             .subscribe(res => {
               if (res !== null) {

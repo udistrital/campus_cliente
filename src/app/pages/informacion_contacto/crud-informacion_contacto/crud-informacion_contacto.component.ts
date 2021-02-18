@@ -236,7 +236,7 @@ export class CrudInformacionContactoComponent implements OnInit {
       this.denied_acces = false;
       this.campusMidService.get('persona/consultar_contacto/' + this.informacion_contacto_id)
         .subscribe(res => {
-          if (res !== null) {
+          if (res !== null && JSON.stringify(res) !== '[{}]') {
             this.datosGet = <InfoContactoGet>res;
             this.info_informacion_contacto = <any>{
               Ente: (1 * this.informacion_contacto_id),

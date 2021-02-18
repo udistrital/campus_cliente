@@ -257,7 +257,7 @@ export class ListFormacionAcademicaComponent implements OnInit {
     Swal(opt)
       .then((willDelete) => {
         if (willDelete.value) {
-          this.campusMidService.delete('formacionacademica', event.data).subscribe(res => {
+          this.campusMidService.delete('formacion_academica', event.data).subscribe(res => {
             if (res !== null) {
               this.loadData();
               this.showToast('info', this.translate.instant('GLOBAL.eliminar'),

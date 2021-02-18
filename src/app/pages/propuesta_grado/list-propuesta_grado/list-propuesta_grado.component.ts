@@ -61,7 +61,7 @@ export class ListPropuestaGradoComponent implements OnInit {
           },
         },
         Nombre: {
-          title: this.translate.instant('GLOBAL.titulo_propuesta'),
+          title: this.translate.instant('GLOBAL.titulo_proyecto'),
           width: '30%',
           valuePrepareFunction: (value) => {
             return value;

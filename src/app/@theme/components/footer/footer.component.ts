@@ -63,7 +63,7 @@ export class FooterComponent {
       seccion: [{
         subtitle: this.translate.instant('FOOTER.academica'),
         list: [{
-          label: this.translate.instant('FOOTER.derechos_pecuniarios') + ' 2019',
+          label: this.translate.instant('FOOTER.derechos_pecuniarios') + ' 2021',
           title: this.translate.instant('FOOTER.derechos_pecuniarios'),
           url: 'http://sgral.udistrital.edu.co/xdata/sgral/cir_2019-001.pdf',
         }, {
@@ -232,9 +232,9 @@ export class FooterComponent {
         seccion: [{
           subtitle: this.translate.instant('FOOTER.academica'),
           list: [{
-            label: this.translate.instant('FOOTER.derechos_pecuniarios') + ' 2019',
+            label: this.translate.instant('FOOTER.derechos_pecuniarios') + ' 2021',
             title: this.translate.instant('FOOTER.derechos_pecuniarios'),
-            url: 'http://sgral.udistrital.edu.co/xdata/sgral/cir_2019-001.pdf',
+            url: 'http://sgral.udistrital.edu.co/xdata/sgral/cir_2021-001.pdf',
           }, {
             label: this.translate.instant('FOOTER.estatuto_academico'),
             title: this.translate.instant('FOOTER.estatuto_academico'),

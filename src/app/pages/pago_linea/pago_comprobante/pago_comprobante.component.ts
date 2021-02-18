@@ -185,7 +185,7 @@ export class PagoComprobanteComponent implements OnInit {
                             .subscribe(res => {
                               if (res !== null) {
                                 this.info_comprobante.ReciboId = {Id: 1 * this.recibo_id};
-                                this.info_comprobante.TipoPagoId = {Id: 2};
+                                this.info_comprobante.TipoPagoId = {Id: 1};
                                 this.info_comprobante.Aprobado = false;
                                 this.info_comprobante.FechaPago = new Date();
                                 this.recibos.post('pago_recibo', this.info_comprobante)

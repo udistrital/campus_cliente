@@ -110,7 +110,7 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   }
 
   loadInfoPostgrados(institucion) {
-    this.programaService.get('/programa_academico/?query=Institucion:' + institucion + '&limit=0')
+    this.programaService.get('programa_academico/?query=Institucion:' + institucion + '&limit=0')
       .subscribe(res => {
         if (res !== null) {
           const r = <ProgramaAcademico>res;
@@ -169,37 +169,39 @@ export class CrudFormacionAcademicaComponent implements OnInit {
   }
 
   addUbicacionOrganizacion(ubicacion: any): void {
-    this.campusMidService.post('persona/RegistrarUbicaciones', ubicacion).subscribe(res => {
-      const r = res as any;
-      if (res !== null && r.Type === 'error') {
-        this.showToast('error', 'error',
-          'Ocurrio un error agregando la ubicación');
-      }
-    },
-      (error: HttpErrorResponse) => {
-        Swal({
-          type: 'error',
-          title: error.status + '',
-          text: this.translate.instant('ERROR.' + error.status),
-          footer: this.translate.instant('GLOBAL.crear') + '-' +
-            this.translate.instant('GLOBAL.formacion_academica') + '|' +
-            this.translate.instant('GLOBAL.pais_universidad'),
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+    this.campusMidService.post('organizacion/registar_ubicacion', ubicacion)
+      .subscribe(res => {
+        const r = res as any;
+        if (res !== null && r.Type === 'error') {
+          this.showToast('info', this.translate.instant('GLOBAL.crear'),
+            this.translate.instant('GLOBAL.nombre_universidad') + ' ' +
+            this.translate.instant('GLOBAL.confirmarCrear'));
+        }
+      },
+        (error: HttpErrorResponse) => {
+          Swal({
+            type: 'error',
+            title: error.status + '',
+            text: this.translate.instant('ERROR.' + error.status),
+            footer: this.translate.instant('GLOBAL.crear') + '-' +
+              this.translate.instant('GLOBAL.formacion_academica') + '|' +
+              this.translate.instant('GLOBAL.pais_universidad'),
+            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+          });
         });
-      });
   }
 
   createOrganizacion(org: any, exp: any): void {
-    this.campusMidService.post('organizacion', org).subscribe(res => {
+    this.campusMidService.post('organizacion/', org).subscribe(res => {
       const identificacion = <any>res;
       if (identificacion !== null && identificacion.Type !== 'error') {
-        exp.Organizacion = identificacion.Body.Ente.Id;
+        exp.Organizacion = identificacion.Ente ? identificacion.Id : null;
         const ubicacion = {
-          Ente: identificacion.Body.Ente.Id,
+          Ente: identificacion.Ente ? identificacion.Id : null,
           Lugar: org.Pais,
           TipoRelacionUbicacionEnte: 3,
           Atributos: [{
-            AtributoUbicacion: 1,
+            AtributoUbicacion: {Id: 1},
             Valor: org.Direccion,
           }],
         };

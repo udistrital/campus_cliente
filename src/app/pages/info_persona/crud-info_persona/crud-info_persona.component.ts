@@ -6,6 +6,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DocumentoService } from '../../../@core/data/documento.service';
 import { CampusMidService } from '../../../@core/data/campus_mid.service';
 import { InscripcionService } from '../../../@core/data/inscripcion.service';
+import { EventoService } from '../../../@core/data/evento.service';
 import { CoreService } from '../../../@core/data/core.service';
 import { FORM_INFO_PERSONA } from './form-info_persona';
 import { ToasterService, ToasterConfig, Toast, BodyOutputType } from 'angular2-toaster';
@@ -72,6 +73,7 @@ export class CrudInfoPersonaComponent implements OnInit {
     private store: Store<IAppState>,
     private listService: ListService,
     private inscripcionService: InscripcionService,
+    private eventoService: EventoService,
     private coreService: CoreService,
     private userService: UserService,
     private toasterService: ToasterService) {
@@ -84,7 +86,6 @@ export class CrudInfoPersonaComponent implements OnInit {
       this.listService.findEstadoCivil();
       this.listService.findTipoIdentificacion();
       this.loading = false;
-      this.cargarPeriodo();
       this.loadLists();
   }
 
@@ -216,16 +217,12 @@ export class CrudInfoPersonaComponent implements OnInit {
                 console.info(JSON.stringify(this.info_info_persona));
                 this.campusMidService.post('persona/guardar_persona', this.info_info_persona)
                   .subscribe(res => {
-                    const r = <any>res
+                    const r = <any>res;
                     console.info(JSON.stringify(res));
                     if (r !== null && r.Type !== 'error') {
                       window.localStorage.setItem('ente', r.Id);
                       this.info_persona_id = r.Id;
-                      this.loadInfoPersona();
                       this.createInscripcion(this.info_persona_id);
-                      this.loadInscripcion();
-                      this.loading = false;
-                      this.eventChange.emit(true);
                       this.showToast('info', this.translate.instant('GLOBAL.crear'),
                         this.translate.instant('GLOBAL.info_persona') + ' ' +
                         this.translate.instant('GLOBAL.confirmarCrear'));
@@ -405,41 +402,78 @@ export class CrudInfoPersonaComponent implements OnInit {
   }
 
   createInscripcion(ente_id): void {
-    this.aspirante = ente_id;
     this.programa = this.userService.getPrograma();
-    const inscripcionPost = {
-      PeriodoId: this.periodo.Id,
-      PersonaId: this.aspirante,
-      ProgramaAcademicoId: this.programa,
-      EstadoInscripcionId: {Id: 1},
-      TipoInscripcionId: {Id: 1},
-      AceptaTerminos: true,
-      FechaAceptaTerminos: new Date(),
-      Id: this.inscripcion_id,
-    };
-    this.info_inscripcion = <Inscripcion>inscripcionPost;
-    this.info_inscripcion.PersonaId = Number(this.info_persona_id);
-    this.info_inscripcion.Id = Number(this.inscripcion_id);
-    this.inscripcionService.post('inscripcion', this.info_inscripcion)
-      .subscribe(res => {
-        this.info_inscripcion = <Inscripcion>res;
-        this.inscripcion_id = this.info_inscripcion.Id;
-        this.eventChange.emit(true);
-        Swal({
-          type: 'info',
-          title: this.translate.instant('GLOBAL.crear'),
-          text: this.translate.instant('GLOBAL.inscrito') + ' ' + this.periodo.Nombre,
-          confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-        });
-      },
+    this.eventoService.get('calendario_evento?query=TipoEventoId.DependenciaId:' + this.programa +
+    ',TipoEventoId.Nombre:Inscripción,Activo:true&sortby=Id&order=desc&limit=0')
+    .subscribe(resInsEv => {
+      if (resInsEv !== null && JSON.stringify(resInsEv) !== '[{}]') {
+        const eventoProg = <any>resInsEv[0];
+        console.info(JSON.stringify(resInsEv));
+        this.coreService.get('periodo/?query=Id:' + eventoProg.PeriodoId + ',Activo:true')
+          .subscribe(res => {
+            if (res !== null && JSON.stringify(res) !== '[{}]') {
+              this.periodo = <any>res[0];
+              console.info(JSON.stringify(this.periodo));
+              this.aspirante = ente_id;
+              const inscripcionPost = {
+                PeriodoId: this.periodo.Id,
+                PersonaId: this.aspirante,
+                ProgramaAcademicoId: this.programa,
+                EstadoInscripcionId: {Id: 1},
+                TipoInscripcionId: {Id: 1},
+                AceptaTerminos: true,
+                FechaAceptaTerminos: new Date(),
+                Id: this.inscripcion_id,
+              };
+              this.info_inscripcion = <Inscripcion>inscripcionPost;
+              this.info_inscripcion.PersonaId = Number(this.info_persona_id);
+              this.info_inscripcion.Id = Number(this.inscripcion_id);
+              this.inscripcionService.post('inscripcion', this.info_inscripcion)
+                .subscribe(resIns => {
+                  this.info_inscripcion = <Inscripcion>res;
+                  this.inscripcion_id = this.info_inscripcion.Id;
+                  window.localStorage.setItem('inscripcion', this.info_inscripcion.Id);
+                  this.loading = false,
+                  this.eventChange.emit(true);
+                  Swal({
+                    type: 'info',
+                    title: this.translate.instant('GLOBAL.crear'),
+                    text: this.translate.instant('GLOBAL.inscrito') + ' ' + this.periodo.Nombre,
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                },
+                (error: HttpErrorResponse) => {
+                  Swal({
+                    type: 'error',
+                    title: error.status + '',
+                    text: this.translate.instant('ERROR.' + error.status),
+                    footer: this.translate.instant('GLOBAL.crear') + '-' +
+                      this.translate.instant('GLOBAL.info_persona') + '|' +
+                      this.translate.instant('GLOBAL.admision'),
+                    confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                  });
+                });
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.periodo_academico'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+      }
+    },
       (error: HttpErrorResponse) => {
         Swal({
           type: 'error',
           title: error.status + '',
           text: this.translate.instant('ERROR.' + error.status),
-          footer: this.translate.instant('GLOBAL.crear') + '-' +
-            this.translate.instant('GLOBAL.info_persona') + '|' +
-            this.translate.instant('GLOBAL.admision'),
+          footer: this.translate.instant('GLOBAL.cargar') + '-' +
+            this.translate.instant('GLOBAL.evento'),
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });
@@ -447,31 +481,65 @@ export class CrudInfoPersonaComponent implements OnInit {
 
   updateInscripcion(): void {
     this.loadInscripcion();
-    this.info_inscripcion.AceptaTerminos = true;
-    this.info_inscripcion.ProgramaAcademicoId = this.userService.getPrograma();
-    this.inscripcionService.put('inscripcion', this.info_inscripcion)
-      .subscribe(res => {
-        this.eventChange.emit(true);
-        this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
-          this.translate.instant('GLOBAL.admision') + ' ' +
-          this.translate.instant('GLOBAL.confirmarActualizar'));
-        this.loadInscripcion();
-      },
+    this.programa = this.userService.getPrograma();
+    this.eventoService.get('calendario_evento?query=TipoEventoId.DependenciaId:' + this.programa +
+    ',TipoEventoId.Nombre:Inscripción,Activo:true&sortby=Id&order=desc&limit=0')
+    .subscribe(resInsEv => {
+      if (resInsEv !== null && JSON.stringify(resInsEv) !== '[{}]') {
+        const eventoProg = <any>resInsEv[0];
+        this.coreService.get('periodo/?query=Id:' + eventoProg.PeriodoId + ',Activo:true')
+          .subscribe(res => {
+            if (res !== null && JSON.stringify(res) !== '[{}]') {
+              this.periodo = <any>res[0];
+              this.info_inscripcion.AceptaTerminos = true;
+              this.info_inscripcion.ProgramaAcademicoId = this.programa;
+              this.info_inscripcion.PeriodoId = this.periodo.Id;
+              this.inscripcionService.put('inscripcion', this.info_inscripcion)
+              .subscribe(resIns => {
+                this.eventChange.emit(true);
+                this.showToast('info', this.translate.instant('GLOBAL.actualizar'),
+                  this.translate.instant('GLOBAL.admision') + ' ' +
+                  this.translate.instant('GLOBAL.confirmarActualizar'));
+                this.loadInscripcion();
+              },
+              (error: HttpErrorResponse) => {
+                Swal({
+                  type: 'error',
+                  title: error.status + '',
+                  text: this.translate.instant('ERROR.' + error.status),
+                  footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                    this.translate.instant('GLOBAL.info_persona') + '|' +
+                    this.translate.instant('GLOBAL.admision'),
+                  confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+                });
+              });
+          }
+        },
+          (error: HttpErrorResponse) => {
+            Swal({
+              type: 'error',
+              title: error.status + '',
+              text: this.translate.instant('ERROR.' + error.status),
+              footer: this.translate.instant('GLOBAL.cargar') + '-' +
+                this.translate.instant('GLOBAL.periodo_academico'),
+              confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
+            });
+          });
+      }
+    },
       (error: HttpErrorResponse) => {
         Swal({
           type: 'error',
           title: error.status + '',
           text: this.translate.instant('ERROR.' + error.status),
           footer: this.translate.instant('GLOBAL.cargar') + '-' +
-            this.translate.instant('GLOBAL.info_persona') + '|' +
-            this.translate.instant('GLOBAL.admision'),
+            this.translate.instant('GLOBAL.evento'),
           confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
         });
       });
   }
 
   ngOnInit() {
-    // this.info_admision()
   }
 
   validarForm(event) {
@@ -526,27 +594,6 @@ export class CrudInfoPersonaComponent implements OnInit {
   setPercentage(event) {
     this.percentage = event;
     this.result.emit(this.percentage);
-  }
-
-  cargarPeriodo(): void {
-    this.coreService.get('periodo/?query=Activo:true&sortby=Id&order=desc&limit=1')
-      .subscribe(res => {
-        const r = <any>res;
-        if (res !== null && r.Type !== 'error') {
-          this.periodo = <any>res[0];
-          console.info(this.periodo);
-        }
-      },
-        (error: HttpErrorResponse) => {
-          Swal({
-            type: 'error',
-            title: error.status + '',
-            text: this.translate.instant('ERROR.' + error.status),
-            footer: this.translate.instant('GLOBAL.cargar') + '-' +
-              this.translate.instant('GLOBAL.periodo_academico'),
-            confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
-          });
-        });
   }
 
   public loadLists() {

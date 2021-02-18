@@ -103,7 +103,7 @@ export class ViewDescuentoAcademicoComponent implements OnInit {
                       title: error.status + '',
                       text: this.translate.instant('ERROR.' + error.status),
                       footer: this.translate.instant('GLOBAL.cargar') + '-' +
-                        this.translate.instant('GLOBAL.documento_programa'),
+                        this.translate.instant('GLOBAL.soporte_documento'),
                       confirmButtonText: this.translate.instant('GLOBAL.aceptar'),
                     });
                   });
