@@ -91,9 +91,9 @@ export const Config = {
       CLIENTE_ID: '3r8DbyjNrVvcf5Z1CSsBGpGWzrwa',
       RESPONSE_TYPE: 'id_token token',
       SCOPE: 'openid email role documento',
-      REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co/',
+      REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co',
       SIGN_OUT_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oidc/logout',
-      SIGN_OUT_REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co/',
+      SIGN_OUT_REDIRECT_URL: 'https://cliente.campusvirtual.udistrital.edu.co',
     },
   },
   PREPRODPL: {
