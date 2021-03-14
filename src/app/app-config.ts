@@ -187,7 +187,7 @@ export const Config = {
     RECIBO_SERVICE: 'https://autenticacion.portaloas.udistrital.edu.co/apioas/recibo_crud/v1/',
     TOKEN: {
       AUTORIZATION_URL: 'https://autenticacion.portaloas.udistrital.edu.co/oauth2/authorize',
-      CLIENTE_ID: 'gnYvY022RDCqwRCBDgFBkuBS0voa',
+      CLIENTE_ID: 'zdhyS15av0nWofliWkgGHSGV__Ua',
       RESPONSE_TYPE: 'id_token token',
       SCOPE: 'openid email role documento',
       REDIRECT_URL: 'https://campus.portaloas.udistrital.edu.co',
