@@ -49,6 +49,13 @@ export class PagesComponent implements OnInit {
       } else {
         this.rol = 'ASPIRANTE';
       }
+       if(this.rol==='ASPIRANTE')
+      {
+        this.menu = MENU_ITEMS;
+          this.translateMenu();
+      }
+      else
+      {
       this.menuws.get(this.rol + '/Campus').subscribe(
         data => {
           this.dataMenu = <any>data;
@@ -145,6 +152,7 @@ export class PagesComponent implements OnInit {
           this.menu = MENU_ITEMS;
           this.translateMenu();
         });
+        }
     } else {
       this.rol = 'PUBLICO';
       this.menu = MENU_PUBLICO;
